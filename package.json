@@ -1,0 +1,19 @@
+{
+  "name": "sauda-shastra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sauda Shastra — Indian markets, explained for traders and investors: intraday structure, technical analysis, options, playbooks, macro, algo trading, risk and tax, investing in India and the USA, plus a researched learning library. Sources, not tips.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "marked": "18.1.1"
+  }
+}
