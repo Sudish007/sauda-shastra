@@ -1,1 +1,1690 @@
-[]
+[
+  {
+    "id": "fo-banknifty-lot",
+    "label": "Bank Nifty lot size",
+    "value": "30",
+    "since": "2026-01-27",
+    "source": "NSE FAOP/70616 | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-banknifty-weekly-status",
+    "label": "Bank Nifty weekly options (last weekly expiry 13 Nov 2024; monthly contracts only)",
+    "value": "Discontinued",
+    "since": "2024-11-20",
+    "source": "NSE FAOP/64506 | https://nsearchives.nseindia.com/content/circulars/FAOP64506.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-expiry-day-elm-addon",
+    "label": "Additional ELM on short options expiring that day; total 4%, deep-OTM 5%",
+    "value": "2%",
+    "since": "2024-11-20",
+    "source": "SEBI 1 Oct 2024 para 5.6 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-finnifty-lot",
+    "label": "FinNifty lot size",
+    "value": "60",
+    "since": "2026-01-27",
+    "source": "NSE FAOP/70616 | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-freeze-qty-banknifty",
+    "label": "Quantity freeze per order — Bank Nifty derivatives",
+    "value": "900",
+    "since": "2026-11-02",
+    "source": "NSE/FAOP/77189 (30 Oct 2026) | https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-freeze-qty-finnifty",
+    "label": "Quantity freeze per order — FinNifty derivatives",
+    "value": "1,800",
+    "since": "2026-11-02",
+    "source": "NSE/FAOP/77189 (30 Oct 2026) | https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-freeze-qty-midcpnifty",
+    "label": "Quantity freeze per order — Nifty Midcap Select derivatives",
+    "value": "2,800",
+    "since": "2026-11-02",
+    "source": "NSE/FAOP/77189 (30 Oct 2026) | https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-freeze-qty-nifty",
+    "label": "Quantity freeze per order — Nifty 50 derivatives",
+    "value": "1,800",
+    "since": "2026-11-02",
+    "source": "NSE/FAOP/77189 (30 Oct 2026) | https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-freeze-qty-niftynxt50",
+    "label": "Quantity freeze per order — Nifty Next 50 derivatives",
+    "value": "600",
+    "since": "2026-11-02",
+    "source": "NSE/FAOP/77189 (30 Oct 2026) | https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-midcpnifty-lot",
+    "label": "Nifty Midcap Select lot size",
+    "value": "120",
+    "since": "2026-01-27",
+    "source": "NSE FAOP/70616 | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-min-contract-value",
+    "label": "Minimum index-derivative contract value at introduction (₹15–20 lakh at lot review)",
+    "value": "₹15 lakh",
+    "since": "2024-11-20",
+    "source": "SEBI 1 Oct 2024 para 5.4 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-monthly-expiry-day-bse",
+    "label": "Monthly expiry day, BSE derivatives",
+    "value": "last Thursday of the month",
+    "since": "2025-09-01",
+    "source": "SEBI circular 26 May 2025; NSE FAOP/68747 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748266377271.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-monthly-expiry-day-nse",
+    "label": "Monthly expiry day, NSE index and stock derivatives",
+    "value": "last Tuesday of the month",
+    "since": "2025-09-01",
+    "source": "SEBI circular 26 May 2025; NSE FAOP/68747 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748266377271.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-mwpl-ban-threshold",
+    "label": "F&O ban trigger: combined open interest as a share of the market-wide position limit (ban exits at 80%)",
+    "value": "95%",
+    "since": "2025-10-01",
+    "source": "NSE Clearing position limits page; SEBI circular 29 May 2025 | https://www.nseclearing.in/risk-management/equity-derivatives/position-limits",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-nifty-lot",
+    "label": "Nifty 50 lot size",
+    "value": "65",
+    "since": "2026-01-06",
+    "source": "NSE FAOP/70616 | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-nifty-weekly-expiry-day",
+    "label": "Nifty weekly expiry day",
+    "value": "Tuesday",
+    "since": "2025-09-01",
+    "source": "NSE FAOP/68747 | https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-niftynxt50-lot",
+    "label": "Nifty Next 50 lot size",
+    "value": "25",
+    "since": "2024-11-20",
+    "source": "NSE FAOP/70616 (unchanged) | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-sensex-lot",
+    "label": "BSE Sensex lot size",
+    "value": "20",
+    "since": "2024-11-20",
+    "source": "BSE Contract Specifications (notice 20241021-13) | https://www.bseindia.com/static/markets/Derivatives/DeriReports/contractindex",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-sensex-weekly-expiry-day",
+    "label": "Sensex weekly expiry day",
+    "value": "Thursday",
+    "since": "2025-09-01",
+    "source": "BSE Contract Specifications | https://www.bseindia.com/static/markets/Derivatives/DeriReports/contractindex",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-stock-fo-settlement",
+    "label": "Stock F&O settlement",
+    "value": "Physical delivery",
+    "since": "2019-10-01",
+    "source": "SEBI circular 31 Dec 2018 | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2018/1546255335099.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-closing-session",
+    "label": "Closing Auction Session for stocks with derivatives (15:30–15:40 from 7 Dec 2026)",
+    "value": "15:15–15:35 IST",
+    "since": "2026-08-03",
+    "source": "SEBI 15 Oct 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-continuous-session",
+    "label": "Continuous trading session (stocks without derivatives; every stock from 7 Dec 2026)",
+    "value": "09:15–15:30 IST",
+    "since": "2026-08-03",
+    "source": "SEBI 16 Jan + 15 Oct 2026; NSE CMTR/74466 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-continuous-session-cas-stocks",
+    "label": "Continuous session for stocks with derivatives until 6 Dec 2026 (CAS 15:15–15:35)",
+    "value": "09:15–15:15 IST",
+    "since": "2026-08-03",
+    "source": "SEBI 16 Jan + 15 Oct 2026; NSE CMTR/74466 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-depth-levels-free",
+    "label": "Best bid/ask levels shown in default market depth (NSE Level 2)",
+    "value": "5",
+    "since": "2019-11-01",
+    "source": "NSE — Paid Real time data (data levels) | https://www.nseindia.com/static/market-data/real-time-data-subscription",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-depth-levels-l3",
+    "label": "Best bid/ask levels in extended market depth (NSE Level 3)",
+    "value": "20",
+    "since": "2019-11-01",
+    "source": "NSE — Paid Real time data (data levels) | https://www.nseindia.com/static/market-data/real-time-data-subscription",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-fo-preopen-since",
+    "label": "F&O pre-open session (current-month futures), live since 8 Dec 2025",
+    "value": "09:00–09:15 IST",
+    "since": "2025-12-08",
+    "source": "NSE FAOP/71640 | https://nsearchives.nseindia.com/content/circulars/FAOP71640.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-fo-session",
+    "label": "Equity derivatives session (from 7 Dec 2026: to 15:45, and expiring index contracts stop at 15:30 on expiry day)",
+    "value": "09:15–15:40 IST",
+    "since": "2026-08-03",
+    "source": "SEBI 16 Jan + 15 Oct 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-holidays-current-year-count",
+    "label": "NSE weekday trading holidays in 2026, incl. one special closure (15 Jan 2026)",
+    "value": "16",
+    "since": "2026-01-01",
+    "source": "NSE Holidays (holiday-master API) and NSE/CMTR/71775 | https://www.nseindia.com/resources/exchange-communication-holidays",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-holidays-next-year-status",
+    "label": "2027 NSE trading-holiday list (expected mid-December 2026)",
+    "value": "Not published",
+    "since": "2026-11-01",
+    "source": "NSE Holidays | https://www.nseindia.com/resources/exchange-communication-holidays",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-index-circuit-breaker",
+    "label": "Market-wide circuit-breaker trigger levels (Nifty 50 or Sensex, whichever is hit first)",
+    "value": "10% / 15% / 20%",
+    "since": "2013-10-01",
+    "source": "NSE Circuit Breakers | https://www.nseindia.com/products-services/equity-market-circuit-breakers",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-post-close-session",
+    "label": "Post-close session (IST)",
+    "value": "15:50–16:00 IST",
+    "since": "2026-08-03",
+    "source": "SEBI 16 Jan 2026 para 4.2.4 | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-preopen-window",
+    "label": "Cash pre-open order-entry window (random close 09:08–09:10; order matching 09:10–09:12)",
+    "value": "09:00–09:10 IST",
+    "since": "2026-09-07",
+    "source": "SEBI 16 Jan 2026 on CAS and pre-open | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-settlement-cycle",
+    "label": "Equity cash settlement cycle",
+    "value": "T+1",
+    "since": "2023-01-27",
+    "source": "SEBI circular 10 Dec 2024 (T+1 as existing cycle) | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2024/1733829354031.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-t0-segment-status",
+    "label": "T+0 same-day settlement segment (session 09:15–13:30 IST)",
+    "value": "Optional, top-500 stocks",
+    "since": "2025-01-31",
+    "source": "SEBI circular 10 Dec 2024; NSE Market Timings | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2024/1733829354031.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-brokerage-example-delivery",
+    "label": "Brokerage on equity delivery (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "₹0",
+    "since": "2026-11-01",
+    "source": "Zerodha Charges | https://zerodha.com/charges/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-brokerage-example-intraday-futures",
+    "label": "Brokerage per executed order, equity intraday and futures (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "₹20 or 0.03%, whichever is lower",
+    "since": "2026-11-01",
+    "source": "Zerodha Charges | https://zerodha.com/charges/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-brokerage-example-options",
+    "label": "Brokerage per executed order, options (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "₹20 per order",
+    "since": "2026-11-01",
+    "source": "Zerodha Charges | https://zerodha.com/charges/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-dp-example-broker",
+    "label": "DP charge per sell, per scrip per day (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "₹15.34",
+    "since": "2026-11-01",
+    "source": "Zerodha Charges | https://zerodha.com/charges/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-gst-rate",
+    "label": "GST on brokerage, exchange and SEBI charges",
+    "value": "18%",
+    "since": "2017-07-01",
+    "source": "NSE levies page | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-ipft-nse",
+    "label": "NSE IPFT contribution, included in the NSE transaction charge",
+    "value": "₹0.01 per crore",
+    "since": "2026-03-01",
+    "source": "NSE/FA/73061 | https://nsearchives.nseindia.com/content/circulars/FA73061.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-nse-txn-equity",
+    "label": "NSE transaction charge, cash segment, each side (0.00307%)",
+    "value": "₹307 per crore",
+    "since": "2026-03-01",
+    "source": "NSE/FA/73061 | https://nsearchives.nseindia.com/content/circulars/FA73061.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-nse-txn-futures",
+    "label": "NSE transaction charge, equity futures, each side (0.00183%)",
+    "value": "₹183 per crore",
+    "since": "2026-03-01",
+    "source": "NSE/FA/73061 | https://nsearchives.nseindia.com/content/circulars/FA73061.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-nse-txn-options",
+    "label": "NSE transaction charge, equity options, on premium turnover each side (0.03553%)",
+    "value": "₹3,553 per crore",
+    "since": "2026-03-01",
+    "source": "NSE/FA/73061 | https://nsearchives.nseindia.com/content/circulars/FA73061.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-sebi-fee",
+    "label": "SEBI turnover fee, each side (0.0001%)",
+    "value": "₹10 per crore",
+    "since": "2023-04-01",
+    "source": "NSE levies page | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stamp-delivery",
+    "label": "Stamp duty, delivery (buyer)",
+    "value": "0.015%",
+    "since": "2020-07-01",
+    "source": "NSE levies page (Indian Stamp Act as amended by Finance Act 2019) | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stamp-futures",
+    "label": "Stamp duty, futures (buyer)",
+    "value": "0.002%",
+    "since": "2020-07-01",
+    "source": "NSE levies page | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stamp-intraday",
+    "label": "Stamp duty, intraday (buyer)",
+    "value": "0.003%",
+    "since": "2020-07-01",
+    "source": "NSE levies page | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stamp-options",
+    "label": "Stamp duty, options (buyer, on premium)",
+    "value": "0.003%",
+    "since": "2020-07-01",
+    "source": "NSE levies page | https://www.nseindia.com/invest/first-time-investor-sebi-turnover-fees-stt-other-levies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stt-equity-delivery",
+    "label": "STT on equity delivery, each side (buy and sell)",
+    "value": "0.1%",
+    "since": "2012-07-01",
+    "source": "Finance Act 2012, s. 153 (STT schedule Sl. 1–2, from 1 Jul 2012) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stt-equity-intraday",
+    "label": "STT on equity intraday (non-delivery), sell side",
+    "value": "0.025%",
+    "since": "2006-06-01",
+    "source": "Finance Act 2006, s. 76 (STT schedule Sl. 3, from 1 Jun 2006) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stt-futures",
+    "label": "STT on futures, sell side",
+    "value": "0.05%",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 159 (STT schedule) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stt-options-exercise",
+    "label": "STT on exercised options, on intrinsic value (buyer)",
+    "value": "0.15%",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 159 (STT schedule) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-stt-options-sell",
+    "label": "STT on option sales, on the premium (seller)",
+    "value": "0.15%",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 159 (STT schedule) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-buyer-share-fy26",
+    "label": "Individual traders who mainly bought options, FY26, approx. (about 2% mainly sold; sellers were the only group with a positive median return on capital)",
+    "value": "97%",
+    "since": "2026-08-20",
+    "source": "SEBI Press Release 50/2026, findings B-1, B-2 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-calendar-spread-expiry-rule",
+    "label": "Calendar-spread margin benefit on expiry day (index derivatives since 10 Feb 2025; single-stock derivatives since 5 May 2026)",
+    "value": "Withdrawn for contracts expiring that day",
+    "since": "2026-05-05",
+    "source": "SEBI 2024/132 para 5.2; SEBI circular 5 Feb 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2026/1770288869049.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-cas-window-from-2026-12-07",
+    "label": "Closing Auction Session from 7 Dec 2026 (orders 15:31–15:40, random close 15:38–15:40; index and stock derivatives trade to 15:45)",
+    "value": "15:30–15:40 IST",
+    "since": "2026-12-07",
+    "source": "SEBI CAS review circular 15 Oct 2026, paras 4.2, 6 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-expiring-index-close-time-from-2026-12-07",
+    "label": "Last trade time for expiring index derivatives on expiry day from 7 Dec 2026 (non-expiring index and stock derivatives: 15:45)",
+    "value": "15:30 IST",
+    "since": "2026-12-07",
+    "source": "SEBI CAS review circular 15 Oct 2026, paras 4.2.4–4.2.5 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-expiry-settlement-current",
+    "label": "Expiring index derivatives — settlement price (current, until 6 Dec 2026)",
+    "value": "Closing index value built from constituents' CAS closing prices",
+    "since": "2026-08-03",
+    "source": "SEBI CAS circular 16 Jan 2026, para 4.9.1 | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-expiry-settlement-from-2026-12-07",
+    "label": "Expiring index derivatives — settlement price from 7 Dec 2026 (broadcast live)",
+    "value": "Index value from constituents' VWAP over the last 30 minutes of continuous trading (15:00–15:30)",
+    "since": "2026-12-07",
+    "source": "SEBI CAS review circular 15 Oct 2026, para 4.9.1 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-india-vix-methodology",
+    "label": "India VIX — what it measures",
+    "value": "Expected 30-day Nifty 50 volatility from OTM near- and mid-month option prices (CBOE method)",
+    "since": "2008-03-03",
+    "source": "NSE, About India VIX — computation methodology | https://nsearchives.nseindia.com/s3fs-public/inline-files/India_VIX_comp_meth.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-intraday-monitoring-snapshots",
+    "label": "Minimum random intraday position-limit snapshots a day for index derivatives (incl. one in 14:45–15:30 since 1 Oct 2025; expiry-day breaches penalised from 6 Dec 2025)",
+    "value": "4",
+    "since": "2025-04-01",
+    "source": "SEBI circulars 2024/132 para 5.3 and 2025/41 para 3 | https://www.sebi.gov.in/sebi_data/attachdocs/mar-2025/1743161645941.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-position-limit-index-eod-gross",
+    "label": "Index options: gross end-of-day FutEq OI limit per PAN, each side (long and short separately)",
+    "value": "₹10,000 crore",
+    "since": "2025-12-06",
+    "source": "SEBI 2025/79, para 5.5.1 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748521484014.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-position-limit-index-eod-net",
+    "label": "Index options: net end-of-day FutEq (delta-adjusted) OI limit per PAN",
+    "value": "₹1,500 crore",
+    "since": "2025-12-06",
+    "source": "SEBI 2025/79, para 5.5.1 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748521484014.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-position-limit-index-intraday-gross",
+    "label": "Intraday index-option position limit per entity, gross FutEq; ≥ 4 random snapshots incl. one 14:45–15:30; expiry-day breaches penalised from 6 Dec 2025",
+    "value": "₹10,000 crore",
+    "since": "2025-10-01",
+    "source": "SEBI circular SEBI/HO/MRD/TPD-1/P/CIR/2025/122 (1 Sep 2025) | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2025/1756745625835.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-position-limit-index-intraday-net",
+    "label": "Intraday index-option position limit per entity, net FutEq; ≥ 4 random snapshots incl. one 14:45–15:30; expiry-day breaches penalised from 6 Dec 2025",
+    "value": "₹5,000 crore",
+    "since": "2025-10-01",
+    "source": "SEBI circular SEBI/HO/MRD/TPD-1/P/CIR/2025/122 (1 Sep 2025) | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2025/1756745625835.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-strike-count-nifty",
+    "label": "Nifty 50 option strikes listed at introduction (35 ITM, 1 ATM, 35 OTM; more added as the index moves)",
+    "value": "71",
+    "since": "2024-11-20",
+    "source": "NSE Nifty 50 contract specifications | https://www.nseindia.com/products-services/equity-derivatives-nifty50",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-strike-interval-nifty",
+    "label": "Nifty 50 options strike interval, weekly and monthly, at all index levels",
+    "value": "50 points",
+    "since": "2024-11-20",
+    "source": "NSE Nifty 50 contract specifications | https://www.nseindia.com/products-services/equity-derivatives-nifty50",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-tick-size-options",
+    "label": "Price step (tick) for Nifty 50 index options",
+    "value": "₹0.05",
+    "since": "2024-11-20",
+    "source": "NSE Nifty 50 contract specifications | https://www.nseindia.com/products-services/equity-derivatives-nifty50",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-upfront-premium-since",
+    "label": "Options premium collected upfront from buyers — exchange go-live (SEBI circular 2024/132 date: 1 Feb 2025)",
+    "value": "10 Feb 2025",
+    "since": "2025-02-10",
+    "source": "SEBI 2024/132, para 5.1; SEBI study 7 Jul 2025 Table 1 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-weekly-expiries-per-exchange",
+    "label": "Weekly index-option expiries allowed per exchange (one benchmark index: NSE Nifty 50 on Tuesday, BSE Sensex on Thursday)",
+    "value": "1",
+    "since": "2025-09-01",
+    "source": "SEBI circulars 2024/132 para 5.5 and 2025/76 para 3.2; NSE/FAOP/68589; BSE notice 20250617-11 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748266377271.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "opt-zero-dte-share-fy26",
+    "label": "Share of index-options turnover in same-day-expiry (0DTE) contracts, FY26, approx. (75% within 1 day, 97% within 1 week)",
+    "value": "59%",
+    "since": "2026-08-20",
+    "source": "SEBI Press Release 50/2026, finding A-9 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-block-deal-min-size",
+    "label": "Block deal minimum order size (orders within ±3% of the window reference price)",
+    "value": "₹25 crore",
+    "since": "2025-12-07",
+    "source": "SEBI — Review of Block Deal Framework, 8 Oct 2025 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-costs-share",
+    "label": "Costs as a share of loss-makers' gross losses, FY26",
+    "value": "35%",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study, 20 Aug 2026, pp. 66–67 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-intraday-cash-loss-share",
+    "label": "Loss-making individual intraday equity traders, FY23",
+    "value": "71%",
+    "since": "2024-07-24",
+    "source": "SEBI Jul 2024 intraday study | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2024/1721818140715.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2023-share",
+    "label": "Loss-making individual F&O traders, FY22",
+    "value": "89%",
+    "since": "2023-01-25",
+    "source": "SEBI Jan 2023 study | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2023/1674645296493.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2024-amount",
+    "label": "Net loss of individual F&O traders, FY22–FY24 combined",
+    "value": "₹1.81 lakh crore",
+    "since": "2024-09-23",
+    "source": "SEBI Sep 2024 study | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2024/1727085659479.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2024-share",
+    "label": "Loss-making individual F&O traders, FY24",
+    "value": "91.1%",
+    "since": "2024-09-23",
+    "source": "SEBI Sep 2024 study | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2024/1727085659479.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2025-amount",
+    "label": "Net loss of individual F&O traders, FY25 (revised to ₹1,11,788 crore in Aug 2026)",
+    "value": "₹1,05,603 crore",
+    "since": "2025-07-07",
+    "source": "SEBI Jul 2025 study, Table 11 | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2025/1751900271726.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2025-share",
+    "label": "Loss-making individual F&O traders, FY25",
+    "value": "91.0%",
+    "since": "2025-07-07",
+    "source": "SEBI Jul 2025 study, Table 11 | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2025/1751900271726.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2026-amount",
+    "label": "Net loss of individual F&O traders, FY26",
+    "value": "₹91,685 crore",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study (FY25–FY26), 20 Aug 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2026-avg",
+    "label": "Average net loss per individual F&O trader, FY26",
+    "value": "₹1.17 lakh",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study (FY25–FY26), 20 Aug 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2026-five-year-consistent",
+    "label": "Traders profitable in all five years FY22–FY26",
+    "value": "0.5%",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II trading-behaviour study, 20 Aug 2026, p. 7 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233601328.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2026-share",
+    "label": "Loss-making individual F&O traders, FY26",
+    "value": "87.7%",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study (FY25–FY26), 20 Aug 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-2026-status",
+    "label": "Latest SEBI F&O profitability study",
+    "value": "Published 20 Aug 2026 (FY25–FY26)",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study (FY25–FY26), 20 Aug 2026 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-loss-fy22-fy26-cumulative",
+    "label": "Cumulative net loss of individual F&O traders, FY22–FY26 (approx.)",
+    "value": "₹3.85 lakh crore",
+    "since": "2026-08-20",
+    "source": "SEBI DEPA-II profitability study (FY25–FY26), 20 Aug 2026, p. 47 | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-margin-penalty-rate-high",
+    "label": "Margin short-collection penalty when the shortfall is ≥ ₹1 lakh or ≥ 10% of the applicable margin",
+    "value": "1% per day",
+    "since": "2011-09-01",
+    "source": "SEBI CIR/DNPD/7/2011 | https://www.sebi.gov.in/sebi_data/attachdocs/1312975056472.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-margin-penalty-rate-low",
+    "label": "Margin short-collection penalty when the shortfall is below ₹1 lakh and below 10% of the applicable margin",
+    "value": "0.5% per day",
+    "since": "2011-09-01",
+    "source": "SEBI CIR/DNPD/7/2011 | https://www.sebi.gov.in/sebi_data/attachdocs/1312975056472.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-margin-penalty-rate-repeat",
+    "label": "Margin short-collection penalty beyond the 3rd consecutive day, or beyond the 5th day in a month",
+    "value": "5% per day",
+    "since": "2011-09-01",
+    "source": "SEBI CIR/DNPD/7/2011 | https://www.sebi.gov.in/sebi_data/attachdocs/1312975056472.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-peak-margin-since",
+    "label": "Date from which 100% of the peak-snapshot margin (≥ 4 random intraday snapshots) must be collected",
+    "value": "1 Sep 2021",
+    "since": "2021-09-01",
+    "source": "SEBI MC Stock Brokers 17 Jun 2025, para 41 | https://www.sebi.gov.in/sebi_data/attachdocs/jun-2025/1750158789381.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-results-deadline-annual",
+    "label": "Annual audited results filing deadline after year end, LODR Reg 33(3)",
+    "value": "60 days",
+    "since": "2015-12-01",
+    "source": "SEBI (LODR) Regulations 2015, Reg 33(3) | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-results-deadline-quarterly",
+    "label": "Quarterly results filing deadline after quarter end, LODR Reg 33(3)",
+    "value": "45 days",
+    "since": "2015-12-01",
+    "source": "SEBI (LODR) Regulations 2015, Reg 33(3) | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-upfront-margin-rule",
+    "label": "Upfront margin in the cash segment (short-collection penalty waived if ≥ 20% is collected upfront)",
+    "value": "100% of VaR + ELM",
+    "since": "2020-12-01",
+    "source": "SEBI MC Stock Brokers 17 Jun 2025, paras 40–41 | https://www.sebi.gov.in/sebi_data/attachdocs/jun-2025/1750158789381.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-act-in-force",
+    "label": "Income-tax Act 2025 in force from",
+    "value": "1 April 2026",
+    "since": "2026-04-01",
+    "source": "CBDT press release 1 Apr 2026 | https://www.incometaxindia.gov.in/documents/d/guest/press-release-income-tax-act-2025-comes-into-force-from-01-april-2026-pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-presumptive",
+    "label": "Advance tax for presumptive-scheme taxpayers, single instalment (s. 408(2))",
+    "value": "100% by 15 March",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 408(1)–(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-q1",
+    "label": "Advance-tax instalment 1, cumulative share of the year's liability (Income-tax Act 2025 s. 408(1))",
+    "value": "15% by 15 June",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 408(1)–(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-q2",
+    "label": "Advance-tax instalment 2, cumulative share of the year's liability (s. 408(1))",
+    "value": "45% by 15 September",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 408(1)–(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-q3",
+    "label": "Advance-tax instalment 3, cumulative share of the year's liability (s. 408(1))",
+    "value": "75% by 15 December",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 408(1)–(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-q4",
+    "label": "Advance-tax instalment 4, cumulative share of the year's liability (s. 408(1))",
+    "value": "100% by 15 March",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 408(1)–(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-advance-tax-threshold",
+    "label": "Advance tax applies from a liability of",
+    "value": "₹10,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 404 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-audit-threshold-digital",
+    "label": "Tax-audit turnover threshold when cash is ≤ 5% of receipts and payments (otherwise ₹1 crore)",
+    "value": "₹10 crore",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 63(1) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-books-threshold-individual",
+    "label": "Books of account compulsory (individual/HUF) when",
+    "value": "business income > ₹2.5 lakh or turnover > ₹25 lakh (any of the 3 preceding years)",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 62(2)(d) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-cess-rate",
+    "label": "Health and Education Cess",
+    "value": "4%",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 3(15) (Health and Education Cess; s. 2(6) for AY 2026-27 under the 1961 Act) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-debt-fund-rule",
+    "label": "Specified (>65% debt) MF units bought on/after 1 Apr 2023",
+    "value": "Always short-term, taxed at slab rate",
+    "since": "2023-04-01",
+    "source": "Income-tax Act 2025, s. 76 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-dividend-tds-rate",
+    "label": "TDS on dividends above ₹10,000 a year (individuals, non-cash)",
+    "value": "10%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 393(1) Table Sl. 7; s. 393(4)(f) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-holding-period-listed",
+    "label": "Long-term holding period, listed securities and equity funds",
+    "value": "more than 12 months",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 2(101) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-itr-form-trader",
+    "label": "ITR form for a trader with business income, return due in 2026 (AY 2026-27; Rules-2026 forms for tax year 2026-27 not notified on 1 Nov 2026)",
+    "value": "ITR-3",
+    "since": "2026-04-01",
+    "source": "ITD, Income Tax Returns (year 2026) | https://www.incometaxindia.gov.in/income-tax-returns",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-late-fee",
+    "label": "Late-filing fee (₹1,000 if total income is ≤ ₹5 lakh)",
+    "value": "₹5,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 428(a) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-ltcg-exemption",
+    "label": "LTCG exempt per tax year",
+    "value": "₹1,25,000",
+    "since": "2024-07-23",
+    "source": "Income-tax Act 2025, s. 198(2)(a) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-ltcg-rate",
+    "label": "LTCG rate, listed equity / equity MF",
+    "value": "12.5%",
+    "since": "2024-07-23",
+    "source": "Income-tax Act 2025, s. 198 (1961 Act s. 112A from 23 Jul 2024) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-ltcg-section",
+    "label": "Equity LTCG section",
+    "value": "s. 198, Income-tax Act 2025 (s. 112A of the 1961 Act until AY 2026-27)",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 198 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-nonspec-loss-carry-forward",
+    "label": "F&O (non-speculative business) loss carry-forward",
+    "value": "8 tax years",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 112(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-presumptive-limit",
+    "label": "Presumptive-scheme turnover ceiling (₹3 crore if cash receipts are ≤ 5%)",
+    "value": "₹2 crore",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 58(2) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-presumptive-rate-digital",
+    "label": "Presumptive deemed profit on digital receipts (Income-tax Act 2025 s. 58(2) Table Sl. 1 col. E)",
+    "value": "6%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 58(2) Table Sl. 1 col. E | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-presumptive-rate-other",
+    "label": "Presumptive deemed profit on other (cash) receipts (s. 58(2) Table Sl. 1 col. E)",
+    "value": "8%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 58(2) Table Sl. 1 col. E | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-presumptive-section",
+    "label": "Presumptive taxation section",
+    "value": "s. 58, Income-tax Act 2025 (s. 44AD of the 1961 Act)",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 58 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-rebate-156",
+    "label": "New-regime rebate, maximum (total income ≤ ₹12 lakh; not against s. 196/198 capital-gains tax)",
+    "value": "₹60,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 156(2)–(3) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-return-due-date-audit",
+    "label": "Return due date, audited persons",
+    "value": "31 October",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 263(1)(c) Table Sl. 2 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-return-due-date-business-noaudit",
+    "label": "Return due date, business income without audit (from tax year 2026-27)",
+    "value": "31 August",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 263(1)(c) Table Sl. 3, substituted by Act 4 of 2026 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-return-due-date-other",
+    "label": "Return due date, other assessees",
+    "value": "31 July",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 263(1)(c) Table Sl. 4 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-1",
+    "label": "New-regime slab 1, Income-tax Act 2025 s. 202(1) Table",
+    "value": "up to ₹4,00,000: nil",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-2",
+    "label": "New-regime slab 2, Income-tax Act 2025 s. 202(1) Table",
+    "value": "₹4,00,001–₹8,00,000: 5%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-3",
+    "label": "New-regime slab 3, Income-tax Act 2025 s. 202(1) Table",
+    "value": "₹8,00,001–₹12,00,000: 10%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-4",
+    "label": "New-regime slab 4, Income-tax Act 2025 s. 202(1) Table",
+    "value": "₹12,00,001–₹16,00,000: 15%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-5",
+    "label": "New-regime slab 5, Income-tax Act 2025 s. 202(1) Table",
+    "value": "₹16,00,001–₹20,00,000: 20%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-6",
+    "label": "New-regime slab 6, Income-tax Act 2025 s. 202(1) Table",
+    "value": "₹20,00,001–₹24,00,000: 25%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-slab-7",
+    "label": "New-regime slab 7, Income-tax Act 2025 s. 202(1) Table",
+    "value": "above ₹24,00,000: 30%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 202(1) Table | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-spec-loss-carry-forward",
+    "label": "Speculation (intraday equity) loss carry-forward, set off against speculation profit only",
+    "value": "4 tax years",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 113 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-speculative-section",
+    "label": "Speculative transaction and speculation-loss sections",
+    "value": "s. 66(31) and s. 113, Income-tax Act 2025 (ss. 43(5), 73 of the 1961 Act)",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, ss. 66(31), 66(33), 113 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-stcg-rate",
+    "label": "STCG rate, listed equity / equity MF",
+    "value": "20%",
+    "since": "2024-07-23",
+    "source": "Income-tax Act 2025, s. 196 (1961 Act s. 111A from 23 Jul 2024) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-stcg-section",
+    "label": "Equity STCG section",
+    "value": "s. 196, Income-tax Act 2025 (s. 111A of the 1961 Act until AY 2026-27)",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 196 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-std-deduction-new-regime",
+    "label": "Standard deduction from salary under the new regime (s. 202(1) computation)",
+    "value": "₹75,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 19(1) Table Sl. 2(a) (Deductions from salaries) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-surcharge-cg-cap",
+    "label": "Surcharge cap on dividends and ss. 196–198 capital gains (individuals)",
+    "value": "15%",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 3(4)(b) Table Sl. 10 cl. (v) and First Schedule Part I-B Paragraph F Table 1 cl. (vi) (surcharge cap) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-budget-date",
+    "label": "Union Budget day (2026: Sunday 1 Feb with a live NSE/BSE session 09:15–15:30)",
+    "value": "1 February",
+    "since": "2026-02-01",
+    "source": "NSE circular NSE/CMTR/72349 and Budget Speech 2026-27 | https://nsearchives.nseindia.com/content/circulars/CMTR72349.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-crude-import-dependence",
+    "label": "India crude-oil import dependence, approx. (FY2023-24 to FY2025-26, POL-consumption basis)",
+    "value": "88%",
+    "since": "2026-03-30",
+    "source": "Rajya Sabha Q 4124, Ministry of Petroleum & Natural Gas | https://sansad.in/getFile/annex/270/AU4124_gs8kNF.pdf?source=pqars",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-fed-funds-range",
+    "label": "US federal funds target range",
+    "value": "3.75%–4.00%",
+    "since": "2026-10-28",
+    "source": "Federal Reserve — FOMC statement 28 Oct 2026 | https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-fomc-statement-ist-dst",
+    "label": "FOMC statement release in IST during US daylight saving time (14:00 ET)",
+    "value": "23:30 IST",
+    "since": "2026-10-28",
+    "source": "Federal Reserve — FOMC statement 28 Oct 2026 (for release at 2:00 p.m. EDT) | https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-fomc-statement-ist-std",
+    "label": "FOMC statement release in IST during US standard time (14:00 ET; the following calendar day in India)",
+    "value": "00:30 IST",
+    "since": "2026-10-28",
+    "source": "Federal Reserve — FOMC statement 28 Oct 2026 (for release at 2:00 p.m. EDT) | https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-gift-nifty-session-1",
+    "label": "GIFT Nifty (NSE IX) trading session 1",
+    "value": "06:30–15:40 IST",
+    "since": "2023-07-03",
+    "source": "NSE IX — Trading Hours | https://www.nseix.com/markets/trading/tradinghoursnew",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-gift-nifty-session-2",
+    "label": "GIFT Nifty (NSE IX) trading session 2 (ends the next calendar day)",
+    "value": "16:05–02:45 IST",
+    "since": "2023-07-03",
+    "source": "NSE IX — Trading Hours | https://www.nseix.com/markets/trading/tradinghoursnew",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-india-cpi-release-ist",
+    "label": "India CPI release time, on the 12th of the month (next working day if a holiday)",
+    "value": "16:00 IST",
+    "since": "2024-11-12",
+    "source": "PIB — MoSPI revises CPI & IIP release time | https://pib.gov.in/PressReleasePage.aspx?PRID=2070932",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-india-gdp-release-ist",
+    "label": "India GDP release time on MoSPI's advance-release dates (quarterly: end Feb, end May/early Jun, end Aug, end Nov)",
+    "value": "16:00 IST",
+    "since": "2024-11-29",
+    "source": "PIB — MoSPI revises GDP release time | https://pib.gov.in/PressReleasePage.aspx?PRID=2071663",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-india-iip-release-ist",
+    "label": "India IIP release time, on the 28th of the month (next working day if a holiday)",
+    "value": "16:00 IST",
+    "since": "2025-04-28",
+    "source": "PIB — IIP to be released on 28th of every month | https://pib.gov.in/PressReleasePage.aspx?PRID=2122427",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-rbi-mpc-time-ist",
+    "label": "RBI monetary policy announcement time (Governor's statement on the last meeting day)",
+    "value": "10:00 IST",
+    "since": "2026-06-05",
+    "source": "Reserve Bank of India (official YouTube) — Monetary Policy Statement, June 5, 2026 at 10 am | https://www.youtube.com/watch?v=9u3MtqbdZ44",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-repo-rate",
+    "label": "RBI policy repo rate (SDF 5.25%, MSF 5.75%; stance: calibrated tightening)",
+    "value": "5.50%",
+    "since": "2026-10-07",
+    "source": "RBI — MPC Resolution 5–7 Oct 2026 | https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-cpi-release-ist-dst",
+    "label": "US CPI release in IST during US daylight saving time (08:30 ET; second Sunday of March to first Sunday of November)",
+    "value": "18:00 IST",
+    "since": "2026-11-01",
+    "source": "BLS — Schedule of Releases for the CPI | https://www.bls.gov/schedule/news_release/cpi.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-cpi-release-ist-std",
+    "label": "US CPI release in IST during US standard time (08:30 ET; November to March)",
+    "value": "19:00 IST",
+    "since": "2026-11-01",
+    "source": "BLS — Schedule of Releases for the CPI | https://www.bls.gov/schedule/news_release/cpi.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-dst-2026",
+    "label": "US daylight saving time 2026 (second Sunday of March to first Sunday of November)",
+    "value": "8 Mar – 1 Nov 2026",
+    "since": "2026-03-08",
+    "source": "NIST — Daylight Saving Time | https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-dst-2027",
+    "label": "US daylight saving time 2027 (from NIST rule)",
+    "value": "14 Mar – 7 Nov 2027",
+    "since": "2027-03-14",
+    "source": "NIST — Daylight Saving Time (rule) | https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-nfp-release-ist-dst",
+    "label": "US jobs report (NFP) release in IST during US daylight saving time (08:30 ET)",
+    "value": "18:00 IST",
+    "since": "2026-11-01",
+    "source": "BLS — Schedule of Releases for the Employment Situation | https://www.bls.gov/schedule/news_release/empsit.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-nfp-release-ist-std",
+    "label": "US jobs report (NFP) release in IST during US standard time (08:30 ET)",
+    "value": "19:00 IST",
+    "since": "2026-11-01",
+    "source": "BLS — Schedule of Releases for the Employment Situation | https://www.bls.gov/schedule/news_release/empsit.htm",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-tariff-india-framework",
+    "label": "US–India interim framework reciprocal tariff rate, agreed 7 Feb 2026 (IEEPA-based duties ended after the 20 Feb 2026 Supreme Court ruling)",
+    "value": "18%",
+    "since": "2026-02-07",
+    "source": "PIB — US–India Joint Statement | https://pib.gov.in/PressReleasePage.aspx?PRID=2224783",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-tariff-india-s301",
+    "label": "US Section 301 duty on most Indian goods (entries from 24 Jul 2026; Annex exemptions apply)",
+    "value": "10%",
+    "since": "2026-07-24",
+    "source": "Federal Register — Section 301 actions, 28 Jul 2026 | https://www.federalregister.gov/documents/2026/07/28/2026-15181/notice-of-actions-in-section-301-investigations-of-acts-policies-and-practices-of-various-economies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-usdinr-reference-rate-time",
+    "label": "FBIL USD/INR reference rate publication time, daily (e.g. ₹94.9432 per $ on 23 Oct 2026)",
+    "value": "13:00 IST",
+    "since": "2026-10-23",
+    "source": "FBIL — Reference Rates | https://www.fbil.org.in/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-5paisa-api-price",
+    "label": "5paisa Xstream API (trading and market data)",
+    "value": "₹0",
+    "since": "2026-11-01",
+    "source": "5paisa Xstream API | https://xstream.5paisa.com/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-angel-smartapi-price",
+    "label": "Angel One SmartAPI (static IP mandatory from 1 Apr 2026)",
+    "value": "Free",
+    "since": "2026-04-01",
+    "source": "Angel One SmartAPI – exchange regulations | https://smartapi.angelbroking.com/exchange-regulations",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-dhan-api-price",
+    "label": "DhanHQ trading APIs (data APIs priced separately)",
+    "value": "₹0",
+    "since": "2026-11-01",
+    "source": "DhanHQ Trading APIs; Dhan support – Data API subscription | https://dhanhq.co/trading-apis",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-dhan-data-api-price",
+    "label": "DhanHQ data API subscription",
+    "value": "₹499 + taxes/month",
+    "since": "2026-11-01",
+    "source": "DhanHQ Trading APIs; Dhan support – Data API subscription | https://dhanhq.co/trading-apis",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-framework-circular-date",
+    "label": "SEBI retail algo framework circular (SEBI/HO/MIRSD/MIRSD-PoD/P/CIR/2025/0000013)",
+    "value": "4 Feb 2025",
+    "since": "2025-02-04",
+    "source": "SEBI circular – Safer participation of retail investors in Algorithmic trading | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2025/1738665456458.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-framework-effective-date",
+    "label": "Retail algo framework applicable to all brokers (ready brokers went live 1 Oct 2025)",
+    "value": "1 Apr 2026",
+    "since": "2026-04-01",
+    "source": "SEBI circular 30 Sep 2025 – Extension of timeline (CIR/2025/132), para 8 | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2025/1759232056254.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-fyers-api-price",
+    "label": "FYERS API Standard plan (Prime plan ₹499 + GST/month for higher limits)",
+    "value": "Free",
+    "since": "2026-11-01",
+    "source": "FYERS API Plans and Rate Limits | https://fyers.in/api-docs/v3/getting-started/plans-and-limits/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-kite-connect-price",
+    "label": "Zerodha Kite Connect (full API incl. streaming and historical)",
+    "value": "₹500/month",
+    "since": "2026-11-01",
+    "source": "Kite Connect APIs – Zerodha | https://zerodha.com/products/api/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-kite-order-limits",
+    "label": "Kite Connect order throttles",
+    "value": "10 orders/s, 400/min, 5,000/day, 25 modifications per order",
+    "since": "2026-11-01",
+    "source": "Kite Connect 3 – Exceptions and errors | https://kite.trade/docs/connect/v3/exceptions/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-kite-personal-price",
+    "label": "Zerodha Kite Connect Personal (orders, GTT, portfolio; no streaming/historical)",
+    "value": "Free",
+    "since": "2026-11-01",
+    "source": "Kite Connect APIs – Zerodha | https://zerodha.com/products/api/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-nse-colo-full-rack",
+    "label": "NSE colocation full rack list price, excl. taxes (plus ₹1,00,000 setup)",
+    "value": "₹9,00,000 per year",
+    "since": "2026-04-29",
+    "source": "NSE – Co-location Facility | https://www.nseindia.com/static/trade/platform-services-co-location-facility",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-order-rate-threshold",
+    "label": "Order-rate threshold for registering a self-coded algo",
+    "value": "10 orders per second",
+    "since": "2025-07-22",
+    "source": "NSE/INVG/69255 – Detailed Operational Modalities, Annexure I paras 8.2.3–8.2.4 | https://nsearchives.nseindia.com/content/circulars/INVG69255.zip",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-registration-tat",
+    "label": "NSE turnaround time to register an algo (execution algos T+7; provider empanelment T+30)",
+    "value": "T+10 working days",
+    "since": "2025-07-22",
+    "source": "NSE/INVG/69255 – Annexure I para 5 | https://nsearchives.nseindia.com/content/circulars/INVG69255.zip",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-upstox-api-price",
+    "label": "Upstox trading and market-data API subscription (API orders ₹10/order promo till 31 Dec 2026)",
+    "value": "₹0",
+    "since": "2026-11-01",
+    "source": "Upstox – Trading API | https://upstox.com/trading-api/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-80c-equivalent-limit",
+    "label": "Deduction cap for Schedule XV savings (PPF, ELSS, life insurance etc.), Income-tax Act 2025 s. 123, old regime",
+    "value": "₹1,50,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 123 | https://incometaxindia.gov.in/w/section-123-96",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-elss-lock-in",
+    "label": "ELSS lock-in from allotment",
+    "value": "3 years",
+    "since": "2005-11-03",
+    "source": "Equity Linked Savings Scheme, 2005, Rule 3(d) | https://www.incometaxindia.gov.in/equity-linked-savings-scheme-2005",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-epf-rate",
+    "label": "EPF interest rate for FY 2025-26 (CBT recommendation 2 Mar 2026; notification not fetched)",
+    "value": "8.25% p.a.",
+    "since": "2026-03-02",
+    "source": "PIB – 239th CBT meeting, EPFO | https://pib.gov.in/PressReleseDetailm.aspx?PRID=2234502",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-gold-etf-tax-rule",
+    "label": "Gold ETF (listed) capital-gains treatment",
+    "value": "Long-term after 12 months, taxed at 12.5% without indexation; short-term at slab",
+    "since": "2025-04-01",
+    "source": "Income-tax Act 2025, s. 2(101) and s. 197(1)(b) | https://incometaxindia.gov.in/w/section-197-78",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-index-fund-ter-cap",
+    "label": "SEBI cap on the base expense ratio of index funds and ETFs (share of daily net assets)",
+    "value": "0.90%",
+    "since": "2026-04-01",
+    "source": "SEBI (Mutual Funds) Regulations 2026, Reg. 66(7)(b) | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2026/1783933012694.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-mcap-to-gdp",
+    "label": "India market-cap-to-GDP, approx. (BSE all-India market cap ₹475.35 lakh crore on 30 Oct 2026 ÷ FY 2025-26 nominal GDP ₹346.36 lakh crore)",
+    "value": "1.37",
+    "since": "2026-10-30",
+    "source": "BSE All India Market Capitalization; PIB/MoSPI Provisional Estimates 5 Jun 2026 | https://www.bseindia.com/markets/equity/EQReports/allindiamktcap.aspx",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-mf-industry-aum",
+    "label": "Mutual fund industry AUM, September 2026 (AMFI)",
+    "value": "₹82.64 lakh crore",
+    "since": "2026-09-30",
+    "source": "AMFI Monthly Note – September 2026 | https://www.amfiindia.com/uploads/AMFI_Monthly_Note_September2026_554f6604b6.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-momentum30-5y-tr",
+    "label": "Nifty200 Momentum 30 total-return CAGR, 5 years to 30 Sep 2026",
+    "value": "9.28% p.a.",
+    "since": "2026-09-30",
+    "source": "NSE Indices – Nifty200 Momentum 30 factsheet | https://www.niftyindices.com/Factsheet/Factsheet_Nifty200_Momentum30.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-5y-tr",
+    "label": "Nifty 50 total-return CAGR, 5 years to 30 Oct 2026 (1-year: −9.45%)",
+    "value": "6.70% p.a.",
+    "since": "2026-10-30",
+    "source": "NSE Indices – Nifty 50 factsheet | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-dy",
+    "label": "Nifty 50 dividend yield (NSE Indices factsheet, 30 Oct 2026)",
+    "value": "1.42%",
+    "since": "2026-10-30",
+    "source": "NSE Indices – Nifty 50 factsheet | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-pb",
+    "label": "Nifty 50 price-to-book ratio (NSE Indices factsheet, 30 Oct 2026)",
+    "value": "2.83",
+    "since": "2026-10-30",
+    "source": "NSE Indices – Nifty 50 factsheet | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-pe",
+    "label": "Nifty 50 price-to-earnings ratio (NSE Indices factsheet, 30 Oct 2026)",
+    "value": "19.30",
+    "since": "2026-10-30",
+    "source": "NSE Indices – Nifty 50 factsheet | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-td-10y",
+    "label": "Example 10-year tracking difference, Nifty 50 index fund (UTI, regular plan, 30 Sep 2026)",
+    "value": "−0.40% p.a.",
+    "since": "2026-09-30",
+    "source": "UTI MF – UTI Nifty 50 Index Fund fund facts | https://www.utimf.com/mutual-funds/uti-nifty-50-index-fund",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-ter-direct",
+    "label": "Example Nifty 50 index fund TER, direct plan (UTI Nifty 50 Index Fund, 30 Sep 2026)",
+    "value": "0.25%",
+    "since": "2026-09-30",
+    "source": "UTI MF – UTI Nifty 50 Index Fund fund facts | https://www.utimf.com/mutual-funds/uti-nifty-50-index-fund",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nifty50-ter-regular",
+    "label": "Example Nifty 50 index fund TER, regular plan (UTI Nifty 50 Index Fund, 30 Sep 2026)",
+    "value": "0.37%",
+    "since": "2026-09-30",
+    "source": "UTI MF – UTI Nifty 50 Index Fund fund facts | https://www.utimf.com/mutual-funds/uti-nifty-50-index-fund",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nps-equity-cap",
+    "label": "Maximum equity allocation under NPS Active Choice, Tier I (100% in Tier II; MSF schemes are classified separately)",
+    "value": "75%",
+    "since": "2026-08-28",
+    "source": "PFRDA circular PFRDA/2026/47/REG-PF/10 (28 Aug 2026), para 2.2 | https://pfrda.org.in/documents/33652/154008/Circular+-+Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-nps-msf-equity-cap",
+    "label": "Maximum equity in an NPS Multiple Scheme Framework scheme, Category A (Aggressive Growth, 80%–100% equity mandate)",
+    "value": "100%",
+    "since": "2026-08-28",
+    "source": "PFRDA circular PFRDA/2026/47/REG-PF/10 (28 Aug 2026), para 2.4 | https://pfrda.org.in/documents/33652/154008/Circular+-+Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-ppf-rate",
+    "label": "Public Provident Fund interest rate (Oct–Dec 2026 quarter, unchanged since Apr 2020)",
+    "value": "7.1% p.a.",
+    "since": "2020-04-01",
+    "source": "National Savings Institute – scheme-wise interest rates; DoP SB Order 12/2026 (DEA OM 30 Sep 2026) | https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=132",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-reit-distribution-min",
+    "label": "Minimum distribution of net distributable cash flows by REIT SPVs",
+    "value": "90%",
+    "since": "2014-09-26",
+    "source": "SEBI (REIT) Regulations 2014 (as amended 18 Apr 2026), Reg. 18(16) | https://www.sebi.gov.in/sebi_data/attachdocs/apr-2026/1776685013526.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-sgb-new-issue-status",
+    "label": "Sovereign Gold Bond new issues",
+    "value": "None since Feb 2024 (2023-24 Series IV); scheme in run-off with RBI premature-redemption windows",
+    "since": "2024-02-21",
+    "source": "RBI – SGB premature redemption calendar Oct 2026–Mar 2027 | https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63416",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-sgb-redemption-exemption",
+    "label": "Capital-gains exemption on SGB redemption (narrowed by Finance Act 2026)",
+    "value": "Only if held by an individual from issue to maturity",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 70(1)(x) as amended by Finance Act 2026 | https://incometaxindia.gov.in/w/section-70-127",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-sip-monthly-inflow",
+    "label": "Monthly SIP contribution, September 2026 (AMFI)",
+    "value": "₹32,490 crore",
+    "since": "2026-09-30",
+    "source": "AMFI Monthly Note – September 2026 | https://www.amfiindia.com/uploads/AMFI_Monthly_Note_September2026_554f6604b6.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "inv-tracking-error-cap",
+    "label": "SEBI cap on tracking error of equity ETFs/index funds",
+    "value": "2%",
+    "since": "2026-04-01",
+    "source": "SEBI Master Circular for Mutual Funds 20 Mar 2026, §4.5.4 | https://www.sebi.gov.in/sebi_data/attachdocs/mar-2026/1774024028162.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-acwi-us-weight",
+    "label": "United States weight in MSCI ACWI (30 Sep 2026)",
+    "value": "64.21%",
+    "since": "2026-09-30",
+    "source": "MSCI ACWI Index factsheet, 30 Sep 2026 | https://www.msci.com/documents/10199/8d97d244-4685-4200-a24c-3e2942e3adeb",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-cspx-ter",
+    "label": "iShares Core S&P 500 UCITS ETF (CSPX) total expense ratio (provider page)",
+    "value": "0.07%",
+    "since": "2026-10-30",
+    "source": "iShares – CSPX product page | https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-em-india-weight",
+    "label": "India weight in MSCI Emerging Markets (30 Sep 2026)",
+    "value": "10.65%",
+    "since": "2026-09-30",
+    "source": "MSCI Emerging Markets Index factsheet, 30 Sep 2026 | https://www.msci.com/documents/10199/c0db0a48-01f2-4ba9-ad01-226fd5678111",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-foreign-stock-ltcg-period",
+    "label": "Holding period for foreign-listed shares/ETFs to be long-term capital assets in India",
+    "value": "more than 24 months",
+    "since": "2024-07-23",
+    "source": "Income-tax Act 2025, s. 2(101) | https://wm.incometaxindia.gov.in/web/guest/w/section-2-1",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-foreign-stock-ltcg-rate",
+    "label": "Indian LTCG rate on foreign shares/ETFs (no indexation)",
+    "value": "12.5%",
+    "since": "2024-07-23",
+    "source": "Income-tax Act 2025, s. 197(1)(b) | https://incometaxindia.gov.in/w/section-197-78",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-lrs-idle-funds-days",
+    "label": "Days within which unused LRS foreign exchange must be repatriated unless reinvested",
+    "value": "180",
+    "since": "2022-08-24",
+    "source": "RBI Master Direction – LRS, para 17 | https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10192",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-lrs-limit",
+    "label": "LRS limit per resident individual per financial year",
+    "value": "$250,000",
+    "since": "2015-05-26",
+    "source": "RBI Master Direction – Liberalised Remittance Scheme (updated 6 Sep 2024) | https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10192",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-mf-overseas-cap",
+    "label": "SEBI overseas-investment cap for the Indian mutual-fund industry (per fund $1 billion; overseas ETFs $300 million per fund)",
+    "value": "$7 billion + $1 billion ETF",
+    "since": "2021-06-03",
+    "source": "SEBI Master Circular for Mutual Funds, 20 Mar 2026, para 13.11.2 | https://www.sebi.gov.in/sebi_data/attachdocs/mar-2026/1774024028162.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-nseix-receipts-status",
+    "label": "NSE IX unsponsored US-stock receipts (NSE IFSC Receipts) status",
+    "value": "Being terminated: no buy orders from 30 Jul 2026; sell by 29 Jan 2027; dealing ends 1 Feb 2027",
+    "since": "2026-07-24",
+    "source": "NSE IFSC circular NSEIFSC/TRADE/2698 | https://www.nseix.com/api/content/circulars/NSEIFSC_TRADE_2698.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-nseixga-brokerage",
+    "label": "NSEIX Global Access brokerage per order (provider price for Indian residents; plus 18% IGST on brokerage)",
+    "value": "$1 or 0.25%, whichever is higher",
+    "since": "2026-10-30",
+    "source": "NSEIX Global Access – pricing | https://www.nseixga.com/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-schedule-fa-rule",
+    "label": "Black Money Act 2015 s. 43 penalty for not reporting foreign assets in the return (nil where non-immovable foreign assets total ≤ ₹20 lakh)",
+    "value": "₹10 lakh",
+    "since": "2024-10-01",
+    "source": "Black Money Act 2015, s. 43 (proviso inserted by Finance (No. 2) Act 2024) | https://incometaxindia.gov.in/w/section-43-114",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-spiva-us-largecap-20y",
+    "label": "Share of active US large-cap funds that underperformed the S&P 500 over 20 years (SPIVA US Year-End 2025)",
+    "value": "92.89%",
+    "since": "2025-12-31",
+    "source": "S&P DJI SPIVA U.S. Scorecard Year-End 2025, Report 1 | https://www.spglobal.com/spdji/en/spiva/article/spiva-us-year-end-2025/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-tcs-rate",
+    "label": "TCS rate on LRS remittances for investment and other non-education/medical purposes (on the amount above the threshold)",
+    "value": "20%",
+    "since": "2023-10-01",
+    "source": "Income-tax Act 2025, s. 394(1) Table Sl. 7(b) | https://incometaxindia.gov.in/w/section-394-6",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-tcs-rate-education-medical",
+    "label": "TCS rate on LRS remittances for education or medical treatment (above the threshold)",
+    "value": "2%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 394(1) Table Sl. 7(a), as amended by Finance Act 2026 | https://incometaxindia.gov.in/w/section-394-6",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-tcs-threshold",
+    "label": "Aggregate LRS remittance in a year above which TCS applies",
+    "value": "₹10 lakh",
+    "since": "2025-04-01",
+    "source": "Income-tax Act 2025, s. 394(1) Table Sl. 7 | https://incometaxindia.gov.in/w/section-394-6",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-us-dividend-withholding-default",
+    "label": "US statutory withholding on dividends to a foreign person without a valid W-8BEN",
+    "value": "30%",
+    "since": "1991-01-01",
+    "source": "IRS Tax Treaty Table 1 (Rev. May 2023), header note | https://www.irs.gov/pub/irs-lbi/tax-treaty-table-1.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-us-dividend-withholding-dtaa",
+    "label": "US withholding on portfolio dividends to an Indian resident with a valid W-8BEN (India–US DTAA Art. 10(2)(b))",
+    "value": "25%",
+    "since": "1991-01-01",
+    "source": "IRS Tax Treaty Table 1 (Rev. May 2023), India row | https://www.irs.gov/pub/irs-lbi/tax-treaty-table-1.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-us-estate-exemption-nra",
+    "label": "US estate-tax filing threshold / effective exemption for a non-resident alien's US-situs assets (not inflation-indexed)",
+    "value": "$60,000",
+    "since": "1988-01-01",
+    "source": "IRS – Estate tax for nonresidents not citizens of the United States (updated 28 Jun 2026) | https://www.irs.gov/businesses/small-businesses-self-employed/estate-tax-for-nonresidents-not-citizens-of-the-united-states",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-us-estate-top-rate",
+    "label": "Top US estate-tax rate (unified rate schedule, Table A; applies above $1,000,000 of taxable estate)",
+    "value": "40%",
+    "since": "2013-01-01",
+    "source": "IRS Instructions for Form 706 (07/2026), Table A | https://www.irs.gov/instructions/i706",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-voo-expense-ratio",
+    "label": "Vanguard S&P 500 ETF (VOO) expense ratio (provider page)",
+    "value": "0.03%",
+    "since": "2026-04-28",
+    "source": "Vanguard – VOO product page | https://advisors.vanguard.com/investments/products/voo/vanguard-sp-500-etf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-w8ben-validity",
+    "label": "Validity of Form W-8BEN",
+    "value": "Signature date to 31 Dec of the third following year",
+    "since": "2021-10-01",
+    "source": "IRS Instructions for Form W-8BEN (10/2021), Expiration of Form W-8BEN | https://www.irs.gov/instructions/iw8ben",
+    "verified": "2026-11-01"
+  }
+]
