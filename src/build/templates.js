@@ -1,25 +1,30 @@
 // HTML templates. Every URL is relative (the site is served under SITE.basePath on GitHub Pages).
-import { escapeHtml as esc } from './markdown.js';
+import { escapeHtml as esc, factCitation, evidenceTagHtml } from './markdown.js';
 import { SITE } from './config.js';
 import { STRINGS as S, fill } from './strings.js';
+import { formatDate, todayIST } from './dates.js';
+
+export { formatDate } from './dates.js';
+
+// Theme colours the build and the client must agree on (design §3.1 --bg light / dark).
+export const THEME_COLOR = { light: '#f5f6f8', dark: '#121418' };
 
 const ICONS = {
+  // M1 brand mark: a non-directional "ledger" glyph (rounded square + two bars) in --accent; the favicon is the same path.
+  brand: '<svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path class="bar" d="M7 9.5h10M7 14.5h6"/></svg>',
   search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
   theme: '<svg viewBox="0 0 24 24" aria-hidden="true" class="theme-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>',
   menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg>',
 };
 
 export function rel(depth) {
   return depth ? '../'.repeat(depth) : './';
 }
 
-export function formatDate(iso, { withTime = false } = {}) {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return String(iso);
-  const opts = { day: 'numeric', month: 'short', year: 'numeric', timeZone: SITE.timeZone };
-  if (withTime) Object.assign(opts, { hour: '2-digit', minute: '2-digit', hour12: false });
-  return new Intl.DateTimeFormat('en-IN', opts).format(d) + (withTime ? ' IST' : '');
+/** `<time datetime="2026-11-01">1 Nov 2026</time>` — dates are data, so the never-typed scan skips them. */
+export function timeTag(iso) {
+  return iso ? `<time datetime="${esc(iso)}">${esc(formatDate(iso))}</time>` : '';
 }
 
 /** Indian figures: ₹1,25,120.35 (en-IN grouping). */
@@ -36,7 +41,7 @@ export function levelTag(level) {
 }
 
 export function evidenceTag(label) {
-  return label ? `<span class="tag tag-evidence" data-evidence="${esc(label)}">${esc(S.labels.evidenceLabels[label] || label)}</span>` : '';
+  return evidenceTagHtml(label);
 }
 
 function seoHead({ fullTitle, description, canonical, type, jsonLd }) {
@@ -52,8 +57,16 @@ function seoHead({ fullTitle, description, canonical, type, jsonLd }) {
 <meta name="twitter:description" content="${esc(description)}">${jsonLd ? `\n<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>` : ''}`;
 }
 
+/** Primary nav links. `current` (the href of the page's nav entry, '' for none) is the ONLY source of aria-current. */
+function navLinks(r, current) {
+  return S.nav
+    .map((n) => `<a href="${r}${n.href}"${n.prominent ? ' class="nav-learn"' : ''}${current === n.href ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`)
+    .join('');
+}
+
 /**
- * Shared shell. `path` is the output path (e.g. guides/x/index.html); `depth` the folder depth for relative URLs.
+ * Shared shell. `path` is the output path (e.g. guides/x/index.html); `depth` the folder depth for relative URLs;
+ * `current` the nav href this page belongs to ('' when it has no nav entry, e.g. facts/).
  * `article` (optional) = { headline, datePublished, dateModified, section } for JSON-LD Article.
  */
 export function layout({ title, description, path, depth = 0, body, current = '', extraHead = '', bodyClass = '', article = null }) {
@@ -61,7 +74,7 @@ export function layout({ title, description, path, depth = 0, body, current = ''
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
   const desc = description || SITE.description;
   const canonical = SITE.liveUrl + path.replace(/index\.html$/, '');
-  const navLinks = S.nav.map((n) => `<a href="${r}${n.href}"${current === n.href ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`).join('');
+  const links = navLinks(r, current);
   const jsonLd = article
     ? { '@context': 'https://schema.org', '@type': 'Article', headline: article.headline, description: desc, datePublished: article.datePublished, dateModified: article.dateModified, articleSection: article.section, inLanguage: SITE.lang, isAccessibleForFree: true, license: 'https://creativecommons.org/licenses/by/4.0/', author: { '@type': 'Organization', name: SITE.name, url: SITE.liveUrl }, publisher: { '@type': 'Organization', name: SITE.name, url: SITE.liveUrl }, mainEntityOfPage: canonical }
     : { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.liveUrl, description: SITE.description, inLanguage: SITE.lang };
@@ -74,7 +87,7 @@ export function layout({ title, description, path, depth = 0, body, current = ''
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(desc)}">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f7f6f3">
+<meta name="theme-color" content="${THEME_COLOR.light}">
 ${seoHead({ fullTitle, description: desc, canonical, type: article ? 'article' : 'website', jsonLd })}
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${r}fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -87,15 +100,15 @@ ${extraHead}
 <a class="skip-link" href="#main">${esc(S.header.skip)}</a>
 <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href="${r}" aria-label="${esc(SITE.name)} ${esc(S.header.homeAria)}"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">${esc(SITE.name)}</span></a>
-    <nav class="site-nav" aria-label="${esc(S.header.primaryNav)}">${navLinks}</nav>
+    <a class="brand" href="${r}" aria-label="${esc(SITE.name)} ${esc(S.header.homeAria)}">${ICONS.brand}<span class="brand-name">${esc(SITE.name)}</span></a>
+    <nav class="site-nav" aria-label="${esc(S.header.primaryNav)}">${links}</nav>
     <div class="header-actions">
       <button class="icon-btn" type="button" data-action="search" aria-label="${esc(S.header.searchAria)}">${ICONS.search}<span class="label">${esc(S.header.search)}</span><kbd aria-hidden="true">/</kbd></button>
       <button class="icon-btn theme-btn" type="button" data-action="theme" data-mode="light" aria-label="${esc(fill(S.client.themeAria, { mode: S.theme.light }))}">${ICONS.theme}<span class="label theme-label">${esc(S.theme.light)}</span></button>
       <button class="icon-btn menu-btn" type="button" data-action="menu" aria-label="${esc(S.header.menuOpen)}" aria-expanded="false" aria-controls="mobile-nav">${ICONS.menu}</button>
     </div>
   </div>
-  <nav class="container mobile-nav" id="mobile-nav" aria-label="${esc(S.header.mobileNav)}" data-open="false">${navLinks}</nav>
+  <nav class="container mobile-nav" id="mobile-nav" aria-label="${esc(S.header.mobileNav)}" data-open="false">${links}</nav>
 </header>
 <main id="main">
 ${body}
@@ -109,7 +122,7 @@ ${footer(r)}
   </form>
   <ul class="search-results" id="search-results" aria-live="polite"></ul>
 </dialog>
-<template id="ui-strings" data-json>${esc(JSON.stringify(S.client))}</template>
+<template id="ui-strings" data-json>${esc(JSON.stringify({ ...S.client, themeColor: THEME_COLOR }))}</template>
 <script src="${r}app.js" defer></script>
 </body>
 </html>
@@ -154,24 +167,32 @@ export function breadcrumbs(r, trail) {
 
 export function sourcesList(sources) {
   if (!sources.length) return '';
-  return `<div class="sources"><h2 class="h3">${esc(S.labels.sourcesHeading)}</h2><ol class="sources-list">${sources
-    .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.title)}</a>${s.accessed ? ` <span class="muted">(${esc(S.labels.accessed)} ${esc(s.accessed)})</span>` : ''}</li>`)
+  return `<div class="sources" id="sources"><h2 class="h3">${esc(S.labels.sourcesHeading)}</h2><ol class="sources-list">${sources
+    .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.title)}</a>${s.accessed ? ` <span class="muted">(${esc(S.labels.accessed)} ${timeTag(s.accessed)})</span>` : ''}</li>`)
     .join('')}</ol></div>`;
 }
 
-/** Rail box listing the facts a page renders, each with its verified date and source. */
-export function factsBox(ids, byFact) {
+/** One rail entry in the N4 format: value · label · <source> · since|from <date> · verified <date>. */
+function factItem(f, today) {
+  return `<li id="fact-${esc(f.id)}"><span class="fv">${esc(f.value)}</span><span class="fl">${esc(f.label)}</span><span class="fd">${factCitation(f, { today, link: true })}</span></li>`;
+}
+
+/**
+ * Rail box "Facts on this page, verified": the facts a page renders, in order of first use. The first `open` entries
+ * (six, design-review NIT 5) are visible; the rest sit inside <details>; then the link to the register.
+ */
+export function factsBox(ids, byFact, r = './', { today = todayIST(), open = 6 } = {}) {
   const facts = ids.map((id) => byFact[id]).filter(Boolean);
   if (!facts.length) return '';
-  return `<div class="card facts-box"><h2>${esc(S.labels.factsVerified)}</h2><ul>${facts
-    .map((f) => {
-      const [title, url] = String(f.source).split('|').map((x) => x.trim());
-      const href = url || title;
-      return `<li><b class="num">${esc(f.value)}</b><small>${esc(f.label)}</small><small class="muted">${esc(S.labels.since)} ${esc(f.since)} · ${esc(S.labels.verified)} ${esc(f.verified)} · <a href="${esc(href)}" rel="noopener noreferrer" target="_blank">source</a></small></li>`;
-    })
-    .join('')}</ul></div>`;
+  const head = facts.slice(0, open);
+  const rest = facts.slice(open);
+  return `<div class="card facts-box"><h2>${esc(S.labels.factsVerified)}</h2><ul>${head.map((f) => factItem(f, today)).join('')}</ul>${rest.length
+    ? `<details><summary>${esc(fill(S.labels.moreFacts, { n: rest.length }))}</summary><ul>${rest.map((f) => factItem(f, today)).join('')}</ul></details>`
+    : ''}<p class="all"><a href="${r}facts/">${esc(S.labels.allFacts)}</a></p></div>`;
 }
 
 export function disclaimer() {
   return `<p class="disclaimer">${esc(S.footer.disclaimer)}</p>`;
 }
+
+export { ICONS };

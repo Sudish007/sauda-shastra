@@ -1,10 +1,12 @@
-// Load and validate all content: guides and playbooks (Markdown + front matter), facts, glossary, calendar,
-// changelog, resources and the learning library. Throws on broken references so the build (and tests) fail loudly.
-// Every loader tolerates an empty content set: a missing file or folder is an empty list.
+// Load and validate all content: guides and playbooks (Markdown + front matter), content pages (about), facts,
+// glossary, calendar, changelog, resources and the learning library. Throws on broken references so the build (and
+// tests) fail loudly. Every loader tolerates an empty content set: a missing file or folder is an empty list.
+// Only content/guides, content/playbooks and content/pages are read; content/_templates is the writers' skeleton.
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { parseFrontMatter, renderMarkdown } from './markdown.js';
+import { parseFrontMatter, renderMarkdown, renderInline, plainInline, factSource } from './markdown.js';
+import { TOOLS } from './tools.js';
 
 // Guide sections map to the brief's research clusters (D = playbooks, L = tools, M = utilities, N = library).
 export const SECTIONS = [
@@ -19,6 +21,8 @@ export const SECTIONS = [
   'Investing: USA & global', // J
   'Edges, habits & traps',   // K
 ];
+// Clusters E, F, G, I, J, K ship in Phase 2; until a section has guides the home page shows its scope line.
+export const PHASE2_SECTIONS = ['Macro & events', 'Fundamentals & news', 'Algo & systematic', 'Investing: India', 'Investing: USA & global', 'Edges, habits & traps'];
 export const LEVELS = ['beginner', 'intermediate', 'advanced'];
 export const EVIDENCE_LABELS = ['EVIDENCE', 'MECHANISM', 'LORE'];
 // Fixed playbook template (brief §3), as h2 headings in this order. Sources render from front matter after the body.
@@ -35,8 +39,33 @@ export const PLAYBOOK_SECTIONS = [
   'Evidence label',
   'Schematic',
 ];
+export const GLANCE_FIELDS = ['glance_stop', 'glance_target', 'glance_size'];
+export const GLANCE_MAX = 90;
 export const LIBRARY_TYPES = ['course', 'book', 'paper', 'video series', 'newsletter'];
 export const LIBRARY_FITS = ['intraday', 'options', 'algo', 'India investing', 'US/global investing', 'risk & psychology', 'tax & rules'];
+
+// The five home-hero facts (design §6.6): all must exist and share one `verified` date whenever the register is non-empty.
+export const HERO_FACT_IDS = ['sebi-loss-2026-share', 'sebi-loss-2026-amount', 'sebi-loss-2026-avg', 'sebi-costs-share', 'sebi-loss-2026-five-year-consistent'];
+// Register groups by id prefix (design §6.6): every fact id must start with one of these prefixes.
+export const FACT_GROUPS = [
+  { key: 'sessions', prefixes: ['mkt', 'fo'] },
+  { key: 'charges', prefixes: ['chg'] },
+  { key: 'options', prefixes: ['opt'] },
+  { key: 'sebi', prefixes: ['sebi'] },
+  { key: 'tax', prefixes: ['tax'] },
+  { key: 'macro', prefixes: ['mac'] },
+  { key: 'algo', prefixes: ['algo'] },
+  { key: 'india', prefixes: ['inv'] },
+  { key: 'abroad', prefixes: ['glb'] },
+];
+export const factGroup = (id) => FACT_GROUPS.find((g) => g.prefixes.includes(String(id).split('-')[0]))?.key || null;
+
+// Fact values: ≤ 60 chars when a page tokens the id (fatal), ≤ 120 for register-only rows (fatal), warn above 40 when tokened.
+export const VALUE_MAX_TOKENED = 60;
+export const VALUE_MAX_REGISTER = 120;
+export const VALUE_WARN = 40;
+// N4: a fact's source TITLE names the enacted instrument or circular, never a Bill clause or a Budget memorandum.
+export const BILL_TITLE_RE = /\bFinance(\s*\(No\.\s*\d\))?\s+Bill\b|\bmemorandum\b/i;
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const URL_RE = /^https?:\/\/\S+$/;
@@ -66,17 +95,27 @@ export function readingMinutes(text) {
 }
 
 const normHeading = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '');
+const asList = (v) => (Array.isArray(v) ? v : v === undefined || v === '' ? [] : [v]);
 
-function parseArticle(raw, slug, facts) {
+/**
+ * Shared front-matter + body parsing. The body renders first so the first {{fact:}} in prose carries the mark; the
+ * summary then renders in `.fact-again` mode (cards, lede) and its ids join factRefs after the body's.
+ */
+function parseArticle(raw, slug, facts, today) {
   const { data, body } = parseFrontMatter(raw);
   const headings = [];
   const factRefs = [];
-  const html = renderMarkdown(body, { headings, facts, factRefs });
+  const html = renderMarkdown(body, { headings, facts, factRefs, today });
+  const summaryRaw = String(data.summary ?? '');
+  const summaryHtml = renderInline(summaryRaw, { facts, factRefs });
   return {
     slug,
     data,
     body,
     html,
+    summaryRaw,
+    summary: plainInline(summaryRaw, { facts }),
+    summaryHtml,
     headings: headings.filter((h) => h.depth === 2 || h.depth === 3),
     factRefs,
     minutes: Number(data.reading_time) || readingMinutes(body),
@@ -84,8 +123,8 @@ function parseArticle(raw, slug, facts) {
   };
 }
 
-export function parseGuide(raw, slug, facts = {}) {
-  const a = parseArticle(raw, slug, facts);
+export function parseGuide(raw, slug, facts = {}, { today } = {}) {
+  const a = parseArticle(raw, slug, facts, today);
   const d = a.data;
   return {
     kind: 'guide',
@@ -93,12 +132,14 @@ export function parseGuide(raw, slug, facts = {}) {
     title: d.title || '',
     section: d.section || '',
     order: Number(d.order || 99),
-    summary: d.summary || '',
+    summary: a.summary,
+    summaryHtml: a.summaryHtml,
     updated: String(d.updated || ''),
     level: String(d.level || ''),
-    topics: Array.isArray(d.topics) ? d.topics : [],
-    related: Array.isArray(d.related) ? d.related : [],
-    sources: parseSources(Array.isArray(d.sources) ? d.sources : []),
+    topics: asList(d.topics),
+    related: asList(d.related),
+    tools: asList(d.tools).map(String),
+    sources: parseSources(asList(d.sources)),
     headings: a.headings,
     factRefs: a.factRefs,
     html: a.html,
@@ -107,23 +148,26 @@ export function parseGuide(raw, slug, facts = {}) {
   };
 }
 
-export function parsePlaybook(raw, slug, facts = {}) {
-  const a = parseArticle(raw, slug, facts);
+export function parsePlaybook(raw, slug, facts = {}, { today } = {}) {
+  const a = parseArticle(raw, slug, facts, today);
   const d = a.data;
   return {
     kind: 'playbook',
     slug,
     title: d.title || '',
     order: Number(d.order || 99),
-    summary: d.summary || '',
+    summary: a.summary,
+    summaryHtml: a.summaryHtml,
     updated: String(d.updated || ''),
     level: String(d.level || ''),
-    instruments: Array.isArray(d.instruments) ? d.instruments : d.instruments ? [d.instruments] : [],
+    instruments: asList(d.instruments).map(String),
     window: String(d.window || ''),
+    glance: Object.fromEntries(GLANCE_FIELDS.map((k) => [k.replace('glance_', ''), d[k] === undefined ? '' : String(d[k])])),
     evidence: String(d.evidence || '').toUpperCase(),
-    topics: Array.isArray(d.topics) ? d.topics : [],
-    related: Array.isArray(d.related) ? d.related : [],
-    sources: parseSources(Array.isArray(d.sources) ? d.sources : []),
+    topics: asList(d.topics),
+    related: asList(d.related),
+    tools: asList(d.tools).map(String),
+    sources: parseSources(asList(d.sources)),
     headings: a.headings,
     factRefs: a.factRefs,
     html: a.html,
@@ -132,7 +176,26 @@ export function parsePlaybook(raw, slug, facts = {}) {
   };
 }
 
-export async function loadContent(contentDir) {
+/** content/pages/<slug>.md: front matter title, summary, updated, sources; body Markdown (the About page lives here). */
+export function parsePage(raw, slug, facts = {}, { today } = {}) {
+  const a = parseArticle(raw, slug, facts, today);
+  const d = a.data;
+  return {
+    kind: 'page',
+    slug,
+    title: d.title || '',
+    summary: a.summary,
+    summaryHtml: a.summaryHtml,
+    updated: String(d.updated || ''),
+    sources: parseSources(asList(d.sources)),
+    headings: a.headings,
+    factRefs: a.factRefs,
+    html: a.html,
+    words: a.words,
+  };
+}
+
+export async function loadContent(contentDir, { today } = {}) {
   const dataDir = path.join(contentDir, 'data');
   const factsList = await readJsonOr(path.join(dataDir, 'facts.json'), []);
   const facts = Object.fromEntries(factsList.map((f) => [f.id, f]));
@@ -140,16 +203,23 @@ export async function loadContent(contentDir) {
   const guides = [];
   const guidesDir = path.join(contentDir, 'guides');
   for (const file of await listMarkdown(guidesDir)) {
-    guides.push(parseGuide(await readFile(path.join(guidesDir, file), 'utf8'), file.replace(/\.md$/, ''), facts));
+    guides.push(parseGuide(await readFile(path.join(guidesDir, file), 'utf8'), file.replace(/\.md$/, ''), facts, { today }));
   }
   guides.sort((a, b) => SECTIONS.indexOf(a.section) - SECTIONS.indexOf(b.section) || a.order - b.order || a.title.localeCompare(b.title));
 
   const playbooks = [];
   const playbooksDir = path.join(contentDir, 'playbooks');
   for (const file of await listMarkdown(playbooksDir)) {
-    playbooks.push(parsePlaybook(await readFile(path.join(playbooksDir, file), 'utf8'), file.replace(/\.md$/, ''), facts));
+    playbooks.push(parsePlaybook(await readFile(path.join(playbooksDir, file), 'utf8'), file.replace(/\.md$/, ''), facts, { today }));
   }
   playbooks.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
+
+  const pages = {};
+  const pagesDir = path.join(contentDir, 'pages');
+  for (const file of await listMarkdown(pagesDir)) {
+    const slug = file.replace(/\.md$/, '');
+    pages[slug] = parsePage(await readFile(path.join(pagesDir, file), 'utf8'), slug, facts, { today });
+  }
 
   const glossary = await readJsonOr(path.join(dataDir, 'glossary.json'), []);
   const calendar = await readJsonOr(path.join(dataDir, 'calendar.json'), { note: '', filters: [], events: [] });
@@ -162,7 +232,7 @@ export async function loadContent(contentDir) {
   };
 
   const dates = [
-    ...guides.map((g) => g.updated), ...playbooks.map((p) => p.updated),
+    ...guides.map((g) => g.updated), ...playbooks.map((p) => p.updated), ...Object.values(pages).map((p) => p.updated),
     ...factsList.map((f) => f.verified), ...changelog.map((e) => e.date),
   ].filter((d) => DATE.test(d)).sort();
   const reviewed = dates.at(-1) || new Date().toISOString().slice(0, 10);
@@ -170,6 +240,7 @@ export async function loadContent(contentDir) {
   const content = {
     guides,
     playbooks,
+    pages,
     facts: factsList,
     byFact: facts,
     glossary,
@@ -185,7 +256,20 @@ export async function loadContent(contentDir) {
   return content;
 }
 
-/** Validate playbook h2 order against the fixed template. Returns a list of problems (empty = OK). */
+/** The `<figure class="schematic">…</figure>` block (or the figure around `svg.schematic`), '' when absent. */
+function schematicBlock(html) {
+  const i = html.search(/<(figure|svg)[^>]*class="[^"]*\bschematic\b[^"]*"/);
+  if (i < 0) return '';
+  const start = html.lastIndexOf('<figure', i) >= 0 ? html.lastIndexOf('<figure', i) : i;
+  const end = html.indexOf('</figure>', i);
+  return end < 0 ? html.slice(start) : html.slice(start, end + 9);
+}
+
+/**
+ * Validate playbook h2 order against the fixed template, plus the schematic rules (design §6.8, D1): an inline
+ * <svg> inside `.schematic`, no <text> in it (words live in the HTML legend) and a `<figcaption class="legend">`
+ * ending with "Schematic, not real data." Returns a list of problems (empty = OK).
+ */
 export function checkPlaybookTemplate(p) {
   const problems = [];
   const raw = p.headings.filter((h) => h.depth === 2).map((h) => h.text);
@@ -195,26 +279,54 @@ export function checkPlaybookTemplate(p) {
     if (h2[i] !== want[i]) { problems.push(`h2 #${i + 1} must be "${PLAYBOOK_SECTIONS[i]}"${raw[i] ? ` (found "${raw[i]}")` : ' (missing)'}`); break; }
   }
   if (h2.length > want.length) problems.push(`unexpected extra h2 "${raw[want.length]}": the template is fixed, use h3 inside a section`);
+  const fig = schematicBlock(p.html);
   if (!/<svg[\s>]/.test(p.html)) problems.push('schematic must be an inline <svg>');
-  if (!/schematic, not real data/i.test(p.html)) problems.push('schematic caption "schematic, not real data" missing');
+  if (!fig) problems.push('schematic must be a <figure class="schematic"> holding the <svg> and a <figcaption class="legend">');
+  else {
+    if (/<text[\s>]/i.test(fig)) problems.push('schematic <svg> must not contain <text>: put every word in the <figcaption class="legend">');
+    const cap = /<figcaption[^>]*class="[^"]*\blegend\b[^"]*"[^>]*>([\s\S]*?)<\/figcaption>/i.exec(fig);
+    if (!cap) problems.push('schematic needs a <figcaption class="legend">');
+    else if (!/schematic, not real data\./i.test(cap[1])) problems.push('schematic legend must end with "Schematic, not real data."');
+  }
   return problems;
 }
 
-export function validate(c) {
+/** Ids tokened anywhere a visitor reads them: article bodies and summaries, content pages, glossary, calendar, library notes. */
+export function tokenedFactIds(c) {
+  const ids = new Set();
+  for (const a of [...c.guides, ...c.playbooks, ...Object.values(c.pages || {})]) for (const id of a.factRefs) ids.add(id);
+  const refs = [];
+  for (const g of c.glossary) renderInline(g.def, { facts: c.byFact, factRefs: refs });
+  for (const e of c.calendar.events || []) renderInline(e.what, { facts: c.byFact, factRefs: refs });
+  if (c.library?.path) {
+    renderInline(c.library.path.intro, { facts: c.byFact, factRefs: refs });
+    for (const st of c.library.path.stages || []) for (const s of st.steps || []) renderInline(s.note, { facts: c.byFact, factRefs: refs });
+  }
+  for (const id of refs) ids.add(id);
+  return ids;
+}
+
+export function validate(c, { tools = TOOLS, warn = (m) => console.warn(m) } = {}) {
   const errors = [];
   const slugs = new Set([...c.guides.map((g) => g.slug), ...c.playbooks.map((p) => p.slug)]);
+  const toolIds = new Set(tools.map((t) => t.id));
+  c.pages ??= {};
 
-  const checkArticle = (a, what) => {
-    if (!a.title || !a.summary) errors.push(`${what} ${a.slug}: title and summary are required`);
-    if (!DATE.test(a.updated)) errors.push(`${what} ${a.slug}: updated must be YYYY-MM-DD`);
-    if (!LEVELS.includes(a.level)) errors.push(`${what} ${a.slug}: level must be one of ${LEVELS.join('|')}`);
-    for (const r of a.related) if (!slugs.has(r)) errors.push(`${what} ${a.slug}: unknown related ${r}`);
-    if (!a.sources.length) errors.push(`${what} ${a.slug}: at least one source is required`);
+  const checkSources = (a, what) => {
     for (const s of a.sources) {
       if (!s.title || !URL_RE.test(s.url)) errors.push(`${what} ${a.slug}: bad source "${s.title || s.url}" (use "Title | URL | accessed YYYY-MM-DD")`);
       if (!DATE.test(s.accessed)) errors.push(`${what} ${a.slug}: source "${s.title}" needs "accessed YYYY-MM-DD"`);
     }
     for (const id of a.factRefs) if (!c.byFact[id]) errors.push(`${what} ${a.slug}: unknown fact {{fact:${id}}}`);
+  };
+  const checkArticle = (a, what) => {
+    if (!a.title || !a.summary) errors.push(`${what} ${a.slug}: title and summary are required`);
+    if (!DATE.test(a.updated)) errors.push(`${what} ${a.slug}: updated must be YYYY-MM-DD`);
+    if (!LEVELS.includes(a.level)) errors.push(`${what} ${a.slug}: level must be one of ${LEVELS.join('|')}`);
+    for (const r of a.related) if (!slugs.has(r)) errors.push(`${what} ${a.slug}: unknown related ${r}`);
+    for (const t of a.tools || []) if (!toolIds.has(t)) errors.push(`${what} ${a.slug}: unknown tool "${t}" in tools: (registry ids: ${[...toolIds].join(', ') || 'none yet'})`);
+    if (!a.sources.length) errors.push(`${what} ${a.slug}: at least one source is required`);
+    checkSources(a, what);
   };
   for (const g of c.guides) {
     checkArticle(g, 'guide');
@@ -225,20 +337,45 @@ export function validate(c) {
     if (!EVIDENCE_LABELS.includes(p.evidence)) errors.push(`playbook ${p.slug}: evidence must be one of ${EVIDENCE_LABELS.join('|')}`);
     if (!p.instruments.length) errors.push(`playbook ${p.slug}: instruments required`);
     if (!p.window) errors.push(`playbook ${p.slug}: window (IST) required`);
+    for (const k of GLANCE_FIELDS) {
+      const v = p.glance?.[k.replace('glance_', '')] || '';
+      if (!v) errors.push(`playbook ${p.slug}: ${k} required (at-a-glance grid)`);
+      else if (v.length > GLANCE_MAX) errors.push(`playbook ${p.slug}: ${k} is ${v.length} chars; max ${GLANCE_MAX}`);
+    }
     for (const problem of checkPlaybookTemplate(p)) errors.push(`playbook ${p.slug}: ${problem}`);
   }
+  for (const pg of Object.values(c.pages)) {
+    if (!pg.title || !pg.summary) errors.push(`page ${pg.slug}: title and summary are required`);
+    if (!DATE.test(pg.updated)) errors.push(`page ${pg.slug}: updated must be YYYY-MM-DD`);
+    checkSources(pg, 'page');
+  }
 
+  const tokened = tokenedFactIds(c);
   const factIds = new Set();
   for (const f of c.facts) {
     if (!f.id || !/^[a-z0-9][a-z0-9-]*$/.test(f.id)) errors.push(`fact "${f.id}": id must be lowercase-kebab`);
+    else if (!factGroup(f.id)) errors.push(`fact ${f.id}: id prefix must be one of ${FACT_GROUPS.flatMap((g) => g.prefixes).join('|')}`);
     if (factIds.has(f.id)) errors.push(`fact ${f.id}: duplicate id`);
     factIds.add(f.id);
-    if (f.value === undefined || f.value === null || f.value === '') errors.push(`fact ${f.id}: value required`);
+    const value = f.value === undefined || f.value === null ? '' : String(f.value);
+    if (!value) errors.push(`fact ${f.id}: value required`);
+    else if (tokened.has(f.id) && value.length > VALUE_MAX_TOKENED) errors.push(`fact ${f.id}: value is ${value.length} chars; a tokened fact's value must be ≤ ${VALUE_MAX_TOKENED} (move qualifiers to the label)`);
+    else if (value.length > VALUE_MAX_REGISTER) errors.push(`fact ${f.id}: value is ${value.length} chars; max ${VALUE_MAX_REGISTER}`);
+    else if (tokened.has(f.id) && value.length > VALUE_WARN) warn(`warning: fact ${f.id}: value is ${value.length} chars (${VALUE_WARN} is the comfortable limit for an inline token)`);
     if (!f.label) errors.push(`fact ${f.id}: label required`);
     if (!DATE.test(String(f.since || ''))) errors.push(`fact ${f.id}: since must be YYYY-MM-DD`);
     if (!DATE.test(String(f.verified || ''))) errors.push(`fact ${f.id}: verified must be YYYY-MM-DD`);
-    const src = parseSources([f.source || ''])[0];
-    if (!URL_RE.test(src.url || src.title)) errors.push(`fact ${f.id}: source must be "Title | URL" or a URL`);
+    const src = factSource(f);
+    if (!URL_RE.test(src.url)) errors.push(`fact ${f.id}: source must be "Title | URL" or a URL`);
+    if (BILL_TITLE_RE.test(src.title)) errors.push(`fact ${f.id}: source title "${src.title}" cites a Bill clause or a Budget memorandum; cite the enacted Act section or circular`);
+  }
+  if (c.facts.length) {
+    const missing = HERO_FACT_IDS.filter((id) => !c.byFact[id]);
+    if (missing.length) errors.push(`home hero: missing facts ${missing.join(', ')}`);
+    else {
+      const dates = new Set(HERO_FACT_IDS.map((id) => c.byFact[id].verified));
+      if (dates.size > 1) errors.push(`home hero: the five figures must share one verified date (${HERO_FACT_IDS.map((id) => `${id}=${c.byFact[id].verified}`).join(', ')})`);
+    }
   }
 
   const terms = new Set();
@@ -247,8 +384,16 @@ export function validate(c) {
     if (terms.has(g.term)) errors.push(`glossary term "${g.term}": duplicate`);
     terms.add(g.term);
   }
+  const kinds = new Set((c.calendar.filters || []).map((f) => f.id));
   if (!Array.isArray(c.calendar.events)) errors.push('calendar.json: events must be an array');
-  else for (const e of c.calendar.events) if (!e.what) errors.push(`calendar event: "what" required (${JSON.stringify(e).slice(0, 60)})`);
+  else for (const e of c.calendar.events) {
+    if (!e.what) errors.push(`calendar event: "what" required (${JSON.stringify(e).slice(0, 60)})`);
+    if (!kinds.has(e.kind)) errors.push(`calendar event "${e.what}": kind "${e.kind}" is not a filter id (${[...kinds].join(', ') || 'no filters defined'})`);
+  }
+  const strayRefs = [];
+  for (const g of c.glossary) renderInline(g.def, { facts: c.byFact, factRefs: strayRefs });
+  for (const e of c.calendar.events || []) renderInline(e.what, { facts: c.byFact, factRefs: strayRefs });
+  for (const id of strayRefs) if (!c.byFact[id]) errors.push(`glossary/calendar: unknown fact {{fact:${id}}}`);
   for (const e of c.changelog) {
     if (!DATE.test(String(e.date || ''))) errors.push(`changelog entry "${e.what}": date must be YYYY-MM-DD`);
     if (!e.what || !URL_RE.test(String(e.source || ''))) errors.push(`changelog entry "${e.what}": what and source URL required`);
@@ -269,6 +414,7 @@ export function validate(c) {
       if (!Array.isArray(e.fits) || !e.fits.length || e.fits.some((f) => !LIBRARY_FITS.includes(f))) errors.push(`${who}: fits must be a non-empty subset of ${LIBRARY_FITS.join(' | ')}`);
       if (!e.year) errors.push(`${who}: year (edition / last updated) required`);
       if (!e.why) errors.push(`${who}: why (one line) required`);
+      if (!e.caveats) errors.push(`${who}: caveats (one line) required`);
       if (e.cost === 'paid' && e.price && !e.price.seen) errors.push(`${who}: a price needs the date it was seen`);
     }
   }

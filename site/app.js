@@ -1,5 +1,6 @@
-/* Client: three-state theme, menu, search, TOC scrollspy, reading progress. No frameworks, no UI text literals
-   (strings come from <template id="ui-strings">), no identity literals (storage prefix from body[data-store]). */
+/* Client: three-state theme, menu, search, TOC scrollspy, reading progress, facts-register filter. No frameworks, no UI
+   text literals (strings come from <template id="ui-strings">), no identity literals (storage prefix from body[data-store]).
+   The current nav item is marked at build time (aria-current from the page's layout call), never inferred here. */
 (() => {
   'use strict';
   const root = document.body.dataset.root || './';
@@ -22,6 +23,7 @@
     dark: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
     system: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
   };
+  const THEME_COLOR = T.themeColor || { light: '#f5f6f8', dark: '#121418' };
   const osDark = window.matchMedia('(prefers-color-scheme: dark)');
   function applyTheme(mode) {
     if (!MODES.includes(mode)) mode = 'light';
@@ -35,7 +37,7 @@
       const span = $('.theme-label', themeBtn); if (span) span.textContent = label;
       const icon = $('.theme-icon', themeBtn); if (icon) icon.innerHTML = ICON[mode];
     }
-    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? '#15171c' : '#f7f6f3';
+    const meta = $('meta[name="theme-color"]'); if (meta) meta.content = dark ? THEME_COLOR.dark : THEME_COLOR.light;
   }
   applyTheme(store.get('theme', 'light'));
   themeBtn?.addEventListener('click', () => { const next = MODES[(MODES.indexOf(themeBtn.dataset.mode) + 1) % MODES.length]; store.set('theme', next); applyTheme(next); });
@@ -57,7 +59,11 @@
   /* ---------- Search ---------- */
   const dialog = $('#search-dialog'); const searchInput = $('#search-input'); const results = $('#search-results');
   let index = null;
-  async function loadIndex() { if (index) return index; const res = await fetch(root + 'data/search.json'); index = await res.json(); return index; }
+  async function loadIndex() {
+    if (index) return index;
+    try { const res = await fetch(root + 'data/search.json'); if (!res.ok) throw new Error(res.status); index = await res.json(); } catch { index = null; }
+    return index;
+  }
   function score(doc, q) {
     const t = doc.title.toLowerCase(); const words = q.split(/\s+/).filter(Boolean);
     let s = 0;
@@ -67,11 +73,12 @@
       if ((doc.keywords || '').toLowerCase().includes(w)) s += 2;
     }
     if (words.length > 1 && t.includes(q)) s += 6;
-    if (s && (doc.kind === 'Guide' || doc.kind === 'Playbook')) s += 4;
+    if (s && (doc.kind === 'Guide' || doc.kind === 'Playbook' || doc.kind === 'Page')) s += 4; // destinations outrank the facts that mention them
     return s;
   }
   function renderResults(q) {
     const query = q.trim().toLowerCase();
+    if (!index) { results.innerHTML = `<li class="muted small hint">${esc(T.searchUnavailable)}</li>`; return; }
     if (!query) { results.innerHTML = `<li class="muted small hint">${esc(T.searchHint)}</li>`; return; }
     const hits = index.map((d) => ({ d, s: score(d, query) })).filter((x) => x.s > 0).sort((a, b) => b.s - a.s).slice(0, 12);
     results.innerHTML = hits.length ? hits.map(({ d }) => `<li><a href="${d.external ? esc(d.url) : root + esc(d.url)}"${d.external ? ' rel="noopener noreferrer" target="_blank"' : ''}><span class="kind">${esc(d.kind)}</span><b>${esc(d.title)}</b>${d.text ? `<span>${esc(d.text)}</span>` : ''}</a></li>`).join('') : `<li class="muted small hint">${esc(T.searchNone)}</li>`;
@@ -112,6 +119,19 @@
   }
   $$('[data-progress-for]').forEach((el) => { const pct = (store.get('progress', {}))[el.dataset.progressFor]; if (pct) el.textContent = `${T.progressRead} ${pct}%`; });
 
-  /* ---------- Mark current nav ---------- */
-  (function markNav() { const here = location.pathname; $$('.site-nav a, .mobile-nav a').forEach((a) => { const href = a.getAttribute('href').replace(/^(\.\.\/)+|^\.\//, ''); if (href && here.includes('/' + href)) a.setAttribute('aria-current', 'page'); }); })();
+  /* ---------- Facts register: one group chip at a time + text filter on label / id / value ---------- */
+  const factsBar = $('[data-facts-filter]');
+  if (factsBar) {
+    const chips = $$('.chip[data-group]', factsBar); const input = $('#facts-filter'); const count = $('[data-facts-count]');
+    const rows = $$('table.facts-table tbody tr[data-group]');
+    let group = 'all';
+    const apply = () => {
+      const q = (input?.value || '').trim().toLowerCase();
+      let shown = 0;
+      for (const tr of rows) { const ok = (group === 'all' || tr.dataset.group === group) && (!q || (tr.dataset.text || '').includes(q)); tr.hidden = !ok; if (ok) shown++; }
+      if (count) count.textContent = fill(T.showing, { x: shown, y: rows.length });
+    };
+    chips.forEach((ch) => ch.addEventListener('click', () => { group = ch.dataset.group; chips.forEach((x) => x.setAttribute('aria-pressed', String(x === ch))); apply(); }));
+    input?.addEventListener('input', apply);
+  }
 })();

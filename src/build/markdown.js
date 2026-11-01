@@ -1,7 +1,15 @@
-// Markdown → HTML for guides and playbooks. marked with: heading ids + anchors, responsive table wrappers,
-// external links opening safely, ::: callout blocks (note | tip | warning | rule | example | evidence)
-// and the {{fact:id}} inline shortcode that renders a value from content/data/facts.json with its verified date.
+// Markdown → HTML for guides, playbooks and content pages. marked with: heading ids + anchors, responsive table
+// wrappers, external links opening safely, ::: callout blocks (note | tip | warning | rule | example | evidence),
+// the {{fact:id}} inline token that renders a value from content/data/facts.json (design §6.6: the first use on a
+// page carries "✓ <verified date>", later uses render the value plain, a future `since` adds "(from <date>)") and the
+// {{label:EVIDENCE|MECHANISM|LORE}} shortcode for evidence chips. renderInline() expands the same tokens inside plain
+// strings (summaries, glossary definitions, calendar text) so a changeable number is never typed anywhere.
 import { Marked } from 'marked';
+import { STRINGS as S, fill } from './strings.js';
+import { formatDate, isFuture, todayIST } from './dates.js';
+
+export const FACT_TOKEN = /\{\{fact:([a-z0-9][a-z0-9-]*)\}\}/g;
+export const LABEL_TOKEN = /\{\{label:(EVIDENCE|MECHANISM|LORE)\}\}/g;
 
 export function slugify(text) {
   return String(text)
@@ -24,12 +32,47 @@ export function decodeEntities(s) {
   return String(s).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 }
 
+/** "Title | URL" (or a bare URL) → { title, url } for a fact's source. */
+export function factSource(f) {
+  const [title, url] = String(f.source || '').split('|').map((x) => x.trim());
+  return url ? { title, url } : { title: title, url: title };
+}
+
+/** "<title> · since|from D MMM YYYY · verified D MMM YYYY" — the N4 citation line used by marks, the rail and the register. */
+export function factCitation(f, { today = todayIST(), link = false } = {}) {
+  const src = factSource(f);
+  const when = `${isFuture(f.since, today) ? S.labels.from : S.labels.since} ${formatDate(f.since)} · ${S.labels.verified} ${formatDate(f.verified)}`;
+  const title = link ? `<a href="${escapeHtml(src.url)}" rel="noopener noreferrer" target="_blank">${escapeHtml(src.title)}</a>` : escapeHtml(src.title);
+  return `${title} · ${escapeHtml(when)}`;
+}
+
+/** The evidence chip: `<span class="tag tag-evidence" data-evidence="LORE">○ Lore</span>` (glyph + label as text). */
+export function evidenceTagHtml(label) {
+  const key = String(label || '').toUpperCase();
+  if (!S.labels.evidenceLabels[key]) return '';
+  return `<span class="tag tag-evidence" data-evidence="${key}">${S.labels.evidenceGlyphs[key]} ${escapeHtml(S.labels.evidenceLabels[key])}</span>`;
+}
+
+/**
+ * One fact token. `again` = the id was already shown on this page (value only). The first occurrence carries the
+ * mark "✓ <verified>" linking to the rail entry (#fact-ID) with the citation as its title; a future `since` adds
+ * "(from D MMM YYYY)" between value and mark. Unknown id → a visible marker (validate() fails the build).
+ */
+export function factHtml(id, f, { again = false, today = todayIST() } = {}) {
+  if (!f) return `<span class="fact fact-missing" data-fact="${escapeHtml(id)}">[${escapeHtml(fill(S.labels.factMissing, { id }))}]</span>`;
+  const value = `<span class="fact-value">${escapeHtml(f.value)}</span>`;
+  if (again) return `<span class="fact fact-again" data-fact="${escapeHtml(id)}">${value}</span>`;
+  const from = isFuture(f.since, today) ? ` <span class="fact-from">(${escapeHtml(S.labels.from)} ${escapeHtml(formatDate(f.since))})</span>` : '';
+  const mark = `<a class="fact-mark" href="#fact-${escapeHtml(id)}" title="${factCitation(f, { today })}">${escapeHtml(fill(S.labels.verifiedMark, { date: formatDate(f.verified) }))}</a>`;
+  return `<span class="fact" data-fact="${escapeHtml(id)}">${value}${from} ${mark}</span>`;
+}
+
 const callout = {
   name: 'callout',
   level: 'block',
   start(src) { return src.match(/^:::/m)?.index; },
   tokenizer(src) {
-    const m = /^:::(note|tip|warning|rule|example|evidence)(?:\s+([^\n]*))?\n([\s\S]*?)\n:::(?:\n|$)/.exec(src);
+    const m = /^:::(note|tip|warning|rule|example|evidence)(?:[ \t]+([^\n]*))?\n([\s\S]*?)\n:::(?:\n|$)/.exec(src);
     if (!m) return undefined;
     return { type: 'callout', raw: m[0], kind: m[1], title: (m[2] || '').trim(), tokens: this.lexer.blockTokens(m[3]) };
   },
@@ -40,8 +83,8 @@ const callout = {
   },
 };
 
-/** `{{fact:id}}` → the fact's value with its verified date; unknown ids render a visible marker and are reported. */
-function factShortcode({ facts = {}, factRefs } = {}) {
+/** `{{fact:id}}` inline extension. factRefs records ids in order of first use and decides first vs again. */
+function factShortcode({ facts = {}, factRefs, today } = {}) {
   return {
     name: 'fact',
     level: 'inline',
@@ -52,17 +95,29 @@ function factShortcode({ facts = {}, factRefs } = {}) {
       return { type: 'fact', raw: m[0], id: m[1] };
     },
     renderer(token) {
-      const f = facts[token.id];
-      if (factRefs && !factRefs.includes(token.id)) factRefs.push(token.id);
-      if (!f) return `<span class="fact fact-missing" data-fact="${escapeHtml(token.id)}">[fact ${escapeHtml(token.id)} missing]</span>`;
-      return `<span class="fact" data-fact="${escapeHtml(token.id)}"><span class="fact-value">${escapeHtml(f.value)}</span><small class="fact-verified">verified ${escapeHtml(f.verified)}</small></span>`;
+      const again = factRefs.includes(token.id);
+      if (!again) factRefs.push(token.id);
+      return factHtml(token.id, facts[token.id], { again, today });
     },
   };
 }
 
-export function createMarkdown({ headings, facts, factRefs } = {}) {
+/** `{{label:EVIDENCE|MECHANISM|LORE}}` inline extension → the evidence chip. */
+const labelShortcode = {
+  name: 'label',
+  level: 'inline',
+  start(src) { return src.indexOf('{{label:'); },
+  tokenizer(src) {
+    const m = /^\{\{label:(EVIDENCE|MECHANISM|LORE)\}\}/.exec(src);
+    if (!m) return undefined;
+    return { type: 'label', raw: m[0], label: m[1] };
+  },
+  renderer(token) { return evidenceTagHtml(token.label); },
+};
+
+export function createMarkdown({ headings, facts, factRefs = [], today } = {}) {
   const marked = new Marked({ gfm: true, breaks: false });
-  marked.use({ extensions: [callout, factShortcode({ facts, factRefs })] });
+  marked.use({ extensions: [callout, factShortcode({ facts, factRefs, today }), labelShortcode] });
   marked.use({
     renderer: {
       heading({ tokens, depth }) {
@@ -96,8 +151,40 @@ export function createMarkdown({ headings, facts, factRefs } = {}) {
   return marked;
 }
 
-export function renderMarkdown(src, { headings, facts, factRefs } = {}) {
-  return createMarkdown({ headings, facts, factRefs }).parse(src);
+/** Full Markdown document → HTML. `factRefs` (array) collects fact ids in order of first use; `today` = YYYY-MM-DD for tests. */
+export function renderMarkdown(src, { headings, facts, factRefs, today } = {}) {
+  return createMarkdown({ headings, facts, factRefs: factRefs || [], today }).parse(src);
+}
+
+/**
+ * Plain string (front-matter summary, glossary definition, calendar text, path note) → HTML with every
+ * {{fact:id}} rendered as a plain `.fact-again` value (no mark: the rail or the register carries the citation)
+ * and every {{label:X}} as a chip; everything else HTML-escaped. Unknown ids render the marker and are recorded.
+ */
+export function renderInline(text, { facts = {}, factRefs } = {}) {
+  const parts = [];
+  let last = 0;
+  const re = /\{\{(fact|label):([A-Za-z0-9-]+)\}\}/g;
+  for (const m of String(text ?? '').matchAll(re)) {
+    parts.push(escapeHtml(text.slice(last, m.index)));
+    if (m[1] === 'fact') {
+      const id = m[2];
+      if (/^[a-z0-9][a-z0-9-]*$/.test(id)) {
+        if (factRefs && !factRefs.includes(id)) factRefs.push(id);
+        parts.push(factHtml(id, facts[id], { again: true }));
+      } else parts.push(escapeHtml(m[0]));
+    } else parts.push(evidenceTagHtml(m[2]) || escapeHtml(m[0]));
+    last = m.index + m[0].length;
+  }
+  parts.push(escapeHtml(String(text ?? '').slice(last)));
+  return parts.join('');
+}
+
+/** Plain string with tokens reduced to their value (for meta descriptions, search text, titles). Unknown ids keep the token. */
+export function plainInline(text, { facts = {} } = {}) {
+  return String(text ?? '')
+    .replace(FACT_TOKEN, (m, id) => (facts[id] ? String(facts[id].value) : m))
+    .replace(LABEL_TOKEN, (_, l) => S.labels.evidenceLabels[l] || l);
 }
 
 /** Tiny front-matter parser: `key: value`, `key: [a, b]`, and `key:` followed by `- item` lines. */
