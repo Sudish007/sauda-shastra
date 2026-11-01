@@ -1,6 +1,6 @@
 """Functional smoke test of the client behaviour (Playwright, workspace .venv). Exits non-zero on failure.
 Usage: python scripts/e2e.py [base_url]   (default http://127.0.0.1:8790/<slug>/ with the slug from src/build/config.js)
-Covers the shell: light first paint, three-state theme cycle + persistence, search dialog, mobile menu, 404 base href,
+Covers the shell: light first paint, three-state theme cycle + persistence (+ theme-color meta, JSON storage, head-script-only first paint), search dialog, mobile menu, 404 base href,
 no console errors; then (design §12) nav state (one aria-current per page with a nav entry, none on home or facts/), the Learn
 pill's two states, the facts box → facts/ links, the facts-register chips, the named-resource link audit on learn/, resources/,
 sources/ and facts/, the home hero figures against data/facts.json and the home counts against data/counts.json. Checks whose
@@ -12,7 +12,9 @@ from playwright.sync_api import sync_playwright
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open(os.path.join(ROOT, "src", "build", "config.js"), encoding="utf-8") as f:
-    SLUG = re.search(r"slug:\s*'([^']+)'", f.read()).group(1)
+    _cfg = f.read()
+    SLUG = re.search(r"slug:\s*'([^']+)'", _cfg).group(1)
+    STORE = re.search(r"storagePrefix:\s*'([^']+)'", _cfg).group(1)
 BASE = sys.argv[1] if len(sys.argv) > 1 else f"http://127.0.0.1:8790/{SLUG}/"
 fails = []
 def check(name, cond, extra=""):
@@ -36,20 +38,47 @@ with sync_playwright() as p:
     page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
 
     # Theme: light first paint even when the OS prefers dark; cycle Light → Dark → System → Light; persists
+    THEME_COLOR_JS = "document.querySelector('meta[name=\"theme-color\"]').content"
+    ICON_JS = "document.querySelector('[data-action=\"theme\"] .theme-icon').innerHTML"
     page.goto(BASE, wait_until="networkidle")
     check("light is first paint", page.evaluate("document.documentElement.getAttribute('data-theme')") is None)
     check("theme control shows its state (Light)", page.inner_text(".theme-label") == "Light")
+    check("theme-color meta is light (#f5f6f8)", page.evaluate(THEME_COLOR_JS) == "#f5f6f8")
+    icon_light = page.evaluate(ICON_JS)
     page.click('[data-action="theme"]')
     check("1st click → dark + label", page.evaluate("document.documentElement.getAttribute('data-theme')") == "dark" and page.inner_text(".theme-label") == "Dark")
+    check("1st click → theme-color meta flips to #121418", page.evaluate(THEME_COLOR_JS) == "#121418")
+    check("1st click → data-mode=dark and icon changes", page.get_attribute('[data-action="theme"]', "data-mode") == "dark" and page.evaluate(ICON_JS) != icon_light)
+    check("theme stored as JSON under <prefix>:theme", page.evaluate(f"localStorage.getItem('{STORE}:theme')") == '"dark"')
     page.reload(wait_until="networkidle")
     check("dark persists after reload", page.evaluate("document.documentElement.getAttribute('data-theme')") == "dark")
+    check("theme-color meta is dark after reload", page.evaluate(THEME_COLOR_JS) == "#121418")
     page.click('[data-action="theme"]')
     check("2nd click → system (OS dark) + label", page.evaluate("document.documentElement.getAttribute('data-theme')") == "dark" and page.inner_text(".theme-label") == "System")
+    check("2nd click → data-mode=system and monitor icon", page.get_attribute('[data-action="theme"]', "data-mode") == "system" and "<rect" in page.evaluate(ICON_JS))
     page.reload(wait_until="networkidle")
     check("system persists and follows OS (dark)", page.evaluate("document.documentElement.getAttribute('data-theme')") == "dark" and page.inner_text(".theme-label") == "System")
+    check("System aria-label names the state", "System" in (page.get_attribute('[data-action="theme"]', "aria-label") or ""))
     page.click('[data-action="theme"]')
     check("3rd click → light + label", page.evaluate("document.documentElement.getAttribute('data-theme')") is None and page.inner_text(".theme-label") == "Light")
+    check("3rd click → theme-color meta flips back to #f5f6f8", page.evaluate(THEME_COLOR_JS) == "#f5f6f8")
     check("theme button aria-label names the state", "Light" in (page.get_attribute('[data-action="theme"]', "aria-label") or ""))
+
+    # First paint = the inline head script alone (app.js blocked): stored "system" + OS dark → dark; nothing stored → light
+    fp = b.new_context(viewport={"width": 1440, "height": 900}, color_scheme="dark")
+    fp.route("**/app.js", lambda route: route.abort())
+    fp.add_init_script(f"try{{localStorage.setItem('{STORE}:theme', JSON.stringify('system'));}}catch(e){{}}")
+    fpp = fp.new_page()
+    fpp.goto(BASE, wait_until="domcontentloaded")
+    check("first paint: stored system + OS dark → dark (head script, no app.js)", fpp.evaluate("document.documentElement.getAttribute('data-theme')") == "dark")
+    fpp.close(); fp.close()
+    fp = b.new_context(viewport={"width": 1440, "height": 900}, color_scheme="dark")
+    fp.route("**/app.js", lambda route: route.abort())
+    fp.add_init_script("try{localStorage.clear();}catch(e){}")
+    fpp = fp.new_page()
+    fpp.goto(BASE, wait_until="domcontentloaded")
+    check("first paint: storage cleared + OS dark → light (head script, no app.js)", fpp.evaluate("document.documentElement.getAttribute('data-theme')") is None)
+    fpp.close(); fp.close()
 
     # Home counts are present and numeric
     check("home shows computed counts", page.locator("[data-count]").count() == 5 and page.inner_text('[data-count="guides"]').strip().isdigit())
