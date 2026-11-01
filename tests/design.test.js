@@ -63,6 +63,11 @@ export const tokenize = (text) => String(text).split(/\s+/).map((t) => t.replace
 const STOP = new Set(['the', 'and', 'for', 'per', 'of', 'on', 'in', 'with', 'from', 'each', 'side', 'its', 'all']);
 export const keywords = (label) => new Set(String(label).toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 3 && !STOP.has(w)));
 const CORE = /^[₹$]?\d[\d,]*(\.\d+)?\s?(%|lakh|crore|cr)?/;
+/** Index names are proper nouns, not register values: "Nifty 50", "Nifty Next 50", "Midcap 150", "Smallcap 250", "Sensex 30",
+ *  "Nifty200 Momentum 30" lose their numeral before the scan (the strike interval "50 points" and the Bank Nifty lot "30" would
+ *  otherwise flag every mention of the index). The word must sit directly before the number; "a lot of 30" is still scanned. */
+const INDEX_NAME = /\b((?:Nifty|Next|Midcap|Smallcap|Microcap|LargeMidcap|Sensex|Momentum|Quality|Alpha|Low Volatility|Value|Dividend Opportunities|Equal Weight|Total Market)\s?)(20|30|50|100|150|200|250|500)\b/g;
+export const dropIndexNumerals = (text) => String(text).replace(INDEX_NAME, '$1');
 
 /** Token sequences that count as "typing" the fact: the whole value, its numeric core, times/ranges as a whole. */
 export function candidates(value) {
@@ -80,7 +85,7 @@ export function candidates(value) {
 
 /** Hits = a candidate sequence found in `text` with a label keyword within six tokens (or anywhere when window = Infinity). */
 export function scanTyped(text, factList, { window = 6 } = {}) {
-  const toks = tokenize(text);
+  const toks = tokenize(dropIndexNumerals(text));
   const hits = [];
   for (const f of factList) {
     const kw = keywords(f.label);
@@ -117,6 +122,11 @@ test('the typed-literal scanner catches a typed fact beside its label words, pas
   assert.equal(scanTyped('Net loss ₹91,685 crore this year.', [{ id: 'x', label: 'Net loss of individual F&O traders', value: '₹91,685 crore' }]).length, 1);
   assert.equal(scanTyped('Net loss ₹91,685 this year.', [{ id: 'x', label: 'Net loss of individual F&O traders', value: '₹91,685 crore' }]).length, 1, 'the numeric part alone counts');
   assert.deepEqual(candidates('Tuesday'), [], 'word-valued facts are not scanned');
+  const strike = { id: 'opt-strike-interval-nifty', label: 'Nifty 50 options strike interval', value: '50 points' };
+  const bnLot = { id: 'fo-banknifty-lot', label: 'Bank Nifty lot size', value: '30' };
+  assert.equal(scanTyped('Nifty 50, Nifty Next 50, Nifty Midcap 150 and the Nifty200 Momentum 30 index options.', [strike, bnLot]).length, 0, 'index names are not typed values');
+  assert.equal(scanTyped('Nifty options have a strike interval of 50 points.', [strike]).length, 1, 'the strike interval itself is still caught');
+  assert.equal(scanTyped('A Bank Nifty lot of 30 units.', [bnLot]).length, 1, 'the lot itself is still caught');
 });
 
 test('facts are never typed: no built page types a register value beside its label words (home, guides, playbooks, tools, calendar, glossary, about)', () => {

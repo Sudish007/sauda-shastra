@@ -570,15 +570,22 @@ details.disclosure .body > * + * { margin-top: 0.7em; }
 .upnext .when { font-family: var(--font-serif); font-size: 1.35em; font-variant-numeric: tabular-nums; }
 .upnext .what { font-weight: 500; }
 .upnext .kind { color: var(--muted); font-size: var(--fs-xs); }
-.rules-box { display: grid; gap: var(--space-4); margin-bottom: var(--space-6); }
+/* The rules card holds ~18 recurring rules and the facts card four rules in force: the cards keep their own heights
+   (align start) instead of the shorter one stretching around empty space. */
+.rules-box { display: grid; gap: var(--space-4); margin-bottom: var(--space-6); align-items: start; }
 @media (min-width: 1024px) { .rules-box { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+.rules-box > .card { container-type: inline-size; }
 .rules-box .card h2 { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
 .rules-box .rules-list { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
-.rules-box .rules-list li { display: grid; grid-template-columns: minmax(10ch, auto) 1fr; gap: 0.2rem 0.9rem; font-size: var(--fs-small); padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+/* One aligned label column (labels are ≤ 17 characters), the rule text beside it capped at 70ch; the row itself may use the card */
+.rules-box .rules-list li { display: grid; grid-template-columns: 18ch minmax(0, 1fr); gap: 0.2rem 0.9rem; font-size: var(--fs-small); padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); max-width: none; }
+.rules-box .rules-list li > span { max-width: 70ch; }
 .rules-box .rules-list li:last-child { border-bottom: 0; padding-bottom: 0; }
 .rules-box .rules-list li b { font-variant-numeric: tabular-nums; }
+/* A narrow card (phones, the 1024 two-column row) stacks the label above its text instead of squeezing the text column */
+@container (max-width: 599px) { .rules-box .rules-list li { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; } }
 /* Keep rule lines under ~80ch when the card is wide: two columns from 2200 px */
-@media (min-width: 2200px) { .rules-box .rules-list { display: block; columns: 2; column-gap: var(--space-6); } .rules-box .rules-list li { break-inside: avoid; margin-bottom: 0.5rem; max-width: none; } }
+@media (min-width: 2200px) { .rules-box .rules-list { display: block; columns: 2; column-gap: var(--space-6); } .rules-box .rules-list li { break-inside: avoid; margin-bottom: 0.5rem; } }
 .month-grid { gap: var(--space-4); }
 .month { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; min-width: 0; container-type: inline-size; }
 .month h2 { margin-bottom: 0.6rem; display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }

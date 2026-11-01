@@ -126,6 +126,57 @@
   }
   $$('[data-progress-for]').forEach((el) => { const pct = (store.get('progress', {}))[el.dataset.progressFor]; if (pct) el.textContent = `${T.progressRead} ${pct}%`; });
 
+  /* ---------- Calendar: kind chips, past switch, up-next recompute and the current-month marker, all from the visitor's
+     clock in IST and the build's <template id="calendar-data">. Without the template the server-rendered months stay as
+     they are and the controls hide (they could not work). ---------- */
+  const calendar = $('[data-calendar]');
+  if (calendar) {
+    let data = null;
+    try { data = JSON.parse($('#calendar-data', calendar).content.textContent); } catch { data = null; }
+    const toolbar = $('[data-cal-toolbar]', calendar);
+    if (!data || !Array.isArray(data.events) || !Array.isArray(data.filters)) {
+      console.warn('calendar: data template missing or unreadable; filters, up-next and the current-month marker are off');
+      if (toolbar) toolbar.hidden = true;
+    } else {
+      const tz = data.tz; // the site's time zone from config, carried in the template (undefined → the visitor's own zone)
+      const ymd = (d) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+      const today = ymd(new Date());
+      const parts = (iso, opts) => Object.fromEntries(new Intl.DateTimeFormat('en-IN', { ...opts, timeZone: tz }).formatToParts(new Date(iso)).map((p) => [p.type, p.value]));
+      const label = Object.fromEntries(data.filters.map((f) => [f.id, f.label]));
+      const host = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } };
+      const chips = $$('[data-cal-filters] .chip[data-value]', calendar);
+      const pastBtn = $('[data-cal-past]', calendar);
+      const rows = $$('.month li[data-kind][data-date]', calendar);
+      const months = $$('.month[data-month]', calendar);
+      const none = $('[data-cal-none]', calendar);
+      const state = { kinds: new Set(chips.filter((ch) => ch.getAttribute('aria-pressed') === 'true').map((ch) => ch.dataset.value)), past: pastBtn?.getAttribute('aria-pressed') === 'true' };
+      const apply = () => {
+        for (const li of rows) li.hidden = !(state.kinds.has(li.dataset.kind) && (state.past || li.dataset.date >= today));
+        let shownMonths = 0;
+        for (const m of months) {
+          const n = $$('li[data-kind]', m).filter((li) => !li.hidden).length;
+          m.hidden = n === 0;
+          if (n) shownMonths++;
+          const count = $('[data-cal-count]', m); if (count) count.textContent = fill(n === 1 ? T.event : T.events, { n });
+        }
+        if (none) none.hidden = shownMonths > 0;
+      };
+      chips.forEach((ch) => ch.addEventListener('click', () => { const on = ch.getAttribute('aria-pressed') !== 'true'; ch.setAttribute('aria-pressed', String(on)); if (on) state.kinds.add(ch.dataset.value); else state.kinds.delete(ch.dataset.value); apply(); }));
+      pastBtn?.addEventListener('click', () => { state.past = !state.past; pastBtn.setAttribute('aria-pressed', String(state.past)); apply(); });
+      // Current month: accent border plus the words "· this month" (colour is never the only signal).
+      for (const m of months) { const now = m.dataset.month === today.slice(0, 7); m.classList.toggle('is-current', now); const w = $('[data-cal-now]', m); if (w) w.hidden = !now; }
+      // Up next: the first four dated events on or after today by the visitor's clock.
+      const up = $('[data-cal-upnext]', calendar);
+      if (up) {
+        const next = data.events.filter((e) => e.date >= today).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 4);
+        up.innerHTML = next.length
+          ? next.map((e) => { const p = parts(e.date, { weekday: 'short', day: 'numeric', month: 'short' }); return `<div class="card"><span class="when num">${esc(`${p.weekday} ${p.day} ${p.month}`)}${e.time ? ` · ${esc(e.time)}` : ''}</span> <span class="what">${e.what}</span> <span class="kind">${esc(label[e.kind] || e.kind)} · ${esc(host(e.source))}</span></div>`; }).join('')
+          : `<p class="empty">${esc(T.noUpcoming)}</p>`;
+      }
+      apply();
+    }
+  }
+
   /* ---------- Facts register: one group chip at a time + text filter on label / id / value ---------- */
   const factsBar = $('[data-facts-filter]');
   if (factsBar) {

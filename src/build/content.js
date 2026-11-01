@@ -291,13 +291,18 @@ export function checkPlaybookTemplate(p) {
   return problems;
 }
 
+/** Every calendar string a visitor reads and that may carry tokens: the note, each event's `what` and a rule event's `rule`. */
+export function calendarTexts(cal) {
+  return [cal?.note || '', ...(Array.isArray(cal?.events) ? cal.events.flatMap((e) => [e.what, e.rule].filter(Boolean)) : [])];
+}
+
 /** Ids tokened anywhere a visitor reads them: article bodies and summaries, content pages, glossary, calendar, library notes. */
 export function tokenedFactIds(c) {
   const ids = new Set();
   for (const a of [...c.guides, ...c.playbooks, ...Object.values(c.pages || {})]) for (const id of a.factRefs) ids.add(id);
   const refs = [];
   for (const g of c.glossary) renderInline(g.def, { facts: c.byFact, factRefs: refs });
-  for (const e of c.calendar.events || []) renderInline(e.what, { facts: c.byFact, factRefs: refs });
+  for (const t of calendarTexts(c.calendar)) renderInline(t, { facts: c.byFact, factRefs: refs });
   if (c.library?.path) {
     renderInline(c.library.path.intro, { facts: c.byFact, factRefs: refs });
     for (const st of c.library.path.stages || []) for (const s of st.steps || []) renderInline(s.note, { facts: c.byFact, factRefs: refs });
@@ -385,14 +390,20 @@ export function validate(c, { tools = TOOLS, warn = (m) => console.warn(m) } = {
     terms.add(g.term);
   }
   const kinds = new Set((c.calendar.filters || []).map((f) => f.id));
+  for (const f of c.calendar.filters || []) if (!f.id || !f.label) errors.push(`calendar.json: every filter needs id and label (${JSON.stringify(f)})`);
   if (!Array.isArray(c.calendar.events)) errors.push('calendar.json: events must be an array');
   else for (const e of c.calendar.events) {
+    const who = `calendar event "${String(e.what || '').slice(0, 60)}"`;
     if (!e.what) errors.push(`calendar event: "what" required (${JSON.stringify(e).slice(0, 60)})`);
-    if (!kinds.has(e.kind)) errors.push(`calendar event "${e.what}": kind "${e.kind}" is not a filter id (${[...kinds].join(', ') || 'no filters defined'})`);
+    if (!kinds.has(e.kind)) errors.push(`${who}: kind "${e.kind}" is not a filter id (${[...kinds].join(', ') || 'no filters defined'})`);
+    if (e.date === undefined && !e.rule) errors.push(`${who}: a "date" (YYYY-MM-DD) or a "rule" is required`);
+    if (e.date !== undefined && !DATE.test(String(e.date))) errors.push(`${who}: date must be YYYY-MM-DD`);
+    if (e.date !== undefined && e.rule) errors.push(`${who}: give either a date or a rule, not both`);
+    if (!/^https:\/\/\S+$/.test(String(e.source || ''))) errors.push(`${who}: source must be an https URL`);
   }
   const strayRefs = [];
   for (const g of c.glossary) renderInline(g.def, { facts: c.byFact, factRefs: strayRefs });
-  for (const e of c.calendar.events || []) renderInline(e.what, { facts: c.byFact, factRefs: strayRefs });
+  for (const t of calendarTexts(c.calendar)) renderInline(t, { facts: c.byFact, factRefs: strayRefs });
   for (const id of strayRefs) if (!c.byFact[id]) errors.push(`glossary/calendar: unknown fact {{fact:${id}}}`);
   for (const e of c.changelog) {
     if (!DATE.test(String(e.date || ''))) errors.push(`changelog entry "${e.what}": date must be YYYY-MM-DD`);

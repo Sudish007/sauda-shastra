@@ -2,7 +2,8 @@
 // wrappers, external links opening safely, ::: callout blocks (note | tip | warning | rule | example | evidence),
 // the {{fact:id}} inline token that renders a value from content/data/facts.json (design §6.6: the first use on a
 // page carries "✓ <verified date>", later uses render the value plain, a future `since` adds "(from <date>)") and the
-// {{label:EVIDENCE|MECHANISM|LORE}} shortcode for evidence chips. renderInline() expands the same tokens inside plain
+// {{label:EVIDENCE|MECHANISM|LORE}} shortcode for evidence chips and the {{date:YYYY-MM-DD}} shortcode that renders a date
+// as <time> (dates are data: the never-typed scan skips them). renderInline() expands the same tokens inside plain
 // strings (summaries, glossary definitions, calendar text) so a changeable number is never typed anywhere.
 import { Marked } from 'marked';
 import { STRINGS as S, fill } from './strings.js';
@@ -10,6 +11,12 @@ import { formatDate, isFuture, todayIST } from './dates.js';
 
 export const FACT_TOKEN = /\{\{fact:([a-z0-9][a-z0-9-]*)\}\}/g;
 export const LABEL_TOKEN = /\{\{label:(EVIDENCE|MECHANISM|LORE)\}\}/g;
+export const DATE_TOKEN = /\{\{date:(\d{4}-\d{2}-\d{2})\}\}/g;
+
+/** `<time datetime="2026-11-01">1 Nov 2026</time>` for the {{date:…}} token. */
+export function dateHtml(iso) {
+  return `<time datetime="${escapeHtml(iso)}">${escapeHtml(formatDate(iso))}</time>`;
+}
 
 export function slugify(text) {
   return String(text)
@@ -115,9 +122,22 @@ const labelShortcode = {
   renderer(token) { return evidenceTagHtml(token.label); },
 };
 
+/** `{{date:YYYY-MM-DD}}` inline extension → `<time>` (a dated statement such as "as of 1 Nov 2026" stays data). */
+const dateShortcode = {
+  name: 'date',
+  level: 'inline',
+  start(src) { return src.indexOf('{{date:'); },
+  tokenizer(src) {
+    const m = /^\{\{date:(\d{4}-\d{2}-\d{2})\}\}/.exec(src);
+    if (!m) return undefined;
+    return { type: 'date', raw: m[0], iso: m[1] };
+  },
+  renderer(token) { return dateHtml(token.iso); },
+};
+
 export function createMarkdown({ headings, facts, factRefs = [], today } = {}) {
   const marked = new Marked({ gfm: true, breaks: false });
-  marked.use({ extensions: [callout, factShortcode({ facts, factRefs, today }), labelShortcode] });
+  marked.use({ extensions: [callout, factShortcode({ facts, factRefs, today }), labelShortcode, dateShortcode] });
   marked.use({
     renderer: {
       heading({ tokens, depth }) {
@@ -158,13 +178,14 @@ export function renderMarkdown(src, { headings, facts, factRefs, today } = {}) {
 
 /**
  * Plain string (front-matter summary, glossary definition, calendar text, path note) → HTML with every
- * {{fact:id}} rendered as a plain `.fact-again` value (no mark: the rail or the register carries the citation)
- * and every {{label:X}} as a chip; everything else HTML-escaped. Unknown ids render the marker and are recorded.
+ * {{fact:id}} rendered as a plain `.fact-again` value (no mark: the rail or the register carries the citation),
+ * every {{label:X}} as a chip and every {{date:YYYY-MM-DD}} as <time>; everything else HTML-escaped. Unknown ids
+ * render the marker and are recorded.
  */
 export function renderInline(text, { facts = {}, factRefs } = {}) {
   const parts = [];
   let last = 0;
-  const re = /\{\{(fact|label):([A-Za-z0-9-]+)\}\}/g;
+  const re = /\{\{(fact|label|date):([A-Za-z0-9-]+)\}\}/g;
   for (const m of String(text ?? '').matchAll(re)) {
     parts.push(escapeHtml(text.slice(last, m.index)));
     if (m[1] === 'fact') {
@@ -173,7 +194,8 @@ export function renderInline(text, { facts = {}, factRefs } = {}) {
         if (factRefs && !factRefs.includes(id)) factRefs.push(id);
         parts.push(factHtml(id, facts[id], { again: true }));
       } else parts.push(escapeHtml(m[0]));
-    } else parts.push(evidenceTagHtml(m[2]) || escapeHtml(m[0]));
+    } else if (m[1] === 'date') parts.push(/^\d{4}-\d{2}-\d{2}$/.test(m[2]) ? dateHtml(m[2]) : escapeHtml(m[0]));
+    else parts.push(evidenceTagHtml(m[2]) || escapeHtml(m[0]));
     last = m.index + m[0].length;
   }
   parts.push(escapeHtml(String(text ?? '').slice(last)));
@@ -184,7 +206,8 @@ export function renderInline(text, { facts = {}, factRefs } = {}) {
 export function plainInline(text, { facts = {} } = {}) {
   return String(text ?? '')
     .replace(FACT_TOKEN, (m, id) => (facts[id] ? String(facts[id].value) : m))
-    .replace(LABEL_TOKEN, (_, l) => S.labels.evidenceLabels[l] || l);
+    .replace(LABEL_TOKEN, (_, l) => S.labels.evidenceLabels[l] || l)
+    .replace(DATE_TOKEN, (_, iso) => formatDate(iso));
 }
 
 /** Tiny front-matter parser: `key: value`, `key: [a, b]`, and `key:` followed by `- item` lines. */

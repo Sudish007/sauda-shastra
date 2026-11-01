@@ -267,6 +267,56 @@ with sync_playwright() as p:
     check("no console/page errors on the tool pages", not errors, "; ".join(errors)[:300])
     errors.clear()
 
+    # Calendar (design §6.11, §12): chips default all on except Results windows and US holidays, toggling a kind hides its rows,
+    # the past switch reveals earlier dates, the current month (visitor clock in IST) says "this month", one row per kind renders,
+    # times carry IST, up next holds the next four dated events, every row links its source.
+    page.goto(BASE + "calendar/", wait_until="networkidle")
+    page.wait_for_timeout(150)
+    if page.locator("[data-cal-filters] .chip").count():
+        cal = page.evaluate("JSON.parse(document.getElementById('calendar-data').content.textContent)")
+        today = page.evaluate("tz => new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())", cal["tz"])
+        kinds = [f["id"] for f in cal["filters"]]
+        pressed = page.evaluate("Object.fromEntries([...document.querySelectorAll('[data-cal-filters] .chip')].map(c => [c.dataset.value, c.getAttribute('aria-pressed') === 'true']))")
+        check("calendar: ten kind chips, all pressed except Results windows and US holidays", len(pressed) == 10 and all(pressed[k] == (k not in ("results", "us-holiday")) for k in kinds), str(pressed))
+        check("calendar: every chip carries a count ≥ its dated events of that kind", page.evaluate("data => [...document.querySelectorAll('[data-cal-filters] .chip')].every(c => { const n = +c.querySelector('.count').textContent; return Number.isInteger(n) && n >= 1 && n >= data.filter(e => e.kind === c.dataset.value).length; })", cal["events"]))
+        VIS = "[...document.querySelectorAll('.month li[data-kind]')].filter(li => !li.hidden && !li.closest('.month').hidden)"
+        visible = page.evaluate(VIS + ".map(li => ({ k: li.dataset.kind, d: li.dataset.date }))")
+        check("calendar: visible rows on load are today or later and never of a released kind", bool(visible) and all(r["d"] >= today and r["k"] not in ("results", "us-holiday") for r in visible), f"{len(visible)} visible")
+        check("calendar: the past switch starts off and names its state", page.get_attribute("[data-cal-past]", "aria-pressed") == "false" and "past" in page.inner_text("[data-cal-past]").lower())
+        for k in kinds:
+            check(f"calendar: at least one row of kind {k} renders", page.locator(f".month li[data-kind='{k}']").count() >= 1)
+        # Toggle Rule changes off → its rows hide; on again → they return
+        before = page.evaluate(VIS + ".filter(li => li.dataset.kind === 'rule-change').length")
+        page.click("[data-cal-filters] .chip[data-value='rule-change']"); page.wait_for_timeout(100)
+        check("calendar: releasing 'Rule changes' hides every rule-change row", before > 0 and page.evaluate(VIS + ".filter(li => li.dataset.kind === 'rule-change').length") == 0 and page.get_attribute("[data-cal-filters] .chip[data-value='rule-change']", "aria-pressed") == "false", f"{before} before")
+        page.click("[data-cal-filters] .chip[data-value='rule-change']"); page.wait_for_timeout(100)
+        check("calendar: pressing it again restores them", page.evaluate(VIS + ".filter(li => li.dataset.kind === 'rule-change').length") == before)
+        # Past switch reveals earlier dates (and the months that hold only past events)
+        HIDDEN_MONTHS = "[...document.querySelectorAll('.month[data-month]')].filter(m => m.hidden).length"
+        PAST_VISIBLE = VIS + f".filter(li => li.dataset.date < '{today}').length"
+        hidden_months = page.evaluate(HIDDEN_MONTHS)
+        page.click("[data-cal-past]"); page.wait_for_timeout(100)
+        past_visible = page.evaluate(PAST_VISIBLE)
+        check("calendar: 'Show past events' reveals earlier dates (and their months) and names its state", past_visible > 0 and page.get_attribute("[data-cal-past]", "aria-pressed") == "true" and page.evaluate(HIDDEN_MONTHS) < hidden_months, f"{past_visible} past rows visible; {hidden_months} months were hidden before")
+        page.click("[data-cal-past]"); page.wait_for_timeout(100)
+        check("calendar: switching past off hides them again", page.evaluate(PAST_VISIBLE) == 0 and page.evaluate(HIDDEN_MONTHS) == hidden_months)
+        # Current month marker: exactly one, equals the visitor's month in IST, header says "this month"
+        current = page.evaluate("[...document.querySelectorAll('.month.is-current')].map(m => ({ ym: m.dataset.month, text: m.querySelector('h2').innerText }))")
+        check("calendar: exactly one current month, the visitor's month in IST, header contains 'this month'", len(current) == 1 and current[0]["ym"] == today[:7] and "this month" in current[0]["text"], str(current))
+        # Times carry IST; every row links its source; up next = the first four dated events from today
+        times = page.evaluate("[...document.querySelectorAll('.month li .time, .rules-list .time')].map(t => t.textContent.trim())")
+        check("calendar: every clock time is labelled IST", bool(times) and all("IST" in t for t in times if re.search(r"\d\d:\d\d", t)), f"{len(times)} times")
+        check("calendar: every event row and rule row links its source", page.evaluate("[...document.querySelectorAll('.month li, .rules-list li')].every(li => li.querySelector('a[href^=\"https://\"]'))"))
+        up = page.evaluate("[...document.querySelectorAll('[data-cal-upnext] .card')].map(c => c.querySelector('.when').textContent)")
+        want_up = [e for e in sorted(cal["events"], key=lambda e: e["date"]) if e["date"] >= today][:4]
+        check("calendar: up next shows the next four dated events with their IST times", len(up) == len(want_up) and all((e["time"] in w) if e["time"] else True for e, w in zip(want_up, up)), str(up))
+        check("calendar: rules box and 'Rules in force, verified' facts box with a register link", page.locator(".rules-box .rules-list li").count() >= 5 and page.locator(".rules-box .facts-box li[id^='fact-']").count() >= 4 and page.locator(".rules-box .facts-box .all a").count() == 1)
+        check("calendar: lede renders the register tokens and the dated note", page.locator(".section-head .lede .fact").count() >= 3 and page.locator(".section-head .lede time").count() >= 1)
+    else:
+        skip("calendar filters (needs calendar data)")
+    check("no console/page errors on the calendar page", not errors, "; ".join(errors)[:300])
+    errors.clear()
+
     # Mobile menu
     m = b.new_context(viewport={"width": 390, "height": 844})
     mp = m.new_page(); mp.goto(BASE, wait_until="networkidle")

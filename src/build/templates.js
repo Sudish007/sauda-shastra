@@ -186,12 +186,12 @@ function factItem(f, today) {
  * Rail box "Facts on this page, verified": the facts a page renders, in order of first use. The first `open` entries
  * (six, design-review NIT 5) are visible; the rest sit inside <details>; then the link to the register.
  */
-export function factsBox(ids, byFact, r = './', { today = todayIST(), open = 6 } = {}) {
+export function factsBox(ids, byFact, r = './', { today = todayIST(), open = 6, title = S.labels.factsVerified } = {}) {
   const facts = ids.map((id) => byFact[id]).filter(Boolean);
   if (!facts.length) return '';
   const head = facts.slice(0, open);
   const rest = facts.slice(open);
-  return `<div class="card facts-box"><h2>${esc(S.labels.factsVerified)}</h2><ul>${head.map((f) => factItem(f, today)).join('')}</ul>${rest.length
+  return `<div class="card facts-box"><h2>${esc(title)}</h2><ul>${head.map((f) => factItem(f, today)).join('')}</ul>${rest.length
     ? `<details><summary>${esc(fill(S.labels.moreFacts, { n: rest.length }))}</summary><ul>${rest.map((f) => factItem(f, today)).join('')}</ul></details>`
     : ''}<p class="all"><a href="${r}facts/">${esc(S.labels.allFacts)}</a></p></div>`;
 }

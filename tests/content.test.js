@@ -67,6 +67,10 @@ test('summaries render tokens in fact-again mode and stay plain for meta and sea
   assert.throws(() => validate(makeContent({ guides: [parseGuide(GUIDE.replace('summary: What', 'summary: {{fact:ghost}} What'), 'x', FACT_MAP)], facts: FACTS })), /unknown fact \{\{fact:ghost\}\}/);
   assert.equal(renderInline('a <b> & {{fact:fo-nifty-lot}} {{label:LORE}} {{fact:nope}}', { facts: FACT_MAP }), 'a &lt;b&gt; &amp; <span class="fact fact-again" data-fact="fo-nifty-lot"><span class="fact-value">65</span></span> <span class="tag tag-evidence" data-evidence="LORE">○ Lore</span> <span class="fact fact-missing" data-fact="nope">[fact nope missing]</span>');
   assert.equal(plainInline('lot {{fact:fo-nifty-lot}} {{label:EVIDENCE}} {{fact:nope}}', { facts: FACT_MAP }), 'lot 65 Evidence {{fact:nope}}');
+  // {{date:YYYY-MM-DD}} renders as <time> in plain strings and in Markdown, and as "D MMM YYYY" in plain text; a malformed date stays literal
+  assert.equal(renderInline('as of {{date:2026-11-01}} {{date:tomorrow}}', {}), 'as of <time datetime="2026-11-01">1 Nov 2026</time> {{date:tomorrow}}');
+  assert.equal(plainInline('as of {{date:2026-11-01}}'), 'as of 1 Nov 2026');
+  assert.match(renderMarkdown('Checked {{date:2026-11-01}}.', {}), /<p>Checked <time datetime="2026-11-01">1 Nov 2026<\/time>\.<\/p>/);
 });
 
 test('validation rejects: unknown section, missing accessed date, unknown fact, bad level, unknown related, unknown tool', () => {
@@ -145,9 +149,51 @@ test('glossary, calendar (kind ∈ filters), changelog and resources are validat
   assert.throws(() => validate(makeContent({ glossary: [{ term: 'Lot', def: 'One lot is {{fact:ghost}}.' }] })), /unknown fact \{\{fact:ghost\}\}/);
   assert.throws(() => validate(makeContent({ changelog: [{ date: '2025-09-01', what: 'Weekly expiry moved', source: 'not-a-url' }] })), /source URL required/);
   assert.throws(() => validate(makeContent({ resources: [{ name: 'NSE', category: 'Data' }] })), /url required/);
-  assert.throws(() => validate(makeContent({ calendar: { note: '', filters: [{ id: 'expiry', label: 'Expiry days' }], events: [{ date: '2026-11-03', what: 'Nifty weekly expiry', kind: 'holiday' }] } })), /kind "holiday" is not a filter id/);
-  assert.doesNotThrow(() => validate(makeContent({ calendar: { note: '', filters: [{ id: 'expiry', label: 'Expiry days' }], events: [{ date: '2026-11-03', what: 'Nifty weekly expiry', kind: 'expiry' }] } })));
+  const cal = (events, filters = [{ id: 'expiry', label: 'Expiry days' }]) => makeContent({ calendar: { note: '', filters, events } });
+  const ok = { date: '2026-11-03', what: 'Nifty weekly expiry', kind: 'expiry', time_ist: '15:40 IST', source: 'https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf' };
+  assert.throws(() => validate(cal([{ ...ok, kind: 'holiday' }])), /kind "holiday" is not a filter id/);
+  assert.doesNotThrow(() => validate(cal([ok])));
+  assert.doesNotThrow(() => validate(cal([{ ...ok, date: undefined, rule: 'Every Tuesday' }])), 'a rule event has no date');
+  assert.throws(() => validate(cal([{ ...ok, source: 'http://nseindia.com/x' }])), /source must be an https URL/);
+  assert.throws(() => validate(cal([{ ...ok, source: undefined }])), /source must be an https URL/);
+  assert.throws(() => validate(cal([{ ...ok, date: '3 Nov 2026' }])), /date must be YYYY-MM-DD/);
+  assert.throws(() => validate(cal([{ ...ok, date: undefined }])), /a "date" \(YYYY-MM-DD\) or a "rule" is required/);
+  assert.throws(() => validate(cal([{ ...ok, rule: 'Every Tuesday' }])), /either a date or a rule, not both/);
+  assert.throws(() => validate(cal([{ ...ok, what: '' }])), /"what" required/);
+  assert.throws(() => validate(cal([{ ...ok, what: 'Lot {{fact:ghost}}' }])), /unknown fact \{\{fact:ghost\}\}/);
+  assert.throws(() => validate(cal([{ ...ok, date: undefined, rule: 'Every {{fact:ghost}}' }])), /unknown fact \{\{fact:ghost\}\}/, 'rule labels are scanned for tokens too');
+  assert.throws(() => validate(cal([ok], [{ id: 'expiry' }])), /every filter needs id and label/);
   assert.doesNotThrow(() => validate(makeContent({ glossary: [{ term: 'VWAP', def: 'Volume-weighted average price.' }], changelog: [{ date: '2025-09-01', what: 'Weekly expiry moved', source: 'https://example.org/c' }], resources: [{ name: 'NSE', category: 'Data', url: 'https://www.nseindia.com/' }] })));
+});
+
+test('the committed calendar: the ten design filters in order, ≥ 60 events, every filter id used, dated events parse, every event has what + https source + a kind in filters', () => {
+  const cal = content.calendar;
+  assert.deepEqual(cal.filters.map((f) => f.id), ['india-holiday', 'expiry', 'rbi', 'india-data', 'us-data', 'fomc', 'budget', 'rule-change', 'results', 'us-holiday']);
+  for (const f of cal.filters) assert.ok(f.label && f.label.length <= 20, f.id);
+  assert.ok(cal.events.length >= 60, `events: ${cal.events.length}`);
+  const kinds = new Set(cal.filters.map((f) => f.id));
+  for (const e of cal.events) {
+    const who = JSON.stringify(e).slice(0, 80);
+    assert.ok(kinds.has(e.kind), `kind ∉ filters: ${who}`);
+    assert.ok(typeof e.what === 'string' && e.what.trim().length > 0, `what: ${who}`);
+    assert.match(String(e.source), /^https:\/\/\S+$/, `source: ${who}`);
+    assert.ok((e.date && !e.rule) || (e.rule && !e.date), `date xor rule: ${who}`);
+    if (e.date) { assert.match(e.date, /^\d{4}-\d{2}-\d{2}$/, who); assert.ok(!Number.isNaN(new Date(e.date).getTime()), `date parses: ${who}`); }
+    assert.equal(typeof e.time_ist, 'string', `time_ist is a string: ${who}`);
+  }
+  for (const f of cal.filters) assert.ok(cal.events.some((e) => e.kind === f.id), `no event of kind ${f.id}`);
+  assert.ok(cal.events.some((e) => e.rule), 'recurring rule events exist');
+  assert.ok(cal.events.some((e) => e.date === '2026-01-15' && e.kind === 'india-holiday'), 'R-07: the 15 Jan 2026 special closure is listed');
+  for (const date of ['2026-11-09', '2026-11-23']) assert.ok(cal.events.some((e) => e.date === date && e.kind === 'expiry' && /previous trading day/.test(e.what)), `Tuesday-holiday expiry shift ${date}`);
+  for (const date of ['2026-11-02', '2026-12-07']) assert.ok(cal.events.some((e) => e.date === date && e.kind === 'rule-change'), `rule-change event ${date}`);
+  assert.ok(cal.events.some((e) => e.date === '2027-02-01' && e.kind === 'budget' && /expected/i.test(e.what)), 'Budget 2027 is labelled expected');
+  assert.ok(/2027 holiday list was not published as of \{\{date:2026-11-01\}\}/.test(cal.note), 'R-09 in the note');
+  assert.ok(/09:08 and 09:10/.test(cal.note) && /\{\{fact:mkt-preopen-window\}\}/.test(cal.note), 'S-01: pre-open random close in the note');
+  assert.ok(!/re-verify/i.test(JSON.stringify(cal)), 'S-06: no re-verify flag');
+  // every token in the calendar resolves and renders as data; the note's date renders as <time>
+  const html = renderInline(cal.note, { facts: content.byFact });
+  assert.match(html, /<time datetime="2026-11-01">1 Nov 2026<\/time>/);
+  assert.ok(!html.includes('fact-missing'));
 });
 
 test('parseSources accepts two- and three-part strings', () => {

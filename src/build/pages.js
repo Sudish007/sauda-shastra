@@ -1,7 +1,7 @@
 // Page renderers. Each returns a full document via layout(). All URLs relative; no UI string literals here.
 // Markup follows the approved design mocks (design.md §6); class names come from site/styles.css.
-import { escapeHtml as esc, renderInline, factSource, factCitation, evidenceTagHtml } from './markdown.js';
-import { SECTIONS, PHASE2_SECTIONS, HERO_FACT_IDS, FACT_GROUPS, factGroup } from './content.js';
+import { escapeHtml as esc, renderInline, plainInline, factSource, factCitation, evidenceTagHtml } from './markdown.js';
+import { SECTIONS, PHASE2_SECTIONS, HERO_FACT_IDS, FACT_GROUPS, factGroup, calendarTexts } from './content.js';
 import { TOOLS, byTool, fieldShown } from './tools.js';
 import { SITE } from './config.js';
 import { STRINGS as S, fill } from './strings.js';
@@ -509,22 +509,73 @@ export function glossaryPage(c) {
   return layout({ title: S.glossary.eyebrow, description: S.glossary.lede, path: 'glossary/index.html', depth: 1, body, current: 'glossary/' });
 }
 
-/* ---------- Calendar (data + page rewritten by the calendar step; this keeps the route and the hooks) ---------- */
+/* ---------- Calendar (design §6.11) ---------- */
 
-export function calendarPage(c) {
+/** "Rules in force, verified" box (design §6.11): expiry-day ELM, Bank Nifty weekly status, one weekly per exchange, holiday count. */
+export const CALENDAR_FACT_IDS = ['fo-expiry-day-elm-addon', 'fo-banknifty-weekly-status', 'opt-weekly-expiries-per-exchange', 'mkt-holidays-current-year-count'];
+/** Chips released on load (design §6.11): the two noisiest kinds. Nothing is persisted. */
+export const CALENDAR_DEFAULT_OFF = ['results', 'us-holiday'];
+const UPNEXT_COUNT = 4;
+
+const istParts = (iso, opts) => Object.fromEntries(new Intl.DateTimeFormat('en-IN', { ...opts, timeZone: SITE.timeZone }).formatToParts(new Date(iso)).map((p) => [p.type, p.value]));
+const monthTitle = (ym) => { const p = istParts(`${ym}-01`, { month: 'long', year: 'numeric' }); return `${p.month} ${p.year}`; };
+/** "Fri 6 Nov" — the up-next card date; app.js builds the same string from the same Intl parts. */
+const upWhen = (iso) => { const p = istParts(iso, { weekday: 'short', day: 'numeric', month: 'short' }); return `${p.weekday} ${p.day} ${p.month}`; };
+const eventCount = (n) => fill(n === 1 ? S.client.event : S.client.events, { n });
+
+export function calendarPage(c, { today = todayIST() } = {}) {
   const r = rel(1);
   const cal = c.calendar;
+  const filters = cal.filters || [];
+  const kindLabel = Object.fromEntries(filters.map((f) => [f.id, f.label]));
+  const rules = (cal.events || []).filter((e) => e.rule);
+  const dated = (cal.events || []).filter((e) => e.date).slice().sort((a, b) => a.date.localeCompare(b.date));
+  const host = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } };
+  const source = (e) => `<a href="${esc(e.source)}" rel="noopener noreferrer" target="_blank">${esc(S.labels.source)}</a>`;
+  const timeSpan = (e) => (e.time_ist ? `<span class="time">${esc(e.time_ist)}</span>` : '');
+  // Spaces between the inline children keep the text readable when the markup is read as text (copy, screen readers, the scan).
+  const meta = (e) => `<span class="m"><span class="tag">${esc(kindLabel[e.kind] || e.kind)}</span> ${timeSpan(e)} ${source(e)}</span>`;
+
+  // Up next: the first four dated events on or after the build date (no-JS fallback; app.js recomputes from the template).
+  const upcoming = dated.filter((e) => e.date >= today).slice(0, UPNEXT_COUNT);
+  const upCard = (e) => `<div class="card"><span class="when num">${esc(upWhen(e.date))}${e.time_ist ? ` · ${esc(e.time_ist)}` : ''}</span> <span class="what">${renderInline(e.what, { facts: c.byFact })}</span> <span class="kind">${esc(kindLabel[e.kind] || e.kind)} · ${esc(host(e.source))}</span></div>`;
+  const upNext = `<section class="upnext" aria-label="${esc(S.calendar.upNext)}" data-cal-upnext>${upcoming.length ? upcoming.map(upCard).join('') : `<p class="empty">${esc(S.client.noUpcoming)}</p>`}</section>`;
+
+  // Rules box: recurring rules left, the verified facts the page relies on right (the four design ids first, then every other tokened id).
+  const tokened = [];
+  for (const t of calendarTexts(cal)) renderInline(t, { facts: c.byFact, factRefs: tokened });
+  const boxIds = [...CALENDAR_FACT_IDS, ...tokened.filter((id) => !CALENDAR_FACT_IDS.includes(id))];
+  const rulesList = rules.length
+    ? `<ul class="rules-list">${rules.map((e) => `<li data-kind="${esc(e.kind)}"><b>${renderInline(e.rule, { facts: c.byFact })}</b> <span>${renderInline(e.what, { facts: c.byFact })}${e.time_ist ? ` · ${timeSpan(e)}` : ''} · ${source(e)}</span></li>`).join('')}</ul>`
+    : `<p class="muted">${esc(S.calendar.empty)}</p>`;
+  const rulesBox = `<div class="rules-box"><div class="card"><h2>${esc(S.calendar.rulesTitle)}</h2>${rulesList}</div>${factsBox(boxIds, c.byFact, r, { today, open: CALENDAR_FACT_IDS.length, title: S.calendar.factsTitle })}</div>`;
+
+  // Filters: one chip per kind with its count; Results windows and US holidays start released; the past switch starts off.
+  const counts = Object.fromEntries(filters.map((f) => [f.id, (cal.events || []).filter((e) => e.kind === f.id).length]));
+  const chip = (f) => `<button type="button" class="chip" data-value="${esc(f.id)}" aria-pressed="${CALENDAR_DEFAULT_OFF.includes(f.id) ? 'false' : 'true'}">${esc(f.label)} <span class="count num">${counts[f.id]}</span></button>`;
+  const toolbar = `<div class="toolbar" role="region" aria-label="${esc(S.calendar.filtersAria)}" data-cal-toolbar><div class="toolbar-row"><span class="label">${esc(S.calendar.filtersTitle)}</span><div class="chip-row" data-cal-filters>${filters.map(chip).join('')}</div><span class="spacer"></span><button type="button" class="switch" aria-pressed="false" data-cal-past><span class="knob" aria-hidden="true"></span>${esc(S.calendar.showPast)}</button></div></div>`;
+
+  // Month cards: every dated event, oldest month first; app.js hides past rows, released kinds and empty months, and marks the current month.
   const byMonth = new Map();
-  for (const e of cal.events) { const k = String(e.date || '').slice(0, 7) || 'recurring'; if (!byMonth.has(k)) byMonth.set(k, []); byMonth.get(k).push(e); }
-  const months = [...byMonth.keys()].sort();
-  const body = `<section class="section"><div class="container">
+  for (const e of dated) { const k = e.date.slice(0, 7); if (!byMonth.has(k)) byMonth.set(k, []); byMonth.get(k).push(e); }
+  const row = (e) => `<li data-kind="${esc(e.kind)}" data-date="${esc(e.date)}"><span class="d"><time datetime="${esc(e.date)}">${esc(e.date.slice(8))}</time> <small>${esc(istParts(e.date, { weekday: 'short' }).weekday)}</small></span> <span class="w">${renderInline(e.what, { facts: c.byFact })}</span> ${meta(e)}</li>`;
+  const month = (ym, list) => `<div class="month" data-month="${esc(ym)}"><h2 class="h3">${esc(monthTitle(ym))} <small><span class="num" data-cal-count>${esc(eventCount(list.length))}</span><span class="now" data-cal-now hidden> ${esc(S.client.thisMonth)}</span></small></h2><ul>${list.map(row).join('')}</ul></div>`;
+  const months = byMonth.size
+    ? `<div class="grid grid-fill-4 month-grid" data-cal-grid>${[...byMonth.entries()].map(([ym, list]) => month(ym, list)).join('')}</div><p class="empty" data-cal-none hidden>${esc(S.calendar.none)}</p>`
+    : empty(S.calendar.empty);
+
+  const data = { tz: SITE.timeZone, today, filters, defaultOff: CALENDAR_DEFAULT_OFF, events: dated.map((e) => ({ date: e.date, kind: e.kind, time: e.time_ist || '', what: renderInline(e.what, { facts: c.byFact }), source: e.source })) };
+  const body = `<section class="section"><div class="container" data-calendar>
     ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: S.calendar.eyebrow }])}
-    <div class="section-head"><div><p class="eyebrow">${esc(S.calendar.eyebrow)}</p><h1>${esc(S.calendar.title)}</h1></div><p class="lede">${esc(cal.note || S.calendar.lede)}</p></div>
-    ${cal.filters?.length ? `<div class="card"><p class="label">${esc(S.calendar.filtersTitle)}</p><div class="chip-row" data-cal-filters>${cal.filters.map((f) => `<button type="button" class="chip" data-value="${esc(f.id)}" aria-pressed="true">${esc(f.label)}</button>`).join('')}</div></div>` : ''}
-    ${months.length ? `<div class="grid grid-fill-4 month-grid" data-cal-grid>${months.map((m) => `<div class="month" data-month="${esc(m)}"><h2 class="h3">${esc(m === 'recurring' ? S.calendar.recurring : formatDate(m + '-01').replace(/^\d+ /, ''))}</h2><ul>${byMonth.get(m).sort((a, b) => String(a.date).localeCompare(String(b.date))).map((e) => `<li data-kind="${esc(e.kind || '')}"><span class="d">${esc(e.date ? e.date.slice(8) : e.rule || '')}</span><span class="w">${renderInline(e.what, { facts: c.byFact })}</span><span class="m">${e.time_ist ? `<span class="time">${esc(e.time_ist)} IST</span>` : ''}${e.source ? `<a href="${esc(e.source)}" rel="noopener noreferrer" target="_blank">${esc(S.labels.source)}</a>` : ''}</span></li>`).join('')}</ul></div>`).join('')}</div>` : empty(S.calendar.empty)}
-    <template id="calendar-data" data-json>${esc(JSON.stringify({ filters: cal.filters || [], events: cal.events }))}</template>
+    <div class="section-head"><div><p class="eyebrow">${esc(S.calendar.eyebrow)}</p><h1>${esc(S.calendar.title)}</h1></div><p class="lede">${cal.note ? renderInline(cal.note, { facts: c.byFact }) : esc(S.calendar.lede)}</p></div>
+    ${upNext}
+    ${rulesBox}
+    ${toolbar}
+    ${months}
+    <p class="small muted" style="margin-top:var(--space-5)">${esc(S.calendar.pastNote)}</p>
+    <template id="calendar-data" data-json>${esc(JSON.stringify(data))}</template>
   </div></section>`;
-  return layout({ title: S.calendar.title, description: S.calendar.lede, path: 'calendar/index.html', depth: 1, body, current: 'calendar/' });
+  return layout({ title: S.calendar.title, description: cal.note ? plainInline(cal.note, { facts: c.byFact }) : S.calendar.lede, path: 'calendar/index.html', depth: 1, body, current: 'calendar/' });
 }
 
 /* ---------- What changed, resources ---------- */
@@ -613,7 +664,7 @@ export function factUsage(c, r = './') {
   if (HERO_FACT_IDS.every((id) => c.byFact[id])) for (const id of HERO_FACT_IDS) add(id, S.labels.home, r);
   const refs = { glossary: [], calendar: [], changelog: [] };
   for (const g of c.glossary) renderInline(g.def, { facts: c.byFact, factRefs: refs.glossary });
-  for (const e of c.calendar.events || []) renderInline(e.what, { facts: c.byFact, factRefs: refs.calendar });
+  for (const t of calendarTexts(c.calendar)) renderInline(t, { facts: c.byFact, factRefs: refs.calendar });
   for (const e of c.changelog) { renderInline(e.what, { facts: c.byFact, factRefs: refs.changelog }); renderInline(e.detail || '', { facts: c.byFact, factRefs: refs.changelog }); }
   for (const id of refs.glossary) add(id, S.glossary.eyebrow, `${r}glossary/`);
   for (const id of refs.calendar) add(id, S.calendar.eyebrow, `${r}calendar/`);

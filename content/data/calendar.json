@@ -1,5 +1,1300 @@
 {
-  "note": "",
-  "filters": [],
-  "events": []
+  "note": "Times are IST. US releases are converted from US Eastern Time; US daylight saving runs {{fact:mac-us-dst-2026}} and {{fact:mac-us-dst-2027}}. Index expiries fall on {{fact:fo-nifty-weekly-expiry-day}} at NSE and {{fact:fo-sensex-weekly-expiry-day}} at BSE; a holiday on the expiry day moves expiry to the previous trading day. The cash pre-open order window is {{fact:mkt-preopen-window}}, closing at a random moment between 09:08 and 09:10. NSE's 2027 holiday list was not published as of {{date:2026-11-01}}.",
+  "filters": [
+    {
+      "id": "india-holiday",
+      "label": "India holidays"
+    },
+    {
+      "id": "expiry",
+      "label": "Expiries"
+    },
+    {
+      "id": "rbi",
+      "label": "RBI"
+    },
+    {
+      "id": "india-data",
+      "label": "India data"
+    },
+    {
+      "id": "us-data",
+      "label": "US data"
+    },
+    {
+      "id": "fomc",
+      "label": "FOMC"
+    },
+    {
+      "id": "budget",
+      "label": "Budget"
+    },
+    {
+      "id": "rule-change",
+      "label": "Rule changes"
+    },
+    {
+      "id": "results",
+      "label": "Results windows"
+    },
+    {
+      "id": "us-holiday",
+      "label": "US holidays"
+    }
+  ],
+  "events": [
+    {
+      "rule": "Every {{fact:fo-nifty-weekly-expiry-day}}",
+      "what": "NSE Nifty 50 weekly options expire (previous trading day if a holiday); short options expiring that day carry an extra {{fact:fo-expiry-day-elm-addon}} ELM",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST (15:30 IST from 7 Dec 2026)",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf"
+    },
+    {
+      "rule": "Every {{fact:fo-sensex-weekly-expiry-day}}",
+      "what": "BSE Sensex weekly options expire (previous trading day if a holiday)",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST (15:30 IST from 7 Dec 2026)",
+      "source": "https://www.bseindia.com/markets/MarketInfo/DispNewNoticesCirculars.aspx?page=20250617-11"
+    },
+    {
+      "rule": "Monthly, NSE",
+      "what": "NSE monthly expiry on the {{fact:fo-monthly-expiry-day-nse}}: Nifty 50, Bank Nifty, FinNifty, Nifty Midcap Select, Nifty Next 50 and every stock future and option",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST (15:30 IST from 7 Dec 2026)",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68589.pdf"
+    },
+    {
+      "rule": "Monthly, BSE",
+      "what": "BSE monthly expiry on the {{fact:fo-monthly-expiry-day-bse}}: Sensex, Bankex and stock derivatives",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST (15:30 IST from 7 Dec 2026)",
+      "source": "https://www.bseindia.com/markets/MarketInfo/DispNewNoticesCirculars.aspx?page=20250617-11"
+    },
+    {
+      "rule": "Each MPC meeting",
+      "what": "RBI Monetary Policy Committee, six meetings a year: the policy resolution and the Governor's statement come on the last day of each meeting; RBI publishes the next year's schedule around March",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "rule": "12th of the month",
+      "what": "India CPI inflation (MoSPI); the next working day when the 12th is a holiday",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "rule": "28th of the month",
+      "what": "India index of industrial production, IIP (MoSPI); the next working day when the 28th is a holiday",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "rule": "Quarterly GDP",
+      "what": "India GDP: quarterly estimates on MoSPI's advance-release dates at the end of February (Q3 with the advance estimates), May (Q4 with the provisional estimates), August and November",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2071663"
+    },
+    {
+      "rule": "End Mar · Sep",
+      "what": "Nifty 50 and other NSE index reconstitutions take effect on the last trading day of March and September (semi-annual review on data to January and July; changes are announced about four weeks earlier)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf"
+    },
+    {
+      "rule": "Quarter-end",
+      "what": "Finance Ministry notifies small-savings rates (PPF, SCSS, NSC, Sukanya Samriddhi) for the next quarter on the last working day of March, June, September and December",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://utilities.cept.gov.in/dop/pdfbind.ashx?id=15533"
+    },
+    {
+      "rule": "February–March",
+      "what": "EPFO's Central Board of Trustees recommends the EPF interest rate for the financial year ending",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://pib.gov.in/PressReleseDetailm.aspx?PRID=2234502"
+    },
+    {
+      "rule": "Around the 10th",
+      "what": "AMFI monthly mutual-fund data: SIP inflows, AUM and net flows for the previous month",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.amfiindia.com/uploads/AMFI_Monthly_Note_September2026_554f6604b6.pdf"
+    },
+    {
+      "rule": "US data, 08:30 ET",
+      "what": "US CPI (around the 10th to 14th) and the jobs report (usually the first Friday) are released at 08:30 ET, which is {{fact:mac-us-cpi-release-ist-dst}} under US daylight time ({{fact:mac-us-dst-2026}}; {{fact:mac-us-dst-2027}}) and {{fact:mac-us-cpi-release-ist-std}} otherwise",
+      "kind": "us-data",
+      "time_ist": "",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "rule": "FOMC, 14:00 ET",
+      "what": "FOMC statement at 14:00 ET on the second meeting day: {{fact:mac-fomc-statement-ist-dst}} under EDT, {{fact:mac-fomc-statement-ist-std}} the next calendar day under EST; the press conference follows half an hour later; eight meetings a year, four with economic projections",
+      "kind": "fomc",
+      "time_ist": "",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "rule": "{{fact:mac-budget-date}}",
+      "what": "Union Budget presented to Parliament (NSE and BSE hold a live session when it falls on a weekend)",
+      "kind": "budget",
+      "time_ist": "11:00 IST (usual)",
+      "source": "https://nsearchives.nseindia.com/content/circulars/CMTR72349.pdf"
+    },
+    {
+      "rule": "Advance tax",
+      "what": "Advance-tax instalments, cumulative: {{fact:tax-advance-tax-q1}}, {{fact:tax-advance-tax-q2}}, {{fact:tax-advance-tax-q3}}, {{fact:tax-advance-tax-q4}}; presumptive-scheme taxpayers: {{fact:tax-advance-tax-presumptive}} (Income-tax Act 2025 s. 408)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "rule": "Return due dates",
+      "what": "Income-tax return due dates: {{fact:tax-return-due-date-other}} for most individuals, {{fact:tax-return-due-date-business-noaudit}} with business income (intraday or F&O) and no audit, {{fact:tax-return-due-date-audit}} for audited persons (Income-tax Act 2025 s. 263)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "rule": "Results seasons",
+      "what": "Results seasons: quarterly results within {{fact:sebi-results-deadline-quarterly}} of quarter-end and audited annual results within {{fact:sebi-results-deadline-annual}} of year-end (LODR Reg 33) — roughly mid-Jan to mid-Feb, mid-Apr to end-May, mid-Jul to mid-Aug and mid-Oct to mid-Nov",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2026-01-14",
+      "what": "BSE Sensex weekly options expire today, moved from {{fact:fo-sensex-weekly-expiry-day}} {{date:2026-01-15}} (special closure): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://www.bseindia.com/markets/MarketInfo/DispNewNoticesCirculars.aspx?page=20250617-11"
+    },
+    {
+      "date": "2026-01-15",
+      "what": "NSE and BSE closed — special trading holiday for the Maharashtra municipal elections (added after the December 2025 list)",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://www.nseindia.com/resources/exchange-communication-holidays"
+    },
+    {
+      "date": "2026-01-26",
+      "what": "NSE and BSE closed — Republic Day",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-01-28",
+      "what": "FOMC statement (meeting 27–28 Jan 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "00:30 IST on 29 Jan",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-02-01",
+      "what": "Union Budget 2026-27 presented (a Sunday; NSE and BSE held a full live trading session)",
+      "kind": "budget",
+      "time_ist": "11:00 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/CMTR72349.pdf"
+    },
+    {
+      "date": "2026-02-14",
+      "what": "Deadline for Q3 FY26 quarterly results ({{fact:sebi-results-deadline-quarterly}} after quarter-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2026-03-01",
+      "what": "NSE transaction charges revised: cash {{fact:chg-nse-txn-equity}}, equity futures {{fact:chg-nse-txn-futures}}, equity options {{fact:chg-nse-txn-options}} of premium turnover (each side)",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+    },
+    {
+      "date": "2026-03-02",
+      "what": "Nifty 50 weekly options expire today, moved from {{fact:fo-nifty-weekly-expiry-day}} {{date:2026-03-03}} (Holi): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf"
+    },
+    {
+      "date": "2026-03-03",
+      "what": "NSE and BSE closed — Holi",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-03-08",
+      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session runs 19:00–01:30 IST",
+      "kind": "us-data",
+      "time_ist": "12:30 IST",
+      "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
+    },
+    {
+      "date": "2026-03-18",
+      "what": "FOMC statement and economic projections (meeting 17–18 Mar 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-03-25",
+      "what": "BSE Sensex weekly options expire today, moved from {{fact:fo-sensex-weekly-expiry-day}} {{date:2026-03-26}} (Ram Navami): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://www.bseindia.com/markets/MarketInfo/DispNewNoticesCirculars.aspx?page=20250617-11"
+    },
+    {
+      "date": "2026-03-26",
+      "what": "NSE and BSE closed — Shri Ram Navami",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-03-30",
+      "what": "NSE March monthly expiry (Nifty 50, Bank Nifty, FinNifty, Nifty Midcap Select, Nifty Next 50 and stock F&O), moved from the {{fact:fo-monthly-expiry-day-nse}}, {{date:2026-03-31}} (Mahavir Jayanti): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68589.pdf"
+    },
+    {
+      "date": "2026-03-31",
+      "what": "NSE and BSE closed — Shri Mahavir Jayanti",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-04-01",
+      "what": "Income-tax Act 2025 comes into force: a single tax year replaces the previous-year and assessment-year pair; returns for FY 2025-26 stay under the 1961 Act",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/documents/d/guest/press-release-income-tax-act-2025-comes-into-force-from-01-april-2026-pdf"
+    },
+    {
+      "date": "2026-04-01",
+      "what": "STT on derivatives rises under Finance Act 2026 s. 159: option premium {{fact:chg-stt-options-sell}}, exercised options {{fact:chg-stt-options-exercise}} of intrinsic value, futures {{fact:chg-stt-futures}}",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/finance-acts"
+    },
+    {
+      "date": "2026-04-01",
+      "what": "SEBI's retail algo-trading framework applies at every broker: API orders tagged, static IP, order-rate thresholds for registration",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/sep-2025/1759232056254.pdf"
+    },
+    {
+      "date": "2026-04-03",
+      "what": "NSE and BSE closed — Good Friday",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-04-08",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 6–8 Apr 2026 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2026-04-13",
+      "what": "Nifty 50 weekly options expire today, moved from {{fact:fo-nifty-weekly-expiry-day}} {{date:2026-04-14}} (Ambedkar Jayanti): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf"
+    },
+    {
+      "date": "2026-04-14",
+      "what": "NSE and BSE closed — Dr. Baba Saheb Ambedkar Jayanti",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-04-29",
+      "what": "FOMC statement (meeting 28–29 Apr 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-05-01",
+      "what": "NSE and BSE closed — Maharashtra Day",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-05-27",
+      "what": "BSE May monthly expiry (Sensex, Bankex and stock derivatives), moved from the {{fact:fo-monthly-expiry-day-bse}}, {{date:2026-05-28}} (Bakri Id): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:30 IST",
+      "source": "https://www.bseindia.com/markets/MarketInfo/DispNewNoticesCirculars.aspx?page=20250617-11"
+    },
+    {
+      "date": "2026-05-28",
+      "what": "NSE and BSE closed — Bakri Id",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-05-30",
+      "what": "Deadline for Q4 FY26 and audited annual results ({{fact:sebi-results-deadline-annual}} after year-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2026-06-05",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 3–5 Jun 2026 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2026-06-15",
+      "what": "Advance tax, first instalment ({{fact:tax-advance-tax-q1}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2026-06-17",
+      "what": "FOMC statement and economic projections (meeting 16–17 Jun 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-06-26",
+      "what": "NSE and BSE closed — Muharram",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-07-29",
+      "what": "FOMC statement (meeting 28–29 Jul 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-08-03",
+      "what": "Closing Auction Session begins for stocks with derivatives: CAS {{fact:mkt-closing-session}}, their continuous session {{fact:mkt-continuous-session-cas-stocks}}; equity derivatives trade {{fact:mkt-fo-session}}",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf"
+    },
+    {
+      "date": "2026-08-05",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 3–5 Aug 2026 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2026-08-14",
+      "what": "Deadline for Q1 FY27 quarterly results ({{fact:sebi-results-deadline-quarterly}} after quarter-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2026-09-07",
+      "what": "Cash pre-open order window becomes {{fact:mkt-preopen-window}} with a random close in its last two minutes (it used to close at a fixed 09:08)",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf"
+    },
+    {
+      "date": "2026-09-14",
+      "what": "NSE and BSE closed — Ganesh Chaturthi",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-09-15",
+      "what": "Advance tax, second instalment ({{fact:tax-advance-tax-q2}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2026-09-16",
+      "what": "FOMC statement and economic projections (meeting 15–16 Sep 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-10-02",
+      "what": "NSE and BSE closed — Mahatma Gandhi Jayanti",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-10-07",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 5–7 Oct 2026 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2026-10-19",
+      "what": "Nifty 50 weekly options expire today, moved from {{fact:fo-nifty-weekly-expiry-day}} {{date:2026-10-20}} (Dussehra): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf"
+    },
+    {
+      "date": "2026-10-20",
+      "what": "NSE and BSE closed — Dussehra",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-10-21",
+      "what": "Tax-audit report due for AY 2026-27 (extended by CBDT from the end of September)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/documents/d/guest/cbdt-extends-due-date-for-furnishing-return-of-income-for-ay-2026-27"
+    },
+    {
+      "date": "2026-10-28",
+      "what": "FOMC statement (meeting 27–28 Oct 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-11-01",
+      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session runs 20:00–02:30 IST",
+      "kind": "us-data",
+      "time_ist": "11:30 IST",
+      "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
+    },
+    {
+      "date": "2026-11-02",
+      "what": "NSE quantity-freeze limits per order under circular NSE/FAOP/77189: Nifty 50 {{fact:fo-freeze-qty-nifty}}, Bank Nifty {{fact:fo-freeze-qty-banknifty}}, FinNifty {{fact:fo-freeze-qty-finnifty}}, Nifty Midcap Select {{fact:fo-freeze-qty-midcpnifty}}, Nifty Next 50 {{fact:fo-freeze-qty-niftynxt50}}",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP77189.pdf"
+    },
+    {
+      "date": "2026-11-06",
+      "what": "US jobs report — Employment Situation, October 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2026-11-08",
+      "what": "Muhurat trading, Diwali Laxmi Pujan (a Sunday): F&O pre-open 14:05–14:20, continuous trading 14:20–15:40; every trade settles as usual",
+      "kind": "india-holiday",
+      "time_ist": "14:20–15:40 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP76940.pdf"
+    },
+    {
+      "date": "2026-11-09",
+      "what": "Nifty 50 weekly options expire today, moved from {{fact:fo-nifty-weekly-expiry-day}} {{date:2026-11-10}} (Diwali Balipratipada): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68747.pdf"
+    },
+    {
+      "date": "2026-11-10",
+      "what": "NSE and BSE closed — Diwali Balipratipada",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-11-10",
+      "what": "US CPI, October 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2026-11-12",
+      "what": "India CPI inflation, October 2026 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2026-11-14",
+      "what": "Deadline for Q2 FY27 quarterly results ({{fact:sebi-results-deadline-quarterly}} after quarter-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2026-11-21",
+      "what": "Income-tax return due for audit cases, AY 2026-27 — the last year under the 1961 Act (extended by CBDT from the usual {{fact:tax-return-due-date-audit}})",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/documents/d/guest/cbdt-extends-due-date-for-furnishing-return-of-income-for-ay-2026-27"
+    },
+    {
+      "date": "2026-11-23",
+      "what": "NSE November monthly expiry (Nifty 50, Bank Nifty, FinNifty, Nifty Midcap Select, Nifty Next 50 and stock F&O), moved from the {{fact:fo-monthly-expiry-day-nse}}, {{date:2026-11-24}} (Guru Nanak Jayanti): a holiday on the expiry day moves expiry to the previous trading day",
+      "kind": "expiry",
+      "time_ist": "close 15:40 IST",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP68589.pdf"
+    },
+    {
+      "date": "2026-11-24",
+      "what": "NSE and BSE closed — Prakash Gurpurb Sri Guru Nanak Dev",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-11-26",
+      "what": "NYSE closed — Thanksgiving Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2026-11-27",
+      "what": "NYSE early close at 13:00 ET, the day after Thanksgiving",
+      "kind": "us-holiday",
+      "time_ist": "23:30 IST",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2026-11-30",
+      "what": "India GDP, Q2 FY27 (July–September 2026) — expected per MoSPI's advance release calendar",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2071663"
+    },
+    {
+      "date": "2026-12-04",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 2–4 Dec 2026 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2026-12-04",
+      "what": "US jobs report — Employment Situation, November 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2026-12-04",
+      "what": "NSE Graded Surveillance Measure: quarterly review circular due (stocks move between GSM stages)",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.nseindia.com/regulations/graded-surveillance-measure"
+    },
+    {
+      "date": "2026-12-07",
+      "what": "Closing Auction Session moves to {{fact:opt-cas-window-from-2026-12-07}} and index and stock derivatives trade until 15:45; expiring index contracts stop at {{fact:opt-expiring-index-close-time-from-2026-12-07}} on expiry day; index expiry settlement switches to a 30-minute VWAP of the constituents",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf"
+    },
+    {
+      "date": "2026-12-09",
+      "what": "FOMC statement and economic projections (meeting 8–9 Dec 2026); press conference follows",
+      "kind": "fomc",
+      "time_ist": "00:30 IST on 10 Dec",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2026-12-10",
+      "what": "US CPI, November 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2026-12-15",
+      "what": "Advance tax, third instalment ({{fact:tax-advance-tax-q3}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2026-12-24",
+      "what": "NYSE early close at 13:00 ET, Christmas Eve",
+      "kind": "us-holiday",
+      "time_ist": "23:30 IST",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2026-12-25",
+      "what": "NSE and BSE closed — Christmas",
+      "kind": "india-holiday",
+      "time_ist": "all day",
+      "source": "https://nsearchives.nseindia.com/content/circulars/FAOP71777.pdf"
+    },
+    {
+      "date": "2026-12-25",
+      "what": "NYSE closed — Christmas Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2026-12-28",
+      "what": "India IIP, November 2026 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-01-01",
+      "what": "NYSE closed — New Year's Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-01-08",
+      "what": "US jobs report — Employment Situation, December 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-01-12",
+      "what": "India CPI inflation, December 2026 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-01-13",
+      "what": "US CPI, December 2026 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-01-18",
+      "what": "NYSE closed — Martin Luther King, Jr. Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-01-20",
+      "what": "Last day to convert NSE IFSC Receipts (unsponsored US-stock receipts on NSE IX) into the underlying shares",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.nseix.com/api/content/circulars/NSEIFSC_TRADE_2698.pdf"
+    },
+    {
+      "date": "2027-01-27",
+      "what": "FOMC statement (meeting 26–27 Jan 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "00:30 IST on 28 Jan",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-01-28",
+      "what": "India IIP, December 2026 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-01-29",
+      "what": "Last day to sell NSE IFSC Receipts on NSE IX",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.nseix.com/api/content/circulars/NSEIFSC_TRADE_2698.pdf"
+    },
+    {
+      "date": "2027-02-01",
+      "what": "Union Budget 2027-28 — expected: Budget day is {{fact:mac-budget-date}} by convention; the Lok Sabha schedule confirms the date",
+      "kind": "budget",
+      "time_ist": "11:00 IST (usual)",
+      "source": "https://www.indiabudget.gov.in/doc/budget_speech.pdf"
+    },
+    {
+      "date": "2027-02-01",
+      "what": "Dealing in NSE IFSC Receipts ends; the programme is terminated",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.nseix.com/api/content/circulars/NSEIFSC_TRADE_2698.pdf"
+    },
+    {
+      "date": "2027-02-05",
+      "what": "RBI MPC policy resolution and Governor's statement, last day of the 3–5 Feb 2027 meeting",
+      "kind": "rbi",
+      "time_ist": "10:00 IST",
+      "source": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422"
+    },
+    {
+      "date": "2027-02-05",
+      "what": "US jobs report — Employment Situation, January 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-02-08",
+      "what": "Unexecuted iceberg orders are carried into the Closing Auction Session as disclosed limit orders with lower time priority, unless the member opts out",
+      "kind": "rule-change",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf"
+    },
+    {
+      "date": "2027-02-11",
+      "what": "US CPI, January 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-02-12",
+      "what": "India CPI inflation, January 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-02-14",
+      "what": "Deadline for Q3 FY27 quarterly results ({{fact:sebi-results-deadline-quarterly}} after quarter-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2027-02-15",
+      "what": "NYSE closed — Washington's Birthday",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-02-26",
+      "what": "India GDP, Q3 FY27 and the second advance estimates for FY27 — expected per MoSPI's advance release calendar",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2071663"
+    },
+    {
+      "date": "2027-03-05",
+      "what": "US jobs report — Employment Situation, February 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-03-10",
+      "what": "US CPI, February 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-03-12",
+      "what": "India CPI inflation, February 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-03-13",
+      "what": "Term of the Manipur legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-03-14",
+      "what": "Term of the Goa legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-03-14",
+      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session runs 19:00–01:30 IST",
+      "kind": "us-data",
+      "time_ist": "12:30 IST",
+      "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
+    },
+    {
+      "date": "2027-03-15",
+      "what": "Advance tax, fourth and final instalment ({{fact:tax-advance-tax-q4}}, cumulative); presumptive-scheme taxpayers pay their single instalment",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-03-16",
+      "what": "Term of the Punjab legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-03-17",
+      "what": "FOMC statement and economic projections (meeting 16–17 Mar 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-03-26",
+      "what": "NYSE closed — Good Friday",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-03-28",
+      "what": "Term of the Uttarakhand legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-03-31",
+      "what": "Nifty index reconstitutions take effect — expected: the last trading day of March under the methodology",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf"
+    },
+    {
+      "date": "2027-04-02",
+      "what": "US jobs report — Employment Situation, March 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-04-12",
+      "what": "India CPI inflation, March 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-04-13",
+      "what": "US CPI, March 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-04-28",
+      "what": "India IIP, March 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-04-28",
+      "what": "FOMC statement (meeting 27–28 Apr 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-05-07",
+      "what": "US jobs report — Employment Situation, April 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-05-12",
+      "what": "India CPI inflation, April 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-05-12",
+      "what": "US CPI, April 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-05-22",
+      "what": "Term of the Uttar Pradesh legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-05-28",
+      "what": "India IIP, April 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-05-30",
+      "what": "Deadline for Q4 FY27 and audited annual results ({{fact:sebi-results-deadline-annual}} after year-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2027-05-31",
+      "what": "India GDP, Q4 FY27 and the provisional estimates for FY27 — expected per MoSPI's advance release calendar",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2071663"
+    },
+    {
+      "date": "2027-05-31",
+      "what": "NYSE closed — Memorial Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-06-04",
+      "what": "US jobs report — Employment Situation, May 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-06-09",
+      "what": "FOMC statement and economic projections (meeting 8–9 Jun 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-06-10",
+      "what": "US CPI, May 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-06-15",
+      "what": "Advance tax, first instalment ({{fact:tax-advance-tax-q1}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-06-18",
+      "what": "NYSE closed — Juneteenth (observed)",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-06-28",
+      "what": "India IIP, May 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-07-02",
+      "what": "US jobs report — Employment Situation, June 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-07-05",
+      "what": "NYSE closed — Independence Day (observed)",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-07-12",
+      "what": "India CPI inflation, June 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-07-14",
+      "what": "US CPI, June 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-07-24",
+      "what": "Term of the President of India ends; the presidential election is held before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-07-28",
+      "what": "India IIP, June 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-07-28",
+      "what": "FOMC statement (meeting 27–28 Jul 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-07-31",
+      "what": "Income-tax return due for tax year 2026-27, individuals without business income or audit ({{fact:tax-return-due-date-other}})",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-08-06",
+      "what": "US jobs report — Employment Situation, July 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-08-11",
+      "what": "US CPI, July 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-08-12",
+      "what": "India CPI inflation, July 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-08-14",
+      "what": "Deadline for Q1 FY28 quarterly results ({{fact:sebi-results-deadline-quarterly}} after quarter-end, LODR Reg 33)",
+      "kind": "results",
+      "time_ist": "",
+      "source": "https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf"
+    },
+    {
+      "date": "2027-08-31",
+      "what": "India GDP, Q1 FY28 (April–June 2027) — expected per MoSPI's advance release calendar",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2071663"
+    },
+    {
+      "date": "2027-08-31",
+      "what": "Income-tax return due for tax year 2026-27, business income (intraday or F&O) without audit ({{fact:tax-return-due-date-business-noaudit}})",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-09-03",
+      "what": "US jobs report — Employment Situation, August 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-09-06",
+      "what": "NYSE closed — Labor Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-09-14",
+      "what": "US CPI, August 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-09-15",
+      "what": "FOMC statement and economic projections (meeting 14–15 Sep 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-09-15",
+      "what": "Advance tax, second instalment ({{fact:tax-advance-tax-q2}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-09-28",
+      "what": "India IIP, August 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-09-30",
+      "what": "Nifty index reconstitutions take effect — expected: the last trading day of September under the methodology",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf"
+    },
+    {
+      "date": "2027-10-08",
+      "what": "US jobs report — Employment Situation, September 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-10-12",
+      "what": "India CPI inflation, September 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-10-14",
+      "what": "US CPI, September 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-10-27",
+      "what": "FOMC statement (meeting 26–27 Oct 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "23:30 IST",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-10-28",
+      "what": "India IIP, September 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    },
+    {
+      "date": "2027-10-31",
+      "what": "Income-tax return due for tax year 2026-27, audited persons ({{fact:tax-return-due-date-audit}})",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-11-05",
+      "what": "US jobs report — Employment Situation, October 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "18:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-11-07",
+      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session runs 20:00–02:30 IST",
+      "kind": "us-data",
+      "time_ist": "11:30 IST",
+      "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
+    },
+    {
+      "date": "2027-11-10",
+      "what": "US CPI, October 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-11-12",
+      "what": "India CPI inflation, October 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2070932"
+    },
+    {
+      "date": "2027-11-25",
+      "what": "NYSE closed — Thanksgiving Day",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-11-26",
+      "what": "NYSE early close at 13:00 ET, the day after Thanksgiving",
+      "kind": "us-holiday",
+      "time_ist": "23:30 IST",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-12-03",
+      "what": "US jobs report — Employment Situation, November 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/empsit.htm"
+    },
+    {
+      "date": "2027-12-08",
+      "what": "FOMC statement and economic projections (meeting 7–8 Dec 2027, tentative); press conference follows",
+      "kind": "fomc",
+      "time_ist": "00:30 IST on 9 Dec",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    },
+    {
+      "date": "2027-12-10",
+      "what": "US CPI, November 2027 (BLS, 08:30 ET)",
+      "kind": "us-data",
+      "time_ist": "19:00 IST",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm"
+    },
+    {
+      "date": "2027-12-15",
+      "what": "Advance tax, third instalment ({{fact:tax-advance-tax-q3}}, cumulative)",
+      "kind": "budget",
+      "time_ist": "",
+      "source": "https://www.incometaxindia.gov.in/income-tax-act-2025"
+    },
+    {
+      "date": "2027-12-19",
+      "what": "Term of the Gujarat legislative assembly ends; the state election is due before this date (Election Commission of India)",
+      "kind": "india-data",
+      "time_ist": "",
+      "source": "https://www.eci.gov.in/term-of-the-houses"
+    },
+    {
+      "date": "2027-12-24",
+      "what": "NYSE closed — Christmas Day (observed)",
+      "kind": "us-holiday",
+      "time_ist": "US session closed",
+      "source": "https://www.nyse.com/markets/hours-calendars"
+    },
+    {
+      "date": "2027-12-28",
+      "what": "India IIP, November 2027 (MoSPI)",
+      "kind": "india-data",
+      "time_ist": "16:00 IST",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2122427"
+    }
+  ]
 }
