@@ -112,6 +112,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "fo-mwpl-formula",
+    "label": "Market-wide position limit per stock (FutEq basis; delivery value averaged over the cash market)",
+    "value": "lower of 15% of free float or 65× avg daily delivery value",
+    "since": "2025-10-01",
+    "source": "SEBI circular 29 May 2025 (2025/79), paras 5.1–5.2 | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748521484014.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "fo-nifty-lot",
     "label": "Nifty 50 lot size",
     "value": "65",
@@ -157,6 +165,38 @@
     "value": "Physical delivery",
     "since": "2019-10-01",
     "source": "SEBI circular 31 Dec 2018 | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2018/1546255335099.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-block-window-1",
+    "label": "Block-deal window, morning (NSE Market Timings page, read 1 Nov 2026)",
+    "value": "08:45–09:00 IST",
+    "since": "2026-11-01",
+    "source": "NSE Market Timings | https://www.nseindia.com/market-data/market-timings",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-block-window-2",
+    "label": "Block-deal window, afternoon (NSE Market Timings page, read 1 Nov 2026)",
+    "value": "14:05–14:20 IST",
+    "since": "2026-11-01",
+    "source": "NSE Market Timings | https://www.nseindia.com/market-data/market-timings",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-cas-band",
+    "label": "CAS price band either side of the reference price (VWAP of the last 15 minutes of continuous trading; futures bands align to it during CAS)",
+    "value": "±3%",
+    "since": "2026-08-03",
+    "source": "SEBI CAS circular 16 Jan 2026, paras 4.3–4.4 | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-cas-order-entry-current",
+    "label": "CAS order entry for stocks with derivatives until 6 Dec 2026 (15:15–15:20 reference-price phase, no orders; limit and market orders 15:20–15:25; limit only 15:25–15:30 with random close 15:28–15:30; matching 15:30–15:35)",
+    "value": "15:20–15:30 IST",
+    "since": "2026-08-03",
+    "source": "SEBI CAS circular 16 Jan 2026, paras 4.1–4.2 | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
     "verified": "2026-11-01"
   },
   {
@@ -216,6 +256,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mkt-fo-session-from-2026-12-07",
+    "label": "Equity derivatives session from 7 Dec 2026 (expiring index contracts stop at 15:30 on their expiry day)",
+    "value": "09:15–15:45 IST",
+    "since": "2026-12-07",
+    "source": "SEBI CAS review circular 15 Oct 2026, paras 4.2.4–4.2.5 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "mkt-holidays-current-year-count",
     "label": "NSE weekday trading holidays in 2026, incl. one special closure (15 Jan 2026)",
     "value": "16",
@@ -261,6 +309,22 @@
     "value": "T+1",
     "since": "2023-01-27",
     "source": "SEBI circular 10 Dec 2024 (T+1 as existing cycle) | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2024/1733829354031.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-squareoff-example-cash",
+    "label": "Broker auto square-off of intraday (MIS/CO/BO) equity cash positions starts, 'onwards' at the broker's discretion (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "15:20 IST",
+    "since": "2026-11-01",
+    "source": "Zerodha Policies and Procedures, §8 | https://zerodha.com/policies-and-procedures/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-squareoff-example-fo",
+    "label": "Broker auto square-off of intraday (MIS/CO/BO) equity derivative positions starts, 'onwards' at the broker's discretion (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "15:25 IST",
+    "since": "2026-11-01",
+    "source": "Zerodha Policies and Procedures, §8 | https://zerodha.com/policies-and-procedures/",
     "verified": "2026-11-01"
   },
   {
@@ -341,6 +405,14 @@
     "value": "₹3,553 per crore",
     "since": "2026-03-01",
     "source": "NSE/FA/73061 | https://nsearchives.nseindia.com/content/circulars/FA73061.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "chg-rms-squareoff-example-broker",
+    "label": "Charge when the broker's risk desk squares off a position, plus GST (broker example: Zerodha, seen 1 Nov 2026)",
+    "value": "₹50 per order",
+    "since": "2026-11-01",
+    "source": "Zerodha Charges | https://zerodha.com/charges/",
     "verified": "2026-11-01"
   },
   {
@@ -733,6 +805,14 @@
     "value": "100% of VaR + ELM",
     "since": "2020-12-01",
     "source": "SEBI MC Stock Brokers 17 Jun 2025, paras 40–41 | https://www.sebi.gov.in/sebi_data/attachdocs/jun-2025/1750158789381.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-upfront-margin-waiver-threshold",
+    "label": "Upfront collection of the trade value in the cash segment at or above which no short-collection penalty applies (the regulatory basis of '5×' intraday equity leverage)",
+    "value": "20%",
+    "since": "2020-12-01",
+    "source": "SEBI MC Stock Brokers 17 Jun 2025, para 40.3.2 | https://www.sebi.gov.in/sebi_data/attachdocs/jun-2025/1750158789381.pdf",
     "verified": "2026-11-01"
   },
   {
