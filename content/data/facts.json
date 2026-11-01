@@ -880,9 +880,17 @@
     "verified": "2026-11-01"
   },
   {
-    "id": "tax-books-threshold-individual",
-    "label": "Books of account compulsory (individual/HUF) when",
-    "value": "business income > ₹2.5 lakh or turnover > ₹25 lakh (any of the 3 preceding years)",
+    "id": "tax-books-threshold-income",
+    "label": "Books of account compulsory (individual/HUF) when business income exceeds this in any of the 3 preceding tax years (s. 62(2)(d); or turnover above its own threshold)",
+    "value": "₹2.5 lakh",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 62(2)(d) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-books-threshold-turnover",
+    "label": "Books of account compulsory (individual/HUF) when business turnover exceeds this in any of the 3 preceding tax years (s. 62(2)(d); or income above its own threshold)",
+    "value": "₹25 lakh",
     "since": "2026-04-01",
     "source": "Income-tax Act 2025, s. 62(2)(d) | https://www.incometaxindia.gov.in/income-tax-act-2025",
     "verified": "2026-11-01"

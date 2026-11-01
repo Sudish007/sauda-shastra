@@ -118,6 +118,19 @@ with sync_playwright() as p:
     resp = page.request.get(BASE + "data/library.csv")
     check("library CSV served", resp.ok and resp.headers.get("content-type", "").startswith("text/csv") and resp.text().startswith("id,kind,title"))
 
+    # Trade-journal template (site/downloads, FEAT-012): text/csv, the exact header, two schematic rows, linked for download
+    JOURNAL_HEADER = ("date,entry_time_ist,exit_time_ist,market,instrument,expiry,strike,option_type,product,playbook,direction,qty_lots,"
+                      "entry_price,stop_price,target_price,exit_price,risk_rupees_1r,pnl_gross,charges,pnl_net,r_multiple,planned_trade,"
+                      "followed_plan,mistake_tags,emotion_before,emotion_after,setup_grade,screenshot_link,notes")
+    resp = page.request.get(BASE + "downloads/trade-journal-template.csv")
+    body = resp.text() if resp.ok else ""
+    check("journal CSV served as text/csv", resp.ok and resp.headers.get("content-type", "").startswith("text/csv"), resp.headers.get("content-type", ""))
+    check("journal CSV has the exact header", body.split("\n")[0] == JOURNAL_HEADER, body.split("\n")[0][:120])
+    check("journal CSV has two schematic rows marked as not real data", body.count("\n") == 3 and body.count("not real data") == 2, f"{body.count(chr(10))} newlines")
+    page.goto(BASE + "guides/psychology-journaling-prop-firms/", wait_until="networkidle")
+    link = page.locator('main a[download][href$="downloads/trade-journal-template.csv"]')
+    check("journaling guide links the CSV with a download attribute", link.count() == 1, f"{link.count()} links")
+
     # Nav state: exactly one aria-current in .site-nav on every page with a nav entry; none on home (no nav entry) or facts/
     for path, want in (("", 0), ("guides/", 1), ("learn/", 1), ("facts/", 0)):
         page.goto(BASE + path, wait_until="networkidle")

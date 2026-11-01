@@ -164,7 +164,9 @@ export function guidesIndexPage(c) {
 function relatedList(slugs, c, r) {
   const items = slugs.map((s) => c.byGuide[s] ? { href: `${r}guides/${s}/`, a: c.byGuide[s], kind: S.labels.guide } : c.byPlaybook[s] ? { href: `${r}playbooks/${s}/`, a: c.byPlaybook[s], kind: S.labels.playbook } : null).filter(Boolean);
   if (!items.length) return '';
-  return `<div class="card related-card"><h2>${esc(S.labels.related)}</h2><ul>${items.map((x) => `<li><a href="${x.href}">${esc(x.a.title)}</a><small>${esc(x.kind)} · ${x.a.minutes} ${esc(S.labels.minRead)}</small></li>`).join('')}</ul></div>`;
+  // Minutes are a rendered figure (`.num`, like the article meta and cards), not prose: a bare "8" beside a title with
+  // "loss" in it would otherwise read as a typed register value (tax-nonspec-loss-carry-forward) to the never-typed scan.
+  return `<div class="card related-card"><h2>${esc(S.labels.related)}</h2><ul>${items.map((x) => `<li><a href="${x.href}">${esc(x.a.title)}</a><small>${esc(x.kind)} · <span class="num">${x.a.minutes}</span> ${esc(S.labels.minRead)}</small></li>`).join('')}</ul></div>`;
 }
 
 /** Rail card linking the calculators named in `tools:` front matter (titles from the registry). */
