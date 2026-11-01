@@ -385,7 +385,8 @@ p { max-width: 80ch; }
 /* Sticky rail; a rail taller than the viewport (a guide with 16 facts) scrolls inside itself instead of being cut off */
 .rail { display: grid; gap: var(--space-4); align-content: start; position: sticky; top: 92px; align-self: start; max-height: calc(100dvh - 110px); overflow-y: auto; scrollbar-gutter: stable; padding-right: 2px; }
 @media (max-width: 1439.98px) { .rail { position: static; display: flex; flex-wrap: wrap; max-height: none; overflow: visible; } .rail > * { flex: 1 1 300px; min-width: 0; } }
-@media (min-width: 2200px) { .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rail > .facts-box, .rail > .evidence-card { grid-column: 1 / -1; } }
+/* Two-column rail from 2200: every card spans the row except a Tools + Related pair, which share one (a lone card never leaves an empty cell) */
+@media (min-width: 2200px) { .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rail > * { grid-column: 1 / -1; } .rail > .tools-card:has(+ .related-card), .rail > .tools-card + .related-card { grid-column: auto; } }
 .rail .card h2, .rail .card h3 { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; letter-spacing: 0; margin-bottom: 0.75rem; }
 .rail ul { list-style: none; padding: 0; display: grid; gap: 0.55rem; }
 .rail li a { color: var(--ink); text-decoration: none; font-weight: 500; }

@@ -15,7 +15,31 @@ npm run serve     # http://127.0.0.1:8790/sauda-shastra/
 npm test          # content validation, markdown, built HTML, links, SEO, identity
 ```
 
-Screenshots and the numeric UI audit (overflow, 12 px floor, 40 px controls, overlaps, stateful controls, 320 px sweep) come from `scripts/shots.py`; the functional smoke test is `scripts/e2e.py`. Both run on the workspace Python venv with Playwright: `python scripts/shots.py [base_url] [out_dir]`, `python scripts/e2e.py [base_url]`.
+## Verification
+
+`npm test` covers the content validators, the renderers and the built HTML. The real-browser audits run on a Python venv with Playwright (the scripts launch Edge, `channel="msedge"`) against a served build (`npm run build`, then `npm run serve` or `PORT=8791 node scripts/serve.mjs`):
+
+```
+python scripts/shots.py [base_url] [out_dir] [--pages a/,b/] [--all-articles]   # screenshots + the numeric UI audit matrix, audit.json, exit 1 on any finding
+python scripts/contrast.py                                                      # WCAG AA for the 21 token pairs × 2 themes, read from site/styles.css
+python scripts/e2e.py [base_url]                                                # functional smoke test; prints "skipped (no data yet)" for data later steps add
+```
+
+`shots.py` audits the page list of the design (home, guides index, first guide, playbooks index, first playbook, tools index, first tool, learn, glossary, calendar, changelog, resources, facts, about, sources, 404 via an unknown nested path; articles that do not exist yet are skipped) at 320 (audit only), 390, 820, 1024 (audit only), 1440, 1920 and 2560 (device scale factor 0.75, so the shot is 1920 × 1080) in both themes; screenshots are viewport-only, named `<page>-<width>-<theme>.png`. `--pages guides/x/,tools/y/` adds pages to the audited and shot set (named by their path); `--all-articles` audits every guide, playbook and tool from `data/search.json` at 320 and 390 without screenshots.
+
+| Audit | Pass criterion |
+|---|---|
+| Horizontal overflow | `scrollWidth ≤ clientWidth`; at 320 also `scrollWidth ≤ 320` |
+| Minimum type | every visible HTML text node ≥ 12 px; every `svg text` ≥ 12 px after scaling by rendered width / viewBox width |
+| Line measure | widest line box of every visible `p, li, dd, dt, figcaption, blockquote, td, th` leaf ≤ 80.5 × its own `ch` |
+| Controls | `button, .btn, .chip, input, select, .site-nav a, .mobile-nav a` ≥ 40 px tall (radio/checkbox inputs excluded: their label is the control) |
+| Content box | (container width − padding) / clientWidth ≥ 0.88 at ≥ 1920 |
+| No intersecting boxes | no two children of `.card, .month, .result, .rates, .toolbar, .sebi-box, .glance, .upnext > *, .changelog > li` overlap |
+| No empty grid cells | every row of every grid/flex container (`.grid*`, `.glance`, `.options`, `.counts`, `.footer-grid`, `.rail`, `.article-layout`, `.month-grid`, `.hero-grid`, `.learn-hero`, `.tool-layout`, `.kpis`, `.upnext`, …) is filled to within one gap |
+| Stateful controls | `[aria-pressed]`, `[aria-expanded]`, `[data-mode]` carry text or an aria-label naming the state; the theme label equals the forced theme |
+| Vocabulary | body text never names the project's internals |
+| Contrast | `scripts/contrast.py`: 4.5:1 for text pairs, 3:1 for the control border, both themes |
+| Behaviour | `scripts/e2e.py`: light first paint under an OS dark preference, theme cycle and persistence, search, mobile menu, 404 base, one `aria-current` per page with a nav entry, Learn pill states, facts box → `facts/` rows, register chips, named-resource rows all linked, hero figures = register, home counts = `data/counts.json` |
 
 ## Where things live
 

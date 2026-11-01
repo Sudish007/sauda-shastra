@@ -171,6 +171,12 @@ function toolsCard(ids, r) {
   return `<div class="card tools-card"><h2>${esc(S.labels.toolsHeading)}</h2><ul>${items.map((t) => `<li><a href="${r}tools/${esc(t.id)}/">${esc(t.title)}</a>${t.summary ? `<small>${esc(t.summary)}</small>` : ''}</li>`).join('')}</ul></div>`;
 }
 
+/** The article rail. A page with nothing to show there gets a stretched placeholder (as sources/ does) so the third column of the article layout is never an empty cell (M2). */
+function rail(...cards) {
+  const html = cards.filter(Boolean).join('\n      ');
+  return html ? `<aside class="rail">\n      ${html}\n    </aside>` : '<div></div>';
+}
+
 function toc(headings, { sources = false } = {}) {
   const items = [...headings.map((h) => ({ depth: h.depth, id: h.id, text: h.text })), ...(sources ? [{ depth: 2, id: 'sources', text: S.labels.sourcesHeading }] : [])];
   return `<nav class="toc" aria-label="${esc(S.labels.onThisPage)}"><h2>${esc(S.labels.onThisPage)}</h2><ol>${items.map((h) => `<li class="depth-${h.depth}"><a href="#${h.id}">${esc(h.text)}</a></li>`).join('')}</ol></nav>`;
@@ -194,11 +200,7 @@ export function guidePage(g, c) {
         ${disclaimer()}
       </footer>
     </article>
-    <aside class="rail">
-      ${toolsCard(g.tools, r)}
-      ${relatedList(g.related, c, r)}
-      ${factsBox(g.factRefs, c.byFact, r)}
-    </aside>
+    ${rail(toolsCard(g.tools, r), relatedList(g.related, c, r), factsBox(g.factRefs, c.byFact, r))}
   </div>`;
   return layout({ title: g.title, description: g.summary, path: `guides/${g.slug}/index.html`, depth: 2, body, current: 'guides/', article: { headline: g.title, datePublished: g.updated, dateModified: g.updated, section: g.section } });
 }
@@ -247,12 +249,7 @@ export function playbookPage(p, c) {
         ${disclaimer()}
       </footer>
     </article>
-    <aside class="rail">
-      <div class="card evidence-card"><h2>${esc(fill(S.playbooks.whyLabel, { label }))}</h2><p class="muted">${esc(S.labels.evidenceExplain[p.evidence] || '')}${evidenceHeading ? ` <a href="#${evidenceHeading.id}">${esc(S.labels.readEvidence)}</a>.` : ''}</p></div>
-      ${toolsCard(p.tools, r)}
-      ${relatedList(p.related, c, r)}
-      ${factsBox(p.factRefs, c.byFact, r)}
-    </aside>
+    ${rail(`<div class="card evidence-card"><h2>${esc(fill(S.playbooks.whyLabel, { label }))}</h2><p class="muted">${esc(S.labels.evidenceExplain[p.evidence] || '')}${evidenceHeading ? ` <a href="#${evidenceHeading.id}">${esc(S.labels.readEvidence)}</a>.` : ''}</p></div>`, toolsCard(p.tools, r), relatedList(p.related, c, r), factsBox(p.factRefs, c.byFact, r))}
   </div>`;
   return layout({ title: p.title, description: p.summary, path: `playbooks/${p.slug}/index.html`, depth: 2, body, current: 'playbooks/', article: { headline: p.title, datePublished: p.updated, dateModified: p.updated, section: S.playbooks.eyebrow } });
 }
@@ -387,9 +384,7 @@ export function aboutPage(c) {
         ${disclaimer()}
       </footer>
     </article>
-    <aside class="rail">
-      ${factsBox(pg.factRefs, c.byFact, r)}
-    </aside>
+    ${rail(factsBox(pg.factRefs, c.byFact, r))}
   </div>`
     : `<section class="section"><div class="container">
     ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: S.about.eyebrow }])}
