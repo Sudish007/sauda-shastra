@@ -1504,6 +1504,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "inv-nifty50-financials-weight",
+    "label": "Financial Services sector weight in Nifty 50 (NSE Indices factsheet, 30 Oct 2026)",
+    "value": "37.13%",
+    "since": "2026-10-30",
+    "source": "NSE Indices – Nifty 50 factsheet | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "inv-nifty50-pb",
     "label": "Nifty 50 price-to-book ratio (NSE Indices factsheet, 30 Oct 2026)",
     "value": "2.83",
