@@ -91,8 +91,23 @@ with sync_playwright() as p:
     page.wait_for_timeout(200)
     first = page.locator("#search-results a").first
     check("search finds the calendar page", (first.get_attribute("href") or "").endswith("calendar/"), first.get_attribute("href") or "")
+    check("results are grouped under a kind heading first", page.evaluate("document.querySelector('#search-results > li')?.className") == "search-group")
+    # Facts are indexed as facts/#fact-<id> (design §6.3); the href is root-relative so strip the ./ or ../ prefix before comparing
+    page.fill("#search-input", "STT")
+    page.wait_for_timeout(200)
+    hrefs = [re.sub(r"^(\.\.?/)+", "", h or "") for h in page.locator("#search-results a").evaluate_all("els => els.map(a => a.getAttribute('href'))")]
+    fact_hrefs = [h for h in hrefs if h.startswith("facts/#fact-")]
+    if page.evaluate("document.querySelectorAll('#search-results a').length") == 0 and not page.request.get(BASE + "data/facts.json").json():
+        skip("search lists a Fact result for STT")
+    else:
+        check("search lists a Fact result for STT (href facts/#fact-…)", bool(fact_hrefs), hrefs[:3])
+    # "/" while typing in the search field is not the shortcut: the dialog stays open and the character is not inserted
+    page.focus("#search-input")
+    page.keyboard.press("/")
+    page.wait_for_timeout(100)
+    check("/ inside the search input neither re-opens nor inserts", page.evaluate("document.getElementById('search-dialog').open") and page.input_value("#search-input") == "STT")
     page.keyboard.press("Escape")
-    check("search closes on Escape", not page.evaluate("document.getElementById('search-dialog').open"))
+    check("search closes on the first Escape", not page.evaluate("document.getElementById('search-dialog').open"))
 
     # Footer disclaimer on every page type reachable from nav
     for path in ("", "guides/", "playbooks/", "learn/", "glossary/", "calendar/", "changelog/", "about/"):

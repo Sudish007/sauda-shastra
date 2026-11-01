@@ -118,7 +118,7 @@ ${footer(r)}
   <form class="search-head" method="dialog" role="search">
     ${ICONS.search}
     <input type="search" id="search-input" placeholder="${esc(S.search.placeholder)}" autocomplete="off" aria-label="${esc(S.header.search)}">
-    <button class="icon-btn" type="submit" aria-label="Close search">${esc(S.search.close)}</button>
+    <button class="icon-btn" type="submit" aria-label="${esc(S.search.closeAria)}">${esc(S.search.close)}</button>
   </form>
   <ul class="search-results" id="search-results" aria-live="polite"></ul>
 </dialog>

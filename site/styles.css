@@ -601,6 +601,9 @@ dialog.search::backdrop { background: var(--backdrop); }
 .search-results li a b { font-weight: 600; }
 .search-results li a span { color: var(--muted); font-size: var(--fs-small); }
 .search-results .kind { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+/* One small heading per kind (Guide, Section, Playbook, Tool, Term, Course, Book, Fact, Page), in the rank order of its best hit */
+.search-results .search-group { padding: 0.6rem 0.9rem 0.2rem; border-top: 1px solid var(--line); }
+.search-results .search-group:first-child { border-top: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding-block: var(--space-7) var(--space-6); color: var(--muted); font-size: var(--fs-small); background: var(--surface-2); margin-top: var(--space-8); }

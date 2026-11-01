@@ -76,18 +76,25 @@
     if (s && (doc.kind === 'Guide' || doc.kind === 'Playbook' || doc.kind === 'Page')) s += 4; // destinations outrank the facts that mention them
     return s;
   }
+  /* Top 12 hits by score, then grouped under a small heading per kind; groups follow the rank of their best hit, so the
+     best match overall is always the first link (↑ ↓ walk the links only, the headings are not focusable). */
   function renderResults(q) {
     const query = q.trim().toLowerCase();
     if (!index) { results.innerHTML = `<li class="muted small hint">${esc(T.searchUnavailable)}</li>`; return; }
     if (!query) { results.innerHTML = `<li class="muted small hint">${esc(T.searchHint)}</li>`; return; }
     const hits = index.map((d) => ({ d, s: score(d, query) })).filter((x) => x.s > 0).sort((a, b) => b.s - a.s).slice(0, 12);
-    results.innerHTML = hits.length ? hits.map(({ d }) => `<li><a href="${d.external ? esc(d.url) : root + esc(d.url)}"${d.external ? ' rel="noopener noreferrer" target="_blank"' : ''}><span class="kind">${esc(d.kind)}</span><b>${esc(d.title)}</b>${d.text ? `<span>${esc(d.text)}</span>` : ''}</a></li>`).join('') : `<li class="muted small hint">${esc(T.searchNone)}</li>`;
+    if (!hits.length) { results.innerHTML = `<li class="muted small hint">${esc(T.searchNone)}</li>`; return; }
+    const groups = new Map();
+    for (const { d } of hits) { if (!groups.has(d.kind)) groups.set(d.kind, []); groups.get(d.kind).push(d); }
+    const item = (d) => `<li><a href="${d.external ? esc(d.url) : root + esc(d.url)}"${d.external ? ' rel="noopener noreferrer" target="_blank"' : ''}><b>${esc(d.title)}</b>${d.text ? `<span>${esc(d.text)}</span>` : ''}</a></li>`;
+    results.innerHTML = [...groups].map(([kind, docs]) => `<li class="search-group" role="presentation"><span class="kind">${esc(kind)}</span></li>${docs.map(item).join('')}`).join('');
   }
   async function openSearch() { if (!dialog) return; await loadIndex(); renderResults(searchInput.value); dialog.showModal(); searchInput.focus(); searchInput.select(); }
   $$('[data-action="search"]').forEach((b) => b.addEventListener('click', openSearch));
   searchInput?.addEventListener('input', () => renderResults(searchInput.value));
   dialog?.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { e.preventDefault(); dialog.close(); return; } // one Esc closes (search inputs otherwise swallow the first to clear)
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey && document.activeElement === searchInput) { e.preventDefault(); return; } // the shortcut key is not a query character
     const links = $$('a', results); const i = links.indexOf(document.activeElement);
     if (e.key === 'ArrowDown') { e.preventDefault(); (links[i + 1] || links[0])?.focus(); }
     if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) searchInput.focus(); else links[i - 1].focus(); }

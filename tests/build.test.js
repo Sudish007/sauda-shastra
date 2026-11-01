@@ -4,9 +4,12 @@ import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildSite } from '../src/build/site.js';
+import { buildSearchIndex, buildSite } from '../src/build/site.js';
 import { SITE } from '../src/build/config.js';
 import { STRINGS } from '../src/build/strings.js';
+import { parseGuide, parsePlaybook } from '../src/build/content.js';
+import { TOOLS } from '../src/build/tools.js';
+import { FACTS, FACT_MAP, GUIDE, PLAYBOOK, makeContent } from './fixtures.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = await mkdtemp(path.join(tmpdir(), `${SITE.slug}-build-`));
@@ -146,6 +149,47 @@ test('search index entries are well-formed and relative; utility pages are alway
     assert.ok(d.text.includes(' · '), `${d.url}: text = value · label`);
   }
   for (const d of idx.filter((x) => x.kind === STRINGS.labels.course || x.kind === STRINGS.labels.book)) assert.match(d.url, /^learn\/#[^#]+$/, d.url);
+});
+
+test('search index: every kind (Guide, Section, Playbook, Tool, Term, Course, Book, Fact, Page) has its URL shape and every url is relative', () => {
+  const L = STRINGS.labels;
+  const tool = { id: 'charges', title: 'Charges calculator', summary: 'Costs per trade', factIds: [] };
+  TOOLS.push(tool); // the registry is empty until the tools step; stub one entry for this test only
+  try {
+    const entry = (id, title) => ({ id, title, by: 'Someone', type: 'course', cost: 'free', links: [{ url: 'https://example.org/' }], year: '2026', level: 'beginner', fits: ['options'], why: 'w', caveats: '' });
+    const c = makeContent({
+      guides: [parseGuide(GUIDE, 'sessions', FACT_MAP)],
+      playbooks: [parsePlaybook(PLAYBOOK, 'orb-15', FACT_MAP)],
+      glossary: [{ term: 'Open interest (OI)', def: 'Contracts outstanding.' }],
+      library: { courses: [entry('varsity-options', 'Varsity options module')], books: [entry('natenberg', 'Option Volatility and Pricing')], path: { intro: '', stages: [] } },
+      facts: FACTS,
+    });
+    const idx = buildSearchIndex(c);
+    const shape = {
+      [L.guide]: /^guides\/[a-z0-9-]+\/$/,
+      [L.section]: /^guides\/[a-z0-9-]+\/#[a-z0-9-]+$/,
+      [L.playbook]: /^playbooks\/[a-z0-9-]+\/$/,
+      [L.tool]: /^tools\/[a-z0-9-]+\/$/,
+      [L.term]: /^glossary\/#[a-z0-9-]+$/,
+      [L.course]: /^learn\/#[^#\s]+$/,
+      [L.book]: /^learn\/#[^#\s]+$/,
+      [L.fact]: /^facts\/#fact-[a-z0-9][a-z0-9-]*$/,
+      [L.page]: /^[a-z]+\/$/,
+    };
+    for (const kind of Object.keys(shape)) assert.ok(idx.some((d) => d.kind === kind), `index has a ${kind} entry`);
+    for (const d of idx) {
+      assert.ok(shape[d.kind], `unknown kind ${d.kind}`);
+      assert.match(d.url, shape[d.kind], `${d.kind}: ${d.url}`);
+      assert.ok(!/^(\/|[a-z]+:)/i.test(d.url), `${d.url} is relative`);
+      assert.ok(d.title && typeof d.text === 'string' && typeof d.keywords === 'string', JSON.stringify(d));
+    }
+    assert.deepEqual(idx.filter((d) => d.kind === L.tool).map((d) => d.url), ['tools/charges/']);
+    assert.equal(idx.find((d) => d.kind === L.term).url, 'glossary/#open-interest-oi');
+    assert.equal(idx.find((d) => d.kind === L.fact && d.url.endsWith('fo-nifty-lot')).text, '65 · Nifty 50 lot size');
+    assert.deepEqual(idx.filter((d) => d.kind === L.course || d.kind === L.book).map((d) => d.url), ['learn/#varsity-options', 'learn/#natenberg']);
+  } finally {
+    TOOLS.splice(TOOLS.indexOf(tool), 1);
+  }
 });
 
 test('the facts register page lists every fact with id anchor, group, N4 source title, since/verified dates and usage', async () => {

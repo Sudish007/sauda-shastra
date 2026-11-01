@@ -30,6 +30,7 @@ export const STRINGS = {
     dialogAria: 'Search the site',
     placeholder: 'Search guides, playbooks, terms, courses, books, facts…',
     close: 'Esc',
+    closeAria: 'Close search',
     hint: 'Type to search guides, playbooks, glossary terms, courses, books and facts. Use ↑ ↓ and Enter.',
     none: 'No matches. Try another word (e.g. “VWAP”, “margin”, “straddle”).',
   },
