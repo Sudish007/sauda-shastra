@@ -434,12 +434,19 @@ p { max-width: 80ch; }
 @media (min-width: 1024px) and (max-width: 1439.98px) { .tool-layout > .rates { grid-column: 1 / -1; } }
 @media (min-width: 1440px) { .tool-layout { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(300px, 0.8fr); } }
 .tool-layout > * { min-width: 0; }
-.form-grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
-@container (min-width: 440px) { .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@container (min-width: 900px) { .form-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.form-grid .span-2 { grid-column: 1 / -1; }
+/* The form is a fill grid like the card grids (M2): fields share a row at half width from 440 px of form width and a
+   quarter from 900 px; a short last row (an odd count, or a field hidden by the segment) widens to fill, never an empty cell. */
+.form-grid { display: flex; flex-wrap: wrap; --g: var(--space-4); gap: var(--g); }
+.form-grid > * { flex: 1 1 100%; min-width: 0; }
+@container (min-width: 440px) { .form-grid > * { flex-basis: calc((100% - var(--g)) / 2 - 1px); } }
+@container (min-width: 900px) { .form-grid > * { flex-basis: calc((100% - 3 * var(--g)) / 4 - 1px); } }
+.form-grid > .span-2 { flex-basis: 100%; }
+.form-grid > fieldset.field { border: 0; padding: 0; margin: 0; }
+.form-grid > fieldset.field > legend { padding: 0; margin-bottom: 0.45rem; }
 .field { display: grid; gap: 0.45rem; align-content: start; }
+.field[hidden] { display: none; }
 .field > label, .label { font-weight: 650; }
+.field > label.option { font-weight: 500; }
 .field .hint { color: var(--muted); font-size: var(--fs-small); }
 .field .hint.error { color: var(--down); font-weight: 600; }
 .input[aria-invalid="true"], .input-prefix:has([aria-invalid="true"]) { border-color: var(--down); border-width: 2px; }
@@ -452,6 +459,9 @@ p { max-width: 80ch; }
 .input-prefix span { padding: 0 0.75rem; color: var(--muted); border-right: 1px solid var(--line); align-self: stretch; display: flex; align-items: center; background: var(--surface-2); }
 .input-prefix input { border: 0; min-height: calc(var(--control) - 2px); padding: 0.55rem 0.85rem; background: transparent; color: var(--ink); width: 100%; font-variant-numeric: tabular-nums; outline: none; }
 .input-prefix:focus-within { border-color: var(--accent); outline: 2px solid var(--focus); outline-offset: 1px; }
+/* Percent fields carry the unit after the number */
+.input-suffix { grid-template-columns: 1fr auto; }
+.input-suffix span { border-right: 0; border-left: 1px solid var(--line); }
 .options { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tool-form { container-type: inline-size; }
 @container (min-width: 620px) { .options.seg-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -461,8 +471,13 @@ p { max-width: 80ch; }
 .option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-soft-ink); }
 .result { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.1rem, 1rem + 0.5vw, 1.75rem); display: grid; gap: var(--space-4); }
 .result h2 { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; letter-spacing: 0; }
-.result-big { font-family: var(--font-serif); font-size: clamp(2.2rem, 1.6rem + 1.4vw, 3.6rem); font-weight: 500; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.result-big { font-family: var(--font-serif); font-size: clamp(2.2rem, 1.6rem + 1.4vw, 3.6rem); font-weight: 500; line-height: 1.05; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.result-big .unit { font-family: var(--font-sans); font-size: 0.42em; font-weight: 500; color: var(--muted); }
 .result-sub { color: var(--muted); font-size: var(--fs-small); }
+.result-head { display: grid; gap: 0.35rem; }
+.result-body { display: grid; gap: var(--space-4); }
+.result .note { color: var(--ink-2); }
+.result .note span[aria-hidden] { color: var(--down); font-weight: 700; margin-right: 0.2em; }
 .lines { list-style: none; padding: 0; display: grid; gap: 0; font-variant-numeric: tabular-nums; }
 .lines li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--line); }
 .lines li span:first-child { color: var(--ink-2); }
@@ -472,7 +487,8 @@ p { max-width: 80ch; }
 .kpis > div { flex: 1 1 140px; min-width: 0; }
 .kpis div { background: var(--surface-2); border-radius: var(--radius-sm); padding: 0.75rem 0.9rem; display: grid; gap: 0.15rem; }
 .kpis dt { color: var(--muted); font-size: var(--fs-xs); }
-.kpis dd { font-weight: 650; font-variant-numeric: tabular-nums; font-size: 1.1em; }
+.kpis dd { font-weight: 650; font-variant-numeric: tabular-nums; font-size: 1.1em; overflow-wrap: anywhere; }
+.kpis dd small { font-size: var(--fs-xs); color: var(--muted); font-weight: 500; }
 details.disclosure { border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
 details.disclosure summary { cursor: pointer; min-height: var(--control); display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1rem; font-weight: 650; list-style: none; }
 details.disclosure summary::-webkit-details-marker { display: none; }

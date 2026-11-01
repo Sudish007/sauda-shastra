@@ -190,6 +190,83 @@ with sync_playwright() as p:
     shown = {k: int(page.inner_text(f'[data-count="{k}"]').strip().replace(",", "")) for k in ("guides", "playbooks", "tools", "terms", "sources")}
     check("home counts equal data/counts.json", all(shown[k] == counts.get(k) for k in shown), f"home {shown} vs {dict((k, counts.get(k)) for k in shown)}")
 
+    # Tools (design §6.9, §12; pack L worked examples): Example 1 on open, Example 2 on click, edit releases the chips and
+    # changes the result within 300 ms, Reset restores, invalid input shows a message and never NaN, segment flips the step,
+    # the IV solver example, no submit button, Tools nav item current. Expected figures come from the page's own template.
+    tool_urls = [d["url"] for d in search_idx if re.match(r"^tools/[^/#]+/$", d.get("url", ""))]
+    RESULTS_JS = "Object.fromEntries([...document.querySelectorAll('[data-result]')].map(el => [el.dataset.result, el.innerText.trim()]))"
+    def results_match(expect, where):
+        got = page.evaluate(RESULTS_JS)
+        wrong = [f"{k}: got {got.get(k)!r}, want {v!r}" for k, v in expect.items() if got.get(k) != v]
+        extra = [k for k in got if k not in expect]
+        check(f"{where}: every data-result equals the worked example ({len(expect)} figures)", not wrong and not extra, "; ".join(wrong + [f"unexpected key {k}" for k in extra])[:400])
+    if tool_urls:
+        check("eight tool pages are indexed", len(tool_urls) == 8, f"{len(tool_urls)}")
+    else:
+        skip("tool pages (needs the registry)")
+    for url in tool_urls:
+        tool = url.split("/")[1]
+        page.goto(BASE + url, wait_until="networkidle")
+        page.wait_for_timeout(150)
+        examples = page.evaluate("JSON.parse(document.getElementById('tool-examples').content.textContent)")
+        strings = page.evaluate("JSON.parse(document.getElementById('tool-strings').content.textContent)")
+        ex1, ex2 = examples[0], examples[1]
+        check(f"{tool}: no submit button", page.locator('main button[type="submit"], main input[type="submit"]').count() == 0)
+        check(f"{tool}: Tools nav item is current", (page.get_attribute('.site-nav a[aria-current="page"]', "href") or "").endswith("tools/"))
+        check(f"{tool}: Example 1 loaded on open (chip pressed, form data-example=1)", page.get_attribute('.chip[data-example="1"]', "aria-pressed") == "true" and page.get_attribute('.chip[data-example="2"]', "aria-pressed") == "false" and page.get_attribute("form.tool-form", "data-example") == "1")
+        results_match(ex1["expect"], f"{tool} example 1")
+        page.wait_for_timeout(500)
+        big = page.inner_text(".result-big").strip()
+        check(f"{tool}: status line announces the headline figure after the debounce", big.split()[0] in page.inner_text("#tool-announce"), page.inner_text("#tool-announce"))
+        page.click('.chip[data-example="2"]')
+        page.wait_for_timeout(150)
+        check(f"{tool}: Example 2 chip pressed, 1 released", page.get_attribute('.chip[data-example="2"]', "aria-pressed") == "true" and page.get_attribute('.chip[data-example="1"]', "aria-pressed") == "false" and page.get_attribute("form.tool-form", "data-example") == "2")
+        results_match(ex2["expect"], f"{tool} example 2")
+        check(f"{tool}: reset button names example 2", "2" in page.inner_text('[data-action="reset-example"]'))
+        if tool == "black-scholes-greeks":
+            iv = page.inner_text('.result-big [data-result="iv"]').strip()
+            check("black-scholes: IV mode example 2 shows 15.17%", iv.startswith("15.17") and "%" in iv, iv)
+        # Edit the first visible numeric field by one step-compatible unit: chips release, the result changes within 300 ms
+        before = page.evaluate(RESULTS_JS)
+        sel = page.evaluate("() => { const i = [...document.querySelectorAll('form.tool-form [data-field]:not([hidden]) input[type=number]')].find(x => x.offsetParent !== null); return i ? '#' + i.id : null; }")
+        check(f"{tool}: a visible numeric field exists to edit", bool(sel), str(sel))
+        if sel:
+            new_value = str(float(page.input_value(sel) or "0") + 1).rstrip("0").rstrip(".")
+            page.fill(sel, new_value)
+            try:
+                page.wait_for_function("prev => { const now = " + RESULTS_JS + "; return Object.keys(now).length !== Object.keys(prev).length || Object.keys(now).some(k => now[k] !== prev[k]); }", arg=before, timeout=300)
+                changed = True
+            except Exception:  # noqa: BLE001
+                changed = False
+            check(f"{tool}: editing {sel} changes the result within 300 ms", changed)
+            check(f"{tool}: editing releases both example chips", page.get_attribute('.chip[data-example="1"]', "aria-pressed") == "false" and page.get_attribute('.chip[data-example="2"]', "aria-pressed") == "false" and page.get_attribute("form.tool-form", "data-example") == "")
+            check(f"{tool}: status says edited", "Reset" in page.inner_text("#form-status") or "edited" in page.inner_text("#form-status").lower(), page.inner_text("#form-status"))
+            page.click('[data-action="reset-example"]')
+            page.wait_for_timeout(150)
+            results_match(ex2["expect"], f"{tool} reset to example 2")
+            check(f"{tool}: reset re-presses example 2", page.get_attribute('.chip[data-example="2"]', "aria-pressed") == "true")
+            # Invalid input: the field is marked with a message, the result shows a dash, nothing renders NaN
+            page.fill(sel, "-5")
+            page.wait_for_timeout(500)
+            check(f"{tool}: invalid input marks the field (aria-invalid + .hint.error with a message)", page.get_attribute(sel, "aria-invalid") == "true" and page.locator('[data-field]:not([hidden]) .hint.error').count() >= 1 and len(page.inner_text('[data-field]:not([hidden]) .hint.error').strip()) > 3, page.inner_text('[data-field]:not([hidden]) .hint.error') if page.locator('[data-field]:not([hidden]) .hint.error').count() else "no error hint")
+            check(f"{tool}: invalid input shows a dash, never NaN or Infinity", page.inner_text(".result-big").strip() == "—" and not re.search(r"NaN|Infinity", page.inner_text("main")))
+            check(f"{tool}: status line asks to fix the fields", page.inner_text("#tool-announce").strip() == strings["C"]["fixFields"], page.inner_text("#tool-announce"))
+            page.click('[data-action="reset-example"]')
+            page.wait_for_timeout(150)
+            check(f"{tool}: reset clears the error", page.locator('[aria-invalid="true"]').count() == 0 and page.locator('.hint.error').count() == 0)
+        if tool == "charges":
+            page.click('.chip[data-example="1"]'); page.wait_for_timeout(100)
+            check("charges: equity segment → price step 0.01", page.get_attribute("#buy", "step") == "0.01")
+            page.check('input[name="segment"][value="futures"]'); page.wait_for_timeout(150)
+            check("charges: futures segment → price step flips to the F&O tick", page.get_attribute("#buy", "step") == "0.05", page.get_attribute("#buy", "step"))
+            check("charges: futures segment shows lots and lot size, hides quantity", not page.evaluate("document.querySelector('[data-field=\"lots\"]').hidden") and not page.evaluate("document.querySelector('[data-field=\"lotSize\"]').hidden") and page.evaluate("document.querySelector('[data-field=\"qty\"]').hidden"))
+            check("charges: segment switch released the example chips", page.get_attribute("form.tool-form", "data-example") == "")
+            page.check('input[name="segment"][value="equity-intraday"]'); page.wait_for_timeout(150)
+            check("charges: back to equity → step 0.01", page.get_attribute("#buy", "step") == "0.01")
+            check("charges: brokerage model option texts ≤ 44 chars and the select does not overflow", page.evaluate("[...document.querySelectorAll('select#model option')].every(o => o.textContent.length <= 44) && document.querySelector('select#model').scrollWidth <= document.querySelector('select#model').clientWidth + 1"))
+    check("no console/page errors on the tool pages", not errors, "; ".join(errors)[:300])
+    errors.clear()
+
     # Mobile menu
     m = b.new_context(viewport={"width": 390, "height": 844})
     mp = m.new_page(); mp.goto(BASE, wait_until="networkidle")

@@ -47,6 +47,8 @@ export async function buildSite({ root, outDir, basePath = SITE.basePath }) {
   await rm(outDir, { recursive: true, force: true });
   await mkdir(outDir, { recursive: true });
   await cp(siteDir, outDir, { recursive: true });
+  // The calculator modules are shared by the build, node:test and the browser (site/tool-ui.js imports ./tools/*.js).
+  await cp(path.join(root, 'src', 'tools'), path.join(outDir, 'tools'), { recursive: true });
   await mkdir(path.join(outDir, 'data'), { recursive: true });
 
   const written = [];
@@ -58,6 +60,7 @@ export async function buildSite({ root, outDir, basePath = SITE.basePath }) {
   await emit('playbooks/index.html', pages.playbooksIndexPage(c));
   for (const p of c.playbooks) await emit(`playbooks/${p.slug}/index.html`, pages.playbookPage(p, c));
   await emit('tools/index.html', pages.toolsIndexPage(c));
+  for (const t of pages.TOOLS) await emit(`tools/${t.id}/index.html`, pages.toolPage(t, c));
   await emit('learn/index.html', pages.learnPage(c));
   await emit('glossary/index.html', pages.glossaryPage(c));
   await emit('calendar/index.html', pages.calendarPage(c));

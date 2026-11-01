@@ -1,12 +1,15 @@
 // Page renderers. Each returns a full document via layout(). All URLs relative; no UI string literals here.
 // Markup follows the approved design mocks (design.md §6); class names come from site/styles.css.
-import { escapeHtml as esc, renderInline, factSource } from './markdown.js';
+import { escapeHtml as esc, renderInline, factSource, factCitation, evidenceTagHtml } from './markdown.js';
 import { SECTIONS, PHASE2_SECTIONS, HERO_FACT_IDS, FACT_GROUPS, factGroup } from './content.js';
-import { TOOLS, byTool } from './tools.js';
+import { TOOLS, byTool, fieldShown } from './tools.js';
 import { SITE } from './config.js';
 import { STRINGS as S, fill } from './strings.js';
 import { formatDate, isFuture, todayIST } from './dates.js';
 import { layout, rel, timeTag, breadcrumbs, sourcesList, factsBox, disclaimer, levelTag, evidenceTag, ICONS } from './templates.js';
+import { rateMap, num as rateNum, parts as rateParts } from '../tools/rates.js';
+import { run } from '../tools/calc.js';
+import { makeCtx, resultHead, resultBody, announce } from '../tools/view.js';
 
 export { TOOLS } from './tools.js';
 
@@ -254,16 +257,204 @@ export function playbookPage(p, c) {
   return layout({ title: p.title, description: p.summary, path: `playbooks/${p.slug}/index.html`, depth: 2, body, current: 'playbooks/', article: { headline: p.title, datePublished: p.updated, dateModified: p.updated, section: S.playbooks.eyebrow } });
 }
 
-/* ---------- Tools (index shell; the tools step fills the registry and adds toolPage) ---------- */
+/* ---------- Tools (design §6.9; registry in tools.js, maths in src/tools/calc.js, markup shared with tool-ui.js via view.js) ---------- */
+
+const TOOLS_LABEL = () => S.nav.find((n) => n.href === 'tools/')?.label || S.tools.eyebrow;
 
 export function toolsIndexPage(c) {
   const r = rel(1);
   const body = `<section class="section"><div class="container">
-    ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: S.nav.find((n) => n.href === 'tools/')?.label || S.tools.eyebrow }])}
+    ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: TOOLS_LABEL() }])}
     <div class="section-head"><div><p class="eyebrow">${esc(S.tools.eyebrow)}</p><h1>${esc(S.tools.indexTitle)}</h1></div><p class="lede">${esc(S.tools.indexLede)}</p></div>
-    ${TOOLS.length ? `<div class="grid grid-fill-4">${TOOLS.map((t) => `<a class="card card-link" href="${r}tools/${esc(t.id)}/"><h3>${esc(t.title)}</h3><p class="muted">${esc(t.summary || '')}</p></a>`).join('')}</div>` : empty(S.tools.empty)}
+    ${TOOLS.length ? `<div class="grid grid-fill-4">${TOOLS.map((t) => `<a class="card card-link" href="${r}tools/${esc(t.id)}/"><div class="card-tags"><span class="tag">${esc(S.tools.eyebrow)}</span></div><h3>${esc(t.title)}</h3><p class="muted">${esc(t.summary || '')}</p></a>`).join('')}</div>` : empty(S.tools.empty)}
   </div></section>`;
   return layout({ title: S.tools.indexTitle, description: S.tools.indexLede, path: 'tools/index.html', depth: 1, body, current: 'tools/' });
+}
+
+/** The shared tool strings (every scalar under S.tools; the per-tool objects are passed separately). */
+const toolCommonStrings = () => Object.fromEntries(Object.entries(S.tools).filter(([, v]) => typeof v === 'string'));
+
+/**
+ * The {placeholder} values every fact-dependent tool string may use (design §10): register ids render as plain .fact spans,
+ * the rest carry their HTML and plain-text forms. Built once per page from the whole register so copy never types a figure.
+ */
+export function toolVars(c, r) {
+  const f = (id) => c.byFact[id];
+  const vars = {
+    lot: { fact: 'fo-nifty-lot' }, sensexLot: { fact: 'fo-sensex-lot' }, freeze: { fact: 'fo-freeze-qty-nifty' }, elm: { fact: 'fo-expiry-day-elm-addon' },
+    foTick: { fact: 'opt-tick-size-options' }, dp: { fact: 'chg-dp-example-broker' }, repo: { fact: 'mac-repo-rate' },
+    std: { fact: 'tax-std-deduction-new-regime' }, rebate: { fact: 'tax-rebate-156' }, rebateLimit: { fact: 'tax-rebate-156-income-limit' }, cess: { fact: 'tax-cess-rate' },
+    specYears: { fact: 'tax-spec-loss-carry-forward' }, nonspecYears: { fact: 'tax-nonspec-loss-carry-forward' },
+    threshold: { fact: 'glb-tcs-threshold' }, tcsRate: { fact: 'glb-tcs-rate' }, lrs: { fact: 'glb-lrs-limit' }, voo: { fact: 'glb-voo-expense-ratio' },
+    dtaa: { fact: 'glb-us-dividend-withholding-dtaa' }, defaultWh: { fact: 'glb-us-dividend-withholding-default' }, terDirect: { fact: 'inv-nifty50-ter-direct' },
+    register: { html: `<a href="${r}facts/">${esc(S.labels.factsRegister)}</a>`, text: S.labels.factsRegister },
+    ratesTitle: { text: S.tools.ratesTitle },
+    lore: { html: evidenceTagHtml('LORE'), text: S.labels.evidenceLabels.LORE },
+    mechanism: { html: evidenceTagHtml('MECHANISM'), text: S.labels.evidenceLabels.MECHANISM },
+  };
+  if (f('mac-repo-rate')) vars.repoDate = { html: timeTag(f('mac-repo-rate').verified), text: formatDate(f('mac-repo-rate').verified) };
+  // Broker-example brokerage figures, as written in the register ("₹20 or 0.03%, whichever is lower" → 0.03% and ₹20; "₹20 per order" → ₹20)
+  const pctCap = f('chg-brokerage-example-intraday-futures') ? rateParts(f('chg-brokerage-example-intraday-futures').value) : [];
+  const flat = f('chg-brokerage-example-options') ? rateParts(f('chg-brokerage-example-options').value) : [];
+  const raw = (p) => ({ html: esc(p ? p.raw : ''), text: p ? p.raw : '' });
+  vars.pct = raw(pctCap.find((p) => p.raw.endsWith('%')));
+  vars.cap = raw(pctCap.find((p) => p.currency === '₹'));
+  vars.flat = raw(flat.find((p) => p.currency === '₹'));
+  for (const [k, v] of Object.entries(vars)) if (v.fact && !f(v.fact)) delete vars[k];
+  return vars;
+}
+
+/** Initial form values for a tool: field defaults (register or literal) overlaid with a worked example's inputs. */
+export function toolValues(tool, rates, example) {
+  const values = {};
+  for (const f of tool.fields) {
+    if (f.factDefault && rates[f.factDefault]) values[f.key] = (rates[f.factDefault].num ?? 0) * (f.factScale || 1);
+    else if (f.default !== undefined) values[f.key] = f.default;
+    else if (f.type === 'segment' || f.type === 'select') values[f.key] = f.options[0];
+    else if (f.type === 'check') values[f.key] = false;
+    else values[f.key] = '';
+  }
+  return { ...values, ...(example ? example.inputs : {}) };
+}
+
+/** The resolved inputs calc.js receives: the brokerage model + segment keys as-is, numbers as numbers, blanks for optional fields. */
+function toolInputs(tool, values) {
+  const inputs = {};
+  for (const f of tool.fields) {
+    if (f.type === 'static') continue;
+    if (!fieldShown(f, values)) continue;
+    inputs[f.key] = values[f.key];
+  }
+  return inputs;
+}
+
+function fieldHtml(tool, f, values, ctx, foStep) {
+  const F = ctx.T.fields?.[f.key] || {};
+  const label = ctx.html(F.label || f.key);
+  const hintText = F.hint || (f.tick && f.key === 'buy' ? S.tools.tickHint : '');
+  const hint = hintText ? `<span class="hint" id="${esc(f.key)}-hint">${ctx.html(hintText)}</span>` : '';
+  const shown = fieldShown(f, values);
+  const cls = `field${f.span ? ' span-2' : ''}`;
+  const show = f.show ? ` data-show="${esc(JSON.stringify(f.show))}"` : '';
+  const wrap = (inner, tag = 'div') => `<${tag} class="${cls}" data-field="${esc(f.key)}"${show}${shown ? '' : ' hidden'}>${inner}</${tag}>`;
+  const v = values[f.key];
+  if (f.type === 'segment') {
+    const tiles = f.options.map((o) => `<label class="option"><input type="radio" name="${esc(f.key)}" value="${esc(o)}"${String(v) === o ? ' checked' : ''}> ${ctx.html(F.options?.[o] ?? o)}</label>`).join('');
+    return wrap(`<legend class="label">${label}</legend><div class="options seg-${f.options.length}" role="radiogroup">${tiles}</div>${hint}`, 'fieldset');
+  }
+  if (f.type === 'static') {
+    const text = f.key === 'exchange' ? S.tools.exchangeStatic : '';
+    const h = f.key === 'exchange' ? `<span class="hint" id="${esc(f.key)}-hint">${ctx.html(S.tools.exchangeHint)}</span>` : hint;
+    return wrap(`<span class="label" id="${esc(f.key)}-label">${label}</span><p class="static" aria-labelledby="${esc(f.key)}-label">${esc(text)}</p>${h}`);
+  }
+  if (f.type === 'select') {
+    const opts = f.options.map((o) => {
+      const text = F.options?.[o] ?? o;
+      // Options whose text carries register figures (the broker-example brokerage models) are marked as fact renderings
+      const factId = f.key === 'model' && o === 'pct-cap' ? 'chg-brokerage-example-intraday-futures' : f.key === 'model' && o === 'flat' ? 'chg-brokerage-example-options' : null;
+      return `<option value="${esc(o)}"${String(v) === o ? ' selected' : ''}${factId ? ` class="fact" data-fact="${factId}"` : ''}>${ctx.html(text)}</option>`;
+    }).join('');
+    return wrap(`<label for="${esc(f.key)}">${label}</label><select class="input" id="${esc(f.key)}" name="${esc(f.key)}"${hint ? ` aria-describedby="${esc(f.key)}-hint"` : ''}>${opts}</select>${hint}`);
+  }
+  if (f.type === 'check') {
+    return wrap(`<label class="option"><input type="checkbox" id="${esc(f.key)}" name="${esc(f.key)}"${v === true || v === 'true' ? ' checked' : ''}> ${label}</label>${hint}`);
+  }
+  // numeric inputs: money (₹ prefix), percent (% suffix), int, number
+  const step = f.tick ? (foStep.fo ? foStep.foStep : '0.01') : String(f.step ?? 1);
+  const attrs = [
+    `id="${esc(f.key)}"`, `name="${esc(f.key)}"`, 'type="number"', `inputmode="${f.type === 'int' ? 'numeric' : 'decimal'}"`,
+    f.min !== undefined ? `min="${f.min}"` : '', f.max !== undefined ? `max="${f.max}"` : '', `step="${step}"`,
+    `value="${esc(v === undefined || v === null ? '' : v)}"`,
+    f.optional ? 'data-optional="true"' : 'required',
+    f.tick ? `data-step-equity="0.01" data-step-fo="${esc(foStep.foStep)}"` : '',
+    hint ? `aria-describedby="${esc(f.key)}-hint"` : '',
+  ].filter(Boolean).join(' ');
+  const optionalMark = f.optional ? ` <span class="muted small">(${esc(S.tools.optional)})</span>` : '';
+  const control = f.type === 'money'
+    ? `<div class="input-prefix"><span>₹</span><input ${attrs}></div>`
+    : f.type === 'percent'
+      ? `<div class="input-prefix input-suffix"><input ${attrs}><span>%</span></div>`
+      : `<input class="input num" ${attrs}>`;
+  return wrap(`<label for="${esc(f.key)}">${label}${optionalMark}</label>${control}${hint}`);
+}
+
+function ratesAside(tool, c, ctx, r, today) {
+  const T = ctx.T;
+  const facts = tool.factIds.map((id) => c.byFact[id]).filter(Boolean);
+  const isBroker = (id) => /-example-/.test(id);
+  const items = facts.map((f) => `<li id="rate-${esc(f.id)}"><span>${esc(f.label)}</span><b class="num">${esc(f.value)}</b><span class="fd">${factCitation(f, { today, link: true })}${isBroker(f.id) ? ` · ${esc(S.tools.brokerExample)} · ${esc(S.tools.editable)}` : ''}</span></li>`).join('');
+  const notes = (T.notes || []).map((n) => `<p class="small">${ctx.html(n)}</p>`).join('');
+  const guide = tool.guide && c.byGuide[tool.guide] ? ` ${ctx.html(S.tools.readMore, { guide: `<a href="${r}guides/${esc(tool.guide)}/">${esc(c.byGuide[tool.guide].title)}</a>` })}` : '';
+  return `<aside class="rates" aria-labelledby="rates-title">
+        <h2 id="rates-title">${esc(facts.length ? S.tools.ratesTitle : S.tools.notesTitle)}</h2>
+        ${facts.length ? `<p class="rates-note">${ctx.html(S.tools.ratesNote)}</p><ul>${items}</ul>` : ''}
+        ${notes}
+        <hr>
+        <p class="small muted">${esc(S.tools.rounding)}${guide}</p>
+        ${disclaimer()}
+      </aside>`;
+}
+
+export function toolPage(tool, c, { today = todayIST() } = {}) {
+  const r = rel(2);
+  const T = S.tools[tool.id];
+  const rates = rateMap(c.byFact, tool.factIds);
+  const ctx = makeCtx({ T, C: toolCommonStrings(), rates, vars: toolVars(c, r) });
+  const example = tool.examples[0];
+  const values = toolValues(tool, rates, example);
+  const result = run(tool.id, toolInputs(tool, values), rates);
+  const tickFact = c.byFact['opt-tick-size-options'];
+  const foStep = { fo: values.segment === 'futures' || values.segment === 'options', foStep: tickFact ? String(rateNum(tickFact.value)) : '0.05' };
+  const fields = tool.fields.map((f) => fieldHtml(tool, f, values, ctx, foStep)).join('\n          ');
+  // Example counters render inside .num (a rendered numeral, like a date in <time>), so "Example 1" is never read as a typed fact
+  const numSpan = (n) => `<span class="num">${n}</span>`;
+  const chips = tool.examples.map((e, i) => `<button class="chip" type="button" aria-pressed="${i === 0 ? 'true' : 'false'}" data-example="${i + 1}">${fillHtml(S.tools.exampleN, { n: numSpan(i + 1), label: esc(e.label) })}</button>`).join('');
+  const mode = values.mode;
+  const body = `<section class="section">
+  <div class="container">
+    ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { href: 'tools/', label: TOOLS_LABEL() }, { label: tool.title }])}
+    <div class="section-head">
+      <div><p class="eyebrow">${esc(S.tools.eyebrow)}</p><h1>${esc(tool.title)}</h1></div>
+      <p class="lede">${ctx.html(tool.factIds.length ? S.tools.lede : S.tools.ledeNoRates)}</p>
+    </div>
+    <div class="tool-layout">
+      <form class="card stack tool-form" aria-labelledby="form-title" data-tool="${esc(tool.id)}" data-example="1" novalidate>
+        <h2 class="h3" id="form-title">${ctx.html(T.formTitle || S.tools.formTitle)}</h2>
+        <div class="form-grid">
+          ${fields}
+        </div>
+        <div>
+          <p class="label small">${esc(S.tools.examples)}</p>
+          <div class="examples">${chips}</div>
+        </div>
+        <div class="cluster">
+          <button class="btn btn-secondary" type="button" data-action="reset-example">${fillHtml(S.tools.reset, { n: numSpan(1) })}</button>
+          <span class="muted small" id="form-status">${fillHtml(S.tools.exampleLoaded, { n: numSpan(1) })}</span>
+        </div>
+      </form>
+      <div class="stack">
+        <section class="result" aria-labelledby="res-title">
+          <div class="result-head" data-result-head>${resultHead(result, ctx, { mode })}</div>
+          <div class="result-body" data-result-body>${resultBody(result, ctx)}</div>
+          <p class="visually-hidden" role="status" id="tool-announce">${esc(announce(result, ctx, { mode }))}</p>
+        </section>
+        <details class="disclosure" open>
+          <summary>${esc(S.tools.formula)}</summary>
+          <div class="body">
+            <pre class="formula">${esc(result.formulaText)}</pre>
+            <p class="small muted">${tool.factIds.length ? `${ctx.html(S.tools.formulaNote)} ` : ''}${esc(S.tools.rounding)}</p>
+          </div>
+        </details>
+      </div>
+      ${ratesAside(tool, c, ctx, r, today)}
+    </div>
+    <template id="tool-strings" data-json>${esc(JSON.stringify({ C: toolCommonStrings(), T, vars: toolVars(c, r) }))}</template>
+    <template id="tool-rates" data-json>${esc(JSON.stringify(rates))}</template>
+    <template id="tool-examples" data-json>${esc(JSON.stringify(tool.examples.map((e, i) => ({ n: i + 1, label: e.label, inputs: toolValues(tool, rates, e), expect: e.expect }))))}</template>
+  </div>
+</section>
+<script type="module" src="${r}tool-ui.js"></script>`;
+  return layout({ title: tool.title, description: tool.summary, path: `tools/${tool.id}/index.html`, depth: 2, body, current: 'tools/', schema: 'WebPage' });
 }
 
 /* ---------- Learn (library; rewritten by the Learn-page step) ---------- */

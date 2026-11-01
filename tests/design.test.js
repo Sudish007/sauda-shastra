@@ -52,10 +52,10 @@ export function htmlToText(html, skip = () => false) {
   return decode(text).replace(/\s+/g, ' ').trim();
 }
 
-/** The §6.6 exclusion list: .fact, .facts-box, .rates, pre.formula, nav, script, style, template, time, .time, td.num. */
+/** The §6.6 exclusion list: .fact, .facts-box, .rates, pre.formula, nav, script, style, template, time, .time and .num
+ *  (rendered figures — table cells, calculator results, example counters — are data, like dates in <time>). */
 const EXCLUDE = (tag, classes) => ['nav', 'script', 'style', 'template', 'time'].includes(tag)
-  || classes.some((c) => ['fact', 'facts-box', 'rates', 'time', 'formula'].includes(c))
-  || (tag === 'td' && classes.includes('num'));
+  || classes.some((c) => ['fact', 'facts-box', 'rates', 'time', 'formula', 'num'].includes(c));
 const mainText = (html) => htmlToText(/<main id="main">([\s\S]*?)<\/main>/.exec(html)?.[1] || '', EXCLUDE);
 
 const PUNCT = /^[()[\]{}.,;:“”"'…]+|[()[\]{}.,;:“”"'…]+$/g;
@@ -147,21 +147,17 @@ test('a playbook with <text> inside the schematic fails the build; the page show
 });
 
 test('guide rail order is Tools → Related → facts box (tools from the registry named in front matter)', () => {
-  const tool = { id: 'charges', title: 'Charges calculator', summary: 'Costs per trade', factIds: ['chg-stt-options-sell'] };
-  TOOLS.push(tool); // the registry is empty until the tools step; stub one entry for this test only
-  try {
-    const other = parseGuide(GUIDE.replace('title: Market sessions in IST', 'title: Other guide'), 'other', FACT_MAP);
-    const g = parseGuide(GUIDE.replace('related: []', 'related: [other]\ntools: [charges]'), 'sessions', FACT_MAP);
-    const c = makeContent({ guides: [g, other], facts: FACTS });
-    validate(c);
-    const html = guidePage(g, c);
-    const rail = /<aside class="rail">([\s\S]*?)<\/aside>/.exec(html)[1];
-    assert.match(rail, /^\s*<div class="card tools-card"><h2>Tools<\/h2><ul><li><a href="\.\.\/\.\.\/tools\/charges\/">Charges calculator<\/a><small>Costs per trade<\/small><\/li><\/ul><\/div>\s*<div class="card related-card">[\s\S]*<div class="card facts-box">/);
-    assert.match(html, /<p class="lede">What happens between the open and the close/);
-    assert.match(factsPage(c), /<tr id="fact-chg-stt-options-sell"[\s\S]*?<a href="\.\.\/guides\/sessions\/">Market sessions in IST<\/a>, <a href="\.\.\/guides\/other\/">Other guide<\/a>, <a href="\.\.\/tools\/charges\/">Charges calculator<\/a><\/td>/, 'Used on lists pages and tools');
-  } finally {
-    TOOLS.splice(TOOLS.indexOf(tool), 1);
-  }
+  const tool = TOOLS.find((t) => t.id === 'charges');
+  const other = parseGuide(GUIDE.replace('title: Market sessions in IST', 'title: Other guide'), 'other', FACT_MAP);
+  const g = parseGuide(GUIDE.replace('related: []', 'related: [other]\ntools: [charges]'), 'sessions', FACT_MAP);
+  const c = makeContent({ guides: [g, other], facts: FACTS });
+  validate(c);
+  const html = guidePage(g, c);
+  const rail = /<aside class="rail">([\s\S]*?)<\/aside>/.exec(html)[1];
+  const re = (s) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+  assert.match(rail, new RegExp(`^\\s*<div class="card tools-card"><h2>Tools</h2><ul><li><a href="\\.\\./\\.\\./tools/charges/">${re(tool.title)}</a><small>${re(tool.summary.replace(/&/g, '&amp;'))}</small></li></ul></div>\\s*<div class="card related-card">[\\s\\S]*<div class="card facts-box">`));
+  assert.match(html, /<p class="lede">What happens between the open and the close/);
+  assert.match(factsPage(c), new RegExp(`<tr id="fact-chg-stt-options-sell"[\\s\\S]*?<a href="\\.\\./guides/sessions/">Market sessions in IST</a>, <a href="\\.\\./guides/other/">Other guide</a>, <a href="\\.\\./tools/charges/">${re(tool.title)}</a></td>`), 'Used on lists pages and tools');
 });
 
 /* ---------- CSS, favicon, vocabulary ---------- */

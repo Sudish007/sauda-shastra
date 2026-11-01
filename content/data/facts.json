@@ -928,6 +928,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "tax-rebate-156-income-limit",
+    "label": "Total income up to which the new-regime rebate applies in full; marginal relief just above it",
+    "value": "₹12,00,000",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 156(2) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "tax-return-due-date-audit",
     "label": "Return due date, audited persons",
     "value": "31 October",
