@@ -44,8 +44,8 @@ export function evidenceTag(label) {
   return evidenceTagHtml(label);
 }
 
-function seoHead({ fullTitle, description, canonical, type, jsonLd }) {
-  return `<link rel="canonical" href="${esc(canonical)}">
+function seoHead({ fullTitle, description, canonical, type, jsonLd, robots }) {
+  return `${robots ? `<meta name="robots" content="${esc(robots)}">\n` : ''}<link rel="canonical" href="${esc(canonical)}">
 <meta property="og:site_name" content="${esc(SITE.name)}">
 <meta property="og:title" content="${esc(fullTitle)}">
 <meta property="og:description" content="${esc(description)}">
@@ -68,16 +68,21 @@ function navLinks(r, current) {
  * Shared shell. `path` is the output path (e.g. guides/x/index.html); `depth` the folder depth for relative URLs;
  * `current` the nav href this page belongs to ('' when it has no nav entry, e.g. facts/).
  * `article` (optional) = { headline, datePublished, dateModified, section } for JSON-LD Article.
+ * `schema` (optional) = 'WebPage' for tool pages and the facts page (design §13: no inflated schema); default WebSite.
+ * `robots` (optional) = e.g. 'noindex' (the 404 page).
  */
-export function layout({ title, description, path, depth = 0, body, current = '', extraHead = '', bodyClass = '', article = null }) {
+export function layout({ title, description, path, depth = 0, body, current = '', extraHead = '', bodyClass = '', article = null, schema = null, robots = '' }) {
   const r = rel(depth);
   const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
   const desc = description || SITE.description;
   const canonical = SITE.liveUrl + path.replace(/index\.html$/, '');
   const links = navLinks(r, current);
+  const org = { '@type': 'Organization', name: SITE.name, url: SITE.liveUrl };
   const jsonLd = article
-    ? { '@context': 'https://schema.org', '@type': 'Article', headline: article.headline, description: desc, datePublished: article.datePublished, dateModified: article.dateModified, articleSection: article.section, inLanguage: SITE.lang, isAccessibleForFree: true, license: 'https://creativecommons.org/licenses/by/4.0/', author: { '@type': 'Organization', name: SITE.name, url: SITE.liveUrl }, publisher: { '@type': 'Organization', name: SITE.name, url: SITE.liveUrl }, mainEntityOfPage: canonical }
-    : { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.liveUrl, description: SITE.description, inLanguage: SITE.lang };
+    ? { '@context': 'https://schema.org', '@type': 'Article', headline: article.headline, description: desc, datePublished: article.datePublished, dateModified: article.dateModified, articleSection: article.section, inLanguage: SITE.lang, isAccessibleForFree: true, license: 'https://creativecommons.org/licenses/by/4.0/', author: org, publisher: org, mainEntityOfPage: canonical }
+    : schema === 'WebPage'
+      ? { '@context': 'https://schema.org', '@type': 'WebPage', name: fullTitle, description: desc, url: canonical, inLanguage: SITE.lang, isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.liveUrl } }
+      : { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.liveUrl, description: SITE.description, inLanguage: SITE.lang };
   const key = `${SITE.storagePrefix}:theme`;
   return `<!doctype html>
 <html lang="${SITE.lang}">
@@ -88,7 +93,7 @@ export function layout({ title, description, path, depth = 0, body, current = ''
 <meta name="description" content="${esc(desc)}">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="${THEME_COLOR.light}">
-${seoHead({ fullTitle, description: desc, canonical, type: article ? 'article' : 'website', jsonLd })}
+${seoHead({ fullTitle, description: desc, canonical, type: article ? 'article' : 'website', jsonLd, robots })}
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${r}fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${r}fonts/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>

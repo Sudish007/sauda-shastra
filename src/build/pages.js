@@ -458,11 +458,11 @@ export function factsPage(c, { today = todayIST() } = {}) {
     <div class="table-wrap"><table class="facts-table"><thead><tr><th>${esc(S.facts.columns.fact)}</th><th>${esc(S.facts.columns.value)}</th><th>${esc(S.facts.columns.source)}</th><th class="num">${esc(S.facts.columns.since)}</th><th class="num">${esc(S.facts.columns.verified)}</th><th>${esc(S.facts.columns.usedOn)}</th></tr></thead><tbody>${c.facts.map(row).join('')}</tbody></table></div>
     <p class="small muted" style="margin-top:var(--space-5)">${esc(S.facts.future)} ${esc(S.facts.corrections)}</p>` : empty(S.facts.empty)}
   </div></section>`;
-  return layout({ title: S.facts.eyebrow, description: S.facts.lede, path: 'facts/index.html', depth: 1, body, current: '' });
+  return layout({ title: S.facts.eyebrow, description: S.facts.lede, path: 'facts/index.html', depth: 1, body, current: '', schema: 'WebPage' });
 }
 
 export function notFoundPage() {
   const r = rel(0);
   const body = `<section class="section"><div class="container not-found"><p class="eyebrow">${esc(S.notFound.eyebrow)}</p><h1>${esc(S.notFound.title)}</h1><p class="lede">${esc(S.notFound.lede)}</p><div class="cluster"><a class="btn btn-primary" href="${r}">${esc(S.notFound.home)}</a><a class="btn btn-secondary" href="${r}guides/">${esc(S.notFound.guides)}</a></div></div></section>`;
-  return layout({ title: S.notFound.title, description: fill(S.notFound.description, { name: SITE.name }), path: '404.html', depth: 0, body, current: '' });
+  return layout({ title: S.notFound.title, description: fill(S.notFound.description, { name: SITE.name }), path: '404.html', depth: 0, body, current: '', robots: 'noindex' });
 }

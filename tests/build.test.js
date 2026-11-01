@@ -74,10 +74,28 @@ test('every page has exactly one h1, a title, a description, SEO meta, the share
     assert.equal(h1s.length, 1, `${file}: ${h1s.length} h1`);
     assert.match(html, /<title>[^<]{5,}<\/title>/, file);
     assert.match(html, /<meta name="description" content="[^"]{20,}"/, file);
-    assert.match(html, new RegExp(`<link rel="canonical" href="${SITE.liveUrl.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}`), file);
-    assert.match(html, /<meta property="og:title"/, file);
-    assert.match(html, /<meta name="twitter:card"/, file);
-    assert.match(html, /<script type="application\/ld\+json">/, file);
+    const canonicals = html.match(/<link rel="canonical" href="([^"]+)"/g) || [];
+    assert.equal(canonicals.length, 1, `${file}: ${canonicals.length} canonical links`);
+    const canonical = /<link rel="canonical" href="([^"]+)"/.exec(html)[1];
+    assert.ok(canonical.startsWith(SITE.liveUrl) && !canonical.includes('index.html'), `${file}: canonical ${canonical}`);
+    for (const p of ['site_name', 'title', 'description', 'type', 'url', 'locale']) assert.match(html, new RegExp(`<meta property="og:${p}" content="[^"]+"`), `${file}: og:${p}`);
+    assert.match(html, /<meta property="og:locale" content="en_IN">/, file);
+    assert.match(html, new RegExp(`<meta property="og:url" content="${canonical.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}">`), `${file}: og:url = canonical`);
+    assert.match(html, /<meta name="twitter:card" content="summary">/, file);
+    const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    assert.equal(ld.length, 1, `${file}: ${ld.length} JSON-LD scripts`);
+    const kind = /^(guides|playbooks)\/[^/]+\/index\.html$/.test(file) ? 'Article' : /^(tools\/[^/]+|facts)\/index\.html$/.test(file) ? 'WebPage' : 'WebSite';
+    assert.equal(ld[0]['@type'], kind, `${file}: JSON-LD @type`);
+    assert.equal(ld[0]['@context'], 'https://schema.org', file);
+    if (kind === 'Article') {
+      for (const k of ['headline', 'description', 'datePublished', 'dateModified', 'articleSection', 'inLanguage', 'isAccessibleForFree', 'license', 'author', 'publisher', 'mainEntityOfPage']) assert.ok(k in ld[0], `${file}: Article.${k}`);
+      assert.equal(ld[0].license, 'https://creativecommons.org/licenses/by/4.0/', file);
+      assert.equal(ld[0].mainEntityOfPage, canonical, file);
+      assert.equal(ld[0].author['@type'], 'Organization', file);
+      assert.equal(ld[0].publisher['@type'], 'Organization', file);
+    }
+    if (file === '404.html') assert.match(html, /<meta name="robots" content="noindex">/, file);
+    else assert.ok(!/<meta name="robots"/.test(html), `${file}: unexpected robots meta`);
     assert.match(html, /<nav class="site-nav"/, file);
     assert.match(html, /app\.js" defer>/, file);
     assert.match(html, new RegExp(`<html lang="${SITE.lang}">`), file);
@@ -120,9 +138,12 @@ test('all internal links are relative and resolve to built files; no absolute ro
   assert.ok(checked > 100, `checked ${checked} links`);
 });
 
-test('404 page pins its base path so relative URLs survive any missing path', () => {
+test('404 page pins its base path so relative URLs survive any missing path, is noindex and offers Home/Guides', () => {
   const p = pages.find((x) => x.file === '404.html');
-  assert.match(p.html, new RegExp(`<base href="${SITE.basePath}">`));
+  assert.match(p.html, new RegExp(`<head>\\s*<base href="${SITE.basePath}">`), 'base right after <head>');
+  assert.match(p.html, /<meta name="robots" content="noindex">/);
+  assert.match(p.html, /<h1>That page is not here<\/h1>/);
+  assert.match(p.html, /<a class="btn btn-primary" href="\.\/">Home<\/a><a class="btn btn-secondary" href="\.\/guides\/">Guides<\/a>/);
 });
 
 test('home shows the computed counts and they match data/counts.json', async () => {
@@ -227,10 +248,17 @@ test('the home page renders the SEBI hero card from the five register facts with
 test('sitemap lists the public pages with https URLs and dated lastmod; robots points at it', async () => {
   const xml = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   const locs = xml.match(/<loc>[^<]+<\/loc>/g) || [];
-  assert.equal(locs.length, result.pages - 1);
-  for (const l of locs) assert.ok(l.includes(`<loc>${SITE.liveUrl}`), l);
+  assert.equal(locs.length, result.pages - 1); // every emitted HTML file except 404.html
+  assert.equal(locs.length, pages.length - 1);
+  for (const l of locs) {
+    assert.ok(l.includes(`<loc>${SITE.liveUrl}`), l);
+    assert.ok(!l.includes('index.html'), l);
+  }
   assert.ok(!xml.includes('404.html'));
-  assert.match(xml, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+  const entries = xml.match(/<url><loc>[^<]+<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod><\/url>/g) || [];
+  assert.equal(entries.length, locs.length, 'every <url> has a dated lastmod');
+  // every emitted page (except 404) is listed under its canonical URL
+  for (const { file } of pages) if (file !== '404.html') assert.ok(xml.includes(`<loc>${SITE.liveUrl}${file.replace(/index\.html$/, '')}</loc>`), `sitemap misses ${file}`);
   const robots = await readFile(path.join(out, 'robots.txt'), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${SITE.liveUrl}sitemap.xml`));
 });
