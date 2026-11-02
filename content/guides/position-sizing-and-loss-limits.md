@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 3
 topics: [position sizing, one per cent rule, risk per trade, lot size, premium at risk, notional, margin, daily loss limit, drawdown, peak margin, upfront premium]
-related: [expectancy-and-drawdown-maths, what-sebi-loss-studies-say, psychology-journaling-prop-firms, intraday-leverage-today, buying-vs-selling-options, spreads-and-delta-neutral, what-a-trade-costs]
+related: [expectancy-and-drawdown-maths, what-sebi-loss-studies-say, psychology-journaling-prop-firms, intraday-leverage-today, buying-vs-selling-options, spreads-and-delta-neutral, what-a-trade-costs, policy-days-vix-and-sizing]
 tools: [position-size]
 sources:
   - Zerodha Varsity — Position sizing for the active trader (Module 9) | https://zerodha.com/varsity/chapter/position-sizing/ | accessed 2026-11-01

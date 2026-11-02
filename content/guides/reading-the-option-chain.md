@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 1
 topics: [option chain, open interest, change in oi, put-call ratio, pcr, max pain, pinning, futeq, participant-wise oi, nifty options, strikes]
-related: [iv-expected-move-and-crush, expiry-day-dynamics, buying-vs-selling-options, index-derivatives-specs, candles-order-flow-depth, oi-shift-breakout]
+related: [iv-expected-move-and-crush, expiry-day-dynamics, buying-vs-selling-options, index-derivatives-specs, candles-order-flow-depth, flows-rupee-and-rbi, oi-shift-breakout]
 sources:
   - NSE — Nifty 50 derivatives contract specifications (strike scheme, tick, trading cycle) | https://www.nseindia.com/products-services/equity-derivatives-nifty50 | accessed 2026-11-01
   - NSE Clearing — Participant-wise open interest, daily file (Oct 2026) | https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_30102026.csv | accessed 2026-11-01

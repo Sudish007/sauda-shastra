@@ -11,7 +11,7 @@ glance_stop: Half the net credit lost, or price through a short strike's breakev
 glance_target: 40–60 per cent of the net credit once IV collapses after the release; exit as one ticket
 glance_size: Max loss of the structure ≤ two per cent of capital; wings first for the hedged margin
 topics: [iv crush, event day, iron fly, iron condor, rbi policy, budget, results, hedged selling]
-related: [iv-expected-move-and-crush, spreads-and-delta-neutral, greeks-for-a-day-trader, intraday-leverage-today, 0920-short-straddle, expiry-day-straddle-scalp]
+related: [iv-expected-move-and-crush, policy-days-vix-and-sizing, spreads-and-delta-neutral, greeks-for-a-day-trader, intraday-leverage-today, 0920-short-straddle, expiry-day-straddle-scalp]
 tools: [expected-move, black-scholes-greeks, position-size]
 sources:
   - Johannes and Dubinsky — Earnings Announcements and Option Prices, SSRN working paper 600593 (2004/2006) | https://doi.org/10.2139/ssrn.600593 | accessed 2026-11-01

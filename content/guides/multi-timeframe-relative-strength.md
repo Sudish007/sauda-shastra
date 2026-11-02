@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 7
 topics: [multi-timeframe, top-down, triple screen, relative strength, ratio chart, momentum, industry momentum, sector rotation, sectoral indices, bank nifty]
-related: [indicators-and-why-they-lag, price-action-market-structure, volume-and-market-profile, index-derivatives-specs, relative-strength-pairs, trend-day-pyramiding]
+related: [indicators-and-why-they-lag, price-action-market-structure, volume-and-market-profile, index-derivatives-specs, crude-yields-dollar-sector-map, relative-strength-pairs, trend-day-pyramiding]
 sources:
   - Wiley — The New Trading for a Living (Alexander Elder, 2014) | https://www.wiley.com/en-us/The+New+Trading+for+a+Living%3A+Psychology%2C+Discipline%2C+Trading+Tools+and+Systems%2C+Risk+Control%2C+Trade+Management-p-9781118443927 | accessed 2026-11-01
   - Alphatrends — Brian Shannon, Technical Analysis Using Multiple Timeframes (author site) | https://alphatrends.net/ | accessed 2026-11-01

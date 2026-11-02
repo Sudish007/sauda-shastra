@@ -1160,6 +1160,22 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mac-cme-es-break-ist-dst",
+    "label": "CME Globex daily maintenance break for E-mini S&P 500 (ES) futures, in IST during US daylight saving time (17:00–18:00 ET)",
+    "value": "02:30–03:30 IST",
+    "since": "2026-11-01",
+    "source": "CME Group — E-mini S&P 500 contract specifications | https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.contractSpecs.html",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-cme-es-break-ist-std",
+    "label": "CME Globex daily maintenance break for E-mini S&P 500 (ES) futures, in IST during US standard time (17:00–18:00 ET)",
+    "value": "03:30–04:30 IST",
+    "since": "2026-11-01",
+    "source": "CME Group — E-mini S&P 500 contract specifications | https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.contractSpecs.html",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "mac-crude-import-dependence",
     "label": "India crude-oil import dependence, approx. (FY2023-24 to FY2025-26, POL-consumption basis)",
     "value": "88%",
@@ -1208,6 +1224,22 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mac-hkex-afternoon-session-ist",
+    "label": "HKEX securities market afternoon session in IST (13:00–16:00 HKT)",
+    "value": "10:30–13:30 IST",
+    "since": "2026-11-01",
+    "source": "HKEX — Securities Market trading hours | https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-hkex-morning-session-ist",
+    "label": "HKEX securities market morning session in IST (09:30–12:00 HKT; pre-opening from 09:00 HKT)",
+    "value": "07:00–09:30 IST",
+    "since": "2026-11-01",
+    "source": "HKEX — Securities Market trading hours | https://www.hkex.com.hk/Services/Trading-hours-and-Severe-Weather-Arrangements/Trading-Hours/Securities-Market?sc_lang=en",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "mac-india-cpi-release-ist",
     "label": "India CPI release time, on the 12th of the month (next working day if a holiday)",
     "value": "16:00 IST",
@@ -1229,6 +1261,38 @@
     "value": "16:00 IST",
     "since": "2025-04-28",
     "source": "PIB — IIP to be released on 28th of every month | https://pib.gov.in/PressReleasePage.aspx?PRID=2122427",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-jpx-afternoon-session-ist",
+    "label": "Tokyo Stock Exchange (JPX) afternoon session in IST (12:30–15:30 JST)",
+    "value": "09:00–12:00 IST",
+    "since": "2026-11-01",
+    "source": "JPX — Trading Hours (domestic stocks) | https://www.jpx.co.jp/english/equities/trading/domestic/01.html",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-jpx-morning-session-ist",
+    "label": "Tokyo Stock Exchange (JPX) morning session in IST (09:00–11:30 JST)",
+    "value": "05:30–08:00 IST",
+    "since": "2026-11-01",
+    "source": "JPX — Trading Hours (domestic stocks) | https://www.jpx.co.jp/english/equities/trading/domestic/01.html",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-nyse-session-ist-dst",
+    "label": "NYSE core trading session in IST during US daylight saving time (09:30–16:00 ET; ends the next calendar day in India)",
+    "value": "19:00–01:30 IST",
+    "since": "2026-11-01",
+    "source": "NYSE — Trading Hours & Calendars | https://www.nyse.com/trade/hours-calendars",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-nyse-session-ist-std",
+    "label": "NYSE core trading session in IST during US standard time (09:30–16:00 ET; ends the next calendar day in India)",
+    "value": "20:00–02:30 IST",
+    "since": "2026-11-01",
+    "source": "NYSE — Trading Hours & Calendars | https://www.nyse.com/trade/hours-calendars",
     "verified": "2026-11-01"
   },
   {
@@ -1296,6 +1360,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mac-us-tariff-india-eo14329",
+    "label": "US additional duty on Indian goods over Russian-oil imports (Executive Order 14329, effective 27 Aug 2025; IEEPA-based, ended with the 20 Feb 2026 Supreme Court ruling)",
+    "value": "25%",
+    "since": "2025-08-27",
+    "source": "Federal Register — Executive Order 14329 (11 Aug 2025) | https://www.federalregister.gov/documents/2025/08/11/2025-15267/addressing-threats-to-the-united-states-by-the-government-of-the-russian-federation",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "mac-us-tariff-india-framework",
     "label": "US–India interim framework reciprocal tariff rate, agreed 7 Feb 2026 (IEEPA-based duties ended after the 20 Feb 2026 Supreme Court ruling)",
     "value": "18%",
@@ -1309,6 +1381,14 @@
     "value": "10%",
     "since": "2026-07-24",
     "source": "Federal Register — Section 301 actions, 28 Jul 2026 | https://www.federalregister.gov/documents/2026/07/28/2026-15181/notice-of-actions-in-section-301-investigations-of-acts-policies-and-practices-of-various-economies",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mac-us-tariff-s122-surcharge",
+    "label": "US temporary import surcharge under s. 122 of the Trade Act 1974 (Proclamation 11012; 150 days from 24 Feb 2026; statutory cap 15%)",
+    "value": "10%",
+    "since": "2026-02-24",
+    "source": "Federal Register — Proclamation 11012 (25 Feb 2026) | https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems",
     "verified": "2026-11-01"
   },
   {

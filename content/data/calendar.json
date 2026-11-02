@@ -234,7 +234,7 @@
     },
     {
       "date": "2026-03-08",
-      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session runs 19:00–01:30 IST",
+      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session becomes the {{fact:mac-nyse-session-ist-dst}} window",
       "kind": "us-data",
       "time_ist": "12:30 IST",
       "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
@@ -486,7 +486,7 @@
     },
     {
       "date": "2026-11-01",
-      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session runs 20:00–02:30 IST",
+      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session becomes the {{fact:mac-nyse-session-ist-std}} window",
       "kind": "us-data",
       "time_ist": "11:30 IST",
       "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
@@ -836,7 +836,7 @@
     },
     {
       "date": "2027-03-14",
-      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session runs 19:00–01:30 IST",
+      "what": "US clocks move to daylight time (EDT): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-dst}} and FOMC statements at {{fact:mac-fomc-statement-ist-dst}}; the NYSE regular session becomes the {{fact:mac-nyse-session-ist-dst}} window",
       "kind": "us-data",
       "time_ist": "12:30 IST",
       "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
@@ -1214,7 +1214,7 @@
     },
     {
       "date": "2027-11-07",
-      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session runs 20:00–02:30 IST",
+      "what": "US clocks return to standard time (EST): 08:30 ET releases land at {{fact:mac-us-cpi-release-ist-std}} and FOMC statements at {{fact:mac-fomc-statement-ist-std}} the next morning in India; the NYSE regular session becomes the {{fact:mac-nyse-session-ist-std}} window",
       "kind": "us-data",
       "time_ist": "11:30 IST",
       "source": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst"
