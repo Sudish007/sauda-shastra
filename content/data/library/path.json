@@ -1,4 +1,139 @@
 {
-  "intro": "",
-  "stages": []
+  "intro": "Our editorial judgement, not advice: this sequence is for a working professional with about 8 hours a week, moving from zero to systematic intraday and options trading on Indian indices plus long-term India and US investing. It is a study plan; nothing here tells you what to buy or sell. Rules and risk come before setups, free material before paid, and paper trading runs the whole year.",
+  "stages": [
+    {
+      "title": "Months 0–3",
+      "hoursPerWeek": 8,
+      "steps": [
+        {
+          "entry": "varsity-intro",
+          "note": "Weeks 1–2: how NSE/BSE, settlement and orders work. Read with the Foundations guides open for the current settlement, charges and lot-size facts."
+        },
+        {
+          "entry": "sebi-iat",
+          "note": "Week 2: sit the free SEBI Investor Awareness Test — one evening, a 2-year certificate, and the regulator's view of your rights."
+        },
+        {
+          "entry": "varsity-ta",
+          "note": "Weeks 3–5: the vocabulary of charts. Treat indicators as descriptions, not signals."
+        },
+        {
+          "entry": "varsity-futures",
+          "note": "Week 6: margins, mark-to-market and leverage before any options."
+        },
+        {
+          "entry": "varsity-options",
+          "note": "Weeks 7–10: the core — moneyness, Greeks, volatility, option chain. Download the PDF for commutes."
+        },
+        {
+          "entry": "varsity-risk",
+          "note": "Weeks 9–11 (in parallel): position sizing and the behaviours that lose money; start a paper-trading journal with the site's CSV template."
+        },
+        {
+          "entry": "douglas-zone",
+          "note": "Weeks 10–12: evening reading; the probabilistic mindset before the first simulated trade."
+        },
+        {
+          "entry": "varsity-tax",
+          "note": "Week 12: how intraday and F&O income is taxed; use the site's tax guide for Income-tax Act 2025 section numbers."
+        }
+      ]
+    },
+    {
+      "title": "Months 4–6",
+      "hoursPerWeek": 9,
+      "steps": [
+        {
+          "entry": "varsity-optstrat",
+          "note": "Weeks 13–15: spreads and neutral structures; map each to the site's playbooks and their 'When NOT to trade' sections."
+        },
+        {
+          "entry": "nism-viii",
+          "note": "Weeks 13–22: study the free workbook 3 h/week and sit the Series-VIII exam — a credential and a forced tour of the rulebook."
+        },
+        {
+          "entry": "natenberg",
+          "note": "Weeks 16–24: chapters on volatility, Greeks and spreads, two chapters a week; skip the US exchange mechanics."
+        },
+        {
+          "entry": "coursera-isb",
+          "note": "Weeks 16–26: audit the first three ISB courses (≈ 30 h) for the habit of testing a rule on data before trading it."
+        },
+        {
+          "entry": "quantra-python",
+          "note": "Weeks 20–23: 9 free hours of Python for trading — enough to read a backtest."
+        },
+        {
+          "entry": "quantra-options-python",
+          "note": "Week 24: code the payoffs you learned in module 6."
+        },
+        {
+          "entry": "halan-ltm",
+          "note": "Weeks 13–16 (weekend reading): set up the long-term side — emergency fund, insurance, index SIPs — before trading capital is allocated."
+        },
+        {
+          "entry": "varsity-pf",
+          "note": "Weeks 17–26: the mutual-fund module, one chapter per sitting, alongside the SIP-maths guide."
+        },
+        {
+          "entry": "sebi-study-2026",
+          "note": "Week 26 checkpoint: re-read the regulator's FY25–FY26 loss study and your own paper-trading journal before deciding whether live trading is for you."
+        }
+      ]
+    },
+    {
+      "title": "Months 7–12",
+      "hoursPerWeek": 8,
+      "steps": [
+        {
+          "entry": "varsity-systems",
+          "note": "Weeks 27–30: turn the two or three playbooks you paper-traded into written rules with entry, stop, size and 'do not trade' conditions."
+        },
+        {
+          "entry": "carver-st",
+          "note": "Weeks 29–34: volatility-targeted sizing and realistic expectations; the bridge to systematic trading."
+        },
+        {
+          "entry": "sinclair-vt",
+          "note": "Weeks 33–40: only if options selling is in your plan — measuring and forecasting volatility, Kelly sizing, the short-gamma psychology."
+        },
+        {
+          "entry": "columbia-ferm",
+          "note": "Weeks 35–48 (optional, free audit): the first two Columbia courses if you want the pricing maths; otherwise skip to Chan."
+        },
+        {
+          "entry": "chan-qt",
+          "note": "Weeks 41–46: data, backtest pitfalls and execution as a retail quant; read the SEBI retail-algo guide alongside."
+        },
+        {
+          "entry": "epat",
+          "note": "Decision point, month 9: EPAT (6 months, paid, 14–20 h/week) only if trading is becoming a second career; the free path above covers the concepts."
+        },
+        {
+          "entry": "bogle-little-book",
+          "note": "Weeks 27–29 (weekend reading): the index-fund case before opening any US route."
+        },
+        {
+          "entry": "bernstein-4p",
+          "note": "Weeks 30–36: theory, history, psychology and business of investing — the 2023 edition."
+        },
+        {
+          "entry": "shiller-financial-markets",
+          "note": "Weeks 37–45: Yale's Financial Markets, free, for the institutional context behind US and global markets."
+        },
+        {
+          "entry": "graham-3rd",
+          "note": "Weeks 44–52: Graham with Zweig's 2024 commentary — the margin-of-safety habit for direct equity in either market."
+        },
+        {
+          "entry": "schwager-mw",
+          "note": "Weeks 46–52: interviews as a mirror for your own journal — notice how every wizard talks about losses first."
+        },
+        {
+          "entry": "traderfeed",
+          "note": "Ongoing: one post a week on process and review; pair with the journaling template."
+        }
+      ]
+    }
+  ]
 }

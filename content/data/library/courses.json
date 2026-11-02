@@ -1,1 +1,1218 @@
-[]
+[
+  {
+    "id": "varsity-intro",
+    "title": "Introduction to Stock Markets (Varsity module 1)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/introduction-to-stock-markets/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "India investing",
+      "tax & rules"
+    ],
+    "hours": 7,
+    "effort": "15 chapters; ≈ 7 h est.",
+    "why": "The standard free Indian primer: exchanges, participants, IPOs, indices, clearing and settlement, written for NSE/BSE.",
+    "caveats": "Chapters touching settlement cycles and charges predate T+1/2024 fee changes in places; read with the site's verified facts register.",
+    "rank": {
+      "India investing": 1,
+      "tax & rules": 2
+    },
+    "credential": "Zerodha Broking Ltd, SEBI broker INZ000031633 (zerodha.com/about footer, fetched 2026-11-01)"
+  },
+  {
+    "id": "varsity-ta",
+    "title": "Technical Analysis (Varsity module 2)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/technical-analysis/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "intraday"
+    ],
+    "hours": 10,
+    "effort": "22 chapters; ≈ 10 h est.",
+    "why": "Candles, support/resistance, volume, moving averages, indicators and a checklist, with NSE examples.",
+    "caveats": "Classic indicator-centric TA; pair with the price-action and anchored-VWAP books (Brooks, Shannon) before trading intraday.",
+    "rank": {
+      "intraday": 1
+    },
+    "credential": "Zerodha Broking Ltd, SEBI broker INZ000031633"
+  },
+  {
+    "id": "varsity-futures",
+    "title": "Futures Trading (Varsity module 4)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/futures-trading/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "intermediate",
+    "fits": [
+      "intraday",
+      "options"
+    ],
+    "hours": 6,
+    "effort": "13 chapters; ≈ 6 h est.",
+    "why": "Margins, M2M, leverage, calendar spreads and open interest explained on Indian index/stock futures.",
+    "caveats": "Margin examples predate SEBI's 2024–25 derivative measures; lot sizes and margins must come from the site's verified facts register.",
+    "rank": {
+      "intraday": 4,
+      "options": 6
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-options",
+    "title": "Options Theory for Professional Trading (Varsity module 5)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/option-theory/"
+      },
+      {
+        "label": "Free PDF (5.0 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%205_Options-Theory-for-Professional-Trading.pdf"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "hours": 12,
+    "effort": "25 chapters; ≈ 12 h est.",
+    "why": "The best free Indian walk-through of calls/puts, moneyness, Greeks, volatility and the option chain, with Nifty examples.",
+    "caveats": "Weekly-expiry and lot-size examples are pre-2024; the physical-settlement chapter is current. Timeless concepts, pre-2024 rules.",
+    "rank": {
+      "options": 1
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-optstrat",
+    "title": "Option Strategies (Varsity module 6)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/option-strategies/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "hours": 7,
+    "effort": "14 chapters; ≈ 7 h est.",
+    "why": "Spreads, straddles/strangles, iron condor and butterflies with payoff maths on Indian indices.",
+    "caveats": "Margin-benefit figures predate the 2025 removal of calendar-spread benefit on expiry day; check the options guides.",
+    "rank": {
+      "options": 3
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-systems",
+    "title": "Trading Systems (Varsity module 10)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/trading-systems/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "hours": 8,
+    "effort": "16 chapters; ≈ 8 h est.",
+    "why": "Pair trading, calendar spreads, momentum and the discipline of writing rules down — the bridge from discretionary to systematic.",
+    "caveats": "Spreadsheet-based; no code, no SEBI algo-framework coverage (see the algo guides).",
+    "rank": {
+      "algo": 2
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-risk",
+    "title": "Risk Management & Trading Psychology (Varsity module 9)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/risk-management/"
+      },
+      {
+        "label": "Free PDF (3.8 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%209_Risk%20Management%20%26%20Trading%20Psychology.pdf"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "hours": 7,
+    "effort": "16 chapters; ≈ 7 h est.",
+    "why": "Position sizing, expectancy, drawdown and the behavioural biases that empty intraday accounts, in plain English.",
+    "caveats": "Does not cite the SEBI loss studies; read with the site's guide What SEBI's loss studies say.",
+    "rank": {
+      "risk & psychology": 1
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-tax",
+    "title": "Markets and Taxation (Varsity module 7)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/markets-and-taxation/"
+      },
+      {
+        "label": "Free PDF (1.3 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%207_Markets%20%26%20Taxation.pdf"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "tax & rules"
+    ],
+    "hours": 4,
+    "effort": "8 chapters; ≈ 4 h est.",
+    "why": "Only free Indian module that walks a trader through speculative vs non-speculative income, turnover and ITR choice.",
+    "caveats": "Written under the Income-tax Act 1961 numbering; the Income-tax Act 2025 applies from 1 Apr 2026 — use the site's tax guide for section numbers and rates. Pre-2024 rules.",
+    "rank": {
+      "tax & rules": 1
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-pf",
+    "title": "Personal Finance – Mutual Funds (Varsity module 11)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/personalfinance/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "India investing"
+    ],
+    "hours": 15,
+    "effort": "33 chapters; ≈ 15 h est.",
+    "why": "Mutual-fund categories, index funds, SIPs, goal planning and portfolio construction for an Indian saver.",
+    "caveats": "Debt-fund taxation changed in 2023 and again under the 2025 Act; verify tax chapters against the site's verified facts register.",
+    "rank": {
+      "India investing": 2
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "varsity-fa",
+    "title": "Fundamental Analysis (Varsity module 3)",
+    "by": "Zerodha Varsity",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/fundamental-analysis/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "India investing"
+    ],
+    "hours": 8,
+    "effort": "16 chapters; ≈ 8 h est.",
+    "why": "Reading Indian annual reports, ratios and a DCF, with a checklist for stock selection.",
+    "caveats": "Beginner depth; follow with Damodaran's free valuation webcasts for rigour.",
+    "rank": {
+      "India investing": 4
+    },
+    "credential": "Zerodha Broking Ltd"
+  },
+  {
+    "id": "nism-viii",
+    "title": "NISM Series-VIII: Equity Derivatives Certification Examination",
+    "by": "NISM (SEBI's institute)",
+    "type": "course",
+    "cost": "paid",
+    "price": {
+      "amount": "₹1,500 + taxes",
+      "currency": "INR",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Exam page",
+        "url": "https://www.nism.ac.in/equity-derivatives/"
+      },
+      {
+        "label": "Free workbook (lead form)",
+        "url": "https://api.nism.ac.in/cmp/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "options",
+      "tax & rules"
+    ],
+    "hours": 30,
+    "effort": "Exam 120 min, 100 questions; self-study ≈ 30–40 h est.",
+    "why": "The one derivatives credential Indian intermediaries must hold; the workbook is the official account of F&O mechanics, margins and regulation.",
+    "caveats": "60% pass mark; certificate valid 3 years. Exam-oriented, not a trading course; check the workbook edition year on its cover for post-2024 rules.",
+    "rank": {
+      "options": 4,
+      "tax & rules": 3
+    },
+    "credential": "NISM is SEBI's education institute"
+  },
+  {
+    "id": "nism-xv",
+    "title": "NISM Series-XV: Research Analyst Certification Examination",
+    "by": "NISM",
+    "type": "course",
+    "cost": "paid",
+    "price": {
+      "amount": "₹1,500 + taxes",
+      "currency": "INR",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Exam page",
+        "url": "https://www.nism.ac.in/research-analyst-certification-examination/"
+      },
+      {
+        "label": "Free workbook (lead form)",
+        "url": "https://api.nism.ac.in/cmp/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "India investing",
+      "tax & rules"
+    ],
+    "hours": 30,
+    "effort": "Exam 120 min, 100 questions; self-study ≈ 30–40 h est.",
+    "why": "Equity research, valuation and the SEBI (Research Analysts) Regulations — the qualifying exam for anyone who wants to publish research legally in India.",
+    "caveats": "60% pass mark; certificate valid 3 years. Needed only if you ever publish recommendations.",
+    "rank": {
+      "India investing": 6,
+      "tax & rules": 5
+    },
+    "credential": "NISM"
+  },
+  {
+    "id": "nism-xa",
+    "title": "NISM Series-X-A: Investment Adviser (Level 1) Certification Examination",
+    "by": "NISM",
+    "type": "course",
+    "cost": "paid",
+    "price": {
+      "amount": "₹3,000 + taxes",
+      "currency": "INR",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Exam page",
+        "url": "https://www.nism.ac.in/investment-adviser-level-1/"
+      },
+      {
+        "label": "Free workbook (lead form)",
+        "url": "https://api.nism.ac.in/cmp/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "India investing",
+      "tax & rules"
+    ],
+    "hours": 40,
+    "effort": "Exam 135 min, 150 marks; self-study ≈ 40 h est.",
+    "why": "Personal-finance planning, products and the SEBI (Investment Advisers) Regulations in one syllabus — a thorough India-investing foundation even if the certificate is never used.",
+    "caveats": "60% pass mark; certificate valid 3 years.",
+    "rank": {
+      "India investing": 5,
+      "tax & rules": 4
+    },
+    "credential": "NISM"
+  },
+  {
+    "id": "sebi-iat",
+    "title": "SEBI Investor Awareness Test (Level 1)",
+    "by": "SEBI with NISM",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Test page",
+        "url": "https://www.nism.ac.in/sebi-investor-awareness-test/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "tax & rules",
+      "India investing"
+    ],
+    "hours": 3,
+    "effort": "Test 60 min, 25 marks; ≈ 3 h prep est.",
+    "why": "Free regulator-backed check of market basics, grievance channels and investor rights; certificate valid 2 years.",
+    "caveats": "Awareness-level only; 40% pass mark.",
+    "rank": {
+      "tax & rules": 6,
+      "India investing": 9
+    },
+    "credential": "SEBI / NISM"
+  },
+  {
+    "id": "sebi-investor-portal",
+    "title": "SEBI Investor education portal (booklets, videos, Saa₹thi app)",
+    "by": "SEBI",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Portal",
+        "url": "https://investor.sebi.gov.in/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "tax & rules"
+    ],
+    "effort": "Self-paced; booklets of 20–60 pages each",
+    "why": "Primary source for investor rights, SCORES complaints, KYC and the regulator's own warnings about unregistered advisers.",
+    "caveats": "Portal navigation is JS-heavy and deep links change, so the home page is linked.",
+    "rank": {
+      "tax & rules": 7
+    },
+    "credential": "SEBI (regulator)"
+  },
+  {
+    "id": "nal-fo-strategies",
+    "title": "Futures & Options Trading Strategies (NAL Academy partner programme with Empirical F&M Academy)",
+    "by": "NAL Academy Ltd (formerly NSE Academy Ltd)",
+    "type": "course",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Course page (nseindia.com/learn)",
+        "url": "https://www.nseindia.com/learn/online-courses-certifications-live-future-and-option-trading-strategies"
+      }
+    ],
+    "year": "2026 (page updated 18 Aug 2026)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "hours": 10,
+    "effort": "10 hours (online)",
+    "why": "Exchange-certified short course on F&O strategies; the certificate carries no expiry.",
+    "caveats": "Fee not shown — contact the session coordinator listed on the page; delivered by a partner academy, not NSE staff.",
+    "rank": {
+      "options": 8
+    },
+    "credential": "NAL Academy Ltd is an NSE group company (page footer lists it under NSE Group Companies)"
+  },
+  {
+    "id": "bse-cism",
+    "title": "Certified Investment and Stock Market Expert (CISM)",
+    "by": "BSE Institute Ltd",
+    "type": "course",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Professional studies (programme list)",
+        "url": "https://www.bsebti.com/professional-studies.html"
+      }
+    ],
+    "year": "2026 (live; page © 2022)",
+    "level": "intermediate",
+    "fits": [
+      "India investing",
+      "intraday"
+    ],
+    "effort": "6 months part-time",
+    "why": "Exchange-subsidiary programme covering markets, analysis and trading for working professionals.",
+    "caveats": "Fee and syllabus only on enquiry; BSE's online course store (bsevarsity.com) was unavailable when checked.",
+    "rank": {
+      "India investing": 10,
+      "intraday": 9
+    },
+    "credential": "BSE Institute Ltd, subsidiary of BSE Ltd"
+  },
+  {
+    "id": "elm-enccmp",
+    "title": "E-NCCMP — NSE Certified Capital Market Professional (online)",
+    "by": "Elearnmarkets × NAL Academy",
+    "type": "course",
+    "cost": "paid",
+    "price": {
+      "amount": "₹16,000 + GST",
+      "currency": "INR",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://www.elearnmarkets.com/enccmp"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "India investing",
+      "tax & rules"
+    ],
+    "hours": 20,
+    "effort": "20+ hours on-demand",
+    "why": "Broad capital-markets certificate jointly certified by the exchange's academy; useful structure for someone who wants a credential while learning.",
+    "caveats": "The NCFM exam fee (₹2,006 per attempt) is extra; a certificate, not a trading edge.",
+    "rank": {
+      "India investing": 7,
+      "tax & rules": 8
+    },
+    "credential": "Kredent InfoEdge, SEBI RA INH300007493; joint certification with NAL Academy"
+  },
+  {
+    "id": "elm-options",
+    "title": "Options Trading Course (live, Chetan Panchamia)",
+    "by": "Elearnmarkets",
+    "type": "course",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://www.elearnmarkets.com/courses/display/learn-options-trading"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "hours": 47,
+    "effort": "47+ h live sessions + 5+ h on-demand",
+    "why": "Longest live Indian options course from a SEBI-registered research-analyst firm; rule-based strategies rather than tips.",
+    "caveats": "Price shown only after login (varies by batch); a live cohort — check batch dates; no performance claims are made and none should be expected.",
+    "rank": {
+      "options": 9
+    },
+    "credential": "Kredent InfoEdge, SEBI RA INH300007493"
+  },
+  {
+    "id": "angelone-trading",
+    "title": "Smart Money — Trading Essentials, Strategies and Systems",
+    "by": "Angel One (SEBI broker)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course category",
+        "url": "https://www.angelone.in/smart-money/trading-courses"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "intraday"
+    ],
+    "hours": 9,
+    "effort": "82 chapters; 9 hours",
+    "why": "Free broker academy covering charting, indicators, instruments and an algorithmic-trading module, with a certificate.",
+    "caveats": "Broker-produced; beginner level; the algo module is conceptual.",
+    "rank": {
+      "intraday": 5
+    },
+    "credential": "Angel One Ltd, SEBI broker INZ000161534, RA INH000000164"
+  },
+  {
+    "id": "icici-fo",
+    "title": "iLearn — Futures & Options module (Options Basic, Option Strategies)",
+    "by": "ICICI Direct (ICICI Securities)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "F&O courses",
+        "url": "https://www.icicidirect.com/ilearn/futures-and-options/courses"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options"
+    ],
+    "hours": 2,
+    "effort": "Options Basic 51 min / 13 chapters; Option Strategies 72 min / 17 chapters",
+    "why": "Short video modules in English and Hindi from a bank-owned, SEBI-registered broker — a gentle first pass before Varsity module 5.",
+    "caveats": "Very short; no Greeks depth; promotional account-opening banners.",
+    "rank": {
+      "options": 7
+    },
+    "credential": "ICICI Securities Ltd, SEBI broker INZ000183631, RA INH000000990"
+  },
+  {
+    "id": "fyers-sos",
+    "title": "School of Stocks — Options, Options Strategies, Risk & Money Management, Trading Psychology modules",
+    "by": "FYERS (SEBI broker)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "School of Stocks",
+        "url": "https://fyers.in/school-of-stocks/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options",
+      "risk & psychology"
+    ],
+    "effort": "Options 13 + Options Strategies 19 + Risk 17 + Psychology 6 chapters",
+    "why": "Free, well-structured text modules including sector rotation and intermarket analysis that most broker academies skip.",
+    "caveats": "Do not confuse with schoolofstocks.in (unaffiliated community site, excluded).",
+    "rank": {
+      "options": 10,
+      "risk & psychology": 6
+    },
+    "credential": "FYERS Securities, SEBI broker INZ000008524"
+  },
+  {
+    "id": "sensibull-yt",
+    "title": "Be Sensibull (YouTube channel)",
+    "by": "Sensibull (SEBI-registered Research Analyst)",
+    "type": "video series",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Channel",
+        "url": "https://www.youtube.com/besensibull"
+      },
+      {
+        "label": "Sensibull (registration in footer)",
+        "url": "https://sensibull.com/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options"
+    ],
+    "effort": "Videos 10–60 min; ongoing",
+    "why": "Option-chain, OI and strategy explainers from a SEBI-registered RA that also builds the tools most Indian retail traders use.",
+    "caveats": "Platform marketing is mixed in; watch for tool promotions.",
+    "rank": {
+      "options": 11
+    },
+    "credential": "Riskilla Software Technologies (Sensibull), SEBI RA INH200006895"
+  },
+  {
+    "id": "epat",
+    "title": "EPAT — Executive Programme in Algorithmic Trading",
+    "by": "QuantInsti",
+    "type": "course",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Programme page",
+        "url": "https://www.quantinsti.com/epat"
+      }
+    ],
+    "year": "2026 (next batch 9 Jan 2027)",
+    "level": "advanced",
+    "fits": [
+      "algo"
+    ],
+    "hours": 364,
+    "effort": "6 months; 8–12 h self-study + 6–8 h live lectures per week",
+    "why": "The most complete India-based algo curriculum (Python, backtesting, options, ML, execution) with placement support; listed as a NAL Academy partner programme.",
+    "caveats": "Fee not displayed (brochure / call) — budget a lakh-plus; heavy weekly load for a working professional; no SEBI registration is needed for education and none is claimed.",
+    "rank": {
+      "algo": 1
+    },
+    "credential": "Listed under NAL Academy Partner Programs on nseindia.com/learn; QuantInsti is an education company, not a SEBI intermediary"
+  },
+  {
+    "id": "quantra-python",
+    "title": "Python for Trading: Basic",
+    "by": "Quantra (QuantInsti)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://quantra.quantinsti.com/course/python-trading-basic"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "algo"
+    ],
+    "hours": 9,
+    "effort": "9 hours",
+    "why": "Free, India-made first Python-for-trading course (list price ₹2,572 shown as ₹0) with in-browser notebooks.",
+    "caveats": "Up-sells into paid Quantra tracks; Python basics only.",
+    "rank": {
+      "algo": 3
+    },
+    "credential": "QuantInsti (education provider)"
+  },
+  {
+    "id": "quantra-options-python",
+    "title": "Options Trading Strategies In Python: Basic",
+    "by": "Quantra with NSE Academy",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://quantra.quantinsti.com/course/options-trading-strategies-python-basic"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options",
+      "algo"
+    ],
+    "hours": 3,
+    "effort": "3 hours",
+    "why": "Free 3-hour course authored with NSE Academy that codes basic option payoffs and strategies in Python.",
+    "caveats": "Short; US-style examples in places; list price ₹3,199 shown as ₹0.",
+    "rank": {
+      "options": 12,
+      "algo": 5
+    },
+    "credential": "Authored by NSE Academy per course page"
+  },
+  {
+    "id": "coursera-isb",
+    "title": "Trading Strategies in Emerging Markets (Specialization)",
+    "by": "Indian School of Business on Coursera (Prasanna Tantri +1)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Specialization page",
+        "url": "https://www.coursera.org/specializations/trading-strategy"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "intraday",
+      "algo",
+      "India investing"
+    ],
+    "hours": 64,
+    "effort": "5 courses; 8+12+11+10+23 ≈ 64 hours",
+    "why": "A business-school treatment of trading basics, technical and fundamental strategies and a capstone, built around Indian data — free to audit.",
+    "caveats": "Free to audit only; graded work and the certificate need a Coursera subscription (price varies by country); academic pace.",
+    "rank": {
+      "intraday": 3,
+      "algo": 4,
+      "India investing": 8
+    },
+    "credential": "ISB (AACSB/EQUIS-accredited business school); no SEBI registration required for education"
+  },
+  {
+    "id": "shiller-financial-markets",
+    "title": "Financial Markets (Yale, Robert Shiller) — Coursera and Open Yale Courses",
+    "by": "Yale University",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Coursera (free audit)",
+        "url": "https://www.coursera.org/learn/financial-markets-global"
+      },
+      {
+        "label": "Open Yale Courses ECON 252 (no login)",
+        "url": "https://oyc.yale.edu/economics/econ-252"
+      }
+    ],
+    "year": "2011 lectures; Coursera version live 2026",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "hours": 30,
+    "effort": "≈ 3 weeks at 10 h/week",
+    "why": "Nobel-laureate overview of risk, behavioural finance, insurance, banking and securities — the right first US course.",
+    "caveats": "US institutions and examples; no India notes; 2011 lecture recordings.",
+    "rank": {
+      "US/global investing": 1
+    },
+    "credential": "Yale University"
+  },
+  {
+    "id": "columbia-ferm",
+    "title": "Financial Engineering and Risk Management (Specialization)",
+    "by": "Columbia University on Coursera (Haugh, Iyengar +1)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Specialization page",
+        "url": "https://www.coursera.org/specializations/financialengineering"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "advanced",
+    "fits": [
+      "options",
+      "algo"
+    ],
+    "hours": 90,
+    "effort": "5 courses; 20+14+14+17+25 ≈ 90 hours",
+    "why": "Rigorous derivatives pricing, term-structure models, portfolio optimisation and algorithmic trading; the free-to-audit path to understanding Greeks and volatility properly.",
+    "caveats": "Needs calculus and probability; certificate paid; US market conventions.",
+    "rank": {
+      "options": 5,
+      "algo": 6
+    },
+    "credential": "Columbia University"
+  },
+  {
+    "id": "coursera-ml-trading",
+    "title": "Machine Learning for Trading (Specialization)",
+    "by": "New York Institute of Finance with Google Cloud (Jack Farmer)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Specialization page",
+        "url": "https://www.coursera.org/specializations/machine-learning-trading"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "hours": 22,
+    "effort": "3 courses; 5+8+9 = 22 hours",
+    "why": "Compact, applied intro to ML and reinforcement learning for trading on Google Cloud tools; free to audit.",
+    "caveats": "Cloud-vendor flavoured; shallow on backtest hygiene — read Carver's Systematic Trading and López de Prado alongside.",
+    "rank": {
+      "algo": 7
+    },
+    "credential": "NYIF / Google Cloud"
+  },
+  {
+    "id": "edx-iimb-investments",
+    "title": "IIMBx: Introduction to Investments",
+    "by": "IIM Bangalore on edX",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://www.edx.org/learn/investing/indian-institute-of-management-bangalore-introduction-to-investments"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "India investing"
+    ],
+    "hours": 15,
+    "effort": "5 weeks; 3–5 h/week",
+    "why": "An IIM's equity-markets and security-valuation course, free to audit, aimed at Indian learners.",
+    "caveats": "Verified certificate is paid (varies); edX shows level 'Intermediate'.",
+    "rank": {
+      "India investing": 3
+    },
+    "credential": "IIM Bangalore"
+  },
+  {
+    "id": "nptel-sapm",
+    "title": "Security Analysis and Portfolio Management (NPTEL 110105035)",
+    "by": "IIT Kharagpur — C. S. Mishra, J. Mahakud",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://nptel.ac.in/courses/110105035"
+      }
+    ],
+    "year": "NPTEL archive (undated); runs re-offered via SWAYAM",
+    "level": "intermediate",
+    "fits": [
+      "India investing"
+    ],
+    "effort": "≈ 40 lectures",
+    "why": "University-grade coverage of valuation, market efficiency, CAPM/APT, bond and portfolio management, free with Indian context.",
+    "caveats": "Lecture-style video; exams only in SWAYAM runs.",
+    "rank": {
+      "India investing": 11
+    },
+    "credential": "IIT Kharagpur (Government of India institute)"
+  },
+  {
+    "id": "mit-15401",
+    "title": "15.401 Finance Theory I",
+    "by": "MIT OpenCourseWare",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://ocw.mit.edu/courses/15-401-finance-theory-i-fall-2008/"
+      }
+    ],
+    "year": "Fall 2008",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing"
+    ],
+    "effort": "≈ 20 lectures + problem sets",
+    "why": "Present value, fixed income, equities, portfolio theory, CAPM and options from MIT Sloan, free with notes and problem sets.",
+    "caveats": "2008 material; US conventions; no video for every lecture.",
+    "rank": {
+      "US/global investing": 5
+    },
+    "credential": "MIT"
+  },
+  {
+    "id": "khan-finance",
+    "title": "Finance and capital markets (incl. Options, swaps, futures unit)",
+    "by": "Khan Academy",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course",
+        "url": "https://www.khanacademy.org/economics-finance-domain/core-finance"
+      },
+      {
+        "label": "Derivatives unit",
+        "url": "https://www.khanacademy.org/economics-finance-domain/core-finance/derivative-securities"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing",
+      "options"
+    ],
+    "effort": "10 units; short videos",
+    "why": "Ten-minute videos that make put-call parity, futures margin and bonds intuitive for a complete beginner.",
+    "caveats": "US examples; dated interface; pages show an anti-bot interstitial to scripts (content fine in browsers).",
+    "rank": {
+      "US/global investing": 7,
+      "options": 13
+    },
+    "credential": "Khan Academy (non-profit)"
+  },
+  {
+    "id": "cfa-foundations",
+    "title": "Investment Foundations Certificate",
+    "by": "CFA Institute",
+    "type": "course",
+    "cost": "paid",
+    "price": {
+      "amount": "$350",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Programme page",
+        "url": "https://www.cfainstitute.org/programs/investment-foundations-certificate"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "hours": 35,
+    "effort": "35–65 hours; 12-month access",
+    "why": "Industry-standard, ethics-first survey of the investment industry from the CFA Institute, self-paced.",
+    "caveats": "Paid (member price on sign-in), not free as often assumed; global, not India-specific.",
+    "rank": {
+      "US/global investing": 6
+    },
+    "credential": "CFA Institute"
+  },
+  {
+    "id": "cme-intro-options",
+    "title": "Introduction to Options",
+    "by": "CME Group (CME Institute)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Course page",
+        "url": "https://www.cmegroup.com/education/courses/introduction-to-options.html"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options"
+    ],
+    "hours": 1.2,
+    "effort": "1 h 11 min",
+    "why": "Exchange-made primer on options on futures (puts/calls, Greeks, strategies) that is CFA/GARP CE-accredited.",
+    "caveats": "US futures options; cmegroup.com blocks automated fetches but opens normally in a browser.",
+    "rank": {
+      "options": 14
+    },
+    "credential": "CME Group (exchange)"
+  },
+  {
+    "id": "cboe-options101",
+    "title": "The Options Institute — Options 101",
+    "by": "Cboe Global Markets",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Options 101",
+        "url": "https://www.cboe.com/optionsinstitute/courses/options101/"
+      },
+      {
+        "label": "Options Institute home",
+        "url": "https://www.cboe.com/optionsinstitute/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options"
+    ],
+    "effort": "Short course + 20-min Payout Diagrams",
+    "why": "Options exchange's own beginner path, with payout diagrams and a free options calculator.",
+    "caveats": "US equity options (SPX, 0DTE culture); no India notes.",
+    "rank": {
+      "options": 15
+    },
+    "credential": "Cboe (exchange)"
+  },
+  {
+    "id": "oic-getting-started",
+    "title": "Getting Started with Options + OCC Learning",
+    "by": "Options Industry Council (OCC)",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Getting Started",
+        "url": "https://www.optionseducation.org/optionsoverview/getting-started-with-options"
+      },
+      {
+        "label": "OCC Learning",
+        "url": "https://www.optionseducation.org/theoptionseducationcenter/occ-learning"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options"
+    ],
+    "pages": 40,
+    "effort": "Self-paced; strategy library of ~40 pages",
+    "why": "Vendor-neutral strategy library and courses from the US options clearing house's education arm.",
+    "caveats": "US conventions (American exercise, assignment); India's index options are European and cash-settled.",
+    "rank": {
+      "options": 16
+    },
+    "credential": "OIC is run by OCC (US clearing house)"
+  },
+  {
+    "id": "ibkr-traders-academy",
+    "title": "IBKR Campus — Traders' Academy (incl. Introduction to Options)",
+    "by": "Interactive Brokers",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "All finance courses",
+        "url": "https://www.interactivebrokers.com/campus/traders-academy/finance-courses/"
+      },
+      {
+        "label": "Introduction to Options course",
+        "url": "https://www.interactivebrokers.com/campus/trading-course/introduction-to-options/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "options",
+      "US/global investing"
+    ],
+    "effort": "Lessons of 10–30 min with quizzes",
+    "why": "Free courses from the broker most Indian residents use for US stocks; covers options, ETFs, fixed income and the IBKR platform.",
+    "caveats": "Platform-specific lessons mixed with general ones; US-centric.",
+    "rank": {
+      "options": 17,
+      "US/global investing": 8
+    },
+    "credential": "Interactive Brokers (US broker; IBKR India is SEBI-registered)"
+  },
+  {
+    "id": "quantconnect-bootcamp",
+    "title": "QuantConnect Boot Camp (101 US Equities and sequels)",
+    "by": "QuantConnect",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Learning Center",
+        "url": "https://www.quantconnect.com/learning/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "hours": 3,
+    "effort": "Guided lessons; 101 ≈ 3–4 h est.",
+    "why": "Learn the LEAN engine by building strategies in the browser; the fastest route to a real backtest with US data.",
+    "caveats": "US equities/forex/futures data only on the free tier; India data not available.",
+    "rank": {
+      "algo": 8
+    },
+    "credential": "QuantConnect (platform)"
+  },
+  {
+    "id": "damodaran-valuation",
+    "title": "Valuation — NYU Stern MBA webcasts (Spring 2025) and the 25-webcast online class",
+    "by": "Aswath Damodaran",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Spring 2025 webcasts",
+        "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/webcasteqspr25.htm"
+      },
+      {
+        "label": "Online valuation class (25 sessions)",
+        "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/webcastvalonline.htm"
+      }
+    ],
+    "year": "Spring 2025",
+    "level": "intermediate",
+    "fits": [
+      "India investing",
+      "US/global investing"
+    ],
+    "effort": "Semester course ≈ 26 sessions; short class 25 × 12–20 min",
+    "why": "The reference free valuation course — DCF, relative valuation and the data to do it, from the author of the Little Book of Valuation (in the books list).",
+    "caveats": "US-centric examples (Indian companies appear occasionally); 1990s-style pages.",
+    "rank": {
+      "India investing": 12,
+      "US/global investing": 3
+    },
+    "credential": "NYU Stern faculty page"
+  },
+  {
+    "id": "bogle-center",
+    "title": "Bogleheads — three-fund, index-first investing (Bogle Center + Bogleheads wiki)",
+    "by": "John C. Bogle Center for Financial Literacy",
+    "type": "course",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Bogle Center",
+        "url": "https://boglecenter.net/"
+      }
+    ],
+    "year": "2026 (live)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "hours": 10,
+    "effort": "Reading path ≈ 10 h",
+    "why": "The community that turned Bogle's index philosophy into a step-by-step path (getting started, three-fund portfolio, asset allocation).",
+    "caveats": "The wiki itself (bogleheads.org/wiki) sits behind a Cloudflare challenge and could not be verified by script, so only the Center's home page is linked; US accounts and tax terms throughout — see the site's guide on investing abroad from India.",
+    "rank": {
+      "US/global investing": 2
+    },
+    "credential": "Bogle Center (US non-profit)"
+  },
+  {
+    "id": "traderfeed",
+    "title": "TraderFeed (blog)",
+    "by": "Brett N. Steenbarger",
+    "type": "newsletter",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Blog",
+        "url": "https://traderfeed.blogspot.com/"
+      }
+    ],
+    "year": "2026 (posting)",
+    "level": "intermediate",
+    "fits": [
+      "risk & psychology"
+    ],
+    "effort": "Posts of 5–10 min; archive since 2005",
+    "why": "A clinical psychologist who coaches hedge-fund traders, writing short, practical posts on process and performance.",
+    "caveats": "US discretionary-trading context; blogspot platform.",
+    "rank": {
+      "risk & psychology": 4
+    },
+    "credential": "Steenbarger (clinical psychologist, author; no SEBI role needed)"
+  }
+]

@@ -1,1 +1,1546 @@
-[]
+[
+  {
+    "id": "natenberg",
+    "title": "Option Volatility and Pricing: Advanced Trading Strategies and Techniques (2nd ed.)",
+    "by": "Sheldon Natenberg (McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780071818773)",
+        "url": "https://books.google.com/books?vid=ISBN9780071818773"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Option+Volatility+and+Pricing+Natenberg"
+      }
+    ],
+    "year": "2014 (2nd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "pages": 592,
+    "effort": "592 pages",
+    "why": "The options desk's standard text: volatility, Greeks, spreads and risk, explained without heavy maths.",
+    "caveats": "US examples; India notes in the site's guide Greeks for a day trader. McGraw-Hill's own product page no longer resolves, hence the catalogue link.",
+    "rank": {
+      "options": 1
+    }
+  },
+  {
+    "id": "sinclair-vt",
+    "title": "Volatility Trading (2nd ed., + website)",
+    "by": "Euan Sinclair (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$46 e-book / $76 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Volatility+Trading%2C+%2B+Website%2C+2nd+Edition-p-9781118347133"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Volatility+Trading+Euan+Sinclair"
+      }
+    ],
+    "year": "2013 (2nd ed.)",
+    "level": "advanced",
+    "fits": [
+      "options"
+    ],
+    "pages": 320,
+    "effort": "320 pages",
+    "why": "How to measure, forecast and trade volatility, with position sizing (Kelly) and the psychology of being short gamma.",
+    "caveats": "Wiley US prices; mathematical; US examples.",
+    "rank": {
+      "options": 2
+    }
+  },
+  {
+    "id": "sinclair-pot",
+    "title": "Positional Option Trading: An Advanced Guide",
+    "by": "Euan Sinclair (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$47 e-book / $79 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Positional+Option+Trading%3A+An+Advanced+Guide-p-9781119583516"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Positional+Option+Trading+Sinclair"
+      }
+    ],
+    "year": "2020",
+    "level": "advanced",
+    "fits": [
+      "options"
+    ],
+    "pages": 240,
+    "effort": "240 pages",
+    "why": "Where the edges in options actually come from (variance premium, skew, event vol) and how to harvest them with risk control.",
+    "caveats": "Wiley US prices; assumes Volatility Trading; US data.",
+    "rank": {
+      "options": 5
+    }
+  },
+  {
+    "id": "hull",
+    "title": "Options, Futures, and Other Derivatives (11th ed.)",
+    "by": "John C. Hull (Pearson)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$89.99–$94.99 by format",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Pearson",
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/options-futures-and-other-derivatives/P200000005938/9780136939979"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Options+Futures+and+Other+Derivatives+Hull"
+      }
+    ],
+    "year": "2021 (11th ed., published 22 Feb 2021)",
+    "level": "advanced",
+    "fits": [
+      "options"
+    ],
+    "pages": 880,
+    "effort": "≈ 880 pages",
+    "why": "The university reference for pricing, hedging and the mechanics behind every Greek the site's calculator shows.",
+    "caveats": "Pearson US prices (Indian editions are cheaper); a textbook, not a trading manual.",
+    "rank": {
+      "options": 6
+    }
+  },
+  {
+    "id": "varsity-options-pdf",
+    "title": "Options Theory for Professional Trading (Varsity module 5, PDF)",
+    "by": "Zerodha Varsity",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "PDF (5.0 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%205_Options-Theory-for-Professional-Trading.pdf"
+      },
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/option-theory/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "intermediate",
+    "fits": [
+      "options"
+    ],
+    "pages": 250,
+    "effort": "25 chapters (≈ 250 pages)",
+    "why": "Offline copy of the best free Indian options text; the same content as the Varsity module 5 course row.",
+    "caveats": "Timeless concepts, pre-2024 rules (weekly expiries, lot sizes).",
+    "rank": {
+      "options": 7
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "nism-viii-workbook",
+    "title": "NISM Series-VIII Equity Derivatives — certification workbook",
+    "by": "NISM",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Free workbooks (lead form)",
+        "url": "https://api.nism.ac.in/cmp/"
+      },
+      {
+        "label": "Exam page",
+        "url": "https://www.nism.ac.in/equity-derivatives/"
+      }
+    ],
+    "year": "edition year printed on the cover (check at download)",
+    "level": "intermediate",
+    "fits": [
+      "options",
+      "tax & rules"
+    ],
+    "pages": 300,
+    "effort": "≈ 300 pages",
+    "why": "The regulator-institute's own account of F&O products, margining, settlement and SEBI rules — free.",
+    "caveats": "Behind a name/email/mobile form; dry; confirm the edition reflects the 2024–25 SEBI measures.",
+    "rank": {
+      "options": 8,
+      "tax & rules": 4
+    },
+    "freeCopy": "regulator-workbook"
+  },
+  {
+    "id": "brooks-trends",
+    "title": "Trading Price Action Trends: Technical Analysis of Price Charts Bar by Bar for the Serious Trader",
+    "by": "Al Brooks (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$24 e-book / $76.99 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Trading+Price+Action+Trends%3A+Technical+Analysis+of+Price+Charts+Bar+by+Bar+for+the+Serious+Trader-p-9781118066515"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Trading+Price+Action+Trends+Al+Brooks"
+      }
+    ],
+    "year": "2011",
+    "level": "advanced",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 480,
+    "effort": "480 pages",
+    "why": "The densest treatment of intraday market structure (trends, pullbacks, breakouts) that the site's price-action guide draws on.",
+    "caveats": "Wiley US prices; notoriously hard prose; US 5-minute E-mini charts.",
+    "rank": {
+      "intraday": 1
+    }
+  },
+  {
+    "id": "minervini",
+    "title": "Trade Like a Stock Market Wizard: How to Achieve Super Performance in Stocks in Any Market",
+    "by": "Mark Minervini (McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780071807227)",
+        "url": "https://books.google.com/books?vid=ISBN9780071807227"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Trade+Like+a+Stock+Market+Wizard+Minervini"
+      }
+    ],
+    "year": "2013",
+    "level": "intermediate",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 350,
+    "effort": "≈ 350 pages",
+    "why": "Momentum stock selection (trend template, VCP) and strict risk rules from a US Investing Champion; the swing/positional complement to intraday setups.",
+    "caveats": "US stocks; swing not intraday; no India notes.",
+    "rank": {
+      "intraday": 4
+    }
+  },
+  {
+    "id": "shannon-avwap",
+    "title": "Maximum Trading Gains with Anchored VWAP",
+    "by": "Brian Shannon (Alphatrends)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Author's book page",
+        "url": "https://www.alphatrends.net/anchored-vwap-book/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Maximum+Trading+Gains+with+Anchored+VWAP+Shannon"
+      }
+    ],
+    "year": "2023",
+    "level": "intermediate",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 230,
+    "effort": "≈ 230 pages",
+    "why": "The only full-length book on anchored VWAP, the tool behind the site's VWAP guide and the VWAP reclaim-and-reject playbook.",
+    "caveats": "Self-published; US stocks; price varies by region.",
+    "rank": {
+      "intraday": 2
+    }
+  },
+  {
+    "id": "murphy",
+    "title": "Technical Analysis of the Financial Markets",
+    "by": "John J. Murphy (New York Institute of Finance / Penguin)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Penguin Random House",
+        "url": "https://www.penguinrandomhouse.com/books/295282/technical-analysis-of-the-financial-markets-by-john-j-murphy/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Technical+Analysis+of+the+Financial+Markets+Murphy"
+      }
+    ],
+    "year": "1999",
+    "level": "beginner",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 576,
+    "effort": "576 pages",
+    "why": "The reference every TA course paraphrases: trends, patterns, indicators, intermarket analysis.",
+    "caveats": "Timeless, pre-2024 rules; 1990s charts; treat pattern hit rates with the scepticism of the site's candlesticks and order-flow guide.",
+    "rank": {
+      "intraday": 6
+    }
+  },
+  {
+    "id": "dalton",
+    "title": "Mind Over Markets: Power Trading with Market Generated Information (updated ed.)",
+    "by": "James F. Dalton, Eric T. Jones, Robert B. Dalton (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$44 e-book / $74 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Mind+Over+Markets%3A+Power+Trading+with+Market+Generated+Information%2C+Updated+Edition-p-9781118531730"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Mind+Over+Markets+Dalton"
+      }
+    ],
+    "year": "2013 (updated ed.)",
+    "level": "advanced",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 368,
+    "effort": "368 pages",
+    "why": "The Market Profile / TPO text behind the site's volume profile guide.",
+    "caveats": "Wiley US prices; CBOT futures examples; dense.",
+    "rank": {
+      "intraday": 7
+    }
+  },
+  {
+    "id": "grimes-asta",
+    "title": "The Art and Science of Technical Analysis: Market Structure, Price Action, and Trading Strategies",
+    "by": "Adam Grimes (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$59 e-book / $98.95 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/The+Art+and+Science+of+Technical+Analysis%3A+Market+Structure%2C+Price+Action%2C+and+Trading+Strategies-p-9781118115121"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Art+and+Science+of+Technical+Analysis+Grimes"
+      }
+    ],
+    "year": "2012",
+    "level": "intermediate",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 480,
+    "effort": "480 pages",
+    "why": "Price action with statistics: which patterns have an edge, how to test them, and a complete trading plan.",
+    "caveats": "Wiley US prices; US data.",
+    "rank": {
+      "intraday": 5
+    }
+  },
+  {
+    "id": "aronson",
+    "title": "Evidence-Based Technical Analysis: Applying the Scientific Method and Statistical Inference to Trading Signals",
+    "by": "David Aronson (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$66 e-book / $110 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Evidence-Based+Technical+Analysis%3A+Applying+the+Scientific+Method+and+Statistical+Inference+to+Trading+Signals-p-9780470008744"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Evidence-Based+Technical+Analysis+Aronson"
+      }
+    ],
+    "year": "2006",
+    "level": "advanced",
+    "fits": [
+      "intraday",
+      "risk & psychology"
+    ],
+    "pages": 544,
+    "effort": "544 pages",
+    "why": "The antidote to indicator folklore: data-mining bias, hypothesis tests and why most published TA rules fail out of sample.",
+    "caveats": "Wiley US prices; statistical; US S&P 500 tests.",
+    "rank": {
+      "intraday": 8,
+      "risk & psychology": 8
+    }
+  },
+  {
+    "id": "gujral-derivatives",
+    "title": "How to Make Money Trading Derivatives: An Insider's Guide",
+    "by": "Ashwani Gujral (Vision Books, India)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9788170948537)",
+        "url": "https://books.google.com/books?vid=ISBN9788170948537"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Ashwani+Gujral+How+to+Make+Money+Trading+Derivatives"
+      }
+    ],
+    "year": "2005 (reprint ed. 2011)",
+    "level": "intermediate",
+    "fits": [
+      "intraday",
+      "options"
+    ],
+    "pages": 280,
+    "effort": "280 pages",
+    "why": "The best-known Indian author on Nifty futures and options trading, written for NSE instruments and Indian sessions.",
+    "caveats": "Timeless, pre-2024 rules — lot sizes, margins and expiries are long superseded; the author died in 2023; the publisher's site did not resolve, so the catalogue link is a Google Books ISBN record (whose author field is wrong).",
+    "rank": {
+      "intraday": 9,
+      "options": 9
+    }
+  },
+  {
+    "id": "varsity-ta-pdf",
+    "title": "Technical Analysis (Varsity module 2, PDF)",
+    "by": "Zerodha Varsity",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "PDF (4.6 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%202_Technical%20Analysis.pdf"
+      },
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/technical-analysis/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "intraday"
+    ],
+    "pages": 200,
+    "effort": "22 chapters (≈ 200 pages)",
+    "why": "Offline copy of the free Indian TA module.",
+    "caveats": "Indicator-centric; same caveat as the module 2 course row.",
+    "rank": {
+      "intraday": 10
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "lefevre",
+    "title": "Reminiscences of a Stock Operator",
+    "by": "Edwin Lefèvre (1923; Project Gutenberg #60979)",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Project Gutenberg (free ebook)",
+        "url": "https://www.gutenberg.org/ebooks/60979"
+      }
+    ],
+    "year": "1923 (public domain)",
+    "level": "beginner",
+    "fits": [
+      "intraday",
+      "risk & psychology"
+    ],
+    "pages": 300,
+    "effort": "≈ 300 pages",
+    "why": "Jesse Livermore's lessons on sitting tight, pyramiding and overtrading — a century old and still the most quoted trading book.",
+    "caveats": "Public-domain text; pre-regulation US bucket shops; read for psychology, not mechanics.",
+    "rank": {
+      "intraday": 11,
+      "risk & psychology": 9
+    },
+    "freeCopy": "public-domain"
+  },
+  {
+    "id": "carver-st",
+    "title": "Systematic Trading: A unique new method for designing trading and investing systems",
+    "by": "Robert Carver (Harriman House)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Harriman House",
+        "url": "https://harriman-house.com/authors/robert-carver/systematic-trading/9780857194459"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Systematic+Trading+Robert+Carver"
+      }
+    ],
+    "year": "2015 (published 14 Sep 2015)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "pages": 325,
+    "effort": "325 pages",
+    "why": "Position sizing by volatility targeting, forecast scaling and honest expectations — the framework behind the site's systematic guides.",
+    "caveats": "UK/US futures examples; price not displayed on the publisher page (varies).",
+    "rank": {
+      "algo": 1
+    }
+  },
+  {
+    "id": "carver-aft",
+    "title": "Advanced Futures Trading Strategies",
+    "by": "Robert Carver (Harriman House)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Harriman House",
+        "url": "https://harriman-house.com/authors/robert-carver/advanced-futures-trading-strategies/9780857199683"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Advanced+Futures+Trading+Strategies+Carver"
+      }
+    ],
+    "year": "2023 (published 18 Apr 2023)",
+    "level": "advanced",
+    "fits": [
+      "algo"
+    ],
+    "pages": 630,
+    "effort": "630 pages",
+    "why": "Thirty tested futures strategies with full backtests and code pointers — the most recent rigorous systematic-trading book.",
+    "caveats": "Global futures universe; Indian index futures need the site's lot/margin facts; long.",
+    "rank": {
+      "algo": 4
+    }
+  },
+  {
+    "id": "carver-ast",
+    "title": "The Art and Science of Trading",
+    "by": "Robert Carver (Harriman House)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Harriman House (pre-order)",
+        "url": "https://harriman-house.com/authors/robert-carver/the-art-and-science-of-trading/9781804094792"
+      }
+    ],
+    "year": "2026 (out 1 Dec 2026)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "pages": 400,
+    "effort": "400 pages",
+    "why": "Carver's forthcoming book on what discretionary and systematic traders share; listed so the library stays current.",
+    "caveats": "Forthcoming; shown unranked until published (out 1 Dec 2026, pre-order only; no reviews yet).",
+    "forthcoming": true
+  },
+  {
+    "id": "chan-qt",
+    "title": "Quantitative Trading: How to Build Your Own Algorithmic Trading Business (2nd ed.)",
+    "by": "Ernest P. Chan (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$31 e-book / $52 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Quantitative+Trading%3A+How+to+Build+Your+Own+Algorithmic+Trading+Business%2C+2nd+Edition-p-9781119800064"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Quantitative+Trading+Ernest+Chan+2nd+edition"
+      }
+    ],
+    "year": "2021 (2nd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "pages": 256,
+    "effort": "256 pages",
+    "why": "A retail quant's practical path: data, backtesting pitfalls, execution and running it as a business, updated in 2021 with ML notes.",
+    "caveats": "Wiley US prices; US data vendors and brokers — map to the site's broker-API comparison guide.",
+    "rank": {
+      "algo": 2
+    }
+  },
+  {
+    "id": "lopez",
+    "title": "Advances in Financial Machine Learning",
+    "by": "Marcos López de Prado (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$33 e-book / $54.99 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482086"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Advances+in+Financial+Machine+Learning+Lopez+de+Prado"
+      }
+    ],
+    "year": "2018",
+    "level": "advanced",
+    "fits": [
+      "algo"
+    ],
+    "pages": 400,
+    "effort": "400 pages",
+    "why": "Why naive ML backtests lie (leakage, overlapping labels, multiple testing) and how to fix them — mandatory before trusting any ML signal.",
+    "caveats": "Wiley US prices; heavy maths and Python.",
+    "rank": {
+      "algo": 5
+    }
+  },
+  {
+    "id": "jansen",
+    "title": "Machine Learning for Algorithmic Trading (2nd ed.)",
+    "by": "Stefan Jansen (Packt)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "O'Reilly Learning (catalogue page)",
+        "url": "https://www.oreilly.com/library/view/machine-learning-for/9781839217715/"
+      },
+      {
+        "label": "Companion site and code",
+        "url": "https://ml4trading.io/"
+      }
+    ],
+    "year": "2020 (2nd ed.)",
+    "level": "advanced",
+    "fits": [
+      "algo"
+    ],
+    "pages": 820,
+    "effort": "820 pages",
+    "why": "End-to-end Python workflow (data, features, models, backtests with Zipline/Backtrader) with a maintained GitHub repo.",
+    "caveats": "Packt's own page blocks automated fetches, so the O'Reilly catalogue page is linked; US data sources; some libraries have aged.",
+    "rank": {
+      "algo": 6
+    }
+  },
+  {
+    "id": "hilpisch",
+    "title": "Python for Finance: Mastering Data-Driven Finance (2nd ed.)",
+    "by": "Yves Hilpisch (O'Reilly)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "O'Reilly",
+        "url": "https://www.oreilly.com/library/view/python-for-finance/9781492024323/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Python+for+Finance+Hilpisch+2nd+edition"
+      }
+    ],
+    "year": "2018 (2nd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "algo"
+    ],
+    "pages": 720,
+    "effort": "720 pages",
+    "why": "The standard pandas/NumPy-for-finance text: time series, backtesting vectorised strategies, options pricing in Python.",
+    "caveats": "Python 3.6-era code; US data; pair with Quantra's free Python course for hands-on practice.",
+    "rank": {
+      "algo": 3
+    }
+  },
+  {
+    "id": "tidy-finance",
+    "title": "Tidy Finance with Python",
+    "by": "Christoph Scheuch, Stefan Voigt, Patrick Weiss, Christoph Frey (Chapman & Hall/CRC; free online)",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Read online (open access)",
+        "url": "https://www.tidy-finance.org/python/"
+      }
+    ],
+    "year": "2024",
+    "level": "advanced",
+    "fits": [
+      "algo",
+      "US/global investing"
+    ],
+    "pages": 400,
+    "effort": "≈ 400 pages online",
+    "why": "Reproducible empirical finance in Python: factor models, portfolio sorts, backtesting — the open-access bridge from courses to research.",
+    "caveats": "US CRSP/Compustat data (needs WRDS for full replication); academic.",
+    "rank": {
+      "algo": 7,
+      "US/global investing": 9
+    },
+    "freeCopy": "open-access"
+  },
+  {
+    "id": "douglas-zone",
+    "title": "Trading in the Zone: Master the Market with Confidence, Discipline, and a Winning Attitude",
+    "by": "Mark Douglas (Prentice Hall Press / Penguin)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780735201446)",
+        "url": "https://books.google.com/books?vid=ISBN9780735201446"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Trading+in+the+Zone+Mark+Douglas"
+      }
+    ],
+    "year": "2000",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 240,
+    "effort": "240 pages",
+    "why": "The probabilistic mindset (think in samples of 20 trades, accept risk before entry) that every risk guide on the site assumes.",
+    "caveats": "Repetitive; no numbers — pair with the Varsity risk module and the site's guide Expectancy and drawdown maths.",
+    "rank": {
+      "risk & psychology": 2
+    }
+  },
+  {
+    "id": "douglas-disciplined",
+    "title": "The Disciplined Trader: Developing Winning Attitudes",
+    "by": "Mark Douglas (New York Institute of Finance)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780132157575)",
+        "url": "https://books.google.com/books?vid=ISBN9780132157575"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Disciplined+Trader+Mark+Douglas"
+      }
+    ],
+    "year": "1990",
+    "level": "intermediate",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 250,
+    "effort": "≈ 250 pages",
+    "why": "Douglas's first, more analytical book on why traders self-sabotage and how to build mental discipline.",
+    "caveats": "Dated examples; read Trading in the Zone first.",
+    "rank": {
+      "risk & psychology": 6
+    }
+  },
+  {
+    "id": "schwager-mw",
+    "title": "Market Wizards: Interviews with Top Traders (updated ed.)",
+    "by": "Jack D. Schwager (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$17 e-book / $29 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/Market+Wizards%3A+Interviews+with+Top+Traders%2C+Updated-p-9781118273050"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Market+Wizards+Jack+Schwager"
+      }
+    ],
+    "year": "2012 (updated ed. of 1989)",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 512,
+    "effort": "512 pages",
+    "why": "Interviews that show how differently great traders trade and how identically they manage risk.",
+    "caveats": "Wiley US prices; 1980s US context; survivorship bias — none of the methods is a template.",
+    "rank": {
+      "risk & psychology": 3
+    }
+  },
+  {
+    "id": "tharp",
+    "title": "Trade Your Way to Financial Freedom (2nd ed.)",
+    "by": "Van K. Tharp (McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780071478717)",
+        "url": "https://books.google.com/books?vid=ISBN9780071478717"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Trade+Your+Way+to+Financial+Freedom+Van+Tharp"
+      }
+    ],
+    "year": "2006 (2nd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 450,
+    "effort": "≈ 450 pages",
+    "why": "Origin of R-multiples, expectancy and position sizing as the real drivers of results — the maths behind the site's calculators.",
+    "caveats": "US examples; some self-promotion; concepts timeless.",
+    "rank": {
+      "risk & psychology": 4
+    }
+  },
+  {
+    "id": "steenbarger-dtc",
+    "title": "The Daily Trading Coach: 101 Lessons for Becoming Your Own Trading Psychologist",
+    "by": "Brett N. Steenbarger (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$28 e-book / $47 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/The+Daily+Trading+Coach%3A+101+Lessons+for+Becoming+Your+Own+Trading+Psychologist-p-9780470398562"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Daily+Trading+Coach+Steenbarger"
+      }
+    ],
+    "year": "2009",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 368,
+    "effort": "368 pages",
+    "why": "101 short, actionable exercises (journaling, state control, review routines) from a trading-floor psychologist.",
+    "caveats": "Wiley US prices; US discretionary context.",
+    "rank": {
+      "risk & psychology": 7
+    }
+  },
+  {
+    "id": "mackay",
+    "title": "Memoirs of Extraordinary Popular Delusions and the Madness of Crowds",
+    "by": "Charles Mackay (1841; Project Gutenberg #24518)",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Project Gutenberg (free ebook)",
+        "url": "https://www.gutenberg.org/ebooks/24518"
+      }
+    ],
+    "year": "1841 (public domain)",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 700,
+    "effort": "≈ 700 pages (read the first three chapters)",
+    "why": "Tulipmania, the South Sea bubble and the Mississippi scheme — the original account of crowd behaviour in markets.",
+    "caveats": "Victorian prose; only the financial chapters matter.",
+    "rank": {
+      "risk & psychology": 10
+    },
+    "freeCopy": "public-domain"
+  },
+  {
+    "id": "odean-hazardous",
+    "title": "Trading Is Hazardous to Your Wealth: The Common Stock Investment Performance of Individual Investors",
+    "by": "Brad M. Barber, Terrance Odean (Journal of Finance, 2000; author PDF)",
+    "type": "paper",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Author PDF (UC Berkeley)",
+        "url": "https://faculty.haas.berkeley.edu/odean/papers/returns/Individual_Investor_Performance_Final.pdf"
+      }
+    ],
+    "year": "2000",
+    "level": "intermediate",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 35,
+    "effort": "≈ 35 pages",
+    "why": "The classic evidence that the most active retail accounts underperform by the cost of their turnover — the academic twin of SEBI's loss studies.",
+    "caveats": "US discount-broker data from 1991–96; a journal article.",
+    "rank": {
+      "risk & psychology": 11
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "sebi-study-2026",
+    "title": "SEBI DEPA-II profitability study FY25–FY26, 20 Aug 2026",
+    "by": "SEBI, Department of Economic and Policy Analysis (study, 20 Aug 2026)",
+    "type": "paper",
+    "cost": "free",
+    "links": [
+      {
+        "label": "SEBI study (PDF)",
+        "url": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf"
+      }
+    ],
+    "year": "2026",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 91,
+    "effort": "91 pages",
+    "why": "The regulator's current numbers on how individual equity-derivatives traders fared in FY25 and FY26 — the study the site's home page and risk guides quote.",
+    "caveats": "A fifteen-broker sample of individual traders; a 91-page PDF — read the summary pages first, then the site's guide What SEBI's loss studies say.",
+    "rank": {
+      "risk & psychology": 1
+    },
+    "freeCopy": "official-study"
+  },
+  {
+    "id": "sebi-study-2023",
+    "title": "Analysis of Profit and Loss of Individual Traders dealing in Equity F&O Segment",
+    "by": "SEBI (study, 25 Jan 2023)",
+    "type": "paper",
+    "cost": "free",
+    "links": [
+      {
+        "label": "SEBI study page",
+        "url": "https://www.sebi.gov.in/reports-and-statistics/research/jan-2023/study-analysis-of-profit-and-loss-of-individual-traders-dealing-in-equity-fando-segment_67525.html"
+      }
+    ],
+    "year": "2023",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology",
+      "tax & rules"
+    ],
+    "pages": 25,
+    "effort": "≈ 25 pages",
+    "why": "The regulator's first study of individual F&O traders' outcomes (FY22 data) — the baseline that its FY25–FY26 study updates.",
+    "caveats": "The first of SEBI's loss studies; its FY25–FY26 successor is listed separately, and the exact figures are in the site's guide What SEBI's loss studies say.",
+    "rank": {
+      "risk & psychology": 12,
+      "tax & rules": 5
+    },
+    "freeCopy": "official-study"
+  },
+  {
+    "id": "varsity-risk-pdf",
+    "title": "Risk Management & Trading Psychology (Varsity module 9, PDF)",
+    "by": "Zerodha Varsity",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "PDF (3.8 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%209_Risk%20Management%20%26%20Trading%20Psychology.pdf"
+      },
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/risk-management/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "risk & psychology"
+    ],
+    "pages": 150,
+    "effort": "16 chapters (≈ 150 pages)",
+    "why": "Offline copy of the free Indian risk module.",
+    "caveats": "Same content as the module 9 course row.",
+    "rank": {
+      "risk & psychology": 13
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "halan-ltm",
+    "title": "Let's Talk Money: You've Worked Hard for It, Now Make It Work for You",
+    "by": "Monika Halan (HarperCollins India)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "HarperCollins India",
+        "url": "https://harpercollins.co.in/product/lets-talk-money/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Let%27s+Talk+Money+Monika+Halan"
+      }
+    ],
+    "year": "2018",
+    "level": "beginner",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 200,
+    "effort": "≈ 200 pages",
+    "why": "The clearest Indian money-management system (cash-flow accounts, insurance before investing, index funds) from a former Mint consulting editor.",
+    "caveats": "Tax rates and product rules move; check against the site's verified facts register.",
+    "rank": {
+      "India investing": 1
+    }
+  },
+  {
+    "id": "halan-ltmf",
+    "title": "Let's Talk Mutual Funds: A Systematic, Smart Way to Make Them Work for You",
+    "by": "Monika Halan (HarperCollins India)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "HarperCollins India",
+        "url": "https://harpercollins.co.in/product/lets-talk-mutual-funds/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Let%27s+Talk+Mutual+Funds+Monika+Halan"
+      }
+    ],
+    "year": "2023",
+    "level": "beginner",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 250,
+    "effort": "≈ 250 pages",
+    "why": "Current (2023) guide to choosing, holding and exiting Indian mutual funds, including index funds and debt-fund tax after 2023.",
+    "caveats": "Debt-fund taxation moved again under the 2025 Act; read with the site's guide Tax for investors.",
+    "rank": {
+      "India investing": 2
+    }
+  },
+  {
+    "id": "parikh-vibf",
+    "title": "Value Investing and Behavioral Finance: Insights into Indian Stock Market Realities",
+    "by": "Parag Parikh (Tata McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780070077638)",
+        "url": "https://books.google.com/books?vid=ISBN9780070077638"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Value+Investing+and+Behavioral+Finance+Parag+Parikh"
+      }
+    ],
+    "year": "2009",
+    "level": "intermediate",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 300,
+    "effort": "≈ 300 pages",
+    "why": "Behavioural finance applied to Indian investors by the founder of PPFAS — bubbles, IPO manias and contrarian buying with Indian cases.",
+    "caveats": "Pre-2014 market examples; timeless lessons.",
+    "rank": {
+      "India investing": 4
+    }
+  },
+  {
+    "id": "mukherjea-ccl",
+    "title": "Coffee Can Investing: The Low-Risk Road to Stupendous Wealth",
+    "by": "Saurabh Mukherjea, Rakshit Ranjan, Pranab Uniyal (Penguin Random House India)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Penguin India",
+        "url": "https://www.penguin.co.in/book/coffee-can-investing/"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Coffee+Can+Investing+Saurabh+Mukherjea"
+      }
+    ],
+    "year": "2018 (paperback 2020)",
+    "level": "intermediate",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 288,
+    "effort": "288 pages",
+    "why": "A rules-based Indian quality filter (10-year revenue growth and ROCE) plus an honest allocation framework for salaried investors.",
+    "caveats": "Author runs a PMS that sells the strategy; backtests are the author's own.",
+    "rank": {
+      "India investing": 3
+    }
+  },
+  {
+    "id": "nair-bbob",
+    "title": "Bulls, Bears and Other Beasts: A Story of the Indian Stock Market",
+    "by": "Santosh Nair (Pan Macmillan India)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Pan Macmillan India (5th-anniversary ed.)",
+        "url": "https://www.panmacmillan.com/authors/santosh-nair/bulls-bears-and-other-beasts-5th-anniversary-edition/9789390742578"
+      },
+      {
+        "label": "Google Books (ISBN 9781509852390, 2016 ed.)",
+        "url": "https://books.google.com/books?vid=ISBN9781509852390"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Bulls+Bears+and+Other+Beasts+Santosh+Nair"
+      }
+    ],
+    "year": "2016 (5th-anniversary ed. 2021)",
+    "level": "beginner",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 424,
+    "effort": "424 pages (2021 ed.)",
+    "why": "Narrative history of Dalal Street from Harshad Mehta to the 2000s — the context behind SEBI's rules and the traps the site's retail-traps guide describes.",
+    "caveats": "Some chapters are dramatised; the 2021 fifth-anniversary edition adds the years since 2016 and is the one the publisher page lists.",
+    "rank": {
+      "India investing": 8
+    }
+  },
+  {
+    "id": "nism-xv-workbook",
+    "title": "NISM Series-XV Research Analyst — certification workbook",
+    "by": "NISM",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Free workbooks (lead form)",
+        "url": "https://api.nism.ac.in/cmp/"
+      },
+      {
+        "label": "Exam page",
+        "url": "https://www.nism.ac.in/research-analyst-certification-examination/"
+      }
+    ],
+    "year": "edition year printed on the cover (check at download)",
+    "level": "intermediate",
+    "fits": [
+      "India investing"
+    ],
+    "pages": 300,
+    "effort": "≈ 300 pages",
+    "why": "Free, regulator-institute text on financial statements, valuation and the RA regulations — a structured fundamentals syllabus.",
+    "caveats": "Lead form; exam-oriented.",
+    "rank": {
+      "India investing": 9
+    },
+    "freeCopy": "regulator-workbook"
+  },
+  {
+    "id": "bogle-little-book",
+    "title": "The Little Book of Common Sense Investing (10th anniversary ed.)",
+    "by": "John C. Bogle (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$16 e-book / $27 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/The+Little+Book+of+Common+Sense+Investing%3A+The+Only+Way+to+Guarantee+Your+Fair+Share+of+Stock+Market+Returns%2C+10th+Anniversary+Edition-p-9781119404507"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Little+Book+of+Common+Sense+Investing+Bogle"
+      }
+    ],
+    "year": "2017 (10th-anniv. ed.)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 304,
+    "effort": "304 pages",
+    "why": "The case for low-cost index funds in 300 pages, by the man who invented them.",
+    "caveats": "Wiley US prices; US funds; India notes in the site's index-funds guide.",
+    "rank": {
+      "US/global investing": 1
+    }
+  },
+  {
+    "id": "graham-3rd",
+    "title": "The Intelligent Investor, Third Edition (updated with new commentary by Jason Zweig)",
+    "by": "Benjamin Graham, Jason Zweig (HarperBusiness)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780063356726)",
+        "url": "https://books.google.com/books?vid=ISBN9780063356726"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Intelligent+Investor+Third+Edition+Graham+Zweig"
+      }
+    ],
+    "year": "2024 (3rd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 650,
+    "effort": "≈ 650 pages",
+    "why": "Graham's margin-of-safety text with Zweig's 2024 commentary on index funds, meme stocks and today's costs.",
+    "caveats": "US examples; the HarperCollins US page blocks automated fetches, so the Google Books catalogue page is linked; long.",
+    "rank": {
+      "US/global investing": 3
+    }
+  },
+  {
+    "id": "malkiel",
+    "title": "A Random Walk Down Wall Street (50th anniversary ed.)",
+    "by": "Burton G. Malkiel (W. W. Norton)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "W. W. Norton",
+        "url": "https://wwnorton.com/books/9781324035435"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=A+Random+Walk+Down+Wall+Street+50th+anniversary+Malkiel"
+      }
+    ],
+    "year": "2023 (50th-anniv. ed.)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 480,
+    "effort": "≈ 480 pages",
+    "why": "Why most active strategies fail after costs, with the 2023 edition covering crypto, SPACs and factor funds.",
+    "caveats": "US-centric; the life-cycle allocation tables assume US accounts.",
+    "rank": {
+      "US/global investing": 4
+    }
+  },
+  {
+    "id": "housel",
+    "title": "The Psychology of Money: Timeless Lessons on Wealth, Greed, and Happiness",
+    "by": "Morgan Housel (Harriman House)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Harriman House",
+        "url": "https://harriman-house.com/psychologyofmoney"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Psychology+of+Money+Morgan+Housel"
+      }
+    ],
+    "year": "2020 (published 8 Sep 2020)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing",
+      "risk & psychology"
+    ],
+    "pages": 256,
+    "effort": "256 pages",
+    "why": "Twenty short essays on behaviour, compounding and 'enough' — the most readable antidote to over-trading.",
+    "caveats": "No methods or numbers; US anecdotes.",
+    "rank": {
+      "US/global investing": 5,
+      "risk & psychology": 14
+    }
+  },
+  {
+    "id": "antonacci",
+    "title": "Dual Momentum Investing: An Innovative Strategy for Higher Returns with Lower Risk",
+    "by": "Gary Antonacci (McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9780071849449)",
+        "url": "https://books.google.com/books?vid=ISBN9780071849449"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=Dual+Momentum+Investing+Antonacci"
+      }
+    ],
+    "year": "2014",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 240,
+    "effort": "≈ 240 pages",
+    "why": "The absolute-plus-relative momentum rule (GEM) with its backtest — the source for the site's trend-rule guide.",
+    "caveats": "US/global ETFs; backtest ends 2013; the author's research site blocks automated fetches, so the book is the link.",
+    "rank": {
+      "US/global investing": 8
+    }
+  },
+  {
+    "id": "faber-free",
+    "title": "Meb Faber's free books (Global Asset Allocation and three others, PDF)",
+    "by": "Meb Faber (Cambria; author-released)",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "Free downloads (name/email form)",
+        "url": "https://mebfaber.com/books/"
+      }
+    ],
+    "year": "2015–2017 titles; page live 2026",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing"
+    ],
+    "effort": "≈ 100–150 pages each",
+    "why": "Author-released PDFs comparing famous allocation models (All-Weather, Permanent, Ivy) on one data set — the free way into the site's all-weather, momentum and trend-rules guide.",
+    "caveats": "Lead form; US ETFs; the author manages funds that implement the ideas.",
+    "rank": {
+      "US/global investing": 6
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "bogleheads-guide",
+    "title": "The Bogleheads' Guide to Investing (2nd ed.)",
+    "by": "Taylor Larimore, Mel Lindauer, Michael LeBoeuf (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$15 e-book / $25 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/The+Bogleheads%27+Guide+to+Investing%2C+2nd+Edition-p-9781118921289"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Bogleheads+Guide+to+Investing+2nd+edition"
+      }
+    ],
+    "year": "2014 (2nd ed.)",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 336,
+    "effort": "336 pages",
+    "why": "The community's own step-by-step plan: emergency fund, asset allocation, index funds, rebalancing, behaviour.",
+    "caveats": "Wiley US prices; US accounts (401k, IRA) — translate with the site's guide on investing abroad from India.",
+    "rank": {
+      "US/global investing": 7
+    }
+  },
+  {
+    "id": "bernstein-4p",
+    "title": "The Four Pillars of Investing, Second Edition: Lessons for Building a Winning Portfolio",
+    "by": "William J. Bernstein (McGraw-Hill)",
+    "type": "book",
+    "cost": "paid",
+    "links": [
+      {
+        "label": "Google Books (ISBN 9781264715916)",
+        "url": "https://books.google.com/books?vid=ISBN9781264715916"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Four+Pillars+of+Investing+Second+Edition+Bernstein"
+      }
+    ],
+    "year": "2023 (2nd ed.)",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 350,
+    "effort": "≈ 350 pages",
+    "why": "Theory, history, psychology and business of investing in one 2023 update — the best single book for a long-term global allocation.",
+    "caveats": "US-centric; some statistics are US-only.",
+    "rank": {
+      "US/global investing": 2
+    }
+  },
+  {
+    "id": "bernstein-ifyoucan",
+    "title": "If You Can: How Millennials Can Get Rich Slowly",
+    "by": "William J. Bernstein (author-released PDF)",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "PDF (etf.com)",
+        "url": "https://www.etf.com/docs/IfYouCan.pdf"
+      }
+    ],
+    "year": "2014",
+    "level": "beginner",
+    "fits": [
+      "US/global investing"
+    ],
+    "pages": 16,
+    "effort": "16 pages",
+    "why": "A 16-page free plan (save 15%, three index funds, rebalance) with a reading list — the shortest complete investing education.",
+    "caveats": "Hosted on etf.com, which blocks automated fetches but opens normally in a browser; US fund names.",
+    "rank": {
+      "US/global investing": 10
+    },
+    "freeCopy": "author-released"
+  },
+  {
+    "id": "damodaran-lbv",
+    "title": "The Little Book of Valuation: How to Value a Company, Pick a Stock, and Profit (updated ed.)",
+    "by": "Aswath Damodaran (Wiley)",
+    "type": "book",
+    "cost": "paid",
+    "price": {
+      "amount": "$17 e-book / $27.95 print",
+      "currency": "USD",
+      "seen": "2026-11-01"
+    },
+    "links": [
+      {
+        "label": "Wiley",
+        "url": "https://www.wiley.com/en-us/The+Little+Book+of+Valuation%3A+How+to+Value+a+Company%2C+Pick+a+Stock%2C+and+Profit%2C+2nd+Edition-p-9781394244409"
+      },
+      {
+        "label": "Amazon.in search",
+        "url": "https://www.amazon.in/s?k=The+Little+Book+of+Valuation+Damodaran+2nd+edition"
+      }
+    ],
+    "year": "2024 (updated ed., Mar 2024)",
+    "level": "intermediate",
+    "fits": [
+      "US/global investing",
+      "India investing"
+    ],
+    "pages": 304,
+    "effort": "304 pages",
+    "why": "Intrinsic and relative valuation in 300 pages, revised in 2024; the companion to Damodaran's free valuation webcasts (in the courses list).",
+    "caveats": "Wiley US prices; US examples.",
+    "rank": {
+      "US/global investing": 11,
+      "India investing": 10
+    }
+  },
+  {
+    "id": "varsity-tax-pdf",
+    "title": "Markets and Taxation (Varsity module 7, PDF)",
+    "by": "Zerodha Varsity",
+    "type": "book",
+    "cost": "free",
+    "links": [
+      {
+        "label": "PDF (1.3 MB)",
+        "url": "https://zerodha-common.s3.ap-south-1.amazonaws.com/Varsity/Modules/Module%207_Markets%20%26%20Taxation.pdf"
+      },
+      {
+        "label": "Module page",
+        "url": "https://zerodha.com/varsity/module/markets-and-taxation/"
+      }
+    ],
+    "year": "2026 (live; no last-updated stamp)",
+    "level": "beginner",
+    "fits": [
+      "tax & rules"
+    ],
+    "pages": 90,
+    "effort": "8 chapters (≈ 90 pages)",
+    "why": "Offline copy of the only free Indian trader-taxation primer.",
+    "caveats": "Income-tax Act 1961 numbering; the 2025 Act applies from 1 Apr 2026 — section numbers and rates must come from the site's guide Tax for traders under the Income-tax Act 2025. Pre-2024 rules.",
+    "rank": {
+      "tax & rules": 2
+    },
+    "freeCopy": "author-released"
+  }
+]
