@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 3
 topics: [opening range, orb, gap up, gap down, gap fill, pre-open auction, u-shaped volatility, stocks in play]
-related: [price-action-market-structure, vwap-and-anchored-vwap, trading-day-ist, order-types-and-products, overnight-chain-to-india-open, orb-15-min-nifty, gap-fill-fade, premarket-gainer-momentum]
+related: [price-action-market-structure, vwap-and-anchored-vwap, trading-day-ist, order-types-and-products, overnight-chain-to-india-open, results-season-playbook, scanners-and-where-data-lives, orb-15-min-nifty, gap-fill-fade, premarket-gainer-momentum]
 tools: [position-size]
 sources:
   - Singh — A Temporal Analysis of Intraday Volatility of Nifty Futures on the National Stock Exchange, SSRN working paper 3272375, 2018 | https://doi.org/10.2139/ssrn.3272375 | accessed 2026-11-01
@@ -41,7 +41,7 @@ For the opening-range trader two consequences follow. The opening print of Nifty
 
 What transfers to India is the structure of the finding, not the numbers:
 
-- **Trade names in play.** The edge in the 2024 study came from the filter, not the breakout. An Indian equivalent is the pre-market gainers and losers list and the stocks with unusual pre-open volume — which is a scanner question, not a chart question.
+- **Trade names in play.** The edge in the 2024 study came from the filter, not the breakout. An Indian equivalent is the pre-market gainers and losers list and the stocks with unusual pre-open volume — which is a [scanner](../scanners-and-where-data-lives/) question, not a chart question.
 - **Respect the range stop.** The strategy's risk control was mechanical: the stop sat at the other side of the range or its midpoint, and the position size came from the stop distance.
 - **Costs decide.** Net-of-commission results in a market with sub-penny spreads say little about a market where [what a trade costs](../what-a-trade-costs/) includes STT on every sale.
 

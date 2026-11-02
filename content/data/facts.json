@@ -184,6 +184,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mkt-block-window-2-reference",
+    "label": "Cash-market trades whose volume-weighted average price is the afternoon block-window reference price (exchanges compute and publish it in the five minutes before that window opens; morning window reference = previous close)",
+    "value": "13:45–14:00 IST",
+    "since": "2025-12-08",
+    "source": "SEBI circular 2025/134 — Review of Block Deal Framework, 8 Oct 2025, para 2.2.1.2 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
+    "verified": "2026-11-02"
+  },
+  {
     "id": "mkt-cas-band",
     "label": "CAS price band either side of the reference price (VWAP of the last 15 minutes of continuous trading; futures bands align to it during CAS)",
     "value": "±3%",
@@ -640,12 +648,28 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "sebi-block-deal-band",
+    "label": "Block-deal order price band either side of the window reference price (never wider than the stock's normal-market band that day); exchanges live 8 Dec 2025",
+    "value": "±3%",
+    "since": "2025-12-08",
+    "source": "SEBI circular 2025/134 — Review of Block Deal Framework, 8 Oct 2025, para 2.2.2 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
+    "verified": "2026-11-02"
+  },
+  {
     "id": "sebi-block-deal-min-size",
-    "label": "Block deal minimum order size (orders within ±3% of the window reference price)",
+    "label": "Block deal minimum order size (orders within ±3% of the window reference price; delivery compulsory). Exchanges live 8 Dec 2025 — the circular's sixtieth day, 7 Dec, was a Sunday",
     "value": "₹25 crore",
-    "since": "2025-12-07",
-    "source": "SEBI — Review of Block Deal Framework, 8 Oct 2025 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
-    "verified": "2026-11-01"
+    "since": "2025-12-08",
+    "source": "SEBI circular 2025/134 — Review of Block Deal Framework, 8 Oct 2025, para 2.2.3 | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf",
+    "verified": "2026-11-02"
+  },
+  {
+    "id": "sebi-bulk-deal-threshold",
+    "label": "Bulk deal: one client's trades in a scrip in a day as a share of the company's listed equity shares (broker discloses on execution; exchange publishes after market hours)",
+    "value": "0.5%",
+    "since": "2004-01-14",
+    "source": "SEBI Master Circular for Stock Exchanges, Chapter 1 Trading (Dec 2024), para 1.1 (circular SEBI/MRD/SE/Cir-7/2004) | https://www.sebi.gov.in/sebi_data/commondocs/dec-2024/RE_Chapter%201%20-%20Trading%20-%20NEW_p.pdf",
+    "verified": "2026-11-02"
   },
   {
     "id": "sebi-costs-share",
@@ -798,6 +822,38 @@
     "since": "2015-12-01",
     "source": "SEBI (LODR) Regulations 2015, Reg 33(3) | https://www.sebi.gov.in/sebi_data/attachdocs/dec-2025/1766489756276.pdf",
     "verified": "2026-11-01"
+  },
+  {
+    "id": "sebi-rpt-materiality-cap",
+    "label": "Material related-party transaction threshold, ceiling: the lower of the Schedule XII slab formula and this amount applies (LODR Reg 23(1), Schedule XII)",
+    "value": "₹5,000 crore",
+    "since": "2025-12-19",
+    "source": "SEBI (LODR) (Fifth Amendment) Regulations 2025, reg. 3(VII) Schedule XII (gazette 18 Nov 2025; in force 19 Dec 2025) | https://www.sebi.gov.in/sebi_data/attachdocs/nov-2025/1763638434029.pdf",
+    "verified": "2026-11-02"
+  },
+  {
+    "id": "sebi-rpt-materiality-high",
+    "label": "Material related-party transaction threshold, listed entity with annual consolidated turnover above ₹40,000 crore (capped at ₹5,000 crore), LODR Schedule XII",
+    "value": "2.5% of turnover above ₹40,000 crore, plus ₹3,000 crore",
+    "since": "2025-12-19",
+    "source": "SEBI (LODR) (Fifth Amendment) Regulations 2025, reg. 3(VII) Schedule XII row (III) | https://www.sebi.gov.in/sebi_data/attachdocs/nov-2025/1763638434029.pdf",
+    "verified": "2026-11-02"
+  },
+  {
+    "id": "sebi-rpt-materiality-low",
+    "label": "Material related-party transaction threshold, listed entity with annual consolidated turnover up to ₹20,000 crore, LODR Schedule XII (earlier rule: ₹1,000 crore or this share, whichever lower)",
+    "value": "10% of annual consolidated turnover",
+    "since": "2025-12-19",
+    "source": "SEBI (LODR) (Fifth Amendment) Regulations 2025, reg. 3(VII) Schedule XII row (I) | https://www.sebi.gov.in/sebi_data/attachdocs/nov-2025/1763638434029.pdf",
+    "verified": "2026-11-02"
+  },
+  {
+    "id": "sebi-rpt-materiality-mid",
+    "label": "Material related-party transaction threshold, listed entity with annual consolidated turnover above ₹20,000 crore and up to ₹40,000 crore, LODR Schedule XII",
+    "value": "5% of turnover above ₹20,000 crore, plus ₹2,000 crore",
+    "since": "2025-12-19",
+    "source": "SEBI (LODR) (Fifth Amendment) Regulations 2025, reg. 3(VII) Schedule XII row (II) | https://www.sebi.gov.in/sebi_data/attachdocs/nov-2025/1763638434029.pdf",
+    "verified": "2026-11-02"
   },
   {
     "id": "sebi-upfront-margin-rule",

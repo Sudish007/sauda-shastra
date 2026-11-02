@@ -11,7 +11,7 @@ glance_stop: 1.5 per cent below entry or below the pullback low, whichever is ne
 glance_target: 2R for half, trail the rest on 15-minute lows; time stop 14:30; never into the auction
 glance_size: Shares = risk budget ÷ (entry − stop); broker intraday margin must cover the notional
 topics: [pre-open, pre-market gainers, momentum, stocks in play, mis, equity intraday]
-related: [opening-range-and-gaps, settlement-circuits-asm-ban, intraday-leverage-today, trading-day-ist, vwap-reclaim-reject, order-types-and-products]
+related: [opening-range-and-gaps, settlement-circuits-asm-ban, scanners-and-where-data-lives, commentary-ratings-block-deals, intraday-leverage-today, trading-day-ist, vwap-reclaim-reject, order-types-and-products]
 tools: [position-size, charges]
 sources:
   - SEBI circular (Jan 2026) — Introduction of Closing Auction Session and modifications in the pre-open session, paras 4.1–4.5, 5 and 6.2 | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf | accessed 2026-11-01
@@ -36,7 +36,7 @@ Screen while the pre-open indicative prices are live; entries from 09:20, after 
 ## Pre-conditions
 
 - Pre-open indicative change of three per cent or more, on a pre-open quantity at least three times the stock's twenty-day average.
-- A reason: results, an order win, a block deal, a regulatory decision. No reason, no trade.
+- A reason: results, an order win, a [block deal](../../guides/commentary-ratings-block-deals/), a regulatory decision. No reason, no trade.
 - Average daily turnover of ₹50 crore or more, and a daily range (ATR) of at least two per cent of the price, so the move has room.
 - Not under ASM or GSM, not in the F&O ban list, not inside its own results-call window.
 
@@ -62,7 +62,7 @@ Shares = the risk budget divided by (entry − stop). On a [one-per-cent rule](.
 - A pre-open gap of more than ten per cent: circuit and auction risk, and the move may already be done.
 - Illiquid names, where the bid–ask spread is wider than two-tenths of a per cent.
 - A market-wide gap day when every stock is up — there is no relative strength in that.
-- The stock's own results day before the management call, when the second move is unknowable.
+- The stock's own [results day](../../guides/results-season-playbook/) before the management call, when the second move is unknowable.
 
 ## Known failure modes
 

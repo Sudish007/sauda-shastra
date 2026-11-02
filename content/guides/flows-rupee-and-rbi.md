@@ -6,7 +6,7 @@ updated: 2026-11-02
 level: intermediate
 order: 2
 topics: [fii, fpi, dii, nsdl, provisional flows, usd/inr, fbil reference rate, rbi intervention, forex reserves, trade deficit]
-related: [overnight-chain-to-india-open, crude-yields-dollar-sector-map, policy-days-vix-and-sizing, reading-the-option-chain, multi-timeframe-relative-strength]
+related: [overnight-chain-to-india-open, crude-yields-dollar-sector-map, policy-days-vix-and-sizing, reading-the-option-chain, multi-timeframe-relative-strength, commentary-ratings-block-deals]
 sources:
   - NSE — FII/FPI and DII trading activity (provisional daily figures and the notes on their basis) | https://www.nseindia.com/reports/fii-dii | accessed 2026-11-01
   - NSDL — FPI Monitor, latest daily investment data | https://www.fpi.nsdl.co.in/web/Reports/Latest.aspx | accessed 2026-11-01

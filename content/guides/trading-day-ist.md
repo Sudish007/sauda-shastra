@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 1
 topics: [sessions, pre-open, closing auction, derivatives timings, holidays, nse, bse]
-related: [order-types-and-products, settlement-circuits-asm-ban, index-derivatives-specs, vwap-and-anchored-vwap, last-hour-positioning, overnight-chain-to-india-open]
+related: [order-types-and-products, settlement-circuits-asm-ban, index-derivatives-specs, vwap-and-anchored-vwap, last-hour-positioning, overnight-chain-to-india-open, commentary-ratings-block-deals]
 sources:
   - SEBI circular Jan 2026 — Introduction of the Closing Auction Session and modifications in the pre-open session | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf | accessed 2026-11-01
   - SEBI circular Oct 2026 — Review of the CAS, market timings and settlement methodology for derivatives | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf | accessed 2026-11-01

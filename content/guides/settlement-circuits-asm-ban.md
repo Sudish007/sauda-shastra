@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 4
 topics: [settlement, t+1, t+0, circuit breaker, price bands, asm, gsm, f&o ban, mwpl, futeq]
-related: [trading-day-ist, order-types-and-products, index-derivatives-specs]
+related: [trading-day-ist, order-types-and-products, index-derivatives-specs, scanners-and-where-data-lives, governance-red-flags]
 sources:
   - NSE — Index-based market-wide circuit breakers (halt table) | https://www.nseindia.com/products-services/equity-market-circuit-breakers | accessed 2026-11-01
   - SEBI circular CIR/MRD/DP/25/2013 — Index-based market-wide circuit breaker mechanism | https://www.sebi.gov.in/sebi_data/attachdocs/1378198702862.pdf | accessed 2026-11-01
@@ -93,4 +93,4 @@ Stock derivatives also settle physically: every stock future or option open at e
 - Does the stock have derivatives? If not, note its daily band; if so, remember it has none.
 - Where are today's market-wide trip levels? A thin market near one of them behaves differently from a thin market far from them.
 
-The exchanges publish all four lists every trading day on their surveillance pages; a later guide on scanners, in the fundamentals section, will cover where to pull them automatically.
+The exchanges publish all four lists every trading day on their surveillance pages; [Stock scanners and where the data lives](../scanners-and-where-data-lives/) covers where to pull them and how to use them as exclusions.
