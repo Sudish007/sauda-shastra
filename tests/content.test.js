@@ -147,6 +147,8 @@ test('the home hero check needs the five SEBI ids with one shared verified date,
 test('glossary, calendar (kind ∈ filters), changelog and resources are validated', () => {
   assert.throws(() => validate(makeContent({ glossary: [{ term: 'VWAP', def: 'x' }, { term: 'VWAP', def: 'y' }] })), /duplicate/);
   assert.throws(() => validate(makeContent({ glossary: [{ term: 'Lot', def: 'One lot is {{fact:ghost}}.' }] })), /unknown fact \{\{fact:ghost\}\}/);
+  assert.throws(() => validate(makeContent({ glossary: [{ term: 'VWAP', def: 'x', see: ['Anchored VWAP'] }] })), /see target "Anchored VWAP" is not a glossary term/);
+  assert.doesNotThrow(() => validate(makeContent({ glossary: [{ term: 'VWAP', def: 'x', see: ['Anchored VWAP'] }, { term: 'Anchored VWAP', def: 'y', see: ['VWAP'] }] })), 'see links resolve both ways');
   assert.throws(() => validate(makeContent({ changelog: [{ date: '2025-09-01', what: 'Weekly expiry moved', source: 'not-a-url' }] })), /source URL required/);
   assert.throws(() => validate(makeContent({ resources: [{ name: 'NSE', category: 'Data' }] })), /url required/);
   const cal = (events, filters = [{ id: 'expiry', label: 'Expiry days' }]) => makeContent({ calendar: { note: '', filters, events } });

@@ -389,6 +389,11 @@ export function validate(c, { tools = TOOLS, warn = (m) => console.warn(m) } = {
     if (terms.has(g.term)) errors.push(`glossary term "${g.term}": duplicate`);
     terms.add(g.term);
   }
+  // Every "See:" target is an existing term (the page links it as #<termId>; a missing target is a dead anchor).
+  for (const g of c.glossary) {
+    if (g.see !== undefined && !Array.isArray(g.see)) errors.push(`glossary term "${g.term}": see must be an array of terms`);
+    for (const t of Array.isArray(g.see) ? g.see : []) if (!terms.has(t)) errors.push(`glossary term "${g.term}": see target "${t}" is not a glossary term`);
+  }
   const kinds = new Set((c.calendar.filters || []).map((f) => f.id));
   for (const f of c.calendar.filters || []) if (!f.id || !f.label) errors.push(`calendar.json: every filter needs id and label (${JSON.stringify(f)})`);
   if (!Array.isArray(c.calendar.events)) errors.push('calendar.json: events must be an array');
