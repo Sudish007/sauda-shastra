@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 2
 topics: [vwap, anchored vwap, execution benchmark, closing price, closing auction session, reclaim, reject, confluence]
-related: [price-action-market-structure, opening-range-and-gaps, volume-and-market-profile, trading-day-ist]
+related: [price-action-market-structure, opening-range-and-gaps, volume-and-market-profile, trading-day-ist, vwap-reclaim-reject, last-hour-positioning]
 sources:
   - Berkowitz, Logue and Noser — The Total Cost of Transactions on the NYSE, Journal of Finance 43(1), 1988 | https://doi.org/10.1111/j.1540-6261.1988.tb02591.x | accessed 2026-11-01
   - Madhavan — Volume-Weighted Average Price (VWAP), Encyclopedia of Quantitative Finance (Wiley, 2010) | https://doi.org/10.1002/9780470061602.eqf07036 | accessed 2026-11-01

@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: advanced
 order: 4
 topics: [expiry day, 0dte, weekly expiry, closing auction session, cas, settlement price, vwap settlement, expiry-day elm, exercise, square off, pinning, position limits]
-related: [greeks-for-a-day-trader, iv-expected-move-and-crush, liquidity-slippage-and-sebi-measures, spreads-and-delta-neutral, trading-day-ist, index-derivatives-specs]
+related: [greeks-for-a-day-trader, iv-expected-move-and-crush, liquidity-slippage-and-sebi-measures, spreads-and-delta-neutral, trading-day-ist, index-derivatives-specs, expiry-day-straddle-scalp, 0920-short-straddle, last-hour-positioning]
 tools: [expected-move]
 sources:
   - SEBI press release 50/2026 (Aug 2026) — Trends in retail participation, trading behaviour and profitability in equity derivatives | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf | accessed 2026-11-01

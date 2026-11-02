@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 3
 topics: [opening range, orb, gap up, gap down, gap fill, pre-open auction, u-shaped volatility, stocks in play]
-related: [price-action-market-structure, vwap-and-anchored-vwap, trading-day-ist, order-types-and-products]
+related: [price-action-market-structure, vwap-and-anchored-vwap, trading-day-ist, order-types-and-products, orb-15-min-nifty, gap-fill-fade, premarket-gainer-momentum]
 tools: [position-size]
 sources:
   - Singh — A Temporal Analysis of Intraday Volatility of Nifty Futures on the National Stock Exchange, SSRN working paper 3272375, 2018 | https://doi.org/10.2139/ssrn.3272375 | accessed 2026-11-01

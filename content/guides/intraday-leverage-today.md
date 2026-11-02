@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 3
 topics: [peak margin, upfront margin, var, elm, span, mis, square-off, margin penalty, expiry-day elm]
-related: [order-types-and-products, what-a-trade-costs, index-derivatives-specs]
+related: [order-types-and-products, what-a-trade-costs, index-derivatives-specs, position-sizing-and-loss-limits, buying-vs-selling-options, premarket-gainer-momentum]
 tools: [position-size]
 sources:
   - SEBI Master Circular for Stock Brokers (Jun 2025), paras 40–41 — upfront margin, peak-margin snapshots, penalty | https://www.sebi.gov.in/sebi_data/attachdocs/jun-2025/1750158789381.pdf | accessed 2026-11-01
@@ -81,4 +81,4 @@ Leverage is a ceiling imposed by the rules, not a target. Three habits follow fr
 2. **Know the day's extra margins before you sell options.** Expiry day adds the ELM figure above and removes the spread benefit on the expiring leg; a position that fit the day before may not fit on expiry day.
 3. **Keep a buffer above the peak.** The snapshots are random and the penalty is on the peak. A margin utilisation that reads 95 per cent at 10:30 is a penalty waiting for a volatile hour.
 
-How these rules changed what a trade costs is the subject of [What a trade costs](../what-a-trade-costs/); how to turn a risk budget into a lot count is the subject of the position-sizing guide in the risk section.
+How these rules changed what a trade costs is the subject of [What a trade costs](../what-a-trade-costs/); how to turn a risk budget into a lot count is the subject of [Position sizing and loss limits](../position-sizing-and-loss-limits/).

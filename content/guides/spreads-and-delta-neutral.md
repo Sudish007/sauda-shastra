@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: advanced
 order: 6
 topics: [vertical spread, bear call spread, iron fly, iron condor, ratio spread, broken-wing butterfly, delta neutral, short straddle, short strangle, adjustments, span, elm, calendar spread, margin benefit]
-related: [iv-expected-move-and-crush, greeks-for-a-day-trader, buying-vs-selling-options, expiry-day-dynamics, intraday-leverage-today]
+related: [iv-expected-move-and-crush, greeks-for-a-day-trader, buying-vs-selling-options, expiry-day-dynamics, intraday-leverage-today, 0920-short-straddle, expiry-day-straddle-scalp, event-day-iv-crush-hedged]
 tools: [black-scholes-greeks, position-size]
 sources:
   - SEBI circular Feb 2020 (2020/27) — Review of the margin framework for cash and derivatives segments (SPAN parameters) | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf | accessed 2026-11-01

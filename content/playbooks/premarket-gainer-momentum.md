@@ -54,7 +54,7 @@ Half off at 2R — ₹515 in the example — and the rest trailed on 15-minute s
 
 ## Position-size rule
 
-Shares = the risk budget divided by (entry − stop). On a one-per-cent rule with ₹2,50,000 of capital the budget is ₹2,500; ₹2,500 ÷ ₹7.50 = 333 shares, a notional of ₹1,66,500. The broker's intraday margin for the stock must cover that notional — [Intraday leverage today](../../guides/intraday-leverage-today/) explains the upfront VaR + ELM requirement and why leverage is lower on volatile names. The [position-size calculator](../../tools/position-size/) works in shares; the [charges calculator](../../tools/charges/) shows the STT and other costs of a cash intraday round trip.
+Shares = the risk budget divided by (entry − stop). On a [one-per-cent rule](../../guides/position-sizing-and-loss-limits/) with ₹2,50,000 of capital the budget is ₹2,500; ₹2,500 ÷ ₹7.50 = 333 shares, a notional of ₹1,66,500. The broker's intraday margin for the stock must cover that notional — [Intraday leverage today](../../guides/intraday-leverage-today/) explains the upfront VaR + ELM requirement and why leverage is lower on volatile names. The [position-size calculator](../../tools/position-size/) works in shares; the [charges calculator](../../tools/charges/) shows the STT and other costs of a cash intraday round trip.
 
 ## When NOT to trade
 

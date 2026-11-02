@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 6
 topics: [brokerage, stt, transaction charges, sebi fee, stamp duty, gst, dp charge, contract note, break-even]
-related: [intraday-leverage-today, order-types-and-products, index-derivatives-specs]
+related: [intraday-leverage-today, order-types-and-products, index-derivatives-specs, tax-for-traders-it-act-2025, expectancy-and-drawdown-maths]
 tools: [charges]
 sources:
   - Finance Act 2026, s. 159 — Securities transaction tax rates from Apr 2026 | https://www.incometaxindia.gov.in/finance-acts | accessed 2026-11-01
@@ -129,7 +129,7 @@ Suppose instead you hold a 23,000 call to expiry and the index settles at 23,150
 
 ## Why you sell an in-the-money option rather than let it expire
 
-The exercise rule explains a habit of experienced option buyers: close the position before the final bell. Selling an option is taxed at {{fact:chg-stt-options-sell}} of the premium you receive; letting it expire in the money is taxed at {{fact:chg-stt-options-exercise}} of the intrinsic value you receive. For an option bought cheaply that finishes far in the money, the second base is far larger than the first. Add the risk of a poor exit price in the last half hour of an expiry session — when the expiring contract's price is being pinned to a settlement value — and the market exit usually wins. The expiry-day guide in the Options section covers the settlement mechanics.
+The exercise rule explains a habit of experienced option buyers: close the position before the final bell. Selling an option is taxed at {{fact:chg-stt-options-sell}} of the premium you receive; letting it expire in the money is taxed at {{fact:chg-stt-options-exercise}} of the intrinsic value you receive. For an option bought cheaply that finishes far in the money, the second base is far larger than the first. Add the risk of a poor exit price in the last half hour of an expiry session — when the expiring contract's price is being pinned to a settlement value — and the market exit usually wins. [Expiry-day dynamics](../expiry-day-dynamics/) covers the settlement mechanics.
 
 ## Reading your own contract note
 

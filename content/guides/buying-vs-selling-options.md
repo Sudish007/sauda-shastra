@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 5
 topics: [option buying, option selling, variance risk premium, sebi study, retail losses, naked options, gap risk, span, elm, hedged selling, upfront premium, oi confirmation]
-related: [iv-expected-move-and-crush, spreads-and-delta-neutral, expiry-day-dynamics, greeks-for-a-day-trader, what-a-trade-costs, intraday-leverage-today]
+related: [iv-expected-move-and-crush, spreads-and-delta-neutral, expiry-day-dynamics, greeks-for-a-day-trader, what-a-trade-costs, intraday-leverage-today, what-sebi-loss-studies-say, position-sizing-and-loss-limits, oi-shift-breakout]
 tools: [position-size, charges]
 sources:
   - SEBI press release 50/2026 (Aug 2026) — Trends in retail participation, trading behaviour and profitability in equity derivatives | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf | accessed 2026-11-01

@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 7
 topics: [liquidity, bid-ask spread, tick size, slippage, scalping, transaction costs, freeze quantity, order throttling, sebi measures, weekly expiry, lot size, upfront premium, position limits, mwpl]
-related: [index-derivatives-specs, what-a-trade-costs, expiry-day-dynamics, order-types-and-products, settlement-circuits-asm-ban, buying-vs-selling-options]
+related: [index-derivatives-specs, what-a-trade-costs, expiry-day-dynamics, order-types-and-products, settlement-circuits-asm-ban, buying-vs-selling-options, what-sebi-loss-studies-say]
 tools: [charges]
 sources:
   - SEBI circular Oct 2024 (2024/132) — Measures to strengthen the equity index derivatives framework | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf | accessed 2026-11-01

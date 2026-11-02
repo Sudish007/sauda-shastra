@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 2
 topics: [order types, stop-loss, sl-m, mis, nrml, cnc, gtt, amo, iceberg, freeze quantity]
-related: [trading-day-ist, intraday-leverage-today, index-derivatives-specs]
+related: [trading-day-ist, intraday-leverage-today, index-derivatives-specs, liquidity-slippage-and-sebi-measures, candles-order-flow-depth]
 sources:
   - NSE circular FAOP/73928 (Apr 2026) — F&O Consolidated Circular, order types, freeze quantity and price bands | https://nsearchives.nseindia.com/content/circulars/FAOP73928.zip | accessed 2026-11-01
   - SEBI circular Oct 2026 — Review of the CAS (order types allowed in the auction, iceberg transition) | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2026/1792079571420.pdf | accessed 2026-11-01

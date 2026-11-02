@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: advanced
 order: 6
 topics: [volume profile, market profile, tpo, value area, point of control, initial balance, single prints, day types, trend day, intraday momentum]
-related: [vwap-and-anchored-vwap, price-action-market-structure, opening-range-and-gaps, trading-day-ist]
+related: [vwap-and-anchored-vwap, price-action-market-structure, opening-range-and-gaps, trading-day-ist, trend-day-pyramiding]
 sources:
   - Wiley — Steidlmayer on Markets, Trading with Market Profile, 2nd edition | https://www.wiley.com/en-us/Steidlmayer+on+Markets%3A+Trading+with+Market+Profile%2C+2nd+Edition-p-9780471215561 | accessed 2026-11-01
   - Wiley — Mind Over Markets, Power Trading with Market Generated Information, updated edition (Dalton, Jones and Dalton) | https://www.wiley.com/en-us/Mind+Over+Markets%3A+Power+Trading+with+Market+Generated+Information%2C+Updated+Edition-p-9781118531730 | accessed 2026-11-01

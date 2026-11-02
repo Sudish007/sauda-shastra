@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 8
 topics: [candlestick patterns, hit rates, bulkowski, order book, market depth, level 2, level 3, tick by tick, iceberg orders, liquidity, slippage, freeze quantity]
-related: [price-action-market-structure, indicators-and-why-they-lag, order-types-and-products, index-derivatives-specs]
+related: [price-action-market-structure, indicators-and-why-they-lag, order-types-and-products, index-derivatives-specs, liquidity-slippage-and-sebi-measures, reading-the-option-chain]
 sources:
   - Zerodha Varsity — Technical Analysis, Single candlestick patterns (Part 1) and following chapters | https://zerodha.com/varsity/chapter/single-candlestick-patterns-part-1/ | accessed 2026-11-01
   - Marshall, Young and Rose — Market Timing with Candlestick Technical Analysis, SSRN 980583 (Journal of Banking and Finance, 2006) | https://doi.org/10.2139/ssrn.980583 | accessed 2026-11-01

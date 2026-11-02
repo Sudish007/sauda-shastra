@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 4
 topics: [cpr, central pivot range, camarilla, pivot points, narrow range, trend day, volatility clustering, support and resistance]
-related: [price-action-market-structure, opening-range-and-gaps, vwap-and-anchored-vwap, indicators-and-why-they-lag]
+related: [price-action-market-structure, opening-range-and-gaps, vwap-and-anchored-vwap, indicators-and-why-they-lag, cpr-narrow-range-trend-day]
 sources:
   - Zerodha Varsity — Technical Analysis, The Central Pivot Range | https://zerodha.com/varsity/chapter/the-central-pivot-range/ | accessed 2026-11-01
   - TradingView Help Center — Pivot Points Standard (Camarilla formulas) | https://www.tradingview.com/support/solutions/43000521824-pivot-points-standard/ | accessed 2026-11-01

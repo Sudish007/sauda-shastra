@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 5
 topics: [lot size, contract value, weekly expiry, monthly expiry, freeze quantity, position limits, futeq, expiry day, physical settlement, nifty, sensex]
-related: [trading-day-ist, order-types-and-products, intraday-leverage-today, what-a-trade-costs]
+related: [trading-day-ist, order-types-and-products, intraday-leverage-today, what-a-trade-costs, expiry-day-dynamics, liquidity-slippage-and-sebi-measures, expiry-day-straddle-scalp]
 tools: [position-size]
 sources:
   - NSE circular FAOP/70616 (Oct 2025) — Revision in market lot of derivative contracts on indices | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf | accessed 2026-11-01
@@ -60,7 +60,7 @@ NSE chose Tuesday for contracts expiring on or after {{date:2025-09-01}} ([circu
 - Sensex weekly options expire on {{fact:fo-sensex-weekly-expiry-day}}; BSE monthly contracts expire on the {{fact:fo-monthly-expiry-day-bse}}.
 - A holiday on the expiry weekday moves that expiry to the previous trading day; the [calendar](../../calendar/) lists the 2026 shifts.
 
-For an options trader this means an index expiry somewhere in the market on two days of every week — the pattern the expiry-day guides in the Options section build on.
+For an options trader this means an index expiry somewhere in the market on two days of every week — the pattern [Expiry-day dynamics](../expiry-day-dynamics/) in the Options section builds on.
 
 ## Freeze quantity: the largest order you can send
 
@@ -101,7 +101,7 @@ Today an expiring index contract trades to the end of the normal derivatives ses
 - Stock derivatives settle at the stock's volume-weighted price over the same thirty minutes, across exchanges.
 :::
 
-The intent is to replace a settlement that depended on one auction print per stock with one that averages half an hour of trading, which is harder to move. The expiry-day guide in the Options section discusses what that does to the last-hour strategies.
+The intent is to replace a settlement that depended on one auction print per stock with one that averages half an hour of trading, which is harder to move. [Expiry-day dynamics](../expiry-day-dynamics/) discusses what that does to the last-hour strategies.
 
 ### Stock F&O is delivered, not cashed
 

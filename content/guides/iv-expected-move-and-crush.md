@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 2
 topics: [implied volatility, india vix, iv percentile, iv rank, expected move, straddle, variance risk premium, iv crush, budget day, event day, black-scholes]
-related: [greeks-for-a-day-trader, expiry-day-dynamics, buying-vs-selling-options, spreads-and-delta-neutral, reading-the-option-chain, indicators-and-why-they-lag]
+related: [greeks-for-a-day-trader, expiry-day-dynamics, buying-vs-selling-options, spreads-and-delta-neutral, reading-the-option-chain, indicators-and-why-they-lag, event-day-iv-crush-hedged]
 tools: [expected-move, black-scholes-greeks]
 sources:
   - NSE — About India VIX, computation methodology | https://nsearchives.nseindia.com/s3fs-public/inline-files/India_VIX_comp_meth.pdf | accessed 2026-11-01

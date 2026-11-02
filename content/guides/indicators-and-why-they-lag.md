@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 5
 topics: [moving average, ema, rsi, macd, divergence, bollinger bands, squeeze, atr, supertrend, indicator lag, transaction costs]
-related: [price-action-market-structure, vwap-and-anchored-vwap, multi-timeframe-relative-strength, what-a-trade-costs]
+related: [price-action-market-structure, vwap-and-anchored-vwap, multi-timeframe-relative-strength, what-a-trade-costs, position-sizing-and-loss-limits]
 tools: [position-size]
 sources:
   - Zerodha Varsity — Technical Analysis, Moving Averages | https://zerodha.com/varsity/chapter/moving-averages/ | accessed 2026-11-01

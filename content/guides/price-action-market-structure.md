@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 1
 topics: [price action, market structure, higher highs, break of structure, support and resistance, liquidity sweep, dow theory, chart patterns]
-related: [vwap-and-anchored-vwap, opening-range-and-gaps, candles-order-flow-depth, index-derivatives-specs]
+related: [vwap-and-anchored-vwap, opening-range-and-gaps, candles-order-flow-depth, index-derivatives-specs, position-sizing-and-loss-limits, vwap-reclaim-reject, oi-shift-breakout]
 tools: [position-size]
 sources:
   - Zerodha Varsity — Technical Analysis, The Dow Theory (Part 1) | https://zerodha.com/varsity/chapter/dow-theory-part-1/ | accessed 2026-11-01
