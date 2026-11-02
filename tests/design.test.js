@@ -53,9 +53,10 @@ export function htmlToText(html, skip = () => false) {
 }
 
 /** The §6.6 exclusion list: .fact, .facts-box, .rates, pre.formula, nav, script, style, template, time, .time and .num
- *  (rendered figures — table cells, calculator results, example counters — are data, like dates in <time>). */
+ *  (rendered figures — table cells, calculator results, example counters — are data, like dates in <time>); .stats-table holds
+ *  computed statistics (FEAT-017), not register facts. */
 const EXCLUDE = (tag, classes) => ['nav', 'script', 'style', 'template', 'time'].includes(tag)
-  || classes.some((c) => ['fact', 'facts-box', 'rates', 'time', 'formula', 'num'].includes(c));
+  || classes.some((c) => ['fact', 'facts-box', 'rates', 'time', 'formula', 'num', 'stats-table'].includes(c));
 const mainText = (html) => htmlToText(/<main id="main">([\s\S]*?)<\/main>/.exec(html)?.[1] || '', EXCLUDE);
 
 const PUNCT = /^[()[\]{}.,;:“”"'…]+|[()[\]{}.,;:“”"'…]+$/g;
@@ -107,7 +108,7 @@ export function scanTyped(text, factList, { window = 6 } = {}) {
 
 /* ---------- D2: facts are never typed ---------- */
 
-const SCANNED = (file) => file === 'index.html' || /^(guides|playbooks|tools|calendar|glossary|about)\//.test(file);
+const SCANNED = (file) => file === 'index.html' || /^(guides|playbooks|tools|calendar|glossary|about|stats)\//.test(file);
 
 test('the typed-literal scanner catches a typed fact beside its label words, passes the token and passes an unrelated number', () => {
   const lot = { id: 'fo-nifty-lot', label: 'Nifty lot size', value: '65' };

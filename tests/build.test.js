@@ -85,7 +85,7 @@ test('every page has exactly one h1, a title, a description, SEO meta, the share
     assert.match(html, /<meta name="twitter:card" content="summary">/, file);
     const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
     assert.equal(ld.length, 1, `${file}: ${ld.length} JSON-LD scripts`);
-    const kind = /^(guides|playbooks)\/[^/]+\/index\.html$/.test(file) ? 'Article' : /^(tools\/[^/]+|facts)\/index\.html$/.test(file) ? 'WebPage' : 'WebSite';
+    const kind = /^(guides|playbooks)\/[^/]+\/index\.html$/.test(file) ? 'Article' : /^(tools\/[^/]+|facts|stats)\/index\.html$/.test(file) ? 'WebPage' : 'WebSite';
     assert.equal(ld[0]['@type'], kind, `${file}: JSON-LD @type`);
     assert.equal(ld[0]['@context'], 'https://schema.org', file);
     if (kind === 'Article') {
@@ -336,6 +336,32 @@ test('learn/ renders the design §6.10 page: hero card figures (M5), toolbar def
   assert.ok(!/<span class="price">[^<]*<\/span> INR/.test(html));
   assert.ok(!/library-table/.test(html), 'the stylesheet class is lib-table');
   assert.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(html)[1], /learn\/" class="nav-learn" aria-current="page"/);
+});
+
+test('stats/ (FEAT-017) builds from content/data/stats.json only: dated lede, ≥ 2 tables with every figure in td.num, the historical label on each, no NaN, a search entry', async () => {
+  const hasData = existsSync(path.join(root, 'content', 'data', 'stats.json'));
+  assert.equal(relFiles.has('stats/index.html'), hasData, 'the page exists exactly when stats.json does');
+  const search = JSON.parse(await readFile(path.join(out, 'data', 'search.json'), 'utf8'));
+  assert.equal(search.some((d) => d.url === 'stats/'), hasData);
+  assert.ok(!/stats\//.test(await readFile(path.join(out, 'sitemap.xml'), 'utf8')) === !hasData);
+  if (!hasData) return;
+  const st = JSON.parse(await readFile(path.join(root, 'content', 'data', 'stats.json'), 'utf8'));
+  const html = pages.find((p) => p.file === 'stats/index.html').html;
+  const main = /<main id="main">([\s\S]*?)<\/main>/.exec(html)[1];
+  const tables = main.match(/<table class="stats-table"/g) || [];
+  assert.ok(tables.length >= 2, `tables: ${tables.length}`);
+  assert.equal((main.match(/<span class="group-note">Historical, not a forecast<\/span>/g) || []).length, tables.length + (st.vix ? 0 : 1), 'one label per table');
+  assert.ok(!/NaN|undefined|null|Infinity/.test(main), 'no NaN/undefined/null/Infinity in the page');
+  assert.ok(!/<td>/.test(main.replace(/<tfoot>[\s\S]*?<\/tfoot>/g, '')), 'every body figure sits in td.num');
+  assert.match(main, new RegExp(`<time datetime="${st.fetched}">`), 'the fetch date is shown');
+  assert.match(main, new RegExp(`<time datetime="${st.from}">[\\s\\S]*<time datetime="${st.to}">`), 'the data window is shown');
+  assert.match(main, /href="https:\/\/query1\.finance\.yahoo\.com\/v8\/finance\/chart\/%5ENSEI\?range=10y&amp;interval=1d"/, 'links the Yahoo endpoint');
+  assert.match(main, /<h2 id="method">How this was computed<\/h2>/);
+  assert.match(main, /<p class="disclaimer">/);
+  assert.match(html, /"@type":"WebPage"/);
+  assert.equal(st.gaps.buckets.length, 5);
+  assert.equal(st.ranges.weekdays.length, 5);
+  for (const w of st.ranges.weekdays) assert.ok(w.p25 <= w.p50 && w.p50 <= w.p75 && w.p75 <= w.p90, `${w.weekday} percentiles are ordered`);
 });
 
 test.after(async () => { await rm(out, { recursive: true, force: true }); });

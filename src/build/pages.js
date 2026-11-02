@@ -803,6 +803,67 @@ export function factsPage(c, { today = todayIST() } = {}) {
   return layout({ title: S.facts.eyebrow, description: S.facts.lede, path: 'facts/index.html', depth: 1, body, current: '', schema: 'WebPage' });
 }
 
+/* ---------- Computed statistics (route stats/, FEAT-017; emitted only when content/data/stats.json exists) ---------- */
+
+const statNum = (x, digits = 2) => (typeof x === 'number' && Number.isFinite(x) ? x.toLocaleString('en-IN', { minimumFractionDigits: digits, maximumFractionDigits: digits }) : '—');
+const statInt = (x) => statNum(x, 0);
+const statPct = (x) => (typeof x === 'number' && Number.isFinite(x) ? `${statNum(x)} %` : '—');
+
+/** One statistics table: heading with the "Historical, not a forecast" label, a one-paragraph note, the table (every figure in td.num). */
+function statsTable(id, title, note, columns, rows, foot = '') {
+  return `<h2 class="group-title" id="${esc(id)}">${esc(title)} <span class="group-note">${esc(S.stats.historical)}</span></h2>
+    <p class="stats-note">${esc(note)}</p>
+    <div class="table-wrap"><table class="stats-table" aria-describedby="${esc(id)}"><thead><tr>${columns.map((c, i) => `<th${i ? ' class="num"' : ''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.map((cells) => `<tr>${cells.map((v, i) => (i ? `<td class="num">${esc(v)}</td>` : `<th scope="row">${esc(v)}</th>`)).join('')}</tr>`).join('')}</tbody>${foot ? `<tfoot><tr>${foot.map((v, i) => `<td${i ? ' class="num"' : ''}>${esc(v)}</td>`).join('')}</tr></tfoot>` : ''}</table></div>`;
+}
+
+export function statsPage(c) {
+  const r = rel(1);
+  const st = c.stats;
+  const ext = (href, text) => `<a href="${esc(href)}" rel="noopener noreferrer" target="_blank">${esc(text)}</a>`;
+  const gc = S.stats.gapsColumns;
+  const gaps = statsTable('gaps', S.stats.gapsTitle, S.stats.gapsNote, [gc.bucket, gc.sessions, gc.share, gc.filled, gc.filledShare],
+    st.gaps.buckets.map((b) => [b.label, statInt(b.sessions), statPct(b.share), statInt(b.filled), statPct(b.filledShare)]),
+    [S.stats.gapsAll, statInt(st.gaps.sessions), statPct(100), statInt(st.gaps.buckets.reduce((n, b) => n + b.filled, 0)), statPct(st.gaps.filledShare)]);
+  const dc = S.stats.dirColumns;
+  const dir = st.gaps.direction
+    ? statsTable('gap-direction', S.stats.dirTitle, S.stats.dirNote, [dc.direction, dc.sessions, dc.share, dc.median, dc.filledShare],
+      [['up', S.stats.up], ['down', S.stats.down]].map(([k, label]) => { const d = st.gaps.direction[k]; return [label, statInt(d.sessions), statPct(d.share), statPct(d.medianSize), statPct(d.filledShare)]; }))
+    : '';
+  const rc = S.stats.rangesColumns;
+  const ranges = statsTable('ranges', S.stats.rangesTitle, S.stats.rangesNote, [rc.weekday, rc.sessions, rc.p25, rc.p50, rc.p75, rc.p90],
+    st.ranges.weekdays.map((w) => [w.weekday, statInt(w.sessions), statPct(w.p25), statPct(w.p50), statPct(w.p75), statPct(w.p90)]),
+    [S.stats.rangesAll, statInt(st.ranges.all.sessions), statPct(st.ranges.all.p25), statPct(st.ranges.all.p50), statPct(st.ranges.all.p75), statPct(st.ranges.all.p90)]);
+  const vc = S.stats.vixColumns;
+  const vix = st.vix
+    ? statsTable('vix', S.stats.vixTitle, S.stats.vixNote, [vc.band, vc.from, vc.to, vc.sessions, vc.p50, vc.p75, vc.p90],
+      st.vix.bands.map((b) => [b.label, b.vixFrom === null ? S.stats.vixAny : statNum(b.vixFrom), b.vixTo === null ? S.stats.vixAny : statNum(b.vixTo), statInt(b.sessions), statPct(b.nextRangeP50), statPct(b.nextRangeP75), statPct(b.nextRangeP90)]))
+    : `<h2 class="group-title" id="vix">${esc(S.stats.vixTitle)} <span class="group-note">${esc(S.stats.historical)}</span></h2><p class="stats-note muted">${esc(S.stats.vixMissing)}</p>`;
+  const sourceLine = fillHtml(S.stats.sourceLine, {
+    nifty: ext(st.sourceUrl, S.stats.sourceNifty),
+    vix: st.vix && st.vixSourceUrl ? `${esc(S.stats.and)}${ext(st.vixSourceUrl, S.stats.sourceVix)}` : '',
+    fetched: timeTag(st.fetched),
+  });
+  const lede = fillHtml(S.stats.lede, { source: ext(st.sourceUrl, st.source), from: timeTag(st.from), to: timeTag(st.to), n: `<span class="num">${statInt(st.sessions)}</span>`, fetched: timeTag(st.fetched) });
+  const body = `<section class="section"><div class="container" data-stats>
+    ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: S.stats.eyebrow }])}
+    <div class="section-head"><div><p class="eyebrow">${esc(S.stats.eyebrow)}</p><h1>${esc(S.stats.title)}</h1></div><p class="lede">${lede}</p></div>
+    ${gaps}
+    ${dir}
+    ${ranges}
+    ${vix}
+    <div class="prose stats-method">
+      <h2 id="method">${esc(S.stats.methodTitle)}</h2>
+      ${st.method.split(/(?<=\.)\s+(?=[A-Z])/).reduce((acc, s) => { const last = acc[acc.length - 1]; if (last && last.length + s.length < 420) acc[acc.length - 1] = `${last} ${s}`; else acc.push(s); return acc; }, []).map((p) => `<p>${esc(p)}</p>`).join('')}
+      <h2 id="data">${esc(S.stats.sourceTitle)}</h2>
+      <p>${sourceLine}</p>
+      <h2 id="reading">${esc(S.stats.readTitle)}</h2>
+      <p>${esc(S.stats.readText)}</p>
+      ${disclaimer()}
+    </div>
+  </div></section>`;
+  return layout({ title: S.stats.title, description: S.stats.description, path: 'stats/index.html', depth: 1, body, current: '', schema: 'WebPage' });
+}
+
 export function notFoundPage() {
   const r = rel(0);
   const body = `<section class="section"><div class="container not-found"><p class="eyebrow">${esc(S.notFound.eyebrow)}</p><h1>${esc(S.notFound.title)}</h1><p class="lede">${esc(S.notFound.lede)}</p><div class="cluster"><a class="btn btn-primary" href="${r}">${esc(S.notFound.home)}</a><a class="btn btn-secondary" href="${r}guides/">${esc(S.notFound.guides)}</a></div></div></section>`;

@@ -31,6 +31,7 @@ export function buildSearchIndex(c) {
   docs.push({ kind: S.labels.page, title: S.changelog.title, url: 'changelog/', text: S.changelog.lede, keywords: 'changes rules sebi circular' });
   docs.push({ kind: S.labels.page, title: S.resources.title, url: 'resources/', text: S.resources.lede, keywords: 'data api broker community' });
   docs.push({ kind: S.labels.page, title: S.facts.eyebrow, url: 'facts/', text: S.facts.lede, keywords: 'facts register rates verified' });
+  if (c.stats) docs.push({ kind: S.labels.page, title: `${S.stats.eyebrow} — ${S.stats.title}`, url: 'stats/', text: S.stats.description, keywords: 'statistics gap fill range vix nifty computed' });
   docs.push({ kind: S.labels.page, title: c.pages?.about?.title || S.about.eyebrow, url: 'about/', text: S.footer.disclaimer, keywords: 'about disclaimer licence' });
   for (const t of c.glossary) docs.push({ kind: S.labels.term, title: t.term, url: `glossary/#${pages.termId(t.term)}`, text: plain(t.def).slice(0, 160), keywords: '' });
   for (const e of c.library.courses) docs.push({ kind: S.labels.course, title: e.title, url: `learn/#${e.id}`, text: `${e.by} · ${e.cost}`, keywords: e.fits.join(' ') });
@@ -67,6 +68,7 @@ export async function buildSite({ root, outDir, basePath = SITE.basePath }) {
   await emit('changelog/index.html', pages.changelogPage(c));
   await emit('resources/index.html', pages.resourcesPage(c));
   await emit('facts/index.html', pages.factsPage(c));
+  if (c.stats) await emit('stats/index.html', pages.statsPage(c)); // optional computed statistics (scripts/stats.mjs)
   await emit('about/index.html', pages.aboutPage(c));
   await emit('sources/index.html', pages.sourcesPage(c));
   // 404 pages are served for any missing path, so relative URLs would break: pin the base.

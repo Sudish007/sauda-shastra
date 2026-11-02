@@ -1,0 +1,172 @@
+{
+  "source": "Yahoo Finance chart API ^NSEI",
+  "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=10y&interval=1d",
+  "vixSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EINDIAVIX?range=10y&interval=1d",
+  "fetched": "2026-11-02",
+  "from": "2016-11-02",
+  "to": "2026-11-02",
+  "sessions": 2467,
+  "method": "Daily open, high, low and close of ^NSEI were downloaded from the Yahoo Finance chart API (range 10y, interval 1d) and dated in IST; sessions missing any of the four prices were dropped, leaving 2467 sessions from 2016-11-02 to 2026-11-02. Gap = (open − previous close) ÷ previous close, in per cent, bucketed by its absolute size. A gap counts as filled when the same session traded back to the previous close: for a gap up, the low reached or crossed the previous close; for a gap down, the high did. Shares are per bucket, so a bucket with few sessions is a noisy estimate. Daily range = (high − low) ÷ previous close, in per cent, summarised as the 25th, 50th, 75th and 90th percentiles (linear interpolation) for all sessions and for each weekday. India VIX: the ^INDIAVIX close of each session was joined to the next session's Nifty range; the closes were split into quarters (quartiles of the sample), and each band reports the median and the 75th and 90th percentiles of the following day's range. VIX is an annualised implied-volatility index; the bands are the sample's own quartiles, not an exchange definition. Caveats: Yahoo opens for the index are the first disseminated value after 09:15 and are not audited against NSE; the window includes the 2020 crash; nothing here adjusts for holidays, expiry days or events. Historical, not a forecast.",
+  "gaps": {
+    "sessions": 2466,
+    "medianAbs": 0.28,
+    "filledShare": 63.79,
+    "buckets": [
+      {
+        "id": "le-0.25",
+        "label": "≤ 0.25 %",
+        "sessions": 1139,
+        "share": 46.19,
+        "filled": 943,
+        "filledShare": 82.79
+      },
+      {
+        "id": "0.25-0.5",
+        "label": "0.25–0.5 %",
+        "sessions": 724,
+        "share": 29.36,
+        "filled": 426,
+        "filledShare": 58.84
+      },
+      {
+        "id": "0.5-1",
+        "label": "0.5–1 %",
+        "sessions": 441,
+        "share": 17.88,
+        "filled": 168,
+        "filledShare": 38.1
+      },
+      {
+        "id": "1-2",
+        "label": "1–2 %",
+        "sessions": 117,
+        "share": 4.74,
+        "filled": 29,
+        "filledShare": 24.79
+      },
+      {
+        "id": "gt-2",
+        "label": "> 2 %",
+        "sessions": 45,
+        "share": 1.82,
+        "filled": 7,
+        "filledShare": 15.56
+      }
+    ],
+    "direction": {
+      "up": {
+        "sessions": 1640,
+        "share": 66.5,
+        "filledShare": 65.67,
+        "medianSize": 0.29
+      },
+      "down": {
+        "sessions": 825,
+        "share": 33.45,
+        "filledShare": 60,
+        "medianSize": 0.24
+      }
+    }
+  },
+  "ranges": {
+    "sessions": 2466,
+    "all": {
+      "sessions": 2466,
+      "p25": 0.66,
+      "p50": 0.9,
+      "p75": 1.28,
+      "p90": 1.77
+    },
+    "weekdays": [
+      {
+        "weekday": "Monday",
+        "sessions": 491,
+        "p25": 0.66,
+        "p50": 0.93,
+        "p75": 1.35,
+        "p90": 1.83
+      },
+      {
+        "weekday": "Tuesday",
+        "sessions": 494,
+        "p25": 0.66,
+        "p50": 0.87,
+        "p75": 1.27,
+        "p90": 1.79
+      },
+      {
+        "weekday": "Wednesday",
+        "sessions": 496,
+        "p25": 0.64,
+        "p50": 0.88,
+        "p75": 1.24,
+        "p90": 1.63
+      },
+      {
+        "weekday": "Thursday",
+        "sessions": 497,
+        "p25": 0.66,
+        "p50": 0.89,
+        "p75": 1.25,
+        "p90": 1.73
+      },
+      {
+        "weekday": "Friday",
+        "sessions": 487,
+        "p25": 0.69,
+        "p50": 0.92,
+        "p75": 1.29,
+        "p90": 1.8
+      }
+    ]
+  },
+  "vix": {
+    "source": "Yahoo Finance chart API ^INDIAVIX",
+    "sessions": 2448,
+    "from": "2016-11-02",
+    "to": "2026-11-02",
+    "medianClose": 14.8,
+    "bands": [
+      {
+        "id": "q1",
+        "label": "Lowest quarter",
+        "vixFrom": null,
+        "vixTo": 12.7,
+        "sessions": 613,
+        "nextRangeP50": 0.66,
+        "nextRangeP75": 0.86,
+        "nextRangeP90": 1.09
+      },
+      {
+        "id": "q2",
+        "label": "Second quarter",
+        "vixFrom": 12.7,
+        "vixTo": 14.8,
+        "sessions": 609,
+        "nextRangeP50": 0.82,
+        "nextRangeP75": 1.09,
+        "nextRangeP90": 1.46
+      },
+      {
+        "id": "q3",
+        "label": "Third quarter",
+        "vixFrom": 14.8,
+        "vixTo": 18.31,
+        "sessions": 615,
+        "nextRangeP50": 0.99,
+        "nextRangeP75": 1.31,
+        "nextRangeP90": 1.74
+      },
+      {
+        "id": "q4",
+        "label": "Highest quarter",
+        "vixFrom": 18.31,
+        "vixTo": null,
+        "sessions": 611,
+        "nextRangeP50": 1.28,
+        "nextRangeP75": 1.78,
+        "nextRangeP90": 2.56
+      }
+    ]
+  }
+}

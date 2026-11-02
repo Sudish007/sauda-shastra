@@ -356,6 +356,13 @@ td.num, th.num { text-align: right; }
 .facts-table td.num, .lib-table td.num, td.nowrap { white-space: nowrap; }
 .facts-table td.val { font-variant-numeric: tabular-nums; max-width: 32ch; }
 .facts-table code { font-size: max(12px, 0.8em); }
+/* Computed statistics (stats/): row headers read as labels, every figure sits in td.num; notes and method stay a reading column. */
+.stats-table tbody th { font-weight: 600; text-transform: none; letter-spacing: 0; font-size: inherit; color: var(--ink); background: transparent; white-space: nowrap; }
+.stats-table tbody tr:nth-child(even) th { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+.stats-table td.num { white-space: nowrap; }
+.stats-note { max-width: 76ch; color: var(--ink-2); margin: 0 0 var(--space-4); }
+.stats-method { max-width: 76ch; margin-top: var(--space-7); }
+.stats-method .disclaimer { margin-top: var(--space-6); }
 tfoot td { font-weight: 650; border-top: 2px solid var(--line-strong); background: var(--surface-2); }
 .callout { border: 1px solid var(--line); border-left-width: 4px; border-radius: var(--radius-sm); padding: 1rem 1.2rem; background: var(--surface); }
 .callout > * + * { margin-top: 0.6em; }

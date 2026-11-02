@@ -233,6 +233,8 @@ export async function loadContent(contentDir, { today } = {}) {
     health: await readJsonOr(path.join(dataDir, 'library', 'health.json'), null),
   };
   if (!library.health && (library.courses.length || library.books.length)) console.warn('warning: content/data/library/health.json missing — run scripts/linkcheck.py; the Learn page shows "links checked: not yet"');
+  // scripts/stats.mjs writes the computed Nifty statistics; without the file the stats/ page is not emitted (FEAT-017, optional).
+  const stats = await readJsonOr(path.join(dataDir, 'stats.json'), null);
 
   const dates = [
     ...guides.map((g) => g.updated), ...playbooks.map((p) => p.updated), ...Object.values(pages).map((p) => p.updated),
@@ -251,6 +253,7 @@ export async function loadContent(contentDir, { today } = {}) {
     changelog,
     resources,
     library,
+    stats,
     reviewed,
     byGuide: Object.fromEntries(guides.map((g) => [g.slug, g])),
     byPlaybook: Object.fromEntries(playbooks.map((p) => [p.slug, p])),
@@ -443,6 +446,11 @@ export function validate(c, { tools = TOOLS, warn = (m) => console.warn(m) } = {
   }
   const h = c.library.health;
   if (h && (!DATE.test(String(h.checked || '')) || !Number.isInteger(h.urls) || !Array.isArray(h.dead) || !Array.isArray(h.blocked || []))) errors.push('library/health.json: { checked: YYYY-MM-DD, urls: n, ok: n, blocked: [], dead: [] } expected');
+  const st = c.stats;
+  if (st && (![st.fetched, st.from, st.to].every((d) => DATE.test(String(d || ''))) || !Number.isInteger(st.sessions) || !st.source || !/^https:/.test(String(st.sourceUrl || '')) || !st.method
+    || !Array.isArray(st.gaps?.buckets) || !st.gaps.buckets.length || !Array.isArray(st.ranges?.weekdays) || !st.ranges.weekdays.length || !st.ranges.all || (st.vix && !Array.isArray(st.vix.bands)))) {
+    errors.push('stats.json: { source, sourceUrl (https), fetched/from/to: YYYY-MM-DD, sessions: n, method, gaps.buckets[], ranges.all, ranges.weekdays[], vix: { bands[] } | null } expected (scripts/stats.mjs writes it)');
+  }
 
   if (errors.length) throw new Error('Content validation failed:\n' + errors.join('\n'));
 }
