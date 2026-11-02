@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 1
 topics: [sebi study, retail losses, base rate, f&o, index options, intraday, transaction costs, persistence, under-30s]
-related: [expectancy-and-drawdown-maths, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, what-a-trade-costs, liquidity-slippage-and-sebi-measures]
+related: [expectancy-and-drawdown-maths, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, what-a-trade-costs, liquidity-slippage-and-sebi-measures, strategy-families-and-backtest-hygiene]
 tools: [expectancy-kelly]
 sources:
   - SEBI — Profitability of individual traders in the equity derivatives segment, FY25–FY26 (Aug 2026) | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf | accessed 2026-11-01

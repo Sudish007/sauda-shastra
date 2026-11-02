@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 6
 topics: [brokerage, stt, transaction charges, sebi fee, stamp duty, gst, dp charge, contract note, break-even]
-related: [intraday-leverage-today, order-types-and-products, index-derivatives-specs, tax-for-traders-it-act-2025, expectancy-and-drawdown-maths]
+related: [intraday-leverage-today, order-types-and-products, index-derivatives-specs, tax-for-traders-it-act-2025, expectancy-and-drawdown-maths, broker-apis-compared, strategy-families-and-backtest-hygiene]
 tools: [charges]
 sources:
   - Finance Act 2026, s. 159 — Securities transaction tax rates from Apr 2026 | https://www.incometaxindia.gov.in/finance-acts | accessed 2026-11-01

@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 7
 topics: [liquidity, bid-ask spread, tick size, slippage, scalping, transaction costs, freeze quantity, order throttling, sebi measures, weekly expiry, lot size, upfront premium, position limits, mwpl]
-related: [index-derivatives-specs, what-a-trade-costs, expiry-day-dynamics, order-types-and-products, settlement-circuits-asm-ban, buying-vs-selling-options, what-sebi-loss-studies-say]
+related: [index-derivatives-specs, what-a-trade-costs, expiry-day-dynamics, order-types-and-products, settlement-circuits-asm-ban, buying-vs-selling-options, what-sebi-loss-studies-say, sebi-retail-algo-framework, execution-realities-and-architecture]
 tools: [charges]
 sources:
   - SEBI circular Oct 2024 (2024/132) — Measures to strengthen the equity index derivatives framework | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf | accessed 2026-11-01
@@ -71,7 +71,7 @@ Two cautions. The figures changed twice in a month — a [circular effective {{d
 
 ## Order throttling
 
-Three layers can slow or stop an order before the exchange sees it. The broker's own risk system rejects orders that breach its per-second or per-client limits. SEBI's [retail algorithmic-trading framework](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2025/1738665456458.pdf) treats orders above an orders-per-second threshold, set by the brokers' industry forum, as algorithmic and requires them to be registered with the exchange, with API access through a client-specific key and a broker-whitelisted static IP; the Algo section of this site covers the threshold and the dates. And the exchange's freeze quantity above caps each order's size. A scalper sending many small orders is closer to the first two layers than it feels.
+Three layers can slow or stop an order before the exchange sees it. The broker's own risk system rejects orders that breach its per-second or per-client limits. SEBI's [retail algorithmic-trading framework](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2025/1738665456458.pdf) treats orders above an orders-per-second threshold, set by the brokers' industry forum, as algorithmic and requires them to be registered with the exchange, with API access through a client-specific key and a broker-whitelisted static IP; [SEBI's retail algo rules](../sebi-retail-algo-framework/) covers the threshold and the dates, and [Execution realities](../execution-realities-and-architecture/) the broker throttles and the order splitter. And the exchange's freeze quantity above caps each order's size. A scalper sending many small orders is closer to the first two layers than it feels.
 
 ## What changed since 2024, and how strategies adapted
 

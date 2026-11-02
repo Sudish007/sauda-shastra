@@ -1464,6 +1464,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "algo-5paisa-order-limits",
+    "label": "5paisa Xstream API order throttles (200 WebSocket subscriptions, 25 OHLC requests/s)",
+    "value": "25 orders/s, 10,000/day",
+    "since": "2026-11-01",
+    "source": "5paisa Xstream API | https://xstream.5paisa.com/",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "algo-angel-smartapi-price",
     "label": "Angel One SmartAPI (static IP mandatory from 1 Apr 2026)",
     "value": "Free",
@@ -1488,6 +1496,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "algo-dhan-order-limits",
+    "label": "DhanHQ order API throttles (data APIs 5/s and 1,00,000/day; quotes 1/s; 25 modifications per order)",
+    "value": "10 orders/s, 250/min, 1,000/hour, 7,000/day",
+    "since": "2026-11-01",
+    "source": "DhanHQ API v2 documentation | https://dhanhq.co/docs/v2/",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "algo-framework-circular-date",
     "label": "SEBI retail algo framework circular (SEBI/HO/MIRSD/MIRSD-PoD/P/CIR/2025/0000013)",
     "value": "4 Feb 2025",
@@ -1509,6 +1525,22 @@
     "value": "Free",
     "since": "2026-11-01",
     "source": "FYERS API Plans and Rate Limits | https://fyers.in/api-docs/v3/getting-started/plans-and-limits/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-fyers-api-rate-limit",
+    "label": "FYERS transaction API rate limit, Standard and Prime plans (data APIs 5/s on Standard, 10/s on Prime)",
+    "value": "10 requests/s",
+    "since": "2026-11-01",
+    "source": "FYERS API plans and rate limits | https://fyers.in/api-docs/v3/getting-started/plans-and-limits/",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-fyers-prime-price",
+    "label": "FYERS Prime subscription, raises the API data limits (₹4,990 + GST/year)",
+    "value": "₹499 + GST/month",
+    "since": "2026-11-01",
+    "source": "FYERS Prime | https://fyers.in/prime",
     "verified": "2026-11-01"
   },
   {
@@ -1544,6 +1576,22 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "algo-nse-colo-msg-rate-a",
+    "label": "NSE colocation message-rate charge, category A (40 msg/s), excl. taxes",
+    "value": "₹50,000 per year",
+    "since": "2026-04-29",
+    "source": "NSE — Co-location facility, tariff per NSE/MSD/73958 | https://www.nseindia.com/static/trade/platform-services-co-location-facility",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-nse-colo-msg-rate-h",
+    "label": "NSE colocation message-rate charge, category H (10,000 msg/s), days other than Wed/Thu (₹1,25,00,000 on Wed/Thu), excl. taxes",
+    "value": "₹2,50,00,000 per year",
+    "since": "2026-04-29",
+    "source": "NSE — Co-location facility, tariff per NSE/MSD/73958 | https://www.nseindia.com/static/trade/platform-services-co-location-facility",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "algo-order-rate-threshold",
     "label": "Order-rate threshold for registering a self-coded algo",
     "value": "10 orders per second",
@@ -1552,11 +1600,27 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "algo-otr-exemption-band",
+    "label": "Order-to-trade ratio penalty: orders priced within this band of the last traded price are exempt, cash and derivatives (circular date; effective date not verified)",
+    "value": "±0.75% of LTP",
+    "since": "2018-04-09",
+    "source": "SEBI circular CIR/MRD/DP/2018/62 (Apr 2018), algorithmic trading and co-location | https://www.sebi.gov.in/sebi_data/attachdocs/apr-2018/1523271816354.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "algo-registration-tat",
     "label": "NSE turnaround time to register an algo (execution algos T+7; provider empanelment T+30)",
     "value": "T+10 working days",
     "since": "2025-07-22",
     "source": "NSE/INVG/69255 – Annexure I para 5 | https://nsearchives.nseindia.com/content/circulars/INVG69255.zip",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "algo-upstox-api-order-charge",
+    "label": "Upstox API order charge, promotional till 31 Dec 2026 (not on GTT orders)",
+    "value": "₹10 per order",
+    "since": "2026-11-01",
+    "source": "Upstox — Trading API | https://upstox.com/trading-api/",
     "verified": "2026-11-01"
   },
   {

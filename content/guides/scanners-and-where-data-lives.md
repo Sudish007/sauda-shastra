@@ -6,7 +6,7 @@ updated: 2026-11-02
 level: beginner
 order: 4
 topics: [stock scanner, screener, f&o universe, liquidity filter, asm, gsm, f&o ban, atr percent, pre-open volume, data sources, screener.in, trendlyne, tickertape, chartink]
-related: [results-season-playbook, commentary-ratings-block-deals, governance-red-flags, settlement-circuits-asm-ban, indicators-and-why-they-lag, multi-timeframe-relative-strength, opening-range-and-gaps, premarket-gainer-momentum, what-a-trade-costs]
+related: [results-season-playbook, commentary-ratings-block-deals, governance-red-flags, settlement-circuits-asm-ban, indicators-and-why-they-lag, multi-timeframe-relative-strength, opening-range-and-gaps, premarket-gainer-momentum, what-a-trade-costs, market-data-for-backtesting-india]
 tools: [charges]
 sources:
   - NSE — List of underlyings and information (equity derivatives) | https://www.nseindia.com/products-services/equity-derivatives-list-underlyings-information | accessed 2026-11-01

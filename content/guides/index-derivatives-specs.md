@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: intermediate
 order: 5
 topics: [lot size, contract value, weekly expiry, monthly expiry, freeze quantity, position limits, futeq, expiry day, physical settlement, nifty, sensex]
-related: [trading-day-ist, order-types-and-products, intraday-leverage-today, what-a-trade-costs, expiry-day-dynamics, liquidity-slippage-and-sebi-measures, expiry-day-straddle-scalp]
+related: [trading-day-ist, order-types-and-products, intraday-leverage-today, what-a-trade-costs, expiry-day-dynamics, liquidity-slippage-and-sebi-measures, expiry-day-straddle-scalp, market-data-for-backtesting-india, execution-realities-and-architecture]
 tools: [position-size]
 sources:
   - NSE circular FAOP/70616 (Oct 2025) — Revision in market lot of derivative contracts on indices | https://nsearchives.nseindia.com/content/circulars/FAOP70616.pdf | accessed 2026-11-01

@@ -321,6 +321,10 @@ main { flex: 1; }
 .prose strong { font-weight: 650; }
 .prose figure { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; }
 .prose figcaption { color: var(--muted); font-size: var(--fs-small); margin-top: 0.6rem; text-align: center; }
+/* Fenced code (the Algo guides' Python examples): the formula block's type and surface; it scrolls sideways inside
+   the reading column instead of widening the page at 320 px. */
+.prose pre { font-family: var(--font-mono); font-size: max(12px, 0.86em); line-height: 1.6; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.8rem 1rem; overflow-x: auto; }
+.prose pre code { font-size: inherit; background: none; border: 0; padding: 0; border-radius: 0; }
 /* Schematic: no words inside the SVG (user units scale with the column: at 390 px a 720-unit viewBox renders at
    0.45×, so 13-unit text would be 6 px). Words live in the HTML legend below the drawing. If a tick label is ever
    unavoidable, 28 user units is the floor (28 × 0.45 = 12.6 px at 390); the shots audit measures every <text>. */

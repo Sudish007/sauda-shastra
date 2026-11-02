@@ -6,7 +6,7 @@ updated: 2026-11-01
 level: beginner
 order: 2
 topics: [expectancy, r-multiple, win rate, reward to risk, break-even, drawdown, losing streak, kelly criterion, transaction costs]
-related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, psychology-journaling-prop-firms, what-a-trade-costs]
+related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, psychology-journaling-prop-firms, what-a-trade-costs, strategy-families-and-backtest-hygiene]
 tools: [expectancy-kelly]
 sources:
   - Zerodha Varsity — Position sizing for the active trader (Module 9) | https://zerodha.com/varsity/chapter/position-sizing/ | accessed 2026-11-01
