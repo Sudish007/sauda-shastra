@@ -166,6 +166,26 @@ with sync_playwright() as p:
     else:
         skip("facts box → facts/ rows (needs a guide)")
 
+    # Playbooks (design §6.8, N2): exactly one evidence chip outside the evidence callout on every playbook page
+    # (the meta chip); the rail's "Why this is labelled" card carries no chip and {{label:}} chips live only inside
+    # the :::evidence callout. Also the wordless schematic: an <svg> inside .schematic with no <text>, and a legend.
+    playbook_urls = [d["url"] for d in search_idx if re.match(r"^playbooks/[^/#]+/$", d.get("url", ""))]
+    if playbook_urls:
+        bad_chips, bad_svg = [], []
+        for url in playbook_urls:
+            page.goto(BASE + url, wait_until="networkidle")
+            outside = page.evaluate("[...document.querySelectorAll('.tag-evidence')].filter(el => !el.closest('.callout-evidence')).length")
+            inside = page.evaluate("document.querySelectorAll('.callout-evidence .tag-evidence').length")
+            if outside != 1 or inside < 1:
+                bad_chips.append(f"{url} outside={outside} inside={inside}")
+            svg_ok = page.evaluate("(() => { const f = document.querySelector('.schematic'); if (!f) return false; const s = f.querySelector('svg'); const l = f.querySelector('figcaption.legend'); return !!s && !s.querySelector('text') && !!l && /Schematic, not real data\\./.test(l.textContent); })()")
+            if not svg_ok:
+                bad_svg.append(url)
+        check(f"{len(playbook_urls)} playbook pages show exactly one evidence chip outside the evidence callout", not bad_chips, "; ".join(bad_chips)[:300])
+        check("every playbook schematic is a wordless <svg> with a legend ending in the fixed sentence", not bad_svg, ", ".join(bad_svg)[:300])
+    else:
+        skip("playbook evidence chip and schematic (needs a playbook)")
+
     # Facts register chips: one group at a time, rows filtered, count updated
     page.goto(BASE + "facts/", wait_until="networkidle")
     if page.locator("[data-facts-filter]").count():
