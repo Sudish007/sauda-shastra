@@ -511,6 +511,7 @@ details.disclosure .body > * + * { margin-top: 0.7em; }
 
 /* ---------- Learn (library) ---------- */
 .learn-hero { display: grid; gap: clamp(1.5rem, 1rem + 1.5vw, 3rem); align-items: center; margin-bottom: var(--space-6); }
+.breadcrumbs + .learn-hero { margin-top: var(--space-4); }
 @media (min-width: 1024px) { .learn-hero { grid-template-columns: fit-content(56%) minmax(0, 1fr); } }
 .learn-hero h1 { max-width: 22ch; }
 .learn-hero .lede { max-width: 58ch; }
@@ -538,30 +539,48 @@ details.disclosure .body > * + * { margin-top: 0.7em; }
 .path-card .hours { color: var(--muted); font-size: var(--fs-small); margin-bottom: 0.8rem; }
 .path-card ol { padding-left: 1.3em; display: grid; gap: 0.5rem; }
 .path-card li small { display: block; color: var(--muted); }
-/* Library list: table from 1024 px, stacked cards below */
-.lib-table { width: 100%; }
-.lib-table th:first-child { min-width: 20ch; }
+/* Library list: a fixed-share table from 1440 px, stacked cards below. Design §6.10 drew the switch at 1024 with short mock
+   labels ("Module", "PDF", "≈ 12"); with the real link labels, prices and effort texts the eight columns need ≈ 700 px of
+   minimum content, so between 1024 and 1439 the table either scrolled sideways or squeezed Title and Why to ≈ 130 px.
+   Column shares are set on the header cells (table-layout: fixed); a word wider than its cell breaks as a last resort. */
+.lib-table { width: 100%; table-layout: fixed; }
+.lib-table th, .lib-table td { padding: 0.6em 0.55em; overflow-wrap: anywhere; }
+.lib-table th.c-title { width: 22%; } .lib-table th.c-type { width: 9%; } .lib-table th.c-cost { width: 9.5%; } .lib-table th.c-level { width: 11%; }
+.lib-table th.c-fits { width: 10%; } .lib-table th.c-hours { width: 7.5%; } .lib-table th.c-why { width: 20%; } .lib-table th.c-links { width: 11%; }
+.lib-table .links a { font-size: var(--fs-small); }
 .lib-table .title { font-weight: 600; }
 .lib-table .by { display: block; color: var(--muted); font-size: var(--fs-xs); font-weight: 400; margin-top: 0.15rem; }
 .lib-table .fits { display: flex; flex-wrap: wrap; gap: 0.25rem; }
 .lib-table .fits .tag { white-space: normal; font-weight: 500; }
-.lib-table .why { max-width: 48ch; }
-.lib-table .caveat { display: block; color: var(--muted); font-size: var(--fs-xs); margin-top: 0.25rem; }
-.lib-table .links a { display: block; white-space: nowrap; }
-@media (max-width: 1023.98px) {
+.lib-table .why { display: block; max-width: 48ch; }
+.lib-table .caveat { display: block; color: var(--muted); font-size: var(--fs-xs); margin-top: 0.25rem; max-width: 48ch; }
+/* Rows with no hours/pages figure show their effort text instead: it wraps, left-aligned, inside the numeric column */
+.lib-table td.num .effort { display: block; white-space: normal; text-align: left; color: var(--ink-2); font-size: var(--fs-small); }
+.lib-table .c-cost .price { display: block; margin-top: 0.35rem; }
+.lib-table .c-cost .seen { display: block; }
+.lib-table .c-title .tag { vertical-align: middle; margin-left: 0.3rem; }
+.lib-table .links a { display: block; }
+.group-title .group-note { font-family: var(--font-sans); font-size: var(--fs-small); font-weight: 500; color: var(--muted); margin-left: 0.4em; white-space: nowrap; }
+.lib-summary .eyebrow { color: var(--accent); }
+.lib-checked { margin-top: var(--space-5); }
+@media (max-width: 1439.98px) {
   .lib-table, .lib-table tbody, .lib-table tr, .lib-table td { display: block; }
   .lib-table thead { display: none; }
-  .lib-table tr { border-bottom: 1px solid var(--line); padding: 0.9rem 0.9rem 1rem; display: grid; gap: 0.5rem; grid-template-columns: 1fr 1fr; }
+  .lib-table tr { border-bottom: 1px solid var(--line); padding: 0.9rem 0.9rem 1rem; display: grid; gap: 0.5rem 1rem; grid-template-columns: 1fr 1fr; }
   .lib-table tr:last-child { border-bottom: 0; }
   .lib-table td { border: 0; padding: 0; }
   .lib-table td.c-title, .lib-table td.c-fits, .lib-table td.c-why, .lib-table td.links { grid-column: 1 / -1; }
+  .lib-table td.c-title, .lib-table td.links { max-width: 72ch; } /* a full-width card would otherwise run a long title or a row of links past 80ch */
   .lib-table td.num { text-align: left; }
-  /* Card order: title · cost | hours · type | level · fit · why · links */
-  .lib-table td.c-title { order: 1; } .lib-table td[data-label="Cost"] { order: 2; } .lib-table td.num { order: 3; } .lib-table td[data-label="Type"] { order: 4; } .lib-table td[data-label="Level"] { order: 5; } .lib-table td.c-fits { order: 6; } .lib-table td.c-why { order: 7; } .lib-table td.links { order: 8; }
+  /* Card order: title · cost | hours · type | level · fit · why · links (cells carry c-* classes; captions come from data-label) */
+  .lib-table td.c-title { order: 1; } .lib-table td.c-cost { order: 2; } .lib-table td.c-hours { order: 3; } .lib-table td.c-type { order: 4; } .lib-table td.c-level { order: 5; } .lib-table td.c-fits { order: 6; } .lib-table td.c-why { order: 7; } .lib-table td.links { order: 8; }
   .lib-table td[data-label]::before { content: attr(data-label); display: block; color: var(--muted); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 650; margin-bottom: 0.1rem; }
   .lib-table tbody tr:nth-child(even) td { background: transparent; }
+  .lib-table .c-cost .price { display: inline; margin: 0 0 0 0.4rem; } .lib-table .c-cost .seen { display: inline; margin-left: 0.4rem; }
   .lib-table .links a { display: inline; white-space: normal; margin-right: 0.8rem; }
 }
+/* Wider cards (tablets and 1024–1439 laptops) put cost · hours · type · level on one row of four */
+@media (min-width: 820px) and (max-width: 1439.98px) { .lib-table tr { grid-template-columns: repeat(4, 1fr); } }
 
 /* ---------- Calendar ---------- */
 .upnext { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }

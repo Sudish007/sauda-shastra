@@ -1,7 +1,7 @@
 // Page renderers. Each returns a full document via layout(). All URLs relative; no UI string literals here.
 // Markup follows the approved design mocks (design.md §6); class names come from site/styles.css.
 import { escapeHtml as esc, renderInline, plainInline, factSource, factCitation, evidenceTagHtml } from './markdown.js';
-import { SECTIONS, PHASE2_SECTIONS, HERO_FACT_IDS, FACT_GROUPS, factGroup, calendarTexts } from './content.js';
+import { SECTIONS, PHASE2_SECTIONS, HERO_FACT_IDS, FACT_GROUPS, LIBRARY_FITS, LIBRARY_TYPES, factGroup, calendarTexts } from './content.js';
 import { TOOLS, byTool, fieldShown } from './tools.js';
 import { SITE } from './config.js';
 import { STRINGS as S, fill } from './strings.js';
@@ -459,33 +459,131 @@ export function toolPage(tool, c, { today = todayIST() } = {}) {
   return layout({ title: tool.title, description: tool.summary, path: `tools/${tool.id}/index.html`, depth: 2, body, current: 'tools/', schema: 'WebPage' });
 }
 
-/* ---------- Learn (library; rewritten by the Learn-page step) ---------- */
+/* ---------- Learn (library, design §6.10) ---------- */
 
-function libraryRow(e) {
-  const price = e.cost === 'free' ? S.labels.free : e.price ? `${esc(S.labels.paid)} · ${esc(e.price.amount)} ${esc(e.price.currency || '')}${e.price.seen ? ` (${esc(e.price.seen)})` : ''}` : `${esc(S.labels.paid)} · varies`;
-  return `<tr id="${esc(e.id)}" data-cost="${esc(e.cost)}" data-level="${esc(e.level)}" data-fits="${esc(e.fits.join('|'))}"><td><b>${esc(e.title)}</b><br><span class="muted small">${esc(e.by)} · ${esc(e.type)} · ${esc(e.year)}</span></td><td>${price}</td><td>${esc(S.labels.levels[e.level] || e.level)}</td><td>${e.fits.map((f) => `<span class="tag">${esc(f)}</span>`).join(' ')}</td><td class="num">${esc(e.hours ? `${e.hours} h` : e.pages ? `${e.pages} pp` : '')}</td><td>${esc(e.why)}${e.caveats ? `<br><span class="muted small">${esc(e.caveats)}</span>` : ''}</td><td>${e.links.map((l) => `<a href="${esc(l.url)}" rel="noopener noreferrer" target="_blank">${esc(l.label)}</a>`).join('<br>')}</td></tr>`;
+/** Default order of a library table: forthcoming titles last, then free before paid, then title (design §6.10). */
+export function libraryOrder(list) {
+  return [...list].sort((a, b) => (a.forthcoming ? 1 : 0) - (b.forthcoming ? 1 : 0) || (a.cost === 'paid' ? 1 : 0) - (b.cost === 'paid' ? 1 : 0) || a.title.localeCompare(b.title));
 }
 
-function libraryTable(list, id) {
-  if (!list.length) return empty(S.learn.empty);
-  return `<div class="table-wrap"><table class="library-table" id="${id}"><thead><tr><th>Title</th><th>Cost</th><th>${esc(S.labels.level)}</th><th>${esc(S.learn.filters.fit)}</th><th>Hours / pages</th><th>Why it is here</th><th>Links</th></tr></thead><tbody>${list.map(libraryRow).join('')}</tbody></table></div>`;
+/** Rows the Learn page filters: both lists; `free` and per-fit counts drive the toolbar chips (N3: counts from data). */
+export function libraryCounts(c) {
+  const all = [...c.library.courses, ...c.library.books];
+  const fits = Object.fromEntries(LIBRARY_FITS.map((f) => [f, all.filter((e) => e.fits.includes(f)).length]));
+  return { all: all.length, free: all.filter((e) => e.cost === 'free').length, paid: all.filter((e) => e.cost === 'paid').length, fits };
+}
+
+const showingHtml = (x, y) => fillHtml(S.client.showing, { x: `<b class="num">${x}</b>`, y: `<b class="num">${y}</b>` });
+
+function libraryRow(e, figureLabel) {
+  const type = S.learn.types[e.type] || e.type;
+  const first = e.links[0];
+  const cost = e.cost === 'free'
+    ? `<span class="tag tag-free">${esc(S.labels.free)}</span>`
+    : `<span class="tag tag-paid">${esc(S.labels.paid)}</span> ${e.price ? `<span class="price">${esc(e.price.amount)}</span> <span class="muted small seen">${fillHtml(S.learn.seen, { date: timeTag(e.price.seen) })}</span>` : `<span class="muted">${esc(S.learn.varies)}</span>`}`;
+  const figure = e.hours ?? e.pages;
+  const figureCaption = e.hours ? S.learn.columns.hours : e.pages ? S.learn.columns.pages : figureLabel;
+  const figureCell = figure !== undefined ? esc(String(figure)) : `<span class="effort">${esc(e.effort || '')}</span>`;
+  const rank = e.rank ? Object.entries(e.rank).map(([f, n]) => `${f}:${n}`).join('|') : '';
+  return `<tr id="${esc(e.id)}" data-cost="${esc(e.cost)}" data-level="${esc(e.level)}" data-type="${esc(e.type)}" data-fits="${esc(e.fits.join('|'))}" data-rank="${esc(rank)}"${e.forthcoming ? ' data-forthcoming="true"' : ''}>`
+    + `<td class="c-title"><span class="title"><a href="${esc(first.url)}" rel="noopener noreferrer" target="_blank">${esc(e.title)}</a></span>${e.forthcoming ? ` <span class="tag">${esc(S.learn.forthcoming)}</span>` : ''}<span class="by">${esc(e.by)} · ${esc(type)} · ${esc(e.year)}</span></td>`
+    + `<td class="c-type" data-label="${esc(S.learn.columns.type)}">${esc(type)}</td>`
+    + `<td class="c-cost" data-label="${esc(S.learn.columns.cost)}">${cost}</td>`
+    + `<td class="c-level" data-label="${esc(S.learn.columns.level)}">${esc(S.labels.levels[e.level] || e.level)}</td>`
+    + `<td class="c-fits" data-label="${esc(S.learn.columns.fit)}"><div class="fits">${e.fits.map((f) => `<span class="tag">${esc(S.learn.fits[f] || f)}</span>`).join('')}</div></td>`
+    + `<td class="num c-hours" data-label="${esc(figureCaption)}">${figureCell}</td>`
+    + `<td class="c-why" data-label="${esc(S.learn.columns.why)}"><span class="why">${esc(e.why)}</span>${e.caveats ? `<span class="caveat">${esc(e.caveats)}</span>` : ''}</td>`
+    + `<td class="links c-links" data-label="${esc(S.learn.columns.links)}">${e.links.map((l) => `<a href="${esc(l.url)}" rel="noopener noreferrer" target="_blank">${esc(l.label)}</a>`).join('')}</td>`
+    + '</tr>';
+}
+
+function libraryTable(list, id, title, figureLabel) {
+  const head = `<h2 id="${id}" class="group-title">${esc(title)} <span class="group-note" data-lib-group-count>${showingHtml(list.length, list.length)}</span></h2>`;
+  if (!list.length) return `${head}${empty(S.learn.empty)}`;
+  const cols = S.learn.columns;
+  return `${head}<div class="table-wrap" data-lib-table="${id}"><table class="lib-table" id="${id}-table"><thead><tr><th class="c-title">${esc(cols.title)}</th><th class="c-type">${esc(cols.type)}</th><th class="c-cost">${esc(cols.cost)}</th><th class="c-level">${esc(cols.level)}</th><th class="c-fits">${esc(cols.fit)}</th><th class="num c-hours">${esc(figureLabel)}</th><th class="c-why">${esc(cols.why)}</th><th class="c-links">${esc(cols.links)}</th></tr></thead><tbody>${libraryOrder(list).map((e) => libraryRow(e, figureLabel)).join('')}</tbody></table></div><p class="empty" data-lib-none hidden>${esc(S.client.libNone)}</p>`;
+}
+
+/** Hero card (M5): courses · books and papers · free · dead links of N checked (from health.json; "not yet" without it). */
+function librarySummary(c, r, n) {
+  const h = c.library.health;
+  const dead = h
+    ? `<div><dd class="num" data-summary="dead">${h.dead.length}</dd><dt>${fillHtml(S.learn.summary.dead, { n: `<span class="num">${h.urls}</span>` })}</dt></div>`
+    : `<div><dd class="num" data-summary="dead">—</dd><dt>${esc(S.learn.summary.notChecked)}</dt></div>`;
+  return `<aside class="lib-summary" aria-labelledby="lib-summary-title" data-lib-summary>
+        <p class="eyebrow" id="lib-summary-title">${h ? fillHtml(S.learn.summaryEyebrow, { date: timeTag(h.checked) }) : esc(S.learn.summaryUnchecked)}</p>
+        <dl>
+          <div><dd class="num" data-summary="courses">${c.library.courses.length}</dd><dt>${esc(S.learn.summary.courses)}</dt></div>
+          <div><dd class="num" data-summary="books">${c.library.books.length}</dd><dt>${esc(S.learn.summary.books)}</dt></div>
+          <div><dd class="num" data-summary="free">${n.free}</dd><dt>${esc(S.learn.summary.free)}</dt></div>
+          ${dead}
+        </dl>
+        <p class="source">${fillHtml(S.learn.summaryNote, { path: `<a href="#path">${esc(S.learn.pathLink)}</a>`, csv: `<a href="${r}data/library.csv" download>${esc(S.learn.csvLink)}</a>` })}</p>
+      </aside>`;
+}
+
+/** Toolbar (N3): Cost chips (All pressed), seven Fit chips (none pressed), Level and Type selects, text filter, count line, CSV. */
+function libraryToolbar(r, n) {
+  const F = S.learn.filters;
+  const chip = (group, value, label, count, pressed) => `<button class="chip" type="button" data-${group}="${esc(value)}" aria-pressed="${pressed}">${esc(label)} <span class="count num">${count}</span></button>`;
+  const option = (value, label) => `<option value="${esc(value)}">${esc(label)}</option>`;
+  return `<div class="toolbar" role="region" aria-label="${esc(S.learn.filtersAria)}" data-library>
+      <div class="toolbar-row">
+        <span class="label">${esc(F.cost)}</span>
+        <div class="chip-row" data-lib-cost>${chip('cost', 'all', F.all, n.all, 'true')}${chip('cost', 'free', F.free, n.free, 'false')}${chip('cost', 'paid', F.paid, n.paid, 'false')}</div>
+        <span class="spacer"></span>
+        <label class="search-field">${ICONS.search}<input class="input" type="search" id="lib-filter" maxlength="80" placeholder="${esc(S.learn.filterPlaceholder)}" aria-label="${esc(S.learn.filterAria)}" autocomplete="off"></label>
+      </div>
+      <div class="toolbar-row">
+        <span class="label">${esc(F.fit)}</span>
+        <div class="chip-row" data-lib-fit>${LIBRARY_FITS.map((f) => chip('fit', f, S.learn.fits[f] || f, n.fits[f], 'false')).join('')}</div>
+      </div>
+      <div class="toolbar-row">
+        <span class="label">${esc(F.level)}</span>
+        <select class="input" aria-label="${esc(F.level)}" data-lib-level>${option('', F.anyLevel)}${Object.entries(S.labels.levels).map(([v, l]) => option(v, l)).join('')}</select>
+        <span class="label">${esc(F.type)}</span>
+        <select class="input" aria-label="${esc(F.type)}" data-lib-type>${option('', F.anyType)}${LIBRARY_TYPES.map((t) => option(t, S.learn.types[t] || t)).join('')}</select>
+        <span class="spacer"></span>
+        <span class="lib-count" data-lib-count>${showingHtml(n.all, n.all)} · <span data-lib-sort>${esc(S.client.libSortDefault)}</span></span>
+        <a class="btn btn-secondary btn-sm" href="${r}data/library.csv" download>${ICONS.download}${esc(S.learn.csv)}</a>
+      </div>
+    </div>`;
+}
+
+/** Recommended path: intro from path.json (starts "Our editorial judgement, not advice", M4), three stage cards, steps linking rows. */
+function libraryPath(c) {
+  const L = c.library;
+  if (!L.path.stages?.length) return '';
+  const byId = Object.fromEntries([...L.courses, ...L.books].map((e) => [e.id, e]));
+  const card = (st) => `<div class="card path-card"><h3>${esc(st.title)}</h3>${st.hoursPerWeek ? `<p class="hours"><b class="num">${esc(String(st.hoursPerWeek))}</b> ${esc(S.learn.hoursPerWeek)}</p>` : ''}<ol>${(st.steps || []).map((s) => { const e = byId[s.entry]; return `<li><a href="#${esc(e.id)}">${esc(e.title)}</a>${s.note ? `<small>${renderInline(s.note, { facts: c.byFact })}</small>` : ''}</li>`; }).join('')}</ol></div>`;
+  return `<section id="path" aria-labelledby="path-title">
+      <div class="section-head"><div><p class="eyebrow">${esc(S.learn.path)}</p><h2 id="path-title">${esc(S.learn.pathTitle)}</h2></div><p>${L.path.intro ? renderInline(L.path.intro, { facts: c.byFact }) : esc(S.learn.pathLede)}</p></div>
+      <div class="path-grid">${L.path.stages.map(card).join('')}</div>
+    </section>`;
 }
 
 export function learnPage(c) {
   const r = rel(1);
   const L = c.library;
-  const path = L.path.stages?.length ? `<section id="path"><h2>${esc(S.learn.path)}</h2><p class="lede">${esc(S.learn.pathLede)}</p>${L.path.intro ? `<p>${renderInline(L.path.intro, { facts: c.byFact })}</p>` : ''}<div class="grid grid-fill-3">${L.path.stages.map((st) => `<div class="card path-card"><h3>${esc(st.title)}</h3>${st.hoursPerWeek ? `<p class="hours">${esc(st.hoursPerWeek)} h/week</p>` : ''}<ol>${(st.steps || []).map((s) => { const e = [...L.courses, ...L.books].find((x) => x.id === s.entry); return `<li><a href="#${esc(e.id)}">${esc(e.title)}</a>${s.note ? `<small>${renderInline(s.note, { facts: c.byFact })}</small>` : ''}</li>`; }).join('')}</ol></div>`).join('')}</div></section>` : '';
+  const n = libraryCounts(c);
+  const h = L.health;
+  const rules = esc(S.learn.checkedRules);
+  const checked = h
+    ? fillHtml(S.learn.checked, { date: timeTag(h.checked), dead: `<span class="num">${h.dead.length}</span>`, n: `<span class="num">${h.urls}</span>`, rules })
+    : fillHtml(S.learn.notChecked, { rules });
   const body = `<section class="section"><div class="container">
     ${breadcrumbs(r, [{ href: '', label: S.labels.home }, { label: S.learn.eyebrow }])}
-    <div class="section-head"><div><p class="eyebrow">${esc(S.learn.eyebrow)}</p><h1>${esc(S.learn.title)}</h1></div><p class="lede">${esc(S.learn.lede)}</p></div>
-    <div class="cluster library-toolbar"><a class="btn btn-secondary btn-sm" href="${r}data/library.csv" download>${esc(S.learn.csv)}</a><span class="muted"><b class="num">${L.courses.length}</b> ${esc(S.learn.courses.toLowerCase())} · <b class="num">${L.books.length}</b> ${esc(S.learn.books.toLowerCase())}</span></div>
-    ${path}
-    <h2 id="courses" class="group-title">${esc(S.learn.courses)}</h2>
-    ${libraryTable(L.courses, 'courses-table')}
-    <h2 id="books" class="group-title">${esc(S.learn.books)}</h2>
-    ${libraryTable(L.books, 'books-table')}
+    <div class="learn-hero">
+      <div><p class="eyebrow">${esc(S.learn.eyebrow)}</p><h1>${esc(S.learn.title)}</h1><p class="lede">${esc(S.learn.lede)}</p></div>
+      ${librarySummary(c, r, n)}
+    </div>
+    ${libraryToolbar(r, n)}
+    ${libraryPath(c)}
+    ${libraryTable(L.courses, 'courses', S.learn.courses, S.learn.columns.hours)}
+    ${libraryTable(L.books, 'books', S.learn.books, S.learn.columns.pages)}
+    <p class="small muted lib-checked">${checked}</p>
   </div></section>`;
-  return layout({ title: S.learn.title, description: S.learn.lede, path: 'learn/index.html', depth: 1, body, current: 'learn/' });
+  return layout({ title: S.learn.title, description: S.learn.description, path: 'learn/index.html', depth: 1, body, current: 'learn/' });
 }
 
 export function libraryCsv(c) {

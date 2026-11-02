@@ -204,7 +204,7 @@ with sync_playwright() as p:
         skip("facts register chips (needs facts)")
 
     # Named-resource audit (brief §3): no resource row without a link
-    for path, sel in (("learn/", ".lib-table tbody tr, .library-table tbody tr"), ("resources/", ".directory .card"), ("sources/", ".sources-list li"), ("facts/", ".facts-table tbody tr")):
+    for path, sel in (("learn/", ".lib-table tbody tr"), ("resources/", ".directory .card"), ("sources/", ".sources-list li"), ("facts/", ".facts-table tbody tr")):
         page.goto(BASE + path, wait_until="networkidle")
         rows = page.evaluate("sel => [...document.querySelectorAll(sel)].map(r => r.querySelectorAll('a').length)", sel)
         if rows:
@@ -348,6 +348,92 @@ with sync_playwright() as p:
     else:
         skip("calendar filters (needs calendar data)")
     check("no console/page errors on the calendar page", not errors, "; ".join(errors)[:300])
+    errors.clear()
+
+    # Learn (design §6.10, §12, N3/M5): on load only the Cost chip "All" is pressed and the count line says "Showing y of y";
+    # every chip's count equals the rows matching it; Free shows exactly the free rows; a Fit chip keeps only rows with that
+    # fit, re-orders each table by its rank for that fit and says "ranked within"; releasing it restores the build order
+    # (free first, then title; forthcoming last); Level, Type and the text filter narrow further; every path step anchor
+    # resolves to a row; the hero card's four figures equal the data (health.json read from the repo when present).
+    page.goto(BASE + "learn/", wait_until="networkidle")
+    page.wait_for_timeout(150)
+    if page.locator("[data-library] .chip").count():
+        ROWS = "[...document.querySelectorAll('.lib-table tbody tr')]"
+        VIS = ROWS + ".filter(tr => !tr.hidden && !tr.closest('[data-lib-table]').hidden)"
+        rows = page.evaluate(ROWS + ".map(tr => ({ id: tr.id, cost: tr.dataset.cost, level: tr.dataset.level, type: tr.dataset.type, fits: tr.dataset.fits.split('|'), rank: tr.dataset.rank, forthcoming: tr.dataset.forthcoming === 'true', table: tr.closest('[data-lib-table]').dataset.libTable }))")
+        total = len(rows); free = sum(1 for r in rows if r["cost"] == "free")
+        check(f"learn: {total} library rows (≥ 30 courses and ≥ 40 books)", sum(1 for r in rows if r["table"] == "courses") >= 30 and sum(1 for r in rows if r["table"] == "books") >= 40, f"{sum(1 for r in rows if r['table'] == 'courses')} courses, {sum(1 for r in rows if r['table'] == 'books')} books")
+        pressed = page.evaluate("[...document.querySelectorAll('[data-library] .chip[aria-pressed=\"true\"]')].map(c => c.dataset.cost || c.dataset.fit)")
+        check("learn: on load only the Cost chip 'All' is pressed", pressed == ["all"], str(pressed))
+        count_text = page.inner_text("[data-lib-count]")
+        check(f"learn: count line reads 'Showing {total} of {total}' with the default sort", f"Showing {total} of {total}" in count_text and "free first" in count_text, count_text)
+        chip_counts = page.evaluate("Object.fromEntries([...document.querySelectorAll('[data-library] .chip')].map(c => [c.dataset.cost || c.dataset.fit, +c.querySelector('.count').textContent]))")
+        want_counts = {"all": total, "free": free, "paid": total - free}
+        for f in set(f for r in rows for f in r["fits"]): want_counts[f] = sum(1 for r in rows if f in r["fits"])
+        check("learn: every chip's count equals the rows matching it (N3)", chip_counts == want_counts, f"{chip_counts} vs {want_counts}")
+        check("learn: seven Fit chips, none pressed", page.locator("[data-lib-fit] .chip").count() == 7 and page.locator("[data-lib-fit] .chip[aria-pressed='true']").count() == 0)
+        by_table = {}
+        for r in rows: by_table.setdefault(r["table"], []).append(r["forthcoming"])
+        check("learn: forthcoming rows sit last in their table in the build order", all(flags == sorted(flags) for flags in by_table.values()))
+        # Free
+        page.click("[data-lib-cost] .chip[data-cost='free']"); page.wait_for_timeout(150)
+        shown = page.evaluate(VIS + ".map(tr => tr.dataset.cost)")
+        check(f"learn: pressing Free shows exactly the {free} free rows and the count line follows", len(shown) == free and all(c == "free" for c in shown) and f"Showing {free} of {total}" in page.inner_text("[data-lib-count]"), f"{len(shown)} shown; {page.inner_text('[data-lib-count]')}")
+        check("learn: Free is now the only pressed Cost chip", page.evaluate("[...document.querySelectorAll('[data-lib-cost] .chip[aria-pressed=\"true\"]')].map(c => c.dataset.cost)") == ["free"])
+        page.click("[data-lib-cost] .chip[data-cost='all']"); page.wait_for_timeout(150)
+        check("learn: All restores every row", page.evaluate(VIS + ".length") == total)
+        # Fit chip: filter + rank order
+        fit = "options"
+        page.click(f"[data-lib-fit] .chip[data-fit='{fit}']"); page.wait_for_timeout(200)
+        vis = page.evaluate(VIS + ".map(tr => ({ table: tr.closest('[data-lib-table]').dataset.libTable, fits: tr.dataset.fits.split('|'), rank: Object.fromEntries(tr.dataset.rank.split('|').filter(Boolean).map(p => { const k = p.lastIndexOf(':'); return [p.slice(0, k), +p.slice(k + 1)]; })) }))")
+        check(f"learn: Fit '{fit}' keeps only rows with that fit ({want_counts[fit]})", len(vis) == want_counts[fit] and all(fit in r["fits"] for r in vis), f"{len(vis)} shown")
+        ranked_ok = True
+        for t in ("courses", "books"):
+            ranks = [r["rank"].get(fit, float("inf")) for r in vis if r["table"] == t]
+            if ranks != sorted(ranks): ranked_ok = False
+        check(f"learn: rows are ordered by their rank within '{fit}' in each table", ranked_ok and len(vis) > 1, str([r["rank"].get(fit) for r in vis][:12]))
+        check("learn: count line says ranked within the fit", "ranked within" in page.inner_text("[data-lib-count]"), page.inner_text("[data-lib-count]"))
+        check("learn: the pressed Fit chip names its state", page.get_attribute(f"[data-lib-fit] .chip[data-fit='{fit}']", "aria-pressed") == "true")
+        page.click(f"[data-lib-fit] .chip[data-fit='{fit}']"); page.wait_for_timeout(200)
+        order_after = page.evaluate(ROWS + ".map(tr => tr.id)")
+        check("learn: releasing the Fit chip restores the build order and the default sort note", order_after == [r["id"] for r in rows] and page.evaluate(VIS + ".length") == total and "free first" in page.inner_text("[data-lib-count]"))
+        # Level and Type selects, text filter
+        page.select_option("[data-lib-level]", "advanced"); page.wait_for_timeout(150)
+        lv = page.evaluate(VIS + ".map(tr => tr.dataset.level)")
+        check("learn: Level = Advanced keeps only advanced rows", lv and all(l == "advanced" for l in lv) and len(lv) == sum(1 for r in rows if r["level"] == "advanced"), f"{len(lv)}")
+        page.select_option("[data-lib-level]", ""); page.select_option("[data-lib-type]", "paper"); page.wait_for_timeout(150)
+        tp = page.evaluate(VIS + ".map(tr => tr.dataset.type)")
+        check("learn: Type = Paper keeps only papers and hides the empty courses table behind its message", tp and all(t == "paper" for t in tp) and page.evaluate("document.querySelector('[data-lib-table=\"courses\"]').hidden") and page.evaluate("[...document.querySelectorAll('[data-lib-none]')].some(p => !p.hidden)"), f"{len(tp)}")
+        page.select_option("[data-lib-type]", ""); page.fill("#lib-filter", "Varsity"); page.wait_for_timeout(200)
+        tx = page.evaluate(VIS + ".map(tr => tr.querySelector('.c-title').textContent.toLowerCase())")
+        check("learn: the text filter matches title or author, case-insensitively", tx and all("varsity" in t for t in tx) and len(tx) == sum(1 for t in page.evaluate(ROWS + ".map(tr => tr.querySelector('.c-title').textContent.toLowerCase())") if "varsity" in t), f"{len(tx)}")
+        page.fill("#lib-filter", "zzzz-no-such-entry"); page.wait_for_timeout(200)
+        check("learn: no match → 'Showing 0 of y', tables hidden, the message shown", f"Showing 0 of {total}" in page.inner_text("[data-lib-count]") and page.evaluate("[...document.querySelectorAll('[data-lib-table]')].every(w => w.hidden) && [...document.querySelectorAll('[data-lib-none]')].every(p => !p.hidden)"))
+        page.fill("#lib-filter", ""); page.wait_for_timeout(200)
+        check("learn: the text filter is capped at 80 characters", page.get_attribute("#lib-filter", "maxlength") == "80")
+        # Path anchors resolve to rows; the hero card figures equal the data
+        anchors = page.evaluate("[...document.querySelectorAll('#path a[href^=\"#\"]')].map(a => a.getAttribute('href').slice(1))")
+        ids = {r["id"] for r in rows}
+        check(f"learn: all {len(anchors)} path step anchors resolve to a library row", len(anchors) >= 20 and all(a in ids for a in anchors), ", ".join(a for a in anchors if a not in ids)[:200])
+        check("learn: the path intro starts with the editorial-judgement sentence (M4)", page.inner_text("#path .section-head > p").startswith("Our editorial judgement, not advice"), page.inner_text("#path .section-head > p")[:60])
+        fig = page.evaluate("Object.fromEntries([...document.querySelectorAll('.lib-summary dd[data-summary]')].map(d => [d.dataset.summary, d.textContent.trim()]))")
+        check("learn: hero card figures equal courses, books and free counts (M5)", fig.get("courses") == str(counts["courses"]) and fig.get("books") == str(counts["books"]) and fig.get("free") == str(free), str(fig))
+        health_file = os.path.join(ROOT, "content", "data", "library", "health.json")
+        if os.path.exists(health_file):
+            import json as _json
+            with open(health_file, encoding="utf-8") as fh: health = _json.load(fh)
+            check("learn: hero card dead-link figure equals health.json and the footer carries the check date", fig.get("dead") == str(len(health["dead"])) and str(health["urls"]) in page.inner_text(".lib-summary") and "How we checked" in page.inner_text(".lib-checked"), f"{fig.get('dead')} vs {len(health['dead'])}")
+        else:
+            skip("learn: dead-link figure vs health.json (file not in this checkout)")
+        wide = b.new_context(viewport={"width": 1920, "height": 1080})
+        wp = wide.new_page(); wp.goto(BASE + "learn/", wait_until="networkidle")
+        cols = wp.evaluate("getComputedStyle(document.querySelector('.learn-hero')).gridTemplateColumns.split(' ').length")
+        check("learn: at 1920 the hero is two columns with the summary card on the right (M5)", cols == 2 and wp.evaluate("document.querySelector('.learn-hero > :last-child').classList.contains('lib-summary')"), f"{cols} columns")
+        check("learn: at 1920 the tables render as tables with eight headed columns", wp.evaluate("document.querySelectorAll('#courses-table thead th').length") == 8 and wp.evaluate("getComputedStyle(document.querySelector('#courses-table')).display") == "table")
+        wide.close()
+    else:
+        skip("learn filters (needs library data)")
+    check("no console/page errors on the learn page", not errors, "; ".join(errors)[:300])
     errors.clear()
 
     # Mobile menu

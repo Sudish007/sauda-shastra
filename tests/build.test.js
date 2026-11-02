@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -257,9 +258,84 @@ test('sitemap lists the public pages with https URLs and dated lastmod; robots p
   assert.ok(robots.includes(`Sitemap: ${SITE.liveUrl}sitemap.xml`));
 });
 
-test('library CSV has the header row with every brief field', async () => {
+test('library CSV has the header row with every brief field and one row per entry', async () => {
   const csv = await readFile(path.join(out, 'data', 'library.csv'), 'utf8');
   assert.equal(csv.split('\n')[0], 'id,kind,title,by,type,cost,price,currency,price_seen,links,year,level,fits,hours,pages,why,caveats');
+  const counts = JSON.parse(await readFile(path.join(out, 'data', 'counts.json'), 'utf8'));
+  // Data rows = lines that start a record (a quoted field may span lines, so count the leading "<id>,course|book," markers).
+  const records = (csv.match(/^[a-z0-9-]+,(course|book),/gm) || []).length;
+  assert.equal(records, counts.courses + counts.books);
+});
+
+test('learn/ renders the design §6.10 page: hero card figures (M5), toolbar defaults (N3), ranked rows with filter data, path anchors, link-health footer', async () => {
+  const html = pages.find((x) => x.file === 'learn/index.html').html;
+  const counts = JSON.parse(await readFile(path.join(out, 'data', 'counts.json'), 'utf8'));
+  const figure = (k) => new RegExp(`<dd class="num" data-summary="${k}">([^<]*)</dd>`).exec(html)?.[1];
+  const rows = [...html.matchAll(/<tr id="([^"]+)" data-cost="(free|paid)" data-level="(beginner|intermediate|advanced)" data-type="([^"]+)" data-fits="([^"]*)" data-rank="([^"]*)"( data-forthcoming="true")?>([\s\S]*?)<\/tr>/g)];
+  const free = rows.filter((m) => m[2] === 'free').length;
+  assert.equal(rows.length, counts.courses + counts.books, 'one row per library entry');
+  assert.equal(figure('courses'), String(counts.courses));
+  assert.equal(figure('books'), String(counts.books));
+  assert.equal(figure('free'), String(free));
+  assert.match(html, /<div class="learn-hero">\s*<div><p class="eyebrow">[^<]*<\/p><h1>/, 'two-column hero: text left');
+  assert.match(html, /<aside class="lib-summary" aria-labelledby="lib-summary-title" data-lib-summary>/, 'summary card right');
+  // Link health: the committed report drives the fourth figure and the footer; without it the page says so and the test warns.
+  const healthFile = path.join(root, 'content', 'data', 'library', 'health.json');
+  if (existsSync(healthFile)) {
+    const health = JSON.parse(await readFile(healthFile, 'utf8'));
+    assert.equal(figure('dead'), String(health.dead.length));
+    assert.ok(html.includes(`dead links of <span class="num">${health.urls}</span> checked`), 'checked count beside the dead figure');
+    assert.match(html, new RegExp(`<p class="small muted lib-checked">How we checked: every link was fetched on <time datetime="${health.checked}">`));
+    assert.equal(health.dead.length, 0, 'the committed link-health report has no dead link');
+  } else {
+    console.warn('warning: content/data/library/health.json missing — learn/ shows "links checked: not yet"; run scripts/linkcheck.py');
+    assert.equal(figure('dead'), '—');
+    assert.ok(html.includes('links checked: not yet'));
+  }
+  if (!rows.length) return; // the empty content set renders the empty strings
+  // Every row links out, carries its type in the by-line, its fit tags and a rank per fit (forthcoming rows have none and sit last).
+  const fits = new Set(['intraday', 'options', 'algo', 'India investing', 'US/global investing', 'risk & psychology', 'tax & rules']);
+  for (const m of rows) {
+    assert.ok(/<a href="https?:\/\/[^"]+" rel="noopener noreferrer" target="_blank">/.test(m[8]), `${m[1]}: row without a link`);
+    assert.ok(m[5].split('|').every((f) => fits.has(f.replace(/&amp;/g, '&'))), `${m[1]}: fits ${m[5]}`);
+    if (m[7]) assert.equal(m[6], '', `${m[1]}: forthcoming rows carry no rank`);
+    else assert.deepEqual(m[6].split('|').map((p) => p.slice(0, p.lastIndexOf(':'))).sort(), m[5].split('|').sort(), `${m[1]}: one rank per fit`);
+    assert.ok(/<td class="c-title">/.test(m[8]) && /<td class="c-type" data-label="Type">/.test(m[8]) && /<td class="c-cost" data-label="Cost">/.test(m[8]) && /<td class="num c-hours" data-label="(Hours|Pages)">/.test(m[8]) && /<td class="c-why" data-label="Why it is here">/.test(m[8]) && /<td class="links c-links" data-label="Links">/.test(m[8]), `${m[1]}: card captions`);
+  }
+  for (const table of ['courses', 'books']) {
+    const body = new RegExp(`<table class="lib-table" id="${table}-table">[\\s\\S]*?</table>`).exec(html)[0];
+    const flags = [...body.matchAll(/<tr id="[^"]+"[^>]*?( data-forthcoming="true")?>/g)].map((m) => Boolean(m[1]));
+    assert.deepEqual(flags, [...flags].sort(), `${table}: forthcoming rows sort last`);
+    const costs = [...body.matchAll(/<tr id="[^"]+" data-cost="(free|paid)"[^>]*?>/g)].filter((m) => !m[0].includes('data-forthcoming')).map((m) => m[1]);
+    assert.deepEqual(costs, [...costs].sort((a, b) => (a === 'paid') - (b === 'paid')), `${table}: free rows before paid rows`);
+  }
+  // Toolbar: Cost chips All ✓ / Free / Paid with counts, seven Fit chips none pressed, Level and Type selects, text filter, CSV.
+  assert.match(html, new RegExp(`<button class="chip" type="button" data-cost="all" aria-pressed="true">All <span class="count num">${rows.length}</span></button><button class="chip" type="button" data-cost="free" aria-pressed="false">Free <span class="count num">${free}</span></button><button class="chip" type="button" data-cost="paid" aria-pressed="false">Paid <span class="count num">${rows.length - free}</span></button>`));
+  const fitChips = [...html.matchAll(/<button class="chip" type="button" data-fit="([^"]+)" aria-pressed="(true|false)">[^<]*<span class="count num">(\d+)<\/span>/g)];
+  assert.equal(fitChips.length, 7);
+  for (const m of fitChips) {
+    assert.equal(m[2], 'false', `${m[1]} pressed on load`);
+    assert.equal(Number(m[3]), rows.filter((r) => r[5].split('|').includes(m[1])).length, `${m[1]} count`);
+  }
+  assert.equal((html.match(/aria-pressed="true"/g) || []).length, 1, 'only All is pressed');
+  assert.match(html, /<select class="input" aria-label="Level" data-lib-level><option value="">Any level<\/option>/);
+  assert.match(html, /<select class="input" aria-label="Type" data-lib-type><option value="">Any type<\/option>/);
+  assert.match(html, /<input class="input" type="search" id="lib-filter" maxlength="80"/);
+  assert.match(html, new RegExp(`<span class="lib-count" data-lib-count>Showing <b class="num">${rows.length}</b> of <b class="num">${rows.length}</b> · <span data-lib-sort>free first, then title`));
+  assert.equal((html.match(/href="\.\.\/data\/library\.csv" download/g) || []).length, 2, 'CSV linked from the hero card and the toolbar');
+  // Path: intro from path.json (M4), three cards with hours per week, every step anchor resolves to a row id.
+  const pathHtml = /<section id="path"[\s\S]*?<\/section>/.exec(html)[0];
+  assert.match(pathHtml, /<h2 id="path-title">[^<]+<\/h2><\/div><p>Our editorial judgement, not advice/);
+  assert.equal((pathHtml.match(/<div class="card path-card">/g) || []).length, 3);
+  assert.equal((pathHtml.match(/<p class="hours"><b class="num">\d+<\/b> h\/week<\/p>/g) || []).length, 3);
+  const ids = new Set(rows.map((m) => m[1]));
+  const anchors = [...pathHtml.matchAll(/<li><a href="#([^"]+)">/g)].map((m) => m[1]);
+  assert.ok(anchors.length >= 20 && anchors.every((a) => ids.has(a)), `unresolved path anchors: ${anchors.filter((a) => !ids.has(a)).join(', ')}`);
+  // Prices render as shown with the date seen; no currency code appended (FEAT-015 finding 1).
+  assert.match(html, /<span class="tag tag-paid">Paid<\/span> <span class="price">₹1,500 \+ taxes<\/span> <span class="muted small seen">seen <time datetime="2026-11-01">1 Nov 2026<\/time><\/span>/);
+  assert.ok(!/<span class="price">[^<]*<\/span> INR/.test(html));
+  assert.ok(!/library-table/.test(html), 'the stylesheet class is lib-table');
+  assert.match(/<nav class="site-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(html)[1], /learn\/" class="nav-learn" aria-current="page"/);
 });
 
 test.after(async () => { await rm(out, { recursive: true, force: true }); });

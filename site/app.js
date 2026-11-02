@@ -1,4 +1,4 @@
-/* Client: three-state theme, menu, search, TOC scrollspy, reading progress, facts-register filter. No frameworks, no UI
+/* Client: three-state theme, menu, search, TOC scrollspy, reading progress, calendar and library filters, facts-register filter. No frameworks, no UI
    text literals (strings come from <template id="ui-strings">), no identity literals (storage prefix from body[data-store]).
    The current nav item is marked at build time (aria-current from the page's layout call), never inferred here. */
 (() => {
@@ -175,6 +175,49 @@
       }
       apply();
     }
+  }
+
+  /* ---------- Learn: Cost chips (one of All / Free / Paid), one Fit chip at a time, Level and Type selects and a text filter
+     on title + author, all read from the rows' data attributes; a pressed fit re-orders each table by its data-rank for that
+     fit (unranked and forthcoming rows last), no fit restores the build order (free first, then title). ---------- */
+  const library = $('[data-library]');
+  if (library) {
+    const costChips = $$('[data-lib-cost] .chip[data-cost]', library);
+    const fitChips = $$('[data-lib-fit] .chip[data-fit]', library);
+    const level = $('[data-lib-level]', library); const type = $('[data-lib-type]', library); const input = $('#lib-filter', library);
+    const countLine = $('[data-lib-count]', library);
+    const tables = $$('[data-lib-table]').map((wrap) => {
+      const rows = $$('tbody tr', wrap).map((tr, i) => ({ tr, i, text: ($('.c-title', tr)?.textContent || '').toLowerCase(), fits: (tr.dataset.fits || '').split('|'), rank: Object.fromEntries((tr.dataset.rank || '').split('|').filter(Boolean).map((p) => { const k = p.lastIndexOf(':'); return [p.slice(0, k), Number(p.slice(k + 1))]; })) }));
+      const heading = wrap.previousElementSibling; const after = wrap.nextElementSibling;
+      return { wrap, body: $('tbody', wrap), rows, none: after?.hasAttribute('data-lib-none') ? after : null, count: heading ? $('[data-lib-group-count]', heading) : null };
+    });
+    const state = { cost: 'all', fit: '', level: '', type: '', q: '' };
+    const showing = (x, y) => fill(T.showing, { x: `<b class="num">${x}</b>`, y: `<b class="num">${y}</b>` });
+    const chipLabel = (chip) => (chip.childNodes[0]?.textContent || chip.textContent).trim();
+    const apply = () => {
+      let shown = 0, total = 0;
+      for (const t of tables) {
+        const order = state.fit
+          ? [...t.rows].sort((a, b) => ((a.rank[state.fit] ?? Infinity) - (b.rank[state.fit] ?? Infinity)) || (a.i - b.i))
+          : [...t.rows].sort((a, b) => a.i - b.i);
+        let n = 0;
+        for (const r of order) {
+          const d = r.tr.dataset;
+          const ok = (state.cost === 'all' || d.cost === state.cost) && (!state.fit || r.fits.includes(state.fit)) && (!state.level || d.level === state.level) && (!state.type || d.type === state.type) && (!state.q || r.text.includes(state.q));
+          r.tr.hidden = !ok; if (ok) n++;
+        }
+        t.body.append(...order.map((r) => r.tr));
+        t.wrap.hidden = n === 0; if (t.none) t.none.hidden = n > 0;
+        if (t.count) t.count.innerHTML = showing(n, t.rows.length);
+        shown += n; total += t.rows.length;
+      }
+      if (countLine) { const sort = state.fit ? fill(T.libSortFit, { fit: esc(chipLabel(fitChips.find((c) => c.dataset.fit === state.fit))) }) : T.libSortDefault; countLine.innerHTML = `${showing(shown, total)} · <span data-lib-sort>${esc(sort)}</span>`; }
+    };
+    costChips.forEach((ch) => ch.addEventListener('click', () => { state.cost = ch.dataset.cost; costChips.forEach((x) => x.setAttribute('aria-pressed', String(x === ch))); apply(); }));
+    fitChips.forEach((ch) => ch.addEventListener('click', () => { const on = ch.getAttribute('aria-pressed') !== 'true'; state.fit = on ? ch.dataset.fit : ''; fitChips.forEach((x) => x.setAttribute('aria-pressed', String(on && x === ch))); apply(); }));
+    level?.addEventListener('change', () => { state.level = level.value; apply(); });
+    type?.addEventListener('change', () => { state.type = type.value; apply(); });
+    input?.addEventListener('input', () => { state.q = input.value.trim().toLowerCase().slice(0, 80); apply(); });
   }
 
   /* ---------- Facts register: one group chip at a time + text filter on label / id / value ---------- */

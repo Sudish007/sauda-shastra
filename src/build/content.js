@@ -229,7 +229,10 @@ export async function loadContent(contentDir, { today } = {}) {
     courses: await readJsonOr(path.join(dataDir, 'library', 'courses.json'), []),
     books: await readJsonOr(path.join(dataDir, 'library', 'books.json'), []),
     path: await readJsonOr(path.join(dataDir, 'library', 'path.json'), { intro: '', stages: [] }),
+    // scripts/linkcheck.py writes { checked, urls, ok, blocked[], dead[] }; without it the Learn page says "links checked: not yet".
+    health: await readJsonOr(path.join(dataDir, 'library', 'health.json'), null),
   };
+  if (!library.health && (library.courses.length || library.books.length)) console.warn('warning: content/data/library/health.json missing — run scripts/linkcheck.py; the Learn page shows "links checked: not yet"');
 
   const dates = [
     ...guides.map((g) => g.updated), ...playbooks.map((p) => p.updated), ...Object.values(pages).map((p) => p.updated),
@@ -438,6 +441,8 @@ export function validate(c, { tools = TOOLS, warn = (m) => console.warn(m) } = {
   for (const stage of c.library.path.stages || []) {
     for (const step of stage.steps || []) if (!libraryIds.has(step.entry)) errors.push(`path stage "${stage.title}": unknown library entry ${step.entry}`);
   }
+  const h = c.library.health;
+  if (h && (!DATE.test(String(h.checked || '')) || !Number.isInteger(h.urls) || !Array.isArray(h.dead) || !Array.isArray(h.blocked || []))) errors.push('library/health.json: { checked: YYYY-MM-DD, urls: n, ok: n, blocked: [], dead: [] } expected');
 
   if (errors.length) throw new Error('Content validation failed:\n' + errors.join('\n'));
 }
