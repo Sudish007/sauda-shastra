@@ -1,7 +1,7 @@
 ---
 title: OI-shift breakout
 summary: A breakout through a clean level, taken only after the option chain shows writers at the strike beyond it covering and writers below it adding — the "shift" in change-in-OI. The one Indian study finds OI repositioning follows breaks rather than leading them, so this playbook uses open interest as context and confirmation, never as the trigger.
-updated: 2026-11-01
+updated: 2026-11-04
 level: advanced
 order: 7
 instruments: [Nifty 50 or Bank Nifty futures, A near-the-money weekly option bought in the breakout direction]
@@ -11,7 +11,7 @@ glance_stop: Back inside the range below the level, with a small buffer; worked 
 glance_target: The next heavy-OI strike (about 1.9R); out early if OI at the break strike rebuilds
 glance_size: One per cent of capital ÷ the stop, one unit only: a confirmation filter, not an edge
 topics: [open interest, change in oi, breakout, option chain, writers, oi walls]
-related: [reading-the-option-chain, price-action-market-structure, candles-order-flow-depth, index-derivatives-specs, orb-15-min-nifty]
+related: [reading-the-option-chain, price-action-market-structure, candles-order-flow-depth, index-derivatives-specs, orb-15-min-nifty, positioning-data-oi-gamma-pinning]
 tools: [position-size]
 sources:
   - S — Open Interest Repositioning around Intraday Price-structure Breaks, Evidence from Nifty 50 Index Options, SSRN working paper 7394780, 2026 | https://doi.org/10.2139/ssrn.7394780 | accessed 2026-11-01

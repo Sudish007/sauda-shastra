@@ -1,8 +1,8 @@
 ---
 title: The opening range and gaps
 section: Technical analysis
-summary: Why the first minutes of the {{fact:mkt-continuous-session}} session are the most volatile of the day in India and the US, how the pre-open auction sets the first print, what the US evidence on opening-range breakouts does and does not transfer, gap-and-go versus gap-fill — and an honest line on Nifty gap statistics, which have no Indian primary source yet.
-updated: 2026-11-01
+summary: Why the first minutes of the {{fact:mkt-continuous-session}} session are the most volatile of the day in India and the US, how the pre-open auction sets the first print, what US opening-range studies do and do not transfer, and what a dated computed Nifty gap table adds while Indian ORB hit rates remain lore.
+updated: 2026-11-04
 level: intermediate
 order: 3
 topics: [opening range, orb, gap up, gap down, gap fill, pre-open auction, u-shaped volatility, stocks in play]
@@ -45,7 +45,7 @@ What transfers to India is the structure of the finding, not the numbers:
 - **Respect the range stop.** The strategy's risk control was mechanical: the stop sat at the other side of the range or its midpoint, and the position size came from the stop distance.
 - **Costs decide.** Net-of-commission results in a market with sub-penny spreads say little about a market where [what a trade costs](../what-a-trade-costs/) includes STT on every sale.
 
-{{label:LORE}} Hit rates for a Nifty opening-range breakout — "the 15-minute ORB works sixty per cent of the time", and similar claims — have no Indian primary source. No exchange, regulator or peer-reviewed study publishes one, and a search on {{date:2026-11-01}} found none. Until this site's planned statistics page computes such figures from daily data, every number of this kind is a practitioner's claim.
+{{label:LORE}} Hit rates for a Nifty opening-range breakout — claims that a fixed opening window wins at a stated rate — have no Indian primary source. No exchange, regulator or peer-reviewed study publishes one, and a search on {{date:2026-11-01}} found none. The site's [computed statistics](../../stats/#ranges) use full-session daily bars, not first-fifteen-minute bars, so they cannot answer this question. Every Indian ORB hit rate remains a practitioner's claim.
 
 ### Five, fifteen or thirty minutes
 
@@ -67,7 +67,9 @@ A gap is the difference between today's open and yesterday's close. If the previ
 
 {{label:EVIDENCE}} The published evidence favours continuation, at least in the US. Plastun, Sibande, Gupta and Wohar studied the Dow Jones, S&P 500 and Nasdaq indices from 1928 to 2018 and found that on gap days prices tend to keep moving in the direction of the gap, that the momentum is temporary, that there is no seasonality in it, and that the results contradict the popular belief that gaps "tend to get filled" ([SSRN; published in 2020](https://doi.org/10.2139/ssrn.3461283)). Caporale and Plastun (2017) tested six gap hypotheses across stock, currency and commodity daily data from 2000 to 2015 and found price behaviour after gaps mostly consistent with an efficient market, the exception being currencies, where a gap strategy earned abnormal profits ([Investment Analysts Journal](https://doi.org/10.1080/10293523.2017.1333563)).
 
-{{label:LORE}} For Nifty, the gap-fill rate is unknown in public. Claims such as "seventy per cent of Nifty gaps fill the same day" circulate widely and have no primary source behind them. This site treats them as lore, exactly as its research notes recorded, until the planned statistics page computes a dated figure from daily index data. US evidence is named here as US evidence; it is not a Nifty statistic.
+{{label:EVIDENCE}} For Nifty, the site's [computed gap table](../../stats/#gaps) now supplies a dated descriptive check: ten years of Yahoo daily index bars, split into absolute gap-size buckets, with the share that traded back to the previous close during the same session. The table prints its sample, method and caveats and is labelled historical, not a forecast. It is not an exchange study, and its open is Yahoo's first disseminated value after continuous trading begins.
+
+{{label:LORE}} A raw daily fill rate is not the hit rate of a tradable gap-fill setup. It does not apply the news, opening-range, volume, entry, stop or cost filters below. Claims that a particular Nifty fade wins at a stated rate remain lore until that complete rule is tested out of sample; the US continuation evidence is still named as US evidence.
 
 ### Reading a gap in context
 
@@ -90,5 +92,6 @@ In FY26, {{fact:sebi-loss-2026-share}} of individual traders in equity derivativ
 - {{label:EVIDENCE}} Opening-range breakouts were profitable net of commissions on US instruments in 2016–2023 working papers; the filter for stocks in play carried the edge.
 - {{label:EVIDENCE}} US index gaps tend to continue rather than fill (1928–2018); across stocks and commodities, post-gap behaviour was mostly efficient, with currencies the exception.
 - {{label:MECHANISM}} The pre-open auction discovers the opening price; range length trades earliness against noise.
-- {{label:LORE}} Any Nifty gap-fill rate or opening-range hit rate: no Indian primary source exists.
+- {{label:EVIDENCE}} The site's dated Nifty daily-bar sample reports same-session gap fills by gap-size bucket; it is descriptive and not a strategy test.
+- {{label:LORE}} Any Indian ORB hit rate or the win rate of a filtered Nifty gap fade: neither has a complete public test.
 :::

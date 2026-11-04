@@ -2,11 +2,11 @@
 title: Reading the option chain
 section: Options
 summary: What each column of a Nifty option chain shows and what it cannot show, why open interest counts contracts rather than direction, how to read change in OI, the put–call ratio and max pain without over-reading them, what SEBI's delta-adjusted FutEq measure is, and what the published evidence on expiry pinning says (US, modest) versus the Indian max-pain claims (lore).
-updated: 2026-11-01
+updated: 2026-11-04
 level: beginner
 order: 1
 topics: [option chain, open interest, change in oi, put-call ratio, pcr, max pain, pinning, futeq, participant-wise oi, nifty options, strikes]
-related: [iv-expected-move-and-crush, expiry-day-dynamics, buying-vs-selling-options, index-derivatives-specs, candles-order-flow-depth, flows-rupee-and-rbi, oi-shift-breakout]
+related: [iv-expected-move-and-crush, expiry-day-dynamics, buying-vs-selling-options, index-derivatives-specs, candles-order-flow-depth, flows-rupee-and-rbi, oi-shift-breakout, positioning-data-oi-gamma-pinning]
 sources:
   - NSE — Nifty 50 derivatives contract specifications (strike scheme, tick, trading cycle) | https://www.nseindia.com/products-services/equity-derivatives-nifty50 | accessed 2026-11-01
   - NSE Clearing — Participant-wise open interest, daily file (Oct 2026) | https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_30102026.csv | accessed 2026-11-01
@@ -46,7 +46,7 @@ Change in OI compares the current OI with the previous close, so during the day 
 
 ### Participant-wise OI exists, but only at the close
 
-NSE Clearing publishes an end-of-day [participant-wise open-interest file](https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_30102026.csv) splitting the market into Client, DII, FII and Pro, each by index and stock futures (long and short) and by index and stock calls and puts (long and short). The file dated {{date:2026-10-30}}, for example, shows clients short 41,26,285 index-put contracts against 7,11,954 for FIIs. Two cautions: it is end of day, so it cannot tell you what any group is doing right now, and "Client" lumps every non-institutional account together, from a one-lot retail trader to a family office. The Edges section of this site returns to this data set once it is written.
+NSE Clearing publishes an end-of-day [participant-wise open-interest file](https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_30102026.csv) splitting the market into Client, DII, FII and Pro, each by index and stock futures (long and short) and by index and stock calls and puts (long and short). The file dated {{date:2026-10-30}}, for example, shows clients short 41,26,285 index-put contracts against 7,11,954 for FIIs. Two cautions: it is end of day, so it cannot tell you what any group is doing right now, and "Client" lumps every non-institutional account together, from a one-lot retail trader to a family office. [Positioning data, dealer gamma and expiry pinning](../positioning-data-oi-gamma-pinning/) tests what can and cannot be inferred from the report.
 
 ### FutEq: the regulator counts delta, not contracts
 
@@ -68,7 +68,7 @@ What does the evidence say? Three strands, none of them Indian max-pain statisti
 - {{label:MECHANISM}} **Why hedging can pin.** Avellaneda and Lipkin ([Quantitative Finance, 2003](https://www.cis.upenn.edu/~mkearns/finread/PinningPaper.pdf)) modelled the effect: when open interest at a strike is unusually large, the aggregate delta-hedging of market makers who are long those options pushes the underlying toward the strike; the probability of pinning rises with open interest and falls with volatility and with time to expiry.
 - {{label:EVIDENCE}} **Index futures, too, but in both directions.** Golez and Jackwerth ([Journal of Financial Economics, 2012](https://ideas.repec.org/a/eee/jfinec/v106y2012i3p566-585.html)) found S&P 500 futures pulled toward the at-the-money strike on serial-option expiry days and pushed away from it before index-option expiries, again driven by hedge rebalancing, with a notional shift of at least $115 million per expiry day.
 - {{label:EVIDENCE}} **India has an expiry-day pattern, not a max-pain result.** The one peer-reviewed Indian study located, in the [Journal of Futures Markets (2005)](https://ideas.repec.org/a/wly/jfutmk/v25y2005i11p1045-1065.html), found underlying prices marginally depressed the day before NSE expiries and significantly higher the day after, with abnormally high expiry-day volume, and attributed it to arbitrage unwinding and limits on short selling in the cash market.
-- {{label:LORE}} **A Nifty or Sensex max-pain hit rate.** No peer-reviewed study of either index settling at its max-pain strike was found on {{date:2026-11-01}}; only vendor and blog backtests exist. Every "the index closes within x points of max pain y per cent of the time" claim is therefore lore until this site's planned statistics page computes a dated figure from exchange data.
+- {{label:LORE}} **A Nifty or Sensex max-pain hit rate.** No peer-reviewed study of either index settling at its max-pain strike was found on {{date:2026-11-01}}; only vendor and blog backtests exist. The site's [computed statistics page](../../stats/) measures daily gaps, ranges and VIX, not option-chain max pain. Every claim that the index closes within a stated distance of max pain at a stated rate therefore remains lore.
 
 Two further points keep the idea in proportion. Pinning, where it exists, is a last-hours effect, not a whole-week forecast, and the pack of positions that could pin the index changes as traders roll. And India's settlement mechanics are moving away from a single closing print: since {{date:2026-08-03}} expiring index options settle on an index built from constituents' closing-auction prices, and from {{date:2026-12-07}} on a thirty-minute volume-weighted index value — an average that is harder to steer than one print. [Expiry-day dynamics](../expiry-day-dynamics/) covers both regimes.
 

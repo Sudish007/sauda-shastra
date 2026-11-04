@@ -2,11 +2,11 @@
 title: The overnight chain: from the US close to the India open
 section: Macro & events
 summary: One clock in IST for the twenty-four hours before Nifty opens: when New York closes, how GIFT Nifty trades through the night and absorbs US data, when Tokyo and Hong Kong open, and how to read a GIFT Nifty quote against the previous close without mistaking a futures premium for a gap.
-updated: 2026-11-02
+updated: 2026-11-04
 level: beginner
 order: 1
 topics: [overnight chain, gift nifty, nyse close, es futures, asia open, pre-open auction, us cpi, nfp, fomc, ist]
-related: [trading-day-ist, opening-range-and-gaps, policy-days-vix-and-sizing, flows-rupee-and-rbi, orb-15-min-nifty, gap-fill-fade]
+related: [trading-day-ist, opening-range-and-gaps, policy-days-vix-and-sizing, flows-rupee-and-rbi, orb-15-min-nifty, gap-fill-fade, flows-and-calendar-effects]
 sources:
   - NSE IX — Trading Hours, index futures (GIFT Nifty sessions) | https://www.nseix.com/markets/trading/tradinghoursnew | accessed 2026-11-01
   - NSE IX — Press release on GIFT Nifty volumes and the record day (Sep 2026) | https://www.nseix.com/web/pressrelease/2026-09/PR_CC_25092026_1_20260925200618.pdf | accessed 2026-11-01

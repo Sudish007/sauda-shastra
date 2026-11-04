@@ -1,7 +1,7 @@
 ---
 title: Gap-fill fade back to the previous close
 summary: Fading an opening gap in Nifty or a liquid stock future only after price fails back inside the previous day's range, with the stop beyond the gap-day extreme and the target at the previous close. The published evidence says gaps continue more often than they fill, so confirmation is the whole trade.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 2
 instruments: [Nifty 50 or Bank Nifty futures, Futures on a liquid F&O stock, Options only as a bought directional hedge]
@@ -78,7 +78,8 @@ Lots = the risk budget divided by the stop in rupees, rounded down. On a one-per
 - {{label:EVIDENCE}} Contrary: on the Dow, S&P 500 and Nasdaq from 1928 to 2018, prices tend to continue in the gap's direction on the gap day, the effect is temporary, and the belief that gaps "get filled" is not supported (Plastun, Sibande, Gupta and Wohar). Across stocks, currencies and commodities 2000–2015, post-gap behaviour was mostly consistent with efficiency, currencies excepted (Caporale and Plastun).
 - {{label:MECHANISM}} The structure filter — a close back inside the previous day's range on higher volume — is a reason to expect the fill; it is explained, not measured.
 - {{label:MECHANISM}} VWAP is the benchmark large orders are worked against, which is why the remainder is held to it.
-- {{label:LORE}} Any Nifty gap-fill percentage. No exchange, regulator or peer-reviewed study publishes one; this site's planned statistics page is the only route to a dated figure.
+- {{label:EVIDENCE}} The site's [computed Nifty gap table](../../stats/#gaps) reports same-session fills by absolute gap-size bucket over a dated ten-year daily sample. It is descriptive evidence from Yahoo's index series, labelled historical and not a forecast.
+- {{label:LORE}} The win rate of this filtered intraday fade — reversal candle, volume condition, stop and costs — is still unmeasured. A daily fill count is not a strategy backtest.
 :::
 
 ## Schematic

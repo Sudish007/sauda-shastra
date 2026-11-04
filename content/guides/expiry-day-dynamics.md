@@ -2,11 +2,11 @@
 title: Expiry-day dynamics
 section: Options
 summary: Who trades expiry day and how concentrated it is ({{fact:opt-zero-dte-share-fy26}} of FY26 index-option turnover was in same-day contracts), the close minute by minute under today's closing auction and under the regime that starts on {{date:2026-12-07}}, the {{fact:fo-expiry-day-elm-addon}} margin add-on, exercise versus square-off, and what the pinning evidence does and does not say.
-updated: 2026-11-01
+updated: 2026-11-04
 level: advanced
 order: 4
 topics: [expiry day, 0dte, weekly expiry, closing auction session, cas, settlement price, vwap settlement, expiry-day elm, exercise, square off, pinning, position limits]
-related: [greeks-for-a-day-trader, iv-expected-move-and-crush, liquidity-slippage-and-sebi-measures, spreads-and-delta-neutral, trading-day-ist, index-derivatives-specs, policy-days-vix-and-sizing, expiry-day-straddle-scalp, 0920-short-straddle, last-hour-positioning]
+related: [greeks-for-a-day-trader, iv-expected-move-and-crush, liquidity-slippage-and-sebi-measures, spreads-and-delta-neutral, trading-day-ist, index-derivatives-specs, policy-days-vix-and-sizing, expiry-day-straddle-scalp, 0920-short-straddle, last-hour-positioning, positioning-data-oi-gamma-pinning]
 tools: [expected-move]
 sources:
   - SEBI press release 50/2026 (Aug 2026) — Trends in retail participation, trading behaviour and profitability in equity derivatives | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf | accessed 2026-11-01

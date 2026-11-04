@@ -2,11 +2,11 @@
 title: What SEBI's loss studies say
 section: Risk, psychology & tax
 summary: Five SEBI studies from 2023 to 2026 counted who made money in equity derivatives. In FY26 {{fact:sebi-loss-2026-share}} of individual traders lost, {{fact:sebi-loss-2026-amount}} between them and {{fact:sebi-loss-2026-avg}} each on average — the base rate every trading plan has to start from. The figures, the samples, who lost more, and what did not help.
-updated: 2026-11-01
+updated: 2026-11-04
 level: beginner
 order: 1
 topics: [sebi study, retail losses, base rate, f&o, index options, intraday, transaction costs, persistence, under-30s]
-related: [expectancy-and-drawdown-maths, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, what-a-trade-costs, liquidity-slippage-and-sebi-measures, strategy-families-and-backtest-hygiene]
+related: [expectancy-and-drawdown-maths, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, what-a-trade-costs, liquidity-slippage-and-sebi-measures, strategy-families-and-backtest-hygiene, retail-traps]
 tools: [expectancy-kelly]
 sources:
   - SEBI — Profitability of individual traders in the equity derivatives segment, FY25–FY26 (Aug 2026) | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf | accessed 2026-11-01

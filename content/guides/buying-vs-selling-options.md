@@ -2,11 +2,11 @@
 title: Buying versus selling options
 section: Options
 summary: What SEBI's FY26 study says about who buys options ({{fact:opt-buyer-share-fy26}} of individual traders mainly bought) and who kept the money, why bought options bleed, why selling is not free money (the {{date:2024-06-04}} gap priced per lot), what a long wing does to margin, and how to size either side with the calculators.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 5
 topics: [option buying, option selling, variance risk premium, sebi study, retail losses, naked options, gap risk, span, elm, hedged selling, upfront premium, oi confirmation]
-related: [iv-expected-move-and-crush, spreads-and-delta-neutral, expiry-day-dynamics, greeks-for-a-day-trader, what-a-trade-costs, intraday-leverage-today, what-sebi-loss-studies-say, position-sizing-and-loss-limits, oi-shift-breakout]
+related: [iv-expected-move-and-crush, spreads-and-delta-neutral, expiry-day-dynamics, greeks-for-a-day-trader, what-a-trade-costs, intraday-leverage-today, what-sebi-loss-studies-say, position-sizing-and-loss-limits, oi-shift-breakout, retail-traps]
 tools: [position-size, charges]
 sources:
   - SEBI press release 50/2026 (Aug 2026) — Trends in retail participation, trading behaviour and profitability in equity derivatives | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf | accessed 2026-11-01

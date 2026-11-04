@@ -2,11 +2,11 @@
 title: Greeks for a day trader
 section: Options
 summary: Delta as direction and a rough probability, gamma as the reason expiry afternoons trend or pin, theta as a calendar-time bill the market charges continuously, vega as the event-day Greek — each with a Nifty 25,000 example priced per lot of {{fact:fo-nifty-lot}} units by the site's calculator, plus the published evidence on dealer hedging and intraday momentum.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 3
 topics: [delta, gamma, theta, vega, greeks, black-scholes, time decay, intraday theta, dealer hedging, gamma hedging, expiry day]
-related: [iv-expected-move-and-crush, expiry-day-dynamics, spreads-and-delta-neutral, buying-vs-selling-options, reading-the-option-chain]
+related: [iv-expected-move-and-crush, expiry-day-dynamics, spreads-and-delta-neutral, buying-vs-selling-options, reading-the-option-chain, volatility-tells-skew-term-structure]
 tools: [black-scholes-greeks]
 sources:
   - Options Industry Council — Understanding options Greeks | https://www.optionseducation.org/advancedconcepts/understanding-options-greeks | accessed 2026-11-01

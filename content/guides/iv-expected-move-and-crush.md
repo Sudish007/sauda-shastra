@@ -2,11 +2,11 @@
 title: Implied volatility, the expected move and IV crush
 section: Options
 summary: What implied volatility is and how India VIX is built, why IV percentile and rank must be computed by you, how a straddle prices the expected move in rupees per lot of {{fact:fo-nifty-lot}} units, what NSE's own index files show about IV on the two Budget days and the {{date:2024-06-04}} election count, and which event-day claims remain lore.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 2
 topics: [implied volatility, india vix, iv percentile, iv rank, expected move, straddle, variance risk premium, iv crush, budget day, event day, black-scholes]
-related: [greeks-for-a-day-trader, expiry-day-dynamics, buying-vs-selling-options, spreads-and-delta-neutral, reading-the-option-chain, indicators-and-why-they-lag, policy-days-vix-and-sizing, results-season-playbook, event-day-iv-crush-hedged]
+related: [greeks-for-a-day-trader, expiry-day-dynamics, buying-vs-selling-options, spreads-and-delta-neutral, reading-the-option-chain, indicators-and-why-they-lag, policy-days-vix-and-sizing, results-season-playbook, event-day-iv-crush-hedged, volatility-tells-skew-term-structure]
 tools: [expected-move, black-scholes-greeks]
 sources:
   - NSE — About India VIX, computation methodology | https://nsearchives.nseindia.com/s3fs-public/inline-files/India_VIX_comp_meth.pdf | accessed 2026-11-01
@@ -78,7 +78,7 @@ IV crush is the fall in implied volatility once an awaited event has happened an
 
 **The opposite case.** On the election count day of {{date:2024-06-04}} Nifty opened at 23,179.50 against the previous close of 23,263.90, fell to 21,281.45 and closed at 21,884.50; Bank Nifty lost 7.95 per cent, and India VIX closed at 26.75, up 27.75 per cent — one day after it had fallen 14.9 per cent on a session in which Nifty had risen 3.25 per cent ([file](https://nsearchives.nseindia.com/content/indices/ind_close_all_04062024.csv)). Whoever sold volatility into the exit-poll relief rally met the other tail within a day. [Buying versus selling options](../buying-vs-selling-options/) prices that day per lot.
 
-{{label:LORE}} RBI policy days, India CPI releases, FOMC nights and results are the same mechanism — a scheduled resolution of uncertainty — but no primary source publishes per-event IV changes for Nifty beyond what the index files show for the two Budgets above. Any "IV always drops x per cent after the RBI" claim is lore until this site's planned statistics page computes it from the daily VIX file. The [IST calendar](../../calendar/) lists the dates and release times.
+{{label:LORE}} RBI policy days, India CPI releases, FOMC nights and results are the same mechanism — a scheduled resolution of uncertainty — but no primary source publishes per-event IV changes for Nifty beyond what the index files show for the two Budgets above. Any "IV always drops x per cent after the RBI" claim remains lore. The site's [computed statistics page](../../stats/#vix) groups the next session's daily range by VIX quartile; it does not group event-day IV changes and cannot supply that missing hit rate. The [IST calendar](../../calendar/) lists the dates and release times.
 
 ## Using it on the day
 

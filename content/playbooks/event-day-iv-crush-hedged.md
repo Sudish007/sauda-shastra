@@ -1,7 +1,7 @@
 ---
 title: Event-day IV crush, sold with a hedge
 summary: Selling the premium that a scheduled event (RBI policy, the Budget, CPI, FOMC, a stock's results) builds into at-the-money options, always as an iron fly or iron condor with the wings bought first. The pricing of event uncertainty is documented in US equity options; the crush is arithmetic; any Indian event-day win rate is lore.
-updated: 2026-11-01
+updated: 2026-11-04
 level: advanced
 order: 10
 instruments: [Nifty or Sensex weekly options as an iron fly or iron condor, Stock options around results (physical settlement applies)]
@@ -11,7 +11,7 @@ glance_stop: Half the net credit lost, or price through a short strike's breakev
 glance_target: 40–60 per cent of the net credit once IV collapses after the release; exit as one ticket
 glance_size: Max loss of the structure ≤ two per cent of capital; wings first for the hedged margin
 topics: [iv crush, event day, iron fly, iron condor, rbi policy, budget, results, hedged selling]
-related: [iv-expected-move-and-crush, policy-days-vix-and-sizing, results-season-playbook, spreads-and-delta-neutral, greeks-for-a-day-trader, intraday-leverage-today, 0920-short-straddle, expiry-day-straddle-scalp]
+related: [iv-expected-move-and-crush, policy-days-vix-and-sizing, results-season-playbook, spreads-and-delta-neutral, greeks-for-a-day-trader, intraday-leverage-today, 0920-short-straddle, expiry-day-straddle-scalp, volatility-tells-skew-term-structure]
 tools: [expected-move, black-scholes-greeks, position-size]
 sources:
   - Johannes and Dubinsky — Earnings Announcements and Option Prices, SSRN working paper 600593 (2004/2006) | https://doi.org/10.2139/ssrn.600593 | accessed 2026-11-01

@@ -1,7 +1,7 @@
 ---
 title: 15-minute opening range breakout on Nifty
 summary: Mark the first fifteen minutes of the session as a range, trade the first close outside it with the stop at the midpoint and the first target one range width away; one lot is {{fact:fo-nifty-lot}} units. US studies back the structure; the Nifty parameters are lore.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 1
 instruments: [Nifty 50 futures (current month), Near-ATM Nifty weekly option bought in the breakout direction]
@@ -11,7 +11,7 @@ glance_stop: Range midpoint (tight) or the far side of the range (loose)
 glance_target: One range width beyond the break (2R on the midpoint stop), then trail 5-minute swings
 glance_size: One per cent of capital per attempt, two attempts a day; options sized by premium at risk
 topics: [opening range, orb, breakout, nifty futures, first fifteen minutes]
-related: [opening-range-and-gaps, position-sizing-and-loss-limits, trading-day-ist, what-a-trade-costs, gap-fill-fade]
+related: [opening-range-and-gaps, position-sizing-and-loss-limits, trading-day-ist, what-a-trade-costs, gap-fill-fade, flows-and-calendar-effects]
 tools: [position-size, charges]
 sources:
   - Zarattini and Aziz — Can Day Trading Really Be Profitable? SSRN working paper 4416622, 2023 | https://doi.org/10.2139/ssrn.4416622 | accessed 2026-11-01
@@ -78,7 +78,7 @@ Lots = the risk budget divided by the stop in rupees, rounded down. With ₹6,00
 :::evidence Lore, with partial evidence
 - {{label:EVIDENCE}} Opening-range breakouts were profitable net of commissions on US instruments in two working papers: QQQ 2016–2023 (Zarattini and Aziz, 2023) and a 5-minute range on 7,000-plus US stocks that paid only on "stocks in play" with unusual volume (Zarattini, Barbon and Aziz, 2024).
 - {{label:EVIDENCE}} Intraday volatility is U-shaped in one-minute Nifty futures 2011–2018 (Singh, working paper) — the reason the window closes at 11:00.
-- {{label:LORE}} The fifteen-minute parameter on Nifty and any hit rate for it: no Indian study, exchange or regulator publishes one; until this site's planned statistics page computes a dated figure, such numbers are practitioners' claims.
+- {{label:LORE}} The fifteen-minute parameter on Nifty and any hit rate for it: no Indian study, exchange or regulator publishes one. The site's [computed statistics](../../stats/#ranges) cover full-session daily ranges, not intraday opening bars, so this claim remains lore.
 - {{label:EVIDENCE}} Base rate: SEBI's FY26 study found {{fact:sebi-loss-2026-share}} of individual F&O traders lost money; a defined stop does not change that by itself.
 :::
 

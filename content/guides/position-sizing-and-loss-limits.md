@@ -2,11 +2,11 @@
 title: Position sizing and loss limits
 section: Risk, psychology & tax
 summary: The one-per-cent rule as a formula; sizing shares, Nifty futures lots (one lot is {{fact:fo-nifty-lot}} units) and options by the loss at the stop rather than by the margin available; why a short option's margin is not its risk; daily, weekly and monthly loss limits as pre-commitments; and what SEBI's FY26 data says about capital and the chance of losing.
-updated: 2026-11-01
+updated: 2026-11-04
 level: intermediate
 order: 3
 topics: [position sizing, one per cent rule, risk per trade, lot size, premium at risk, notional, margin, daily loss limit, drawdown, peak margin, upfront premium]
-related: [expectancy-and-drawdown-maths, what-sebi-loss-studies-say, psychology-journaling-prop-firms, intraday-leverage-today, buying-vs-selling-options, spreads-and-delta-neutral, what-a-trade-costs, policy-days-vix-and-sizing, execution-realities-and-architecture]
+related: [expectancy-and-drawdown-maths, what-sebi-loss-studies-say, psychology-journaling-prop-firms, intraday-leverage-today, buying-vs-selling-options, spreads-and-delta-neutral, what-a-trade-costs, policy-days-vix-and-sizing, execution-realities-and-architecture, retail-traps]
 tools: [position-size]
 sources:
   - Zerodha Varsity — Position sizing for the active trader (Module 9) | https://zerodha.com/varsity/chapter/position-sizing/ | accessed 2026-11-01

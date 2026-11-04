@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { buildSearchIndex, buildSite } from '../src/build/site.js';
 import { SITE } from '../src/build/config.js';
 import { STRINGS } from '../src/build/strings.js';
-import { parseGuide, parsePlaybook } from '../src/build/content.js';
+import { parseGuide, parsePlaybook, PHASE2_SECTIONS } from '../src/build/content.js';
 import { TOOLS } from '../src/build/tools.js';
 import { FACTS, FACT_MAP, GUIDE, PLAYBOOK, makeContent } from './fixtures.js';
 
@@ -237,7 +237,9 @@ test('the home page renders the SEBI hero card from the five register facts with
   assert.match(home, /<dl class="counts"/);
   assert.match(home, /<div class="grid grid-4">(<div class="card honesty-card">[\s\S]*?<\/div>){4}<\/div>/, 'four honesty cards');
   assert.match(home, /<a href="\.\/facts\/">verified facts register<\/a>/);
-  assert.match(home, /<p class="eyebrow"[^>]*>Coming in Phase 2<\/p><div class="grid grid-fill-3"/);
+  const remainingPhase2 = PHASE2_SECTIONS.filter((section) => !result.content.guides.some((g) => g.section === section));
+  if (remainingPhase2.length) assert.match(home, /<p class="eyebrow"[^>]*>Coming in Phase 2<\/p><div class="grid grid-fill-3"/);
+  else assert.doesNotMatch(home, /Coming in Phase 2/, 'the Phase-2 grid disappears after every section has content');
 });
 
 test('sitemap lists the public pages with https URLs and dated lastmod; robots points at it', async () => {

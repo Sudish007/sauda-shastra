@@ -2,11 +2,11 @@
 title: Policy days, India VIX and sizing on event days
 section: Macro & events
 summary: What happens on an RBI or Fed day in IST and what the RBI publishes at {{fact:mac-rbi-mpc-time-ist}}, when India's CPI, IIP and GDP land, how India VIX turns into an expected daily move in Nifty points and rupees per lot of {{fact:fo-nifty-lot}} units, what ten years of data say about VIX bands, and a sizing rule that keeps one event-day standard deviation inside your daily loss limit.
-updated: 2026-11-02
+updated: 2026-11-04
 level: intermediate
 order: 4
 topics: [rbi mpc, repo rate, fomc, fed funds, india vix, expected move, event day, sizing, daily loss limit, budget day, cpi, iip, gdp]
-related: [iv-expected-move-and-crush, expiry-day-dynamics, position-sizing-and-loss-limits, event-day-iv-crush-hedged, overnight-chain-to-india-open, crude-yields-dollar-sector-map, greeks-for-a-day-trader]
+related: [iv-expected-move-and-crush, expiry-day-dynamics, position-sizing-and-loss-limits, event-day-iv-crush-hedged, overnight-chain-to-india-open, crude-yields-dollar-sector-map, greeks-for-a-day-trader, volatility-tells-skew-term-structure]
 tools: [expected-move, position-size]
 sources:
   - RBI — Meeting Schedule of the Monetary Policy Committee for 2026-27 (Mar 2026) | https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=62422 | accessed 2026-11-01

@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: advanced
 order: 8
 topics: [LRS, TCS, Form A2, Interactive Brokers, GIFT City, Global Access, foreign stocks, W-8BEN, DTAA, Form 67, US estate tax, UCITS ETF, Schedule FA]
-related: [us-index-core-three-fund, cape-expected-returns-and-currency, investing-in-europe, investing-in-japan, investing-in-emerging-markets, tax-for-investors]
+related: [us-index-core-three-fund, cape-expected-returns-and-currency, investing-in-europe, investing-in-japan, investing-in-emerging-markets, tax-for-investors, retail-traps]
 tools: [us-vs-india-investing-cost]
 sources:
   - RBI — Master Direction, Liberalised Remittance Scheme, updated Sep 2024 | https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10192 | accessed 2026-11-01
