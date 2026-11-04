@@ -2,17 +2,17 @@
 title: Management commentary, analyst ratings and block deals
 section: Fundamentals & news
 summary: Where earnings-call audio and transcripts must appear and by when, what to pull out of a management call, why an upgrade or a target price is a registered analyst's opinion with no published hit rate, and how to read the exchanges' evening lists of block deals ({{fact:sebi-block-deal-min-size}} minimum) and bulk deals ({{fact:sebi-bulk-deal-threshold}} of a company's listed shares in a day).
-updated: 2026-11-02
+updated: 2026-11-05
 level: intermediate
 order: 2
 topics: [earnings call, concall transcript, investor presentation, guidance, research analyst, upgrade, downgrade, target price, block deal, bulk deal, block window, reference price]
-related: [results-season-playbook, governance-red-flags, scanners-and-where-data-lives, flows-rupee-and-rbi, trading-day-ist, premarket-gainer-momentum]
+related: [results-season-playbook, governance-red-flags, scanners-and-where-data-lives, flows-rupee-and-rbi, trading-day-ist, premarket-gainer-momentum, positioning-data-oi-gamma-pinning, retail-traps]
 sources:
   - SEBI (LODR) Regulations 2015, amended up to 14 Jul 2026 — Schedule III Part A cl. 15(o) and 15(oa) (analyst meets, call recordings and transcripts); Reg 30(6) | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2026/1784630770711.pdf | accessed 2026-11-02
   - SEBI (Research Analysts) Regulations 2014, consolidated to 6 Aug 2025 — Reg 2 definitions, Reg 3(1) registration | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2025/1755176387160.pdf | accessed 2026-11-01
   - SEBI — list of registered Research Analysts | https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=14 | accessed 2026-11-01
   - SEBI circular SEBI/HO/MRD/POD-III/CIR/P/2025/134 — Review of Block Deal Framework (Oct 2025) | https://www.sebi.gov.in/sebi_data/attachdocs/oct-2025/1759928647818.pdf | accessed 2026-11-02
-  - NSE circular NSE/CMTR/71394 — Block Trading Session update: revised size and band live from 8 Dec 2025 | https://nsearchives.nseindia.com/content/circulars/CMTR71394.pdf | accessed 2026-11-02
+  - NSE circular NSE/CMTR/71394 — Block Trading Session update: revised size and band live from Dec 2025 | https://nsearchives.nseindia.com/content/circulars/CMTR71394.pdf | accessed 2026-11-02
   - SEBI Master Circular for Stock Exchanges and Clearing Corporations, Chapter 1 Trading (Dec 2024) — paras 1.1 (bulk deals) and 1.2 (block deals before the 2025 review) | https://www.sebi.gov.in/sebi_data/commondocs/dec-2024/RE_Chapter%201%20-%20Trading%20-%20NEW_p.pdf | accessed 2026-11-02
   - NSE — Bulk and block deals (daily lists) | https://www.nseindia.com/report-detail/display-bulk-and-block-deals | accessed 2026-11-01
   - NSE — Corporate filings: announcements | https://www.nseindia.com/companies-listing/corporate-filings-announcements | accessed 2026-11-01

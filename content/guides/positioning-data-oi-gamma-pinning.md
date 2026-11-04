@@ -2,11 +2,11 @@
 title: Positioning data, dealer gamma and expiry pinning
 section: Edges, habits & traps
 summary: What NSE Clearing's participant-wise open-interest report proves, why it does not forecast direction, what US studies and Indian expiry evidence say about dealer hedging and pinning, and why a large strike-OI wall or a vendor Nifty gamma level can fail.
-updated: 2026-11-04
+updated: 2026-11-05
 level: advanced
 order: 1
 topics: [participant-wise oi, futeq, fii, proprietary traders, dealer gamma, gamma exposure, pinning, max pain, strike oi walls, closing auction]
-related: [reading-the-option-chain, expiry-day-dynamics, oi-shift-breakout, volatility-tells-skew-term-structure]
+related: [reading-the-option-chain, expiry-day-dynamics, oi-shift-breakout, volatility-tells-skew-term-structure, flows-rupee-and-rbi, commentary-ratings-block-deals, strategy-families-and-backtest-hygiene]
 sources:
   - NSE Clearing — Participant-wise open interest, daily report (Oct 2026) | https://nsearchives.nseindia.com/content/nsccl/fao_participant_oi_30102026.csv | accessed 2026-11-01
   - SEBI circular May 2025 — Future-equivalent open interest and position limits | https://www.sebi.gov.in/sebi_data/attachdocs/may-2025/1748521484014.pdf | accessed 2026-11-01

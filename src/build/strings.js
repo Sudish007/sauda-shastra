@@ -406,7 +406,7 @@ export const STRINGS = {
         surchargeNote: 'Estimate only: surcharge on high incomes, the old regime, audit, presumptive and advance-tax rules are not modelled — consult a chartered accountant.',
         carryNote: 'A loss is carried forward only when the return is filed by the due date.',
       },
-      examples: ['Salary ₹12 lakh, F&O profit ₹3 lakh', 'Salary ₹9 lakh, F&O loss ₹1.5 lakh'],
+      examples: ['Salary ₹12 lakh, F&O profit three lakh rupees', 'Salary ₹9 lakh, F&O loss ₹1.5 lakh'],
       notes: [
         'Intraday equity is a speculative business: its loss is set off only against speculation profit and carried forward {specYears}. Exchange-traded F&O is non-speculative business: its loss is set off against any head except salary and carried forward {nonspecYears}.',
       ],

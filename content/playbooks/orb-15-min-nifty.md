@@ -1,7 +1,7 @@
 ---
 title: 15-minute opening range breakout on Nifty
 summary: Mark the first fifteen minutes of the session as a range, trade the first close outside it with the stop at the midpoint and the first target one range width away; one lot is {{fact:fo-nifty-lot}} units. US studies back the structure; the Nifty parameters are lore.
-updated: 2026-11-04
+updated: 2026-11-05
 level: intermediate
 order: 1
 instruments: [Nifty 50 futures (current month), Near-ATM Nifty weekly option bought in the breakout direction]
@@ -11,7 +11,7 @@ glance_stop: Range midpoint (tight) or the far side of the range (loose)
 glance_target: One range width beyond the break (2R on the midpoint stop), then trail 5-minute swings
 glance_size: One per cent of capital per attempt, two attempts a day; options sized by premium at risk
 topics: [opening range, orb, breakout, nifty futures, first fifteen minutes]
-related: [opening-range-and-gaps, position-sizing-and-loss-limits, trading-day-ist, what-a-trade-costs, gap-fill-fade, flows-and-calendar-effects]
+related: [opening-range-and-gaps, position-sizing-and-loss-limits, trading-day-ist, what-a-trade-costs, gap-fill-fade, flows-and-calendar-effects, overnight-chain-to-india-open]
 tools: [position-size, charges]
 sources:
   - Zarattini and Aziz — Can Day Trading Really Be Profitable? SSRN working paper 4416622, 2023 | https://doi.org/10.2139/ssrn.4416622 | accessed 2026-11-01

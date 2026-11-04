@@ -2,11 +2,11 @@
 title: Psychology, journaling and prop firms
 section: Risk, psychology & tax
 summary: What SEBI's behaviour data says about experience, persistence and activity ({{fact:sebi-loss-2026-five-year-consistent}} of five-year traders profited every year), the classic over-trading studies, revenge- and over-trading controls written as rules, a downloadable trade-journal template with a weekly review, and what a "funded account" is for an Indian trader — RBI's Alert List, the LRS rule and the regulated alternative.
-updated: 2026-11-04
+updated: 2026-11-05
 level: beginner
 order: 4
 topics: [trading psychology, revenge trading, over-trading, overconfidence, daily loss limit, trade journal, journaling template, csv, prop firm, funded account, ftmo, rbi alert list, lrs]
-related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, expectancy-and-drawdown-maths, buying-vs-selling-options, retail-traps]
+related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, expectancy-and-drawdown-maths, buying-vs-selling-options, retail-traps, investing-abroad-from-india]
 sources:
   - SEBI — Trading behaviour of individual traders in the equity derivatives segment, FY25–FY26 (Aug 2026) | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233601328.pdf | accessed 2026-11-01
   - SEBI — Analysis of profits and losses in the equity derivatives segment, FY22–FY24 (Sep 2024) | https://www.sebi.gov.in/sebi_data/attachdocs/sep-2024/1727085659479.pdf | accessed 2026-11-01

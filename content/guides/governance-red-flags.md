@@ -2,11 +2,11 @@
 title: Governance red flags: pledge, related parties and sudden exits
 section: Fundamentals & news
 summary: The filings that warn before the price does — promoter pledges disclosed under the takeover code, related-party deals above the turnover-scaled Schedule XII thresholds ({{fact:sebi-rpt-materiality-low}} for the smallest listed companies), auditor and independent-director resignations with reasons, fraud and default disclosures — and what a trader does with each.
-updated: 2026-11-02
+updated: 2026-11-05
 level: intermediate
 order: 3
 topics: [promoter pledge, encumbrance, sast regulation 31, shareholding pattern, related-party transactions, schedule xii, audit committee, auditor resignation, independent director, fraud disclosure, trading window, insider trading]
-related: [results-season-playbook, commentary-ratings-block-deals, scanners-and-where-data-lives, settlement-circuits-asm-ban, position-sizing-and-loss-limits, what-sebi-loss-studies-say]
+related: [results-season-playbook, commentary-ratings-block-deals, scanners-and-where-data-lives, settlement-circuits-asm-ban, position-sizing-and-loss-limits, what-sebi-loss-studies-say, direct-equity-and-valuation-bands, retail-traps]
 sources:
   - SEBI (Substantial Acquisition of Shares and Takeovers) Regulations 2011, text as amended to 5 Dec 2025 — Reg 31 (disclosure of encumbered shares) | https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1785911192198.pdf | accessed 2026-11-01
   - SEBI (LODR) Regulations 2015, amended up to 14 Jul 2026 — Reg 23 and Schedule XII (related-party transactions), Reg 31(1)(b) (shareholding pattern), Schedule III Part A cl. 6, 7A, 7B | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2026/1784630770711.pdf | accessed 2026-11-02

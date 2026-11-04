@@ -2,11 +2,11 @@
 title: Tariff wars and oil shocks: 2025–26 as case studies
 section: Macro & events
 summary: A dated walk through the US tariff actions on Indian goods from August 2025 to July 2026 — the legal route behind each, what the Supreme Court ended, which rates are verifiable in text — and through two oil shocks, June 2025 and September 2026, with a method for deciding whether a headline changes cash flows or only sentiment before you size a trade.
-updated: 2026-11-02
+updated: 2026-11-05
 level: intermediate
 order: 5
 topics: [us tariffs, ieepa, section 301, section 122, executive order 14329, supreme court, trade framework, oil shock, strait of hormuz, west asia, brent, indian crude basket, event risk]
-related: [crude-yields-dollar-sector-map, policy-days-vix-and-sizing, flows-rupee-and-rbi, overnight-chain-to-india-open, psychology-journaling-prop-firms, event-day-iv-crush-hedged]
+related: [crude-yields-dollar-sector-map, policy-days-vix-and-sizing, flows-rupee-and-rbi, overnight-chain-to-india-open, psychology-journaling-prop-firms, event-day-iv-crush-hedged, retail-traps]
 sources:
   - Federal Register — Executive Order 14329, Addressing Threats to the United States by the Government of the Russian Federation (Aug 2025) | https://www.federalregister.gov/documents/2025/08/11/2025-15267/addressing-threats-to-the-united-states-by-the-government-of-the-russian-federation | accessed 2026-11-01
   - Federal Register — Executive Order 14326, Further Modifying the Reciprocal Tariff Rates (Aug 2025) | https://www.federalregister.gov/documents/2025/08/06/2025-15010/further-modifying-the-reciprocal-tariff-rates | accessed 2026-11-01

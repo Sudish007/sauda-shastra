@@ -2,7 +2,7 @@
 title: The trading day in IST
 section: Foundations
 summary: Every session of an NSE and BSE trading day in 2026 — pre-open, continuous trading, the Closing Auction Session, the derivatives close and post-close — what shifts on {{date:2026-12-07}}, and where the 2026 holiday list lives.
-updated: 2026-11-04
+updated: 2026-11-05
 level: beginner
 order: 1
 topics: [sessions, pre-open, closing auction, derivatives timings, holidays, nse, bse]
@@ -35,11 +35,11 @@ An Indian cash-market day is no longer one continuous session from open to close
 
 Two things in that table surprise traders who learned the market before 2026: the pre-open order window no longer shuts at 09:08, and stocks with derivatives stop continuous trading at 15:15. The rest of this guide walks through the day in order and then explains what changes in December.
 
-## Pre-open: 09:00 to the first trade
+## Pre-open to the first trade
 
-The pre-open session discovers one opening price for every stock instead of letting the first market orders of the day set it. Orders are collected during the order-entry window, {{fact:mkt-preopen-window}}. Since {{date:2026-09-07}} that window closes at a random moment between 09:08 and 09:10, so nobody can time an order for the last second. Only limit and market orders are accepted in this phase; stop-loss and immediate-or-cancel orders are not.
+The pre-open session discovers one opening price for every stock instead of letting the first market orders of the day set it. Orders are collected during the order-entry window, {{fact:mkt-preopen-window}}. Since {{date:2026-09-07}} that window closes at a random moment in its final two minutes, so nobody can time an order for the last second. Only limit and market orders are accepted in this phase; stop-loss and immediate-or-cancel orders are not.
 
-Order matching then runs from 09:10 to 09:12, and the equilibrium price — the one at which the most quantity trades — becomes the open. A short buffer follows until the continuous session starts at {{fact:mkt-continuous-session}}. Those are the current phases from SEBI's [circular of {{date:2026-01-16}} on the Closing Auction Session and the pre-open changes](https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf); NSE's [FAQ attached to circular FAOP/71092](https://nsearchives.nseindia.com/content/circulars/FAOP71092.zip) describes the older 09:08 close that it replaced.
+Order matching then runs in the {{fact:mkt-preopen-match-window}} window, and the equilibrium price — the one at which the most quantity trades — becomes the open. The {{fact:mkt-preopen-buffer-window}} transition follows before the continuous session starts. Those are the current phases from SEBI's [circular of {{date:2026-01-16}} on the Closing Auction Session and the pre-open changes](https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf); NSE's [FAQ attached to circular FAOP/71092](https://nsearchives.nseindia.com/content/circulars/FAOP71092.zip) describes the older close that it replaced.
 
 ### Derivatives have a pre-open too
 
@@ -55,12 +55,12 @@ From {{fact:mkt-continuous-session}} the order book works the way most tutorials
 
 ### Stocks with derivatives leave early
 
-For a stock that has futures and options on it, continuous trading runs {{fact:mkt-continuous-session-cas-stocks}}. At 15:15 the stock enters the Closing Auction Session, {{fact:mkt-closing-session}}. The first five minutes fix a reference price — the volume-weighted average price of the last fifteen minutes of continuous trading — and take no orders. Orders are then accepted {{fact:mkt-cas-order-entry-current}}: limit and market orders in the first five minutes of that window, limit orders only in the last five, which end at a random moment in the final two minutes. Matching follows, and the auction price becomes the day's close for that stock. Orders in the auction must sit within {{fact:mkt-cas-band}} of the reference price.
+For a stock that has futures and options on it, continuous trading runs {{fact:mkt-continuous-session-cas-stocks}}. When that window ends, the stock enters the Closing Auction Session, {{fact:mkt-closing-session}}. The first five minutes fix a reference price — the volume-weighted average price of the last fifteen minutes of continuous trading — and take no orders. Orders are then accepted {{fact:mkt-cas-order-entry-current}}: limit and market orders in the first five minutes of that window, limit orders only in the last five, which end at a random moment in the final two minutes. Matching follows, and the auction price becomes the day's close for that stock. Orders in the auction must sit within {{fact:mkt-cas-band}} of the reference price.
 
 Stocks without derivatives are unaffected: they keep trading continuously to the end of {{fact:mkt-continuous-session}} and close on the usual volume-weighted basis. NSE's [circular CMTR/74466](https://nsearchives.nseindia.com/content/circulars/CMTR74466.zip) carries the trading modalities and an FAQ (question 26 covers the non-F&O stocks), and [circular CMTR/73362](https://nsearchives.nseindia.com/content/circulars/CMTR73362.pdf) is the operational SOP.
 
 :::example
-A stock with derivatives last traded at ₹1,000 and its reference price works out to ₹1,000. The auction band is then ₹970 to ₹1,030; a limit order outside that range is rejected. A trader who sends a plain market order at 15:17 gets no continuous-session fill — the stock is already in the reference-price phase, so the order is rejected or has to wait for the entry window. Pending stop-loss orders are not carried into the auction at all; see [Order types and products](../order-types-and-products/).
+A stock with derivatives last traded at ₹1,000 and its reference price works out to ₹1,000. The auction band is then ₹970 to ₹1,030; a limit order outside that range is rejected. A trader who sends a plain market order two minutes after the continuous window closes gets no continuous-session fill — the stock is already in the reference-price phase, so the order is rejected or has to wait for the entry window. Pending stop-loss orders are not carried into the auction at all; see [Order types and products](../order-types-and-products/).
 :::
 
 ### Derivatives and the post-close
@@ -73,7 +73,7 @@ SEBI's [circular of {{date:2026-10-15}}](https://www.sebi.gov.in/sebi_data/attac
 
 :::note From 7 Dec 2026
 - Continuous trading runs to the end of {{fact:mkt-continuous-session}} for **every** stock again, derivatives or not.
-- The Closing Auction Session moves to {{fact:opt-cas-window-from-2026-12-07}}, with orders accepted from 15:31 and a random close in the last two minutes.
+- The Closing Auction Session moves to {{fact:opt-cas-window-from-2026-12-07}}, with orders accepted after its one-minute reference-price phase and a random close in the final two minutes.
 - Equity derivatives trade {{fact:mkt-fo-session-from-2026-12-07}} — except an expiring index contract, which stops at {{fact:opt-expiring-index-close-time-from-2026-12-07}} on its expiry day.
 - An expiring index contract then settles at an index value built from its constituents' volume-weighted prices over the last thirty minutes of continuous trading, broadcast live, instead of the value built from the auction closes. [Index derivatives contract specs](../index-derivatives-specs/) has the detail.
 - Post-close stays {{fact:mkt-post-close-session}}. On special sessions (Muhurat, for instance) derivatives close five minutes after the auction and post-close starts five minutes later.
@@ -86,8 +86,8 @@ The [What changed](../../changelog/) page lists these dates with their circulars
 
 Most of this is plumbing, but four consequences reach into a day trader's routine.
 
-- **The "last fifteen minutes" is now the last fifteen minutes of a different session.** For a stock with derivatives, the window before the auction ends at 15:15 until December. A routine built around exiting at 15:22 in such a stock is a routine of placing auction orders, not continuous-market orders.
-- {{label:MECHANISM}} **Closing-price logic behaves differently in an auction.** A stop that triggers off the last traded price has no last traded price to watch between 15:15 and the auction match; a market-on-close habit becomes a limit order inside the auction band. Plan the exit before the reference-price phase or accept the auction price.
+- **The "last fifteen minutes" is now the last fifteen minutes of a different session.** For a stock with derivatives, {{fact:mkt-continuous-session-cas-stocks}} is the continuous window until December. A routine built around exiting seven minutes after that window is a routine of placing auction orders, not continuous-market orders.
+- {{label:MECHANISM}} **Closing-price logic behaves differently in an auction.** A stop that triggers off the last traded price has no last traded price to watch between the continuous close and the auction match; a market-on-close habit becomes a limit order inside the auction band. Plan the exit before the reference-price phase or accept the auction price.
 - **Broker square-off timings predate the auction.** As a published example, Zerodha's [policies page](https://zerodha.com/policies-and-procedures/) says intraday (MIS, cover and bracket) positions in equity cash are squared off from {{fact:mkt-squareoff-example-cash}} onwards and equity derivatives from {{fact:mkt-squareoff-example-fo}} onwards, at the broker's discretion. For an F&O stock the cash time now falls inside the auction. Check your own broker's current policy rather than assuming the old continuous-market behaviour; the charge for a position the broker squares off for you is covered in [Intraday leverage today](../intraday-leverage-today/).
 - **Derivatives outlive the cash close.** An index option still prints after its underlying stocks have stopped; on expiry day the settlement method decides what that last quarter-hour means, which is why the December change matters more to options traders than to anyone else.
 

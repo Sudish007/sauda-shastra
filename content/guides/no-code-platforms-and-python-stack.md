@@ -2,11 +2,11 @@
 title: No-code platforms versus a Python stack
 section: Algo & systematic
 summary: Streak, Tradetron and AlgoTest let you run a strategy without writing code, as empanelled providers on the broker's servers or through your broker's API; a Python stack — kiteconnect or OpenAlgo, pandas, backtrader or vectorbt, QuantConnect's Lean for US markets — gives you control and keeps the logic yours. What each route costs per year, what you give up on each, and how to choose.
-updated: 2026-11-02
+updated: 2026-11-05
 level: intermediate
 order: 3
 topics: [no-code algo, streak, tradetron, algotest, python trading, kiteconnect, openalgo, pandas, backtrader, vectorbt, quantconnect, lean, paper trading, empanelled provider]
-related: [sebi-retail-algo-framework, broker-apis-compared, market-data-for-backtesting-india, strategy-families-and-backtest-hygiene, execution-realities-and-architecture, psychology-journaling-prop-firms]
+related: [sebi-retail-algo-framework, broker-apis-compared, market-data-for-backtesting-india, strategy-families-and-backtest-hygiene, execution-realities-and-architecture, psychology-journaling-prop-firms, retail-traps]
 sources:
   - Streak — Free systematic trading platform (home page) | https://www.streak.tech/ | accessed 2026-11-01
   - Tradetron — Pricing | https://tradetron.tech/pricing | accessed 2026-11-01

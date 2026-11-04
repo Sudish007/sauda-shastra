@@ -1,7 +1,7 @@
 ---
 title: Gap-fill fade back to the previous close
 summary: Fading an opening gap in Nifty or a liquid stock future only after price fails back inside the previous day's range, with the stop beyond the gap-day extreme and the target at the previous close. The published evidence says gaps continue more often than they fill, so confirmation is the whole trade.
-updated: 2026-11-04
+updated: 2026-11-05
 level: intermediate
 order: 2
 instruments: [Nifty 50 or Bank Nifty futures, Futures on a liquid F&O stock, Options only as a bought directional hedge]
@@ -11,7 +11,7 @@ glance_stop: Beyond the gap-day extreme (above the high for a gap-up fade); work
 glance_target: The previous close, half off there and the rest at VWAP if VWAP sits in between
 glance_size: One per cent of capital, one attempt only; a failed fade is information, not a re-entry
 topics: [gap fill, gap and go, opening gap, fade, previous close]
-related: [opening-range-and-gaps, price-action-market-structure, vwap-and-anchored-vwap, volume-and-market-profile, orb-15-min-nifty]
+related: [opening-range-and-gaps, price-action-market-structure, vwap-and-anchored-vwap, volume-and-market-profile, orb-15-min-nifty, overnight-chain-to-india-open, retail-traps]
 tools: [position-size]
 sources:
   - Plastun, Sibande, Gupta and Wohar — Price Gap Anomaly in the US Stock Market, SSRN 3461283 (2019; North American Journal of Economics and Finance, 2020) | https://doi.org/10.2139/ssrn.3461283 | accessed 2026-11-01

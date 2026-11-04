@@ -2,7 +2,7 @@
 title: What a trade costs
 section: Foundations
 summary: Brokerage, STT, the exchange levy, SEBI fee, stamp duty, GST and the DP charge — who pays which side, what the {{date:2026-04-01}} STT increase did to F&O, and five worked examples with the current rates: equity intraday, delivery, Nifty futures, a Nifty option and an option left to expire.
-updated: 2026-11-01
+updated: 2026-11-05
 level: beginner
 order: 6
 topics: [brokerage, stt, transaction charges, sebi fee, stamp duty, gst, dp charge, contract note, break-even]
@@ -43,7 +43,7 @@ The rates are facts that change by Finance Act and by exchange circular, so ever
 | Brokerage (broker example) | {{fact:chg-brokerage-example-intraday-futures}} | {{fact:chg-brokerage-example-delivery}} | {{fact:chg-brokerage-example-intraday-futures}} | {{fact:chg-brokerage-example-options}} |
 | DP charge (broker example) | — | {{fact:chg-dp-example-broker}} per stock per day | — | — |
 
-Three notes on the table. NSE's levy is quoted per ₹1 crore of turnover and already includes its Investor Protection Fund contribution of {{fact:chg-ipft-nse}}, per NSE's [circular FA/73061](https://nsearchives.nseindia.com/content/circulars/FA73061.pdf). The brokerage and DP figures are one broker's published plan ([Zerodha's charges page](https://zerodha.com/charges/)) and are labelled as an example throughout — substitute your own. BSE charges are not in the register: take them from your broker's contract note.
+Three notes on the table. NSE's levy is quoted per crore rupees of turnover and already includes its Investor Protection Fund contribution of {{fact:chg-ipft-nse}}, per NSE's [circular FA/73061](https://nsearchives.nseindia.com/content/circulars/FA73061.pdf). The brokerage and DP figures are one broker's published plan ([Zerodha's charges page](https://zerodha.com/charges/)) and are labelled as an example throughout — substitute your own. BSE charges are not in the register: take them from your broker's contract note.
 
 ## What changed in 2026
 

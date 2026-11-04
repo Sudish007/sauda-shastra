@@ -2,11 +2,11 @@
 title: FII and DII flows, the rupee and the RBI
 section: Macro & events
 summary: Where the daily foreign and domestic flow figures come from and why two official series for the same day can carry opposite signs, how USD/INR is benchmarked at {{fact:mac-usdinr-reference-rate-time}}, what the RBI says it does in the currency market and what it publishes only monthly, with worked rupee conversions at the current rate.
-updated: 2026-11-04
+updated: 2026-11-05
 level: intermediate
 order: 2
 topics: [fii, fpi, dii, nsdl, provisional flows, usd/inr, fbil reference rate, rbi intervention, forex reserves, trade deficit]
-related: [overnight-chain-to-india-open, crude-yields-dollar-sector-map, policy-days-vix-and-sizing, reading-the-option-chain, multi-timeframe-relative-strength, commentary-ratings-block-deals, flows-and-calendar-effects]
+related: [overnight-chain-to-india-open, crude-yields-dollar-sector-map, policy-days-vix-and-sizing, reading-the-option-chain, multi-timeframe-relative-strength, commentary-ratings-block-deals, flows-and-calendar-effects, positioning-data-oi-gamma-pinning, investing-abroad-from-india]
 sources:
   - NSE — FII/FPI and DII trading activity (provisional daily figures and the notes on their basis) | https://www.nseindia.com/reports/fii-dii | accessed 2026-11-01
   - NSDL — FPI Monitor, latest daily investment data | https://www.fpi.nsdl.co.in/web/Reports/Latest.aspx | accessed 2026-11-01

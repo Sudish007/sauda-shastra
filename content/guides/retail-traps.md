@@ -2,11 +2,11 @@
 title: Retail traps: tips, averaging, leverage and naked shorts
 section: Edges, habits & traps
 summary: Seven recurring traps, each labelled by what supports it: Telegram tips, “sure-shot” services, averaging losers, martingale, over-leverage, revenge trades and overnight gap risk in naked shorts. SEBI's loss-study base rate appears beside every item, with the mechanism and the limit of the evidence.
-updated: 2026-11-04
+updated: 2026-11-05
 level: beginner
 order: 4
 topics: [telegram tips, social media tips, sure-shot services, averaging losers, disposition effect, martingale, over-leverage, revenge trading, naked short options, gap risk]
-related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, investing-abroad-from-india]
+related: [what-sebi-loss-studies-say, position-sizing-and-loss-limits, psychology-journaling-prop-firms, buying-vs-selling-options, investing-abroad-from-india, tariff-war-oil-shocks, commentary-ratings-block-deals, governance-red-flags, gap-fill-fade, no-code-platforms-and-python-stack]
 tools: [charges, position-size]
 sources:
   - SEBI interim order — Stock recommendations through social-media platforms (May 2026) | https://www.sebi.gov.in/sebi_data/attachdocs/may-2026/ORDER_1779429679.pdf | accessed 2026-11-01
@@ -96,10 +96,10 @@ The control is a pre-commitment: a daily loss limit, a cooling-off interval and 
 
 {{label:EVIDENCE}} NSE's [index file for {{date:2024-06-04}}](https://nsearchives.nseindia.com/content/indices/ind_close_all_04062024.csv) records Nifty opening below the prior close, falling to 21,281.45 and closing down 5.93 per cent; the intraday low was 8.5 per cent below that prior close. The preceding session had risen 3.25 per cent while India VIX fell 14.9 per cent. An overnight short option had no stop between those closes.
 
-{{label:MECHANISM}} SPAN is a deposit calibrated to scenarios, not a maximum loss. SEBI's [margin framework](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf) sets the index price-scan range at six standard deviations scaled by √2 with a 9.3 per cent floor; base ELM adds two per cent of notional, with further expiry and deep-out-of-the-money additions. A move can consume the margin while the short remains open-ended. That mechanism is why a long wing changes the loss shape, as [Buying versus selling options](../../guides/buying-vs-selling-options/) explains.
+{{label:MECHANISM}} SPAN is a deposit calibrated to scenarios, not a maximum loss. SEBI's [margin framework](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf) sets the index price-scan range at six standard deviations scaled by √2 with a {{fact:fo-span-price-scan-floor}} floor; base ELM adds {{fact:fo-elm-index-base}} of notional, with further expiry and deep-out-of-the-money additions. A move can consume the margin while the short remains open-ended. That mechanism is why a long wing changes the loss shape, as [Buying versus selling options](../../guides/buying-vs-selling-options/) explains.
 
 :::example Premium collected versus gap liability
-An illustrative 23,000 put sold before the count for ₹60 collects ₹60 × {{fact:fo-nifty-lot}} = ₹3,900. At the 21,281 low, intrinsic value is about ₹1,719 a unit, or ₹1,11,735 per lot — almost twenty-nine times the premium collected. Net of that premium the mark is about ₹1,07,835 against the seller, before volatility and execution. The 9.3 per cent scan plus base ELM on the ₹14,95,000 notional is roughly ₹1,69,000; most of that buffer can disappear in one session.
+An illustrative 23,000 put sold before the count for ₹60 collects ₹60 × {{fact:fo-nifty-lot}} = ₹3,900. At the 21,281 low, intrinsic value is about ₹1,719 a unit, or ₹1,11,735 per lot — almost twenty-nine times the premium collected. Net of that premium the mark is about ₹1,07,835 against the seller, before volatility and execution. The {{fact:fo-span-price-scan-floor}} scan plus {{fact:fo-elm-index-base}} base ELM on the ₹14,95,000 notional is roughly ₹1,69,000; most of that buffer can disappear in one session.
 :::
 
 The base rate still belongs beside the dramatic day: {{fact:sebi-loss-2026-share}} of individual derivatives traders lost in FY26 and options caused most aggregate losses ([SEBI](https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787236407005.pdf)). Defined risk does not create an edge, but it prevents one gap from becoming an unlimited claim on the account.

@@ -1156,8 +1156,8 @@
     "cost": "paid",
     "links": [
       {
-        "label": "Pan Macmillan India (5th-anniversary ed.)",
-        "url": "https://www.panmacmillan.com/authors/santosh-nair/bulls-bears-and-other-beasts-5th-anniversary-edition/9789390742578"
+        "label": "Google Books (ISBN 9789390742578, 2021 ed.)",
+        "url": "https://books.google.com/books?vid=ISBN9789390742578"
       },
       {
         "label": "Google Books (ISBN 9781509852390, 2016 ed.)",
@@ -1176,7 +1176,7 @@
     "pages": 424,
     "effort": "424 pages (2021 ed.)",
     "why": "Narrative history of Dalal Street from Harshad Mehta to the 2000s — the context behind SEBI's rules and the traps the site's retail-traps guide describes.",
-    "caveats": "Some chapters are dramatised; the 2021 fifth-anniversary edition adds the years since 2016 and is the one the publisher page lists.",
+    "caveats": "Some chapters are dramatised; the 2021 fifth-anniversary edition adds the years since 2016, and the catalogue link uses that edition's ISBN.",
     "rank": {
       "India investing": 8
     }

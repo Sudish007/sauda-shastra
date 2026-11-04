@@ -2,7 +2,7 @@
 title: Spreads and delta-neutral structures
 section: Options
 summary: Verticals, iron flies and condors, ratio and broken-wing spreads with their defined and undefined risks, how SPAN's portfolio scan rewards a long wing while ELM does not, why a tight spread's expiry-day margin is mostly ELM, delta-neutral straddles and strangles with practitioner adjustment rules, and the calendar-spread benefit that is {{fact:opt-calendar-spread-expiry-rule}}.
-updated: 2026-11-01
+updated: 2026-11-05
 level: advanced
 order: 6
 topics: [vertical spread, bear call spread, iron fly, iron condor, ratio spread, broken-wing butterfly, delta neutral, short straddle, short strangle, adjustments, span, elm, calendar spread, margin benefit]
@@ -52,12 +52,12 @@ A ratio spread sells more options than it buys — for example, buy one 25,200 c
 
 NSE Clearing's [margins page](https://www.nseclearing.in/risk-management/equity-derivatives/margins) and SEBI's [2020 framework](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf) describe two layers that behave differently when a wing is added.
 
-**SPAN** is portfolio-based: it computes the worst loss across a grid of price and volatility scenarios, nets positions per client, grosses them across clients at the member level and is recomputed online during the day. Its initial margin covers a 99 per cent one-day value-at-risk (two-day for futures); the index price-scan range is six standard deviations scaled by √2 with a floor of 9.3 per cent (17.7 per cent beyond nine months), the volatility-scan range is a quarter of the EWMA volatility with a minimum of four per cent, there is no separate short-option minimum charge for index or stock derivatives, and the calendar-spread charge for index futures is 2.2 per cent of the far-month contract. Because a long wing caps the worst-case scenario, it lowers SPAN. {{label:MECHANISM}}
+**SPAN** is portfolio-based: it computes the worst loss across a grid of price and volatility scenarios, nets positions per client, grosses them across clients at the member level and is recomputed online during the day. Its initial margin covers a {{fact:fo-span-var-confidence}} one-day value-at-risk (two-day for futures); the index price-scan range is six standard deviations scaled by √2 with a floor of {{fact:fo-span-price-scan-floor}} for nearer contracts or {{fact:fo-span-price-scan-floor-long-dated}} for long-dated contracts, the volatility-scan range is {{fact:fo-span-volatility-scan-share}} of EWMA volatility with a minimum of {{fact:fo-span-volatility-scan-floor}}, there is no separate short-option minimum charge for index or stock derivatives, and the calendar-spread charge for index futures is {{fact:fo-span-calendar-spread-charge}} of the far-month contract. Because a long wing caps the worst-case scenario, it lowers SPAN. {{label:MECHANISM}}
 
-**ELM**, the extreme-loss margin, is two per cent of notional for index derivatives, three per cent for short index options more than ten per cent out of the money, five per cent for short index options with more than nine months to expiry and 5.25 per cent for single-stock options more than thirty per cent out of the money — plus the additional {{fact:fo-expiry-day-elm-addon}} on short index options on their expiry day. It is charged per short notional, so a wing does not reduce it.
+**ELM**, the extreme-loss margin, is {{fact:fo-elm-index-base}} of notional for index derivatives, {{fact:fo-elm-index-deep-otm}} for short index options deep out of the money, {{fact:fo-elm-index-long-dated}} for long-dated short index options and {{fact:fo-elm-stock-deep-otm}} for single-stock options deep out of the money — plus the additional {{fact:fo-expiry-day-elm-addon}} on short index options on their expiry day. It is charged per short notional, so a wing does not reduce it.
 
 :::example
-The bear call spread above has a worst-case scenario loss of 200 × {{fact:fo-nifty-lot}} = ₹13,000 before the credit, so SPAN cannot exceed that. The short leg's notional is 25,000 × {{fact:fo-nifty-lot}} = ₹16,25,000, so ELM is about ₹32,500 on an ordinary day and about ₹65,000 on expiry day.
+The bear call spread above has a worst-case scenario loss of 200 × {{fact:fo-nifty-lot}} = ₹13,000 before the credit, so SPAN cannot exceed that. The short leg's notional is 25,000 × {{fact:fo-nifty-lot}} = ₹16,25,000, so ELM is about ₹32,500 at the {{fact:fo-elm-index-base}} ordinary-day rate and about ₹65,000 after the further {{fact:fo-expiry-day-elm-addon}} expiry-day charge.
 
 | Component | Ordinary day | Expiry day |
 |---|---|---|

@@ -16,6 +16,38 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "fo-elm-index-base",
+    "label": "Base ELM on index derivatives, current NSE Clearing schedule",
+    "value": "2%",
+    "since": "2026-11-01",
+    "source": "NSE Clearing — Equity derivatives margins | https://www.nseclearing.in/risk-management/equity-derivatives/margins",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-elm-index-deep-otm",
+    "label": "ELM on a short index option more than 10% out of the money, current NSE Clearing schedule",
+    "value": "3%",
+    "since": "2026-11-01",
+    "source": "NSE Clearing — Equity derivatives margins | https://www.nseclearing.in/risk-management/equity-derivatives/margins",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-elm-index-long-dated",
+    "label": "ELM on a short index option with more than 9 months to expiry, current NSE Clearing schedule",
+    "value": "5%",
+    "since": "2026-11-01",
+    "source": "NSE Clearing — Equity derivatives margins | https://www.nseclearing.in/risk-management/equity-derivatives/margins",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-elm-stock-deep-otm",
+    "label": "ELM on a single-stock option more than 30% out of the money, current NSE Clearing schedule",
+    "value": "5.25%",
+    "since": "2026-11-01",
+    "source": "NSE Clearing — Equity derivatives margins | https://www.nseclearing.in/risk-management/equity-derivatives/margins",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "fo-expiry-day-elm-addon",
     "label": "Additional ELM on short options expiring that day; total 4%, deep-OTM 5%",
     "value": "2%",
@@ -157,6 +189,54 @@
     "value": "Thursday",
     "since": "2025-09-01",
     "source": "BSE Contract Specifications | https://www.bseindia.com/static/markets/Derivatives/DeriReports/contractindex",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-calendar-spread-charge",
+    "label": "SPAN calendar-spread charge for index futures, as a share of the far-month contract",
+    "value": "2.2%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.6 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-price-scan-floor",
+    "label": "Minimum SPAN index price-scan range for contracts up to 9 months",
+    "value": "9.3%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.2 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-price-scan-floor-long-dated",
+    "label": "Minimum SPAN index price-scan range for contracts beyond 9 months",
+    "value": "17.7%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.2 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-var-confidence",
+    "label": "SPAN initial-margin value-at-risk confidence level",
+    "value": "99%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.2 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-volatility-scan-floor",
+    "label": "Minimum SPAN volatility-scan range",
+    "value": "4%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.4 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "fo-span-volatility-scan-share",
+    "label": "SPAN volatility-scan range as a share of EWMA volatility",
+    "value": "25%",
+    "since": "2020-02-24",
+    "source": "SEBI circular CIR/P/2020/27, para 1.2.4 — Review of Margin Framework | https://www.sebi.gov.in/sebi_data/attachdocs/feb-2020/1582545012845.pdf",
     "verified": "2026-11-01"
   },
   {
@@ -304,8 +384,24 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "mkt-preopen-buffer-window",
+    "label": "Cash pre-open transition buffer before continuous trading",
+    "value": "09:12–09:15 IST",
+    "since": "2026-09-07",
+    "source": "SEBI 16 Jan 2026 on CAS and pre-open | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "mkt-preopen-match-window",
+    "label": "Cash pre-open order-matching window after the random order-entry close",
+    "value": "09:10–09:12 IST",
+    "since": "2026-09-07",
+    "source": "SEBI 16 Jan 2026 on CAS and pre-open | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "mkt-preopen-window",
-    "label": "Cash pre-open order-entry window (random close 09:08–09:10; order matching 09:10–09:12)",
+    "label": "Cash pre-open order-entry window with a random close in its last two minutes",
     "value": "09:00–09:10 IST",
     "since": "2026-09-07",
     "source": "SEBI 16 Jan 2026 on CAS and pre-open | https://www.sebi.gov.in/sebi_data/attachdocs/jan-2026/1768576287344.pdf",
@@ -928,11 +1024,27 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "tax-audit-threshold-base",
+    "label": "Tax-audit turnover threshold for a business before the enhanced low-cash ceiling",
+    "value": "₹1 crore",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 63(1) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "tax-audit-threshold-digital",
-    "label": "Tax-audit turnover threshold when cash is ≤ 5% of receipts and payments (otherwise ₹1 crore)",
+    "label": "Tax-audit turnover threshold when cash receipts and cash payments satisfy the low-cash test",
     "value": "₹10 crore",
     "since": "2026-04-01",
     "source": "Income-tax Act 2025, s. 63(1) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-audit-threshold-profession",
+    "label": "Tax-audit gross-receipts threshold for a profession",
+    "value": "₹50 lakh",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 63(1) Table Sl. 2 | https://www.incometaxindia.gov.in/income-tax-act-2025",
     "verified": "2026-11-01"
   },
   {
@@ -949,6 +1061,14 @@
     "value": "₹25 lakh",
     "since": "2026-04-01",
     "source": "Income-tax Act 2025, s. 62(2)(d) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-capital-loss-carry-forward",
+    "label": "Capital-loss carry-forward period under Income-tax Act 2025 s. 111",
+    "value": "8 tax years",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 111 | https://www.incometaxindia.gov.in/income-tax-act-2025",
     "verified": "2026-11-01"
   },
   {
@@ -992,11 +1112,35 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "tax-itr4-income-limit",
+    "label": "Total-income ceiling for ITR-4 Sugam in AY 2026-27",
+    "value": "₹50 lakh",
+    "since": "2026-04-01",
+    "source": "ITD, Income Tax Returns (year 2026) | https://www.incometaxindia.gov.in/income-tax-returns",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "tax-late-fee",
-    "label": "Late-filing fee (₹1,000 if total income is ≤ ₹5 lakh)",
+    "label": "Late-filing fee when total income exceeds the reduced-fee band",
     "value": "₹5,000",
     "since": "2026-04-01",
     "source": "Income-tax Act 2025, s. 428(a) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-late-fee-reduced-threshold",
+    "label": "Total-income ceiling for the reduced late-filing fee",
+    "value": "₹5 lakh",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 428(a) | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-low-cash-share-threshold",
+    "label": "Cash-share ceiling for enhanced tax-audit and presumptive-scheme turnover limits",
+    "value": "5%",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, ss. 58(2), 63(1) | https://www.incometaxindia.gov.in/income-tax-act-2025",
     "verified": "2026-11-01"
   },
   {
@@ -1033,8 +1177,16 @@
   },
   {
     "id": "tax-presumptive-limit",
-    "label": "Presumptive-scheme turnover ceiling (₹3 crore if cash receipts are ≤ 5%)",
+    "label": "Presumptive-scheme turnover ceiling before the enhanced low-cash ceiling",
     "value": "₹2 crore",
+    "since": "2026-04-01",
+    "source": "Income-tax Act 2025, s. 58(2) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-presumptive-limit-cash",
+    "label": "Presumptive-scheme turnover ceiling when cash receipts satisfy the low-cash test",
+    "value": "₹3 crore",
     "since": "2026-04-01",
     "source": "Income-tax Act 2025, s. 58(2) Table Sl. 1 | https://www.incometaxindia.gov.in/income-tax-act-2025",
     "verified": "2026-11-01"
@@ -1205,6 +1357,14 @@
     "value": "15%",
     "since": "2026-04-01",
     "source": "Finance Act 2026, s. 3(4)(b) Table Sl. 10 cl. (v) and First Schedule Part I-B Paragraph F Table 1 cl. (vi) (surcharge cap) | https://www.incometaxindia.gov.in/finance-acts",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "tax-surcharge-threshold",
+    "label": "Total-income threshold at which surcharge starts for an individual",
+    "value": "₹50 lakh",
+    "since": "2026-04-01",
+    "source": "Finance Act 2026, s. 3(4)(b) and First Schedule Part I-B Paragraph F | https://www.incometaxindia.gov.in/finance-acts",
     "verified": "2026-11-01"
   },
   {

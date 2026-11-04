@@ -277,10 +277,11 @@ main { flex: 1; }
 .sebi-box { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: clamp(1.1rem, 1rem + 0.6vw, 2rem); display: grid; gap: var(--space-4); }
 .sebi-box .eyebrow { color: var(--accent); }
 /* Three figures share one row from a ~400 px card upward (basis 110 px); the figure size follows the card width
-   (cqw) so "₹91,685 cr" fits its third at 1024–1440 instead of orphaning 2+1. Below ~400 px: 2 + 1 full-width. */
+   (cqw) so the longest register value fits its third at 1024–1440 instead of orphaning 2+1. Below ~400 px: 2 + 1 full-width. */
 .sebi-box dl { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); }
 .sebi-box dl > div { flex: 1 1 110px; min-width: 0; }
-.sebi-box dd { font-family: var(--font-serif); font-size: clamp(1.45rem, 6.2cqw, 2.6rem); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sebi-box dd { font-family: var(--font-serif); font-size: clamp(1.45rem, 5.2cqw, 2.6rem); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sebi-box .fact-value { white-space: nowrap; }
 .sebi-box dt { color: var(--muted); font-size: var(--fs-small); margin-top: 0.3rem; }
 .sebi-box .source { font-size: var(--fs-small); color: var(--muted); }
 /* Counts strip: five computed numbers; 2 columns (5th spans both) below 768, one row of five above */

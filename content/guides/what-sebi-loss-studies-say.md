@@ -2,7 +2,7 @@
 title: What SEBI's loss studies say
 section: Risk, psychology & tax
 summary: Five SEBI studies from 2023 to 2026 counted who made money in equity derivatives. In FY26 {{fact:sebi-loss-2026-share}} of individual traders lost, {{fact:sebi-loss-2026-amount}} between them and {{fact:sebi-loss-2026-avg}} each on average — the base rate every trading plan has to start from. The figures, the samples, who lost more, and what did not help.
-updated: 2026-11-04
+updated: 2026-11-05
 level: beginner
 order: 1
 topics: [sebi study, retail losses, base rate, f&o, index options, intraday, transaction costs, persistence, under-30s]
@@ -45,9 +45,9 @@ The earlier studies say the same thing in different years. In FY22 the typical a
 
 - **Options, not futures.** In FY26, {{fact:sebi-loss-2026-share}} of options traders lost against about two-thirds of futures traders; by product, index options 87 per cent, stock options 76 per cent, stock futures 64 per cent and index futures 62 per cent. Options produced about 92 per cent of all FY26 losses.
 - **Buyers, mostly.** In SEBI's behaviour sample, 93 per cent of traders only bought options and about two per cent mostly sold them. Nine in ten buyers lost; 44 per cent of sellers lost — but a losing seller lost ₹51.7 lakh on average against ₹1.3 lakh for a losing trader who only bought. [Buying versus selling options](../buying-vs-selling-options/) takes this apart.
-- **Frequency and size.** Traders active more than a hundred days a year were 42 per cent of traders but 94 per cent of turnover and 87 per cent of losses. In FY24, 95 per cent of "high-value" traders (over ₹1 crore of premium turnover) lost, against 91.5 per cent of the rest.
+- **Frequency and size.** Traders active more than a hundred days a year were 42 per cent of traders but 94 per cent of turnover and 87 per cent of losses. In FY24, 95 per cent of "high-value" traders (over one crore rupees of premium turnover) lost, against 91.5 per cent of the rest.
 - **Capital.** In FY25–FY26, 78 per cent of traders held equity portfolios under ₹1 lakh yet made 70 per cent of the losses; about 35 per cent held no equity portfolio at all, and 24 per cent had no cash-market turnover in FY26.
-- **Age and income.** Under-30s were 43 per cent of traders in both FY24 and FY26 (31 per cent in FY23); 93 per cent of them lost in FY24 and 89 per cent in FY26. In FY24 over 75 per cent of traders declared annual income under ₹5 lakh, and 88 per cent of that group lost in FY26; 72 per cent came from beyond the top thirty cities.
+- **Age and income.** Under-30s were 43 per cent of traders in both FY24 and FY26 (31 per cent in FY23); 93 per cent of them lost in FY24 and 89 per cent in FY26. In FY24 over 75 per cent of traders declared annual income under five lakh rupees, and 88 per cent of that group lost in FY26; 72 per cent came from beyond the top thirty cities.
 
 ## What did not help
 

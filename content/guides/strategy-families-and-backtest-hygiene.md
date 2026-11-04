@@ -2,11 +2,11 @@
 title: Strategy families and the backtest checklist
 section: Algo & systematic
 summary: The six families systematic traders build from — momentum, mean reversion, pairs, hedged option selling, volatility and machine learning — with the evidence for each, and the checklist that separates a backtest from a story: look-ahead and survivorship bias, costs and slippage at current rates, walk-forward tests, a haircut for your trial count and a Monte Carlo shuffle of the trade order.
-updated: 2026-11-02
+updated: 2026-11-05
 level: advanced
 order: 5
 topics: [strategy families, momentum, mean reversion, pairs trading, statistical arbitrage, volatility risk premium, option selling, machine learning, backtest, look-ahead bias, survivorship bias, slippage, walk-forward, overfitting, multiple testing, monte carlo, purged cross-validation]
-related: [market-data-for-backtesting-india, no-code-platforms-and-python-stack, execution-realities-and-architecture, expectancy-and-drawdown-maths, what-a-trade-costs, what-sebi-loss-studies-say, buying-vs-selling-options, position-sizing-and-loss-limits]
+related: [market-data-for-backtesting-india, no-code-platforms-and-python-stack, execution-realities-and-architecture, expectancy-and-drawdown-maths, what-a-trade-costs, what-sebi-loss-studies-say, buying-vs-selling-options, position-sizing-and-loss-limits, factor-indices-evidence, positioning-data-oi-gamma-pinning]
 tools: [charges, expectancy-kelly]
 sources:
   - Jegadeesh and Titman — Returns to Buying Winners and Selling Losers, Journal of Finance (1993) | https://doi.org/10.1111/j.1540-6261.1993.tb04702.x | accessed 2026-11-01

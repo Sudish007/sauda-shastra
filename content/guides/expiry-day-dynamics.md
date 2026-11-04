@@ -2,7 +2,7 @@
 title: Expiry-day dynamics
 section: Options
 summary: Who trades expiry day and how concentrated it is ({{fact:opt-zero-dte-share-fy26}} of FY26 index-option turnover was in same-day contracts), the close minute by minute under today's closing auction and under the regime that starts on {{date:2026-12-07}}, the {{fact:fo-expiry-day-elm-addon}} margin add-on, exercise versus square-off, and what the pinning evidence does and does not say.
-updated: 2026-11-04
+updated: 2026-11-05
 level: advanced
 order: 4
 topics: [expiry day, 0dte, weekly expiry, closing auction session, cas, settlement price, vwap settlement, expiry-day elm, exercise, square off, pinning, position limits]
@@ -62,10 +62,10 @@ For the expiry-day trader the change is sharp. Today you can trade the expiring 
 
 Three margin rules make the expiring contract more expensive to be short.
 
-**The ELM add-on.** Every short index option expiring today carries an additional {{fact:fo-expiry-day-elm-addon}} extreme-loss margin on its notional, on positions open at the start of the day and on new shorts opened during it — a total of four per cent, and five per cent for deep out-of-the-money shorts, as the [October 2024 circular](https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf) and NSE Clearing's [example circular](https://nsearchives.nseindia.com/content/circulars/CMPT64639.pdf) set out.
+**The ELM add-on.** Every short index option expiring today carries an additional {{fact:fo-expiry-day-elm-addon}} extreme-loss margin on its notional, on positions open at the start of the day and on new shorts opened during it. The ordinary {{fact:fo-elm-index-base}} base rate receives that add-on; a deep out-of-the-money short starts from {{fact:fo-elm-index-deep-otm}} before the same addition, as the [October 2024 circular](https://www.sebi.gov.in/sebi_data/attachdocs/oct-2024/1727786261636.pdf) and NSE Clearing's [example circular](https://nsearchives.nseindia.com/content/circulars/CMPT64639.pdf) set out.
 
 :::example
-A trader is short one lot of the 25,000 Nifty call on its expiry day. Notional is 25,000 × {{fact:fo-nifty-lot}} = ₹16,25,000, so the extreme-loss margin is about ₹32,500 on a normal day and about ₹65,000 on expiry day, on top of SPAN. A short straddle doubles that. Size by the expiry-day figure, not yesterday's; the [position-size calculator](../../tools/position-size/) sizes from the loss limit and reports the margin alongside.
+A trader is short one lot of the 25,000 Nifty call on its expiry day. Notional is 25,000 × {{fact:fo-nifty-lot}} = ₹16,25,000, so the extreme-loss margin is about ₹32,500 at the {{fact:fo-elm-index-base}} ordinary-day rate and about ₹65,000 after the further {{fact:fo-expiry-day-elm-addon}} expiry-day charge, on top of SPAN. A short straddle doubles that. Size by the expiry-day figure, not yesterday's; the [position-size calculator](../../tools/position-size/) sizes from the loss limit and reports the margin alongside.
 :::
 
 **No calendar-spread benefit for the expiring leg.** The spread benefit is {{fact:opt-calendar-spread-expiry-rule}}, so a trader long next week's option against this week's short sees the margin on the short leg jump on expiry morning. [Spreads and delta-neutral structures](../spreads-and-delta-neutral/) has the detail.

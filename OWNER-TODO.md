@@ -27,18 +27,18 @@ Things only the repository owner can decide or do. **None of them is required fo
 - **How:** when CBDT notifies the forms, re-verify the register row (value, `since`, `source`, `verified`) and the paragraph in `guides/tax-for-traders-it-act-2025/`, add a changelog entry, push.
 
 ### "From 7 Dec 2026" session facts
-- **Why:** three register rows (`*-from-2026-12-07`) describe the derivatives-close change before it takes effect; after that date the "from" prefix is stale.
+- **Why:** four register rows (`mkt-fo-session-from-2026-12-07`, `opt-cas-window-from-2026-12-07`, `opt-expiring-index-close-time-from-2026-12-07`, `opt-expiry-settlement-from-2026-12-07`) describe the derivatives-close change before it takes effect; after that date the "from" prefix is stale.
 - **How:** on or after 7 Dec 2026, make them the current rows (drop the `-from-2026-12-07` suffix and the old `mkt-closing-session` / `opt-expiry-settlement-current` values), run `npm test` and push; the build re-renders every token.
 
 ### Blocked-host links
-- **Why:** `content/data/library/health.json` lists two URLs the checker could not fetch (anti-bot walls that open in a browser): `cmegroup.com/education/courses/introduction-to-options.html` and `etf.com/docs/IfYouCan.pdf`. They are kept, not dead.
-- **How:** open them in a browser every few months; if one has moved, change the URL in `content/data/library/courses.json` or `books.json`, re-run `python scripts/linkcheck.py`, commit `health.json`, push.
+- **Why:** `content/data/library/health.json` currently lists 47 URLs whose sites returned anti-bot pages to automation but rendered as available in the browser re-check. Most are retailer searches; the report keeps the complete list. They are blocked, not dead.
+- **How:** open a sample every few months; if one has moved, change the URL in `content/data/library/courses.json`, `books.json` or `content/data/resources.json`, re-run `python scripts/linkcheck.py --resources`, commit `health.json`, push.
 
 ## Optional additions
 
-### Stats page (Phase 2)
-- **Why:** a page of market statistics (participation, turnover, SEBI studies) is planned as FEAT-017 and not yet built.
-- **How:** nothing to do; it arrives with the Phase 2 deploy. Decide then whether you want it in the nav.
+### Stats page navigation
+- **Why:** the computed `stats/` page now ships with ten years of Nifty gap, daily-range and India VIX data. It is reachable from search, the sitemap and the guides that interpret its tables, but the fixed main navigation does not include it.
+- **How:** no action is needed. To make it a main-nav item, add its label and route in `src/build/strings.js`, then run `npm test` and the browser audits before pushing.
 
 ### BSE toggle in the charges tool
 - **Why:** hidden until BSE rates are verified (see the R-08 watch above).

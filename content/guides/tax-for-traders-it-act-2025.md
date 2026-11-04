@@ -2,7 +2,7 @@
 title: Tax for traders under the Income-tax Act 2025
 section: Risk, psychology & tax
 summary: Which Act applies to which year, why intraday equity is speculative business income and exchange-traded F&O is not, the set-off and carry-forward rules ({{fact:tax-spec-loss-carry-forward}} for speculation losses, {{fact:tax-nonspec-loss-carry-forward}} for F&O), turnover for the audit test, the presumptive trap, STT as an expense, advance tax, slabs, due dates and the return form for 2026.
-updated: 2026-11-01
+updated: 2026-11-05
 level: intermediate
 order: 5
 topics: [income tax, income-tax act 2025, speculative business, non-speculative business, f&o tax, intraday tax, set-off, carry forward, turnover, tax audit, presumptive taxation, advance tax, itr-3, stt deduction]
@@ -59,8 +59,8 @@ Everything else depends on which head and which basket a trade falls into.
 |---|---|---|---|
 | Speculation (intraday equity) | speculation profit only (s. 113) | {{fact:tax-spec-loss-carry-forward}} | return filed by the due date (s. 121) |
 | F&O (non-speculative business) | any head except Salaries, including capital gains (s. 109) | {{fact:tax-nonspec-loss-carry-forward}}, against business profits (s. 112) | return filed by the due date (s. 121) |
-| Short-term capital loss | any capital gain (s. 108(2)) | eight tax years, against capital gains (s. 111) | return filed by the due date |
-| Long-term capital loss | long-term capital gains only | eight tax years, long-term only | return filed by the due date |
+| Short-term capital loss | any capital gain (s. 108(2)) | {{fact:tax-capital-loss-carry-forward}}, against capital gains (s. 111) | return filed by the due date |
+| Long-term capital loss | long-term capital gains only | {{fact:tax-capital-loss-carry-forward}}, long-term only | return filed by the due date |
 
 Section 121 is the sting: a belated return is still assessed, but its losses cannot be carried forward, and s. 263(1)(a)(viii) obliges anyone who wants to carry a loss forward to file at all. A losing year with no return is a loss thrown away.
 
@@ -73,7 +73,7 @@ Section 121 is the sting: a belated return is still assessed, but its losses can
 
 **Turnover** for the audit test is not the contract value. The method comes from the ICAI's [Guidance Note on Tax Audit](https://publication.icai.org/publication/968), as [Varsity describes it](https://zerodha.com/varsity/chapter/turnover-balance-sheet-and-pl/): for speculative trades, the sum of the absolute values of profits and losses; for F&O, the absolute favourable and unfavourable differences, plus any option premium received on sale that is not already in that figure, plus differences on reverse trades; for delivery, the sale value. Whether differences are aggregated per scrip or per trade is a disclosed choice (the note's text was not read for this page; Varsity's description of it is cited).
 
-**Audit** under s. 63 is required when business turnover exceeds ₹1 crore — or {{fact:tax-audit-threshold-digital}} when cash receipts and cash payments are each at most five per cent of the totals, which describes almost every exchange-traded account — when professional receipts exceed fifty lakh rupees, or when a presumptive-scheme user declares a profit below the deemed rate (next section). The report is due a month before the return.
+**Audit** under s. 63 is required when business turnover exceeds {{fact:tax-audit-threshold-base}} — or {{fact:tax-audit-threshold-digital}} when cash receipts and cash payments are each at most {{fact:tax-low-cash-share-threshold}}, which describes almost every exchange-traded account — when professional receipts exceed {{fact:tax-audit-threshold-profession}}, or when a presumptive-scheme user declares a profit below the deemed rate (next section). The report is due a month before the return.
 
 **Books** are compulsory for an individual or HUF in business (s. 62) once business income exceeds {{fact:tax-books-threshold-income}} or turnover exceeds {{fact:tax-books-threshold-turnover}} in any of the three preceding tax years — thresholds a modest F&O account crosses in its first year.
 
@@ -83,7 +83,7 @@ Three hundred option trades in a year, with the absolute sum of all profits and 
 
 ## The presumptive scheme and its trap
 
-{{label:MECHANISM}} Section 58 lets a resident individual, HUF or partnership firm (not an LLP) with business turnover up to {{fact:tax-presumptive-limit}} — ₹3 crore where cash receipts are at most five per cent — declare {{fact:tax-presumptive-rate-digital}} of digital receipts and {{fact:tax-presumptive-rate-other}} of the rest as profit, or a higher actual profit, and skip books and audit. Advance tax is then a single instalment, {{fact:tax-advance-tax-presumptive}}.
+{{label:MECHANISM}} Section 58 lets a resident individual, HUF or partnership firm (not an LLP) with business turnover up to {{fact:tax-presumptive-limit}} — {{fact:tax-presumptive-limit-cash}} where cash receipts are at most {{fact:tax-low-cash-share-threshold}} — declare {{fact:tax-presumptive-rate-digital}} of digital receipts and {{fact:tax-presumptive-rate-other}} of the rest as profit, or a higher actual profit, and skip books and audit. Advance tax is then a single instalment, {{fact:tax-advance-tax-presumptive}}.
 
 For a trader it is a trap in two ways. No loss and no deduction can be claimed against presumptive income (s. 58(4)), so a losing year under the scheme is a year of deemed profit on the turnover. And declaring below the deemed rate while total income exceeds the exemption brings books and audit back (s. 58(3)); opting out within five years of opting in bars re-entry for five years (s. 58(7)). A trader with real, variable P&L is usually better off with books, where a loss is a loss.
 
@@ -111,7 +111,7 @@ The default (new-regime) rates in s. 202(1) apply to a trader's total income —
 | Sixth | {{fact:tax-slab-6}} |
 | Seventh | {{fact:tax-slab-7}} |
 
-Three adjustments sit on top of the slab tax. The s. 156 **rebate** of up to {{fact:tax-rebate-156}} wipes out slab tax when total income is at most {{fact:tax-rebate-156-income-limit}}, with marginal relief just above it — but it is capped at the slab tax (s. 156(3)) and never offsets the special-rate tax on equity gains. A **surcharge** applies above fifty lakh rupees of total income, rising with income, and is capped at {{fact:tax-surcharge-cg-cap}} on dividends and on ss. 196–198 capital gains (Finance Act 2026, s. 3 and the First Schedule). The **Health and Education Cess** of {{fact:tax-cess-rate}} is charged on tax plus surcharge. A business assessee may opt out of the default regime once and, after withdrawing, never again (s. 202(4)).
+Three adjustments sit on top of the slab tax. The s. 156 **rebate** of up to {{fact:tax-rebate-156}} wipes out slab tax when total income is at most {{fact:tax-rebate-156-income-limit}}, with marginal relief just above it — but it is capped at the slab tax (s. 156(3)) and never offsets the special-rate tax on equity gains. A **surcharge** starts above {{fact:tax-surcharge-threshold}} of total income, rises with income, and is capped at {{fact:tax-surcharge-cg-cap}} on dividends and on ss. 196–198 capital gains (Finance Act 2026, s. 3 and the First Schedule). The **Health and Education Cess** of {{fact:tax-cess-rate}} is charged on tax plus surcharge. A business assessee may opt out of the default regime once and, after withdrawing, never again (s. 202(4)).
 
 {{label:MECHANISM}} **Advance tax** applies once the year's liability reaches {{fact:tax-advance-tax-threshold}} (s. 404), in cumulative instalments under s. 408(1); paying less than ninety per cent of the assessed tax by the year end draws simple interest of one per cent a month (s. 424), plus deferment interest on late instalments (s. 425). Salary TDS covers the salary; trading income has to be estimated and paid as the year goes, on the instalment dates the [IST calendar](../../calendar/) lists.
 
@@ -130,9 +130,9 @@ The [F&O tax estimator](../../tools/fo-tax-estimator/) reproduces this case and 
 
 ## Due dates, forms and records
 
-Under s. 263(1)(c), as substituted with effect from the 2025 Act's commencement, the return is due on {{fact:tax-return-due-date-business-noaudit}} for business or professional income without audit, {{fact:tax-return-due-date-audit}} for audited persons and {{fact:tax-return-due-date-other}} for everyone else. A belated return may be filed within nine months of the tax-year end (s. 263(4)) and a revised one within twelve (s. 263(5)); the late-filing fee is {{fact:tax-late-fee}} (less where total income is at most ₹5 lakh), under s. 428.
+Under s. 263(1)(c), as substituted with effect from the 2025 Act's commencement, the return is due on {{fact:tax-return-due-date-business-noaudit}} for business or professional income without audit, {{fact:tax-return-due-date-audit}} for audited persons and {{fact:tax-return-due-date-other}} for everyone else. A belated return may be filed within nine months of the tax-year end (s. 263(4)) and a revised one within twelve (s. 263(5)); the late-filing fee is {{fact:tax-late-fee}}, with a reduced fee where total income is at most {{fact:tax-late-fee-reduced-threshold}}, under s. 428.
 
-**The form.** For the return due in 2026 (assessment year 2026-27, under the 1961 Act) a trader with business income files {{fact:tax-itr-form-trader}}; a presumptive-scheme trader with income up to fifty lakh rupees may use ITR-4 Sugam, and an investor with only capital gains uses ITR-2, per the department's [returns page](https://www.incometaxindia.gov.in/income-tax-returns). Under the Income-tax Rules 2026 the audit report that used to be Forms 3CA/3CB/3CD becomes Form 26, per the department's [form map](https://www.incometaxindia.gov.in/faqs-and-guidance-notes-on-forms-as-per-income-tax-rules-2026). The Rules-2026 return forms for the tax year 2026-27 — the ones a trader will file in 2027 — had **not** been notified as of {{date:2026-11-01}}; the [What changed](../../changelog/) page will record them when they appear, and this page will be re-verified then.
+**The form.** For the return due in 2026 (assessment year 2026-27, under the 1961 Act) a trader with business income files {{fact:tax-itr-form-trader}}; a presumptive-scheme trader with income up to {{fact:tax-itr4-income-limit}} may use ITR-4 Sugam, and an investor with only capital gains uses ITR-2, per the department's [returns page](https://www.incometaxindia.gov.in/income-tax-returns). Under the Income-tax Rules 2026 the audit report that used to be Forms 3CA/3CB/3CD becomes Form 26, per the department's [form map](https://www.incometaxindia.gov.in/faqs-and-guidance-notes-on-forms-as-per-income-tax-rules-2026). The Rules-2026 return forms for the tax year 2026-27 — the ones a trader will file in 2027 — had **not** been notified as of {{date:2026-11-01}}; the [What changed](../../changelog/) page will record them when they appear, and this page will be re-verified then.
 
 **Records.** Keep, for every year: contract notes and the broker's annual tax P&L statement; ledger, fund and bank statements showing every transfer to and from the broker; bills for claimed expenses; the turnover computation with its per-scrip or per-trade choice stated; and the department's annual information statement, reconciled before filing. Retention is as the Rules prescribe under s. 62(3).
 
