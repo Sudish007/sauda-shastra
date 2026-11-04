@@ -2,11 +2,11 @@
 title: Tax for investors: capital gains, dividends and debt funds
 section: Risk, psychology & tax
 summary: Listed shares and equity-fund units are long-term once held {{fact:tax-holding-period-listed}}; short-term gains are taxed at {{fact:tax-stcg-rate}} and long-term gains at {{fact:tax-ltcg-rate}} above {{fact:tax-ltcg-exemption}} a year. Loss set-off, dividends and their TDS, the debt-fund rule, the rebate, surcharge and cess, the records to keep and the form to file, with five worked examples.
-updated: 2026-11-01
+updated: 2026-11-04
 level: beginner
 order: 6
 topics: [capital gains tax, stcg, ltcg, holding period, equity mutual fund, index fund, dividend tax, tds, debt fund taxation, specified mutual fund, itr-2, cess, surcharge]
-related: [tax-for-traders-it-act-2025, what-a-trade-costs, what-sebi-loss-studies-say]
+related: [tax-for-traders-it-act-2025, what-a-trade-costs, what-sebi-loss-studies-say, index-funds-india, wrappers-nps-ppf-epf-elss-reits, asset-allocation-and-gold-after-sgb]
 tools: [sip-compounding]
 sources:
   - Income-tax Act 2025, as amended by the Finance Act 2026 — ss. 2(101), 76, 108, 109, 111, 121, 156, 196, 198, 263, 393 | https://www.incometaxindia.gov.in/income-tax-act-2025 | accessed 2026-11-01
