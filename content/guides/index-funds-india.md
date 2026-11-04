@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: beginner
 order: 1
 topics: [index fund, nifty 50, nifty next 50, midcap 150, smallcap 250, expense ratio, direct plan, regular plan, tracking difference, tracking error, passive investing]
-related: [sip-maths-and-sequencing, factor-indices-evidence, direct-equity-and-valuation-bands, asset-allocation-and-gold-after-sgb, tax-for-investors]
+related: [sip-maths-and-sequencing, factor-indices-evidence, direct-equity-and-valuation-bands, asset-allocation-and-gold-after-sgb, tax-for-investors, us-index-core-three-fund]
 tools: [sip-compounding]
 sources:
   - SEBI (Mutual Funds) Regulations 2026, as amended Jul 2026 — Regulation 66 expense structure | https://www.sebi.gov.in/sebi_data/attachdocs/jul-2026/1783933012694.pdf | accessed 2026-11-01
@@ -73,7 +73,7 @@ The arithmetic is why “only a few basis points” is the wrong frame. A recurr
 
 No India SPIVA scorecard or India investor-return-gap study was fetched for this research. This guide therefore quotes **no Indian active-versus-passive success percentage**. A US scorecard cannot answer the India question, and importing its result would turn a sourced US observation into an unsupported Indian claim.
 
-The defensible decision rule is mechanical. If the investor has no documented process for selecting and monitoring an active manager, start with the index. If an active fund is considered, compare it with the correct total-return benchmark after fees, over a full cycle, and ask whether the current manager and mandate produced the record. A trailing-return rank is not a process.
+The defensible decision rule is mechanical. The [US index-core guide](../us-index-core-three-fund/) puts that market’s scorecard in its own context; it still cannot answer the India question. If the investor has no documented process for selecting and monitoring an active manager, start with the index. If an active fund is considered, compare it with the correct total-return benchmark after fees, over a full cycle, and ask whether the current manager and mandate produced the record. A trailing-return rank is not a process.
 
 ## A selection checklist
 

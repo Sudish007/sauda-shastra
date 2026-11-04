@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: beginner
 order: 6
 topics: [capital gains tax, stcg, ltcg, holding period, equity mutual fund, index fund, dividend tax, tds, debt fund taxation, specified mutual fund, itr-2, cess, surcharge]
-related: [tax-for-traders-it-act-2025, what-a-trade-costs, what-sebi-loss-studies-say, index-funds-india, wrappers-nps-ppf-epf-elss-reits, asset-allocation-and-gold-after-sgb]
+related: [tax-for-traders-it-act-2025, what-a-trade-costs, what-sebi-loss-studies-say, index-funds-india, wrappers-nps-ppf-epf-elss-reits, asset-allocation-and-gold-after-sgb, investing-abroad-from-india]
 tools: [sip-compounding]
 sources:
   - Income-tax Act 2025, as amended by the Finance Act 2026 — ss. 2(101), 76, 108, 109, 111, 121, 156, 196, 198, 263, 393 | https://www.incometaxindia.gov.in/income-tax-act-2025 | accessed 2026-11-01
@@ -61,7 +61,7 @@ Dividends from Indian companies are taxed at slab in the shareholder's hands —
 Units of a corporate-bond fund bought in 2024 and sold three years later with a gain of ₹70,000. Because s. 76 applies, the gain is short-term and taxed at slab: in the twenty-per-cent slab, ₹14,000 plus cess of ₹560 — **₹14,560**, against ₹8,750 plus cess (before the exemption) had the gain been a long-term equity gain at {{fact:tax-ltcg-rate}}. The after-tax return of a debt fund is a slab question, and investors in the top slab should compare it with the yield after tax of a fixed deposit, not with equity.
 :::
 
-Gold ETFs and international funds have their own rules; they belong to the Investing sections' guides on asset allocation and on investing abroad, which cover them as they are published.
+Gold ETFs have their own rules; they belong to the India guide on [asset allocation and gold](../asset-allocation-and-gold-after-sgb/). Foreign stocks, UCITS funds and international schemes are covered in [Investing abroad from India](../investing-abroad-from-india/), including the longer foreign-security holding test and Schedule FA.
 
 ## Rebate, surcharge and cess
 

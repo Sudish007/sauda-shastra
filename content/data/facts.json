@@ -2008,6 +2008,22 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "glb-active-us-largecap-peer-expense",
+    "label": "Lipper peer-average expense ratio beside VOO on Vanguard's provider page (31 Dec 2025)",
+    "value": "0.405%",
+    "since": "2025-12-31",
+    "source": "Vanguard – VOO product page | https://advisors.vanguard.com/investments/products/voo/vanguard-sp-500-etf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-bnd-expense-ratio",
+    "label": "Vanguard Total Bond Market ETF (BND) expense ratio (provider page)",
+    "value": "0.03%",
+    "since": "2026-04-28",
+    "source": "Vanguard – BND product page | https://advisors.vanguard.com/investments/products/bnd/vanguard-total-bond-market-etf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "glb-cspx-ter",
     "label": "iShares Core S&P 500 UCITS ETF (CSPX) total expense ratio (provider page)",
     "value": "0.07%",
@@ -2120,6 +2136,14 @@
     "verified": "2026-11-01"
   },
   {
+    "id": "glb-ucits-us-dividend-withholding",
+    "label": "US dividend withholding paid inside an Ireland-domiciled fund under the Ireland–US treaty (IRS table revision date; historical effective date not re-verified)",
+    "value": "15%",
+    "since": "2023-05-01",
+    "source": "IRS Tax Treaty Table 1 (Rev. May 2023), Ireland row | https://www.irs.gov/pub/irs-lbi/tax-treaty-table-1.pdf",
+    "verified": "2026-11-01"
+  },
+  {
     "id": "glb-us-dividend-withholding-default",
     "label": "US statutory withholding on dividends to a foreign person without a valid W-8BEN",
     "value": "30%",
@@ -2157,6 +2181,22 @@
     "value": "0.03%",
     "since": "2026-04-28",
     "source": "Vanguard – VOO product page | https://advisors.vanguard.com/investments/products/voo/vanguard-sp-500-etf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-vti-expense-ratio",
+    "label": "Vanguard Total Stock Market ETF (VTI) expense ratio (provider page)",
+    "value": "0.03%",
+    "since": "2026-04-28",
+    "source": "Vanguard – VTI product page | https://advisors.vanguard.com/investments/products/vti/vanguard-total-stock-market-etf",
+    "verified": "2026-11-01"
+  },
+  {
+    "id": "glb-vxus-expense-ratio",
+    "label": "Vanguard Total International Stock ETF (VXUS) expense ratio (provider page)",
+    "value": "0.05%",
+    "since": "2026-04-28",
+    "source": "Vanguard – VXUS product page | https://advisors.vanguard.com/investments/products/vxus/vanguard-total-international-stock-etf",
     "verified": "2026-11-01"
   },
   {

@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: intermediate
 order: 3
 topics: [factor index, smart beta, momentum, quality, low volatility, value, alpha, back-filled index, tracking difference, cyclicality, factor fund]
-related: [index-funds-india, direct-equity-and-valuation-bands, strategy-families-and-backtest-hygiene, market-data-for-backtesting-india]
+related: [index-funds-india, direct-equity-and-valuation-bands, strategy-families-and-backtest-hygiene, market-data-for-backtesting-india, factors-dividends-quality]
 tools: [sip-compounding]
 sources:
   - NSE Indices — Nifty200 Momentum 30 factsheet, Sep 2026 | https://www.niftyindices.com/Factsheet/Factsheet_Nifty200_Momentum30.pdf | accessed 2026-11-01
@@ -46,7 +46,7 @@ The exact formula belongs to the index methodology and can change. Read the curr
 
 Four factor rows sit above the Nifty 50’s five-year number in this mixed-date snapshot; Nifty50 Value 20 sits below it. Their current-year outcomes spread from a large loss to a gain. That is evidence of **dispersion**, not evidence that buying the latest winner will repeat the ranking. The factor exposure is the source of both the possible premium and the tracking pain.
 
-The global research base is deeper than the Indian live-fund record. Kenneth French’s [Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) publishes value, size, profitability, investment and momentum series across regions, while the Indian rows above are index factsheets. The later guide on global factors will separate those academic portfolios from investable products; this page does not transplant a US premium into an India forecast.
+The global research base is deeper than the Indian live-fund record. Kenneth French’s [Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) publishes value, size, profitability, investment and momentum series across regions, while the Indian rows above are index factsheets. The [global factors guide](../factors-dividends-quality/) separates those academic portfolios from investable products; this page does not transplant a US premium into an India forecast.
 
 ## The back-fill problem
 

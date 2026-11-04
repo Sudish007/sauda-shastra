@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: intermediate
 order: 4
 topics: [direct equity, roce, free cash flow, cash conversion, promoter holding, promoter pledge, capital allocation, valuation band, price earnings, price to book, dividend yield, market cap to gdp, concentration]
-related: [index-funds-india, factor-indices-evidence, governance-red-flags, results-season-playbook, scanners-and-where-data-lives, tax-for-investors]
+related: [index-funds-india, factor-indices-evidence, governance-red-flags, results-season-playbook, scanners-and-where-data-lives, tax-for-investors, cape-expected-returns-and-currency]
 sources:
   - NSE Indices — Nifty 50 factsheet, Oct 2026 | https://www.niftyindices.com/Factsheet/ind_nifty50.pdf | accessed 2026-11-01
   - BSE — All India Market Capitalization, Oct 2026 | https://www.bseindia.com/markets/equity/EQReports/allindiamktcap.aspx | accessed 2026-11-01

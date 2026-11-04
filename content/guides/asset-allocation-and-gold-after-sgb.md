@@ -6,7 +6,7 @@ updated: 2026-11-04
 level: intermediate
 order: 5
 topics: [asset allocation, rebalancing, equity, debt, gold, sovereign gold bond, sgb, gold etf, sequence risk, goal planning, capital gains]
-related: [sip-maths-and-sequencing, index-funds-india, wrappers-nps-ppf-epf-elss-reits, direct-equity-and-valuation-bands, tax-for-investors]
+related: [sip-maths-and-sequencing, index-funds-india, wrappers-nps-ppf-epf-elss-reits, direct-equity-and-valuation-bands, tax-for-investors, all-weather-momentum-trend-rules]
 tools: [sip-compounding]
 sources:
   - RBI — Sovereign Gold Bond premature-redemption calendar, Oct 2026 to Mar 2027 | https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63416 | accessed 2026-11-01
@@ -43,7 +43,7 @@ Use new contributions first. Direct the next SIPs to the underweight asset, whic
 
 {{label:EVIDENCE}} Damodaran’s [US historical-return series](https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html) records that US stocks and the ten-year Treasury both fell sharply in 2022 while gold was roughly flat. The observation belongs to the **US market**. It demonstrates that stocks and conventional bonds can fall together when inflation and rates rise, and that a third asset can behave differently in one regime.
 
-It does not establish an India equity/debt/gold correlation, an ideal gold weight or a repeatable crisis return. No primary Indian correlation study was fetched for this guide. Indian claims therefore stay {{label:MECHANISM}}: gold may diversify because its drivers differ, but it can fall, spend years going sideways and create tracking and tax friction. The later global allocation guide can place the US episode in its own market context.
+It does not establish an India equity/debt/gold correlation, an ideal gold weight or a repeatable crisis return. No primary Indian correlation study was fetched for this guide. Indian claims therefore stay {{label:MECHANISM}}: gold may diversify because its drivers differ, but it can fall, spend years going sideways and create tracking and tax friction. The [global All-Weather and trend guide](../all-weather-momentum-trend-rules/) places the US episode in its own market context.
 
 ## Sovereign Gold Bonds are now a run-off book
 
