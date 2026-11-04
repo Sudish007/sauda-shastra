@@ -31,7 +31,7 @@ Things only the repository owner can decide or do. **None of them is required fo
 - **How:** on or after 7 Dec 2026, make them the current rows (drop the `-from-2026-12-07` suffix and the old `mkt-closing-session` / `opt-expiry-settlement-current` values), run `npm test` and push; the build re-renders every token.
 
 ### Blocked-host links
-- **Why:** `content/data/library/health.json` currently lists 47 URLs whose sites returned anti-bot pages to automation but rendered as available in the browser re-check. Most are retailer searches; the report keeps the complete list. They are blocked, not dead.
+- **Why:** `content/data/library/health.json` lists 46 URLs as of the 5 Nov 2026 link-health refresh whose sites returned anti-bot pages to automation but rendered as available in the browser re-check. Most are retailer searches; the report keeps the complete list. They are blocked, not dead.
 - **How:** open a sample every few months; if one has moved, change the URL in `content/data/library/courses.json`, `books.json` or `content/data/resources.json`, re-run `python scripts/linkcheck.py --resources`, commit `health.json`, push.
 
 ## Optional additions
